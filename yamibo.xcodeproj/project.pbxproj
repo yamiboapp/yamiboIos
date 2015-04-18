@@ -12,6 +12,8 @@
 		6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF981ADE1634008EFEE7 /* UIImage+Utility.m */; };
 		6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */; };
 		6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */; };
+		656531F21AE29C6D00486ECF /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 656531F11AE29C6D00486ECF /* LocationManager.m */; };
+		656531F41AE29DA800486ECF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656531F31AE29DA800486ECF /* CoreLocation.framework */; };
 		65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A4DB571ADE0F5B00251E2F /* BaseViewController.m */; };
 		65BB63191ADE0B300042C359 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB63181ADE0B300042C359 /* main.m */; };
 		65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB631B1ADE0B300042C359 /* AppDelegate.m */; };
@@ -48,6 +50,10 @@
 		6541DF9B1ADE1634008EFEE7 /* UIView+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utility.h"; sourceTree = "<group>"; };
 		6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utility.m"; sourceTree = "<group>"; };
 		6541DFA11ADE16F4008EFEE7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		656531EF1AE298B000486ECF /* Constance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constance.h; sourceTree = "<group>"; };
+		656531F01AE29C6D00486ECF /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		656531F11AE29C6D00486ECF /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		656531F31AE29DA800486ECF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		65A4DB561ADE0F5B00251E2F /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		65A4DB571ADE0F5B00251E2F /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		65BB63131ADE0B300042C359 /* yamibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yamibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				656531F41AE29DA800486ECF /* CoreLocation.framework in Frameworks */,
 				38A7F8624BB17F573DBB244D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +234,8 @@
 		65BB633F1ADE0C130042C359 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				656531F01AE29C6D00486ECF /* LocationManager.h */,
+				656531F11AE29C6D00486ECF /* LocationManager.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -234,6 +243,7 @@
 		65BB63401ADE0C220042C359 /* Constance */ = {
 			isa = PBXGroup;
 			children = (
+				656531EF1AE298B000486ECF /* Constance.h */,
 			);
 			name = Constance;
 			sourceTree = "<group>";
@@ -284,6 +294,7 @@
 		ED244B33B96349B75C123D36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				656531F31AE29DA800486ECF /* CoreLocation.framework */,
 				E27CD2202FE8D2FD1477FE4B /* libPods.a */,
 			);
 			name = Frameworks;
@@ -435,6 +446,7 @@
 				65BB63191ADE0B300042C359 /* main.m in Sources */,
 				6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */,
 				65E8F2971ADF7FB2005BD0F0 /* StatusMessagePair.m in Sources */,
+				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
 				6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */,
 				65E8F2961ADF7FB2005BD0F0 /* NSObject+Utility.m in Sources */,
 				65CA24051ADE286C008FD86D /* IndexViewController.m in Sources */,

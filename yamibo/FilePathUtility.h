@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * 获取目录名称.
+ */
 @interface FilePathUtility : NSObject
 
 + (NSString *)cachesDirectory;

@@ -29,19 +29,6 @@
 
 @end
 
-@implementation NSString (NotNull)
-
-- (NSString *)notNullString
-{
-    if (self == nil || ![self isKindOfClass:[NSString class]]) {
-        return @"";
-    } else {
-        return (NSString *)self;
-    }
-}
-
-@end
-
 @implementation NSString (Localize)
 
 - (NSString *)localize

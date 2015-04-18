@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * 网络返回状态提示.
+ */
 @interface StatusMessagePair : NSObject
 
 @property (nonatomic, assign) BOOL success;

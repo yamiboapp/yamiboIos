@@ -9,5 +9,4 @@
 #import "StatusMessagePair.h"
 
 @implementation StatusMessagePair
-
 @end

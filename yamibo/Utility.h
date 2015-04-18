@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * 常用合法性检测.
+ */
 @interface Utility : NSObject
 
 + (BOOL)isValidEmail:(NSString *)email;

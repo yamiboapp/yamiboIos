@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "IndexViewController.h"
+#import "LocationManager.h"
 @interface AppDelegate ()
 
 @end
@@ -23,6 +24,7 @@
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[IndexViewController alloc] init]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    [LocationManager sharedInstance];
     return YES;
 }
 

@@ -14,7 +14,9 @@
  */
 @interface BaseViewController : UIViewController
 
-
+/**
+ * 快速消息提醒
+ */
 - (void)showMessage:(NSString*)message;
 
 
