@@ -24,6 +24,5 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_HEIGHT == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_HEIGHT == 736.0)
 
-#define KFontsmall (IS_IPHONE_6P) ? [UIFont systemFontOfSize:35] : [UIFont systemFontOfSize:12]
 
 #endif

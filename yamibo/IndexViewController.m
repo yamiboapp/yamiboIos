@@ -25,7 +25,6 @@
     }];
     showLabel.textAlignment = NSTextAlignmentCenter;
     showLabel.text = [@"hello" localize];
-    showLabel.font = KFontsmall;
 }
 
 - (void)didReceiveMemoryWarning
