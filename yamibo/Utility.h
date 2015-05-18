@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 
 /**
- * 常用合法性检测.
+ *  @author lsl, 15-04-24 11:04:15
+ *
+ *  @brief  常用合法性检测.
  */
 @interface Utility : NSObject
 
-+ (BOOL)isValidEmail:(NSString *)email;
++ (BOOL)isValidEmail:(NSString*)email;
 
-+ (BOOL)isValidMobile:(NSString *)mobile;
++ (BOOL)isValidMobile:(NSString*)mobile;
 
 @end

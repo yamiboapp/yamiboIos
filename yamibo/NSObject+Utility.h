@@ -10,26 +10,38 @@
 
 @interface NSString (MD5)
 /**
- * 字符串md5编码.
- */
-- (NSString *)md5sum;
+*  @author lsl, 15-04-24 11:04:58
+*
+*  @brief  字符串md5编码.
+*
+*  @return 
+*/
+- (NSString*)md5sum;
 
 @end
 
-/**
- * 字符串国际化.
- */
 @interface NSString (Localize)
-
-- (NSString *)localize;
+/**
+ *  @author lsl, 15-04-24 11:04:13
+ *
+ *  @brief  字符串国际化.
+ *
+ *  @return 
+ */
+- (NSString*)localize;
 
 @end
 
-/**
- * NSData按照byte编码.
- */
 @interface NSData (MD5)
 
-- (NSString *)md5;
+/**
+ *  @author lsl, 15-04-24 11:04:33
+ *
+ *  @brief  NSData byte编码后的md5.
+ *
+ *  @return 
+ */
+
+- (NSString*)md5;
 
 @end

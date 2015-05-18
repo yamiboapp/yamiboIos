@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 /**
- * 网络返回状态提示.
+ *  @author lsl, 15-04-24 11:04:24
+ *
+ *  @brief  网络返回状态提示.
  */
 @interface StatusMessagePair : NSObject
 
 @property (nonatomic, assign) BOOL success;
-@property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSString* message;
 
 @end

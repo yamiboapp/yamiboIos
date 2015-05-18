@@ -9,7 +9,9 @@
 #import "BaseViewController.h"
 
 /**
- * 示范基本的国际化和代码布局策略.
+ *  @author lsl, 15-04-24 11:04:26
+ *
+ *  @brief  示范基本的国际化和代码布局策略.
  */
 @interface IndexViewController : BaseViewController
 

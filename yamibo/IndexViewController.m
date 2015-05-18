@@ -14,23 +14,24 @@
 
 @implementation IndexViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UILabel *showLabel = [[UILabel alloc] init];
+    UILabel* showLabel = [[UILabel alloc] init];
     [self.view addSubview:showLabel];
-    [showLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [showLabel mas_makeConstraints:^(MASConstraintMaker* make) {
         make.edges.equalTo(self.view);
     }];
     showLabel.textAlignment = NSTextAlignmentCenter;
     showLabel.text = [@"hello" localize];
-    
+    showLabel.font = KFontsmall;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

@@ -12,24 +12,24 @@
 /**
  * 获取location成功
  */
-static const int KLOCATIONSUCCESS               = 0;
+static const int KLOCATIONSUCCESS = 0;
 /**
  * 用户未开定位服务
  */
-static const int KLOCATIONFAILESERVICENOTOPEND  = 1;
+
+static const int KLOCATIONFAILESERVICENOTOPEND = 1;
 /**
  * 用户禁止程序定位
  */
-static const int KLOCATIONFAILEUSERDENIED       = 2;
+static const int KLOCATIONFAILEUSERDENIED = 2;
 /**
  * 无法获取位置信息
  */
-static const int KLOCATIONFAILEUNKNOW           = 3;
 
+static const int KLOCATIONFAILEUNKNOW = 3;
 
-@interface LocationManager()<CLLocationManagerDelegate>
-{
-    CLLocationManager *locationService;
+@interface LocationManager () <CLLocationManagerDelegate> {
+    CLLocationManager* locationService;
     void (^block)(int status, float latitude, float longitude);
 }
 
@@ -37,7 +37,7 @@ static const int KLOCATIONFAILEUNKNOW           = 3;
 
 @implementation LocationManager
 
-+ (id)allocWithZone:(NSZone *)zone
++ (id)allocWithZone:(NSZone*)zone
 {
     return [self sharedInstance];
 }
@@ -46,27 +46,27 @@ static const int KLOCATIONFAILEUNKNOW           = 3;
 {
     static dispatch_once_t once;
     static id instance = nil;
-    
+
     dispatch_once(&once, ^{
         instance = [[super allocWithZone:NULL] init];
     });
-    
+
     return instance;
 }
 - (id)init
 {
     self = [super init];
-    
+
     if (self) {
         locationService = [[CLLocationManager alloc] init];
-        if([locationService respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        if ([locationService respondsToSelector:@selector(requestAlwaysAuthorization)]) {
             [locationService requestWhenInUseAuthorization]; //使用中授权
         }
         locationService.delegate = self;
         locationService.distanceFilter = 10;
         locationService.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     }
-    
+
     return self;
 }
 
@@ -91,18 +91,20 @@ static const int KLOCATIONFAILEUNKNOW           = 3;
     NSLog(@"定位已关闭");
 }
 #pragma mark CLLocationManagerDelegate<br>/**<br>* 获取经纬度<br>*/
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    CLLocation *currLocation=[locations lastObject];
-    NSLog(@"定位成功：纬度:%f, 经度:%f",currLocation.coordinate.latitude,currLocation.coordinate.longitude);
+- (void)locationManager:(CLLocationManager*)manager didUpdateLocations:(NSArray*)locations
+{
+    CLLocation* currLocation = [locations lastObject];
+    NSLog(@"定位成功：纬度:%f, 经度:%f", currLocation.coordinate.latitude, currLocation.coordinate.longitude);
     if (block) {
         NSLog(@"执行定位回调");
-        block(KLOCATIONSUCCESS, currLocation.coordinate.latitude,currLocation.coordinate.longitude);
+        block(KLOCATIONSUCCESS, currLocation.coordinate.latitude, currLocation.coordinate.longitude);
     }
 }
 /**
  *定位失败，回调此方法
  */
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+- (void)locationManager:(CLLocationManager*)manager didFailWithError:(NSError*)error
+{
     NSLog(@"定位失败");
     block(KLOCATIONFAILEUNKNOW, 0, 0);
 }

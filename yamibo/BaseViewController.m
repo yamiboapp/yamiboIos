@@ -9,13 +9,11 @@
 #import "BaseViewController.h"
 #import "MBProgressHUD.h"
 @interface BaseViewController () {
-    
 }
 
 @end
 
 @implementation BaseViewController
-
 
 - (id)init
 {
@@ -57,13 +55,13 @@
     tLabelTip.lineBreakMode = NSLineBreakByWordWrapping;
     tLabelTip.textAlignment = NSTextAlignmentCenter;
     tLabelTip.numberOfLines = 2;
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    MBProgressHUD* hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
     hud.customView = tLabelTip;
     hud.mode = MBProgressHUDModeCustomView;
 
     CGSize SimpleTextSize = [tLabelTip contentSize];
-    if (SimpleTextSize.width>194){
+    if (SimpleTextSize.width > 194) {
         tLabelTip.textAlignment = NSTextAlignmentLeft;
     }
     [hud showAnimated:YES whileExecutingBlock:^{
@@ -73,16 +71,10 @@
     }];
 }
 
-
-
 #pragma mark Hide/Show StatusBar
 - (BOOL)prefersStatusBarHidden
 {
     return NO;
 }
 
-
 @end
-
-
-

@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
 /**
- * 建议将其作为基类.
- * 
+ *  @author lsl, 15-04-24 11:04:52
+ *
+ *  @brief  建议将其作为基类.
  */
 @interface BaseViewController : UIViewController
 
 /**
- * 快速消息提醒
- */
+*  @author lsl, 15-04-24 11:04:56
+*
+*  @brief  类似android的快速消息提醒
+*
+*  @param message 消息内容
+*/
 - (void)showMessage:(NSString*)message;
-
 
 @end
