@@ -8,6 +8,8 @@
 
 #import "NSObject+Utility.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "ChineseTransform.h"
+#import "AppManager.h"
 
 @implementation NSString (MD5)
 
@@ -33,6 +35,17 @@
 - (NSString*)localize
 {
     return NSLocalizedString(self, @"");
+}
+
+@end
+
+@implementation NSString (Convert)
+
+- (NSString *)convert {
+    if ([[AppManager sharedInstance] isTradionChinese]) {
+        return [[ChineseTransform sharedInstance] traditionString:self];
+    }
+    return self;
 }
 
 @end

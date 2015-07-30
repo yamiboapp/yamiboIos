@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 /**
- *  @author lsl, 15-04-24 11:04:52
+ *  @author 李思良, 15-04-24 11:04:52
  *
  *  @brief  建议将其作为基类.
  */
 @interface BaseViewController : UIViewController
 
 /**
-*  @author lsl, 15-04-24 11:04:56
+*  @author 李思良, 15-04-24 11:04:56
 *
 *  @brief  类似android的快速消息提醒
 *

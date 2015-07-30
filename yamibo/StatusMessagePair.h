@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  @author lsl, 15-04-24 11:04:24
+ *  @author 李思良, 15-04-24 11:04:24
  *
  *  @brief  网络返回状态提示.
  */

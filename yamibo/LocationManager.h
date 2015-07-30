@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  @author lsl, 15-04-24 11:04:24
+ *  @author 李思良, 15-04-24 11:04:24
  *
  *  @brief  定位服务.
  */
 @interface LocationManager : NSObject
 /**
- *  @author lsl, 15-04-24 11:04:49
+ *  @author 李思良, 15-04-24 11:04:49
  *
  *  @brief  manager 单例
  *
@@ -24,7 +24,7 @@
 + (id)sharedInstance;
 
 /**
- *  @author lsl, 15-04-24 11:04:37
+ *  @author 李思良, 15-04-24 11:04:37
  *
  *  @brief  获取当前location，注意completion在stopLocation前会由于位置变动而不断产生新的调用.
  *
@@ -33,7 +33,7 @@
 - (void)getLocation:(void (^)(int status, float latitude, float longitude))completion;
 
 /**
- *  @author lsl, 15-04-24 11:04:33
+ *  @author 李思良, 15-04-24 11:04:33
  *
  *  @brief  当不需要位置服务，调用此函数.
  */

@@ -10,7 +10,7 @@
 
 @interface NSString (MD5)
 /**
-*  @author lsl, 15-04-24 11:04:58
+*  @author 李思良, 15-04-24 11:04:58
 *
 *  @brief  字符串md5编码.
 *
@@ -22,7 +22,7 @@
 
 @interface NSString (Localize)
 /**
- *  @author lsl, 15-04-24 11:04:13
+ *  @author 李思良, 15-04-24 11:04:13
  *
  *  @brief  字符串国际化.
  *
@@ -32,10 +32,22 @@
 
 @end
 
+@interface NSString (Convert)
+/**
+ *  @author 李思良, 15-07-08
+ *
+ *  @brief  根据用户需求将简体转繁体
+ *
+ *  @return 转换后的string
+ */
+- (NSString *)convert;
+
+@end
+
 @interface NSData (MD5)
 
 /**
- *  @author lsl, 15-04-24 11:04:33
+ *  @author 李思良, 15-04-24 11:04:33
  *
  *  @brief  NSData byte编码后的md5.
  *

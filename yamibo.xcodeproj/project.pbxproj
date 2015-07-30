@@ -8,19 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		38A7F8624BB17F573DBB244D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E27CD2202FE8D2FD1477FE4B /* libPods.a */; };
+		650454C01B4D3EBD00651434 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650454BF1B4D3EBD00651434 /* HomeController.m */; };
+		650454C41B4D3F2D00651434 /* MenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650454C31B4D3F2D00651434 /* MenuController.m */; };
+		6525A7CF1B50B4D8005F2D6D /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6525A7CE1B50B4D8005F2D6D /* RootController.m */; };
 		6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF961ADE1634008EFEE7 /* UIColor+Utility.m */; };
 		6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF981ADE1634008EFEE7 /* UIImage+Utility.m */; };
 		6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */; };
 		6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */; };
+		655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D00DF1B4D189E00F0FFBE /* AppManager.m */; };
 		656531F21AE29C6D00486ECF /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 656531F11AE29C6D00486ECF /* LocationManager.m */; };
 		656531F41AE29DA800486ECF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656531F31AE29DA800486ECF /* CoreLocation.framework */; };
+		659D28971B4CF5F1007B7526 /* ChineseTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 659D28961B4CF5F1007B7526 /* ChineseTransform.m */; };
 		65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A4DB571ADE0F5B00251E2F /* BaseViewController.m */; };
 		65BB63191ADE0B300042C359 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB63181ADE0B300042C359 /* main.m */; };
 		65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB631B1ADE0B300042C359 /* AppDelegate.m */; };
 		65BB63241ADE0B300042C359 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65BB63231ADE0B300042C359 /* Images.xcassets */; };
 		65BB63271ADE0B300042C359 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65BB63251ADE0B300042C359 /* LaunchScreen.xib */; };
 		65BB63331ADE0B300042C359 /* yamiboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB63321ADE0B300042C359 /* yamiboTests.m */; };
-		65CA24051ADE286C008FD86D /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA24041ADE286C008FD86D /* IndexViewController.m */; };
 		65E8F2961ADF7FB2005BD0F0 /* NSObject+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F28C1ADF7FB2005BD0F0 /* NSObject+Utility.m */; };
 		65E8F2971ADF7FB2005BD0F0 /* StatusMessagePair.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F28E1ADF7FB2005BD0F0 /* StatusMessagePair.m */; };
 		65E8F2981ADF7FB2005BD0F0 /* NSObject+ValidObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F2901ADF7FB2005BD0F0 /* NSObject+ValidObject.m */; };
@@ -40,6 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		650454BE1B4D3EBD00651434 /* HomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeController.h; sourceTree = "<group>"; };
+		650454BF1B4D3EBD00651434 /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
+		650454C21B4D3F2D00651434 /* MenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuController.h; sourceTree = "<group>"; };
+		650454C31B4D3F2D00651434 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuController.m; sourceTree = "<group>"; };
+		6525A7CD1B50B4D8005F2D6D /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
+		6525A7CE1B50B4D8005F2D6D /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
 		6541DF941ADE1634008EFEE7 /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
 		6541DF951ADE1634008EFEE7 /* UIColor+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utility.h"; sourceTree = "<group>"; };
 		6541DF961ADE1634008EFEE7 /* UIColor+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utility.m"; sourceTree = "<group>"; };
@@ -50,10 +60,14 @@
 		6541DF9B1ADE1634008EFEE7 /* UIView+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utility.h"; sourceTree = "<group>"; };
 		6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utility.m"; sourceTree = "<group>"; };
 		6541DFA11ADE16F4008EFEE7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		655D00DE1B4D189E00F0FFBE /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
+		655D00DF1B4D189E00F0FFBE /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
 		656531EF1AE298B000486ECF /* Constance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constance.h; sourceTree = "<group>"; };
 		656531F01AE29C6D00486ECF /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		656531F11AE29C6D00486ECF /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		656531F31AE29DA800486ECF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		659D28951B4CF5F1007B7526 /* ChineseTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseTransform.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		659D28961B4CF5F1007B7526 /* ChineseTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseTransform.m; sourceTree = "<group>"; };
 		65A4DB561ADE0F5B00251E2F /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		65A4DB571ADE0F5B00251E2F /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		65BB63131ADE0B300042C359 /* yamibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yamibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,8 +80,6 @@
 		65BB632C1ADE0B300042C359 /* yamiboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yamiboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65BB63311ADE0B300042C359 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65BB63321ADE0B300042C359 /* yamiboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = yamiboTests.m; sourceTree = "<group>"; };
-		65CA24031ADE286C008FD86D /* IndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexViewController.h; sourceTree = "<group>"; };
-		65CA24041ADE286C008FD86D /* IndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
 		65E8F2881ADF7FB2005BD0F0 /* NSUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUtility.h; sourceTree = "<group>"; };
 		65E8F28B1ADF7FB2005BD0F0 /* NSObject+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Utility.h"; sourceTree = "<group>"; };
 		65E8F28C1ADF7FB2005BD0F0 /* NSObject+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Utility.m"; sourceTree = "<group>"; };
@@ -116,6 +128,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		650454C11B4D3F1500651434 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				650454C21B4D3F2D00651434 /* MenuController.h */,
+				650454C31B4D3F2D00651434 /* MenuController.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
 		6541DF931ADE161E008EFEE7 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,13 +153,15 @@
 			name = UIView;
 			sourceTree = "<group>";
 		};
-		65A4DB551ADE0F4C00251E2F /* BaseViewController */ = {
+		65A4DB551ADE0F4C00251E2F /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				65A4DB561ADE0F5B00251E2F /* BaseViewController.h */,
 				65A4DB571ADE0F5B00251E2F /* BaseViewController.m */,
+				6525A7CD1B50B4D8005F2D6D /* RootController.h */,
+				6525A7CE1B50B4D8005F2D6D /* RootController.m */,
 			);
-			name = BaseViewController;
+			name = Base;
 			sourceTree = "<group>";
 		};
 		65BB630A1ADE0B300042C359 = {
@@ -236,6 +259,10 @@
 			children = (
 				656531F01AE29C6D00486ECF /* LocationManager.h */,
 				656531F11AE29C6D00486ECF /* LocationManager.m */,
+				659D28951B4CF5F1007B7526 /* ChineseTransform.h */,
+				659D28961B4CF5F1007B7526 /* ChineseTransform.m */,
+				655D00DE1B4D189E00F0FFBE /* AppManager.h */,
+				655D00DF1B4D189E00F0FFBE /* AppManager.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -258,19 +285,20 @@
 		65BB63421ADE0C440042C359 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				65CA24021ADE2850008FD86D /* IndexViewController */,
-				65A4DB551ADE0F4C00251E2F /* BaseViewController */,
+				650454C11B4D3F1500651434 /* Menu */,
+				65CA24021ADE2850008FD86D /* Home */,
+				65A4DB551ADE0F4C00251E2F /* Base */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		65CA24021ADE2850008FD86D /* IndexViewController */ = {
+		65CA24021ADE2850008FD86D /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				65CA24031ADE286C008FD86D /* IndexViewController.h */,
-				65CA24041ADE286C008FD86D /* IndexViewController.m */,
+				650454BE1B4D3EBD00651434 /* HomeController.h */,
+				650454BF1B4D3EBD00651434 /* HomeController.m */,
 			);
-			name = IndexViewController;
+			name = Home;
 			sourceTree = "<group>";
 		};
 		65E8F2871ADF7F9E005BD0F0 /* NSUtility */ = {
@@ -440,16 +468,20 @@
 			files = (
 				6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */,
 				65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */,
+				659D28971B4CF5F1007B7526 /* ChineseTransform.m in Sources */,
+				655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */,
 				6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */,
 				65E8F29A1ADF7FB2005BD0F0 /* Utility.m in Sources */,
 				65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */,
+				650454C41B4D3F2D00651434 /* MenuController.m in Sources */,
 				65BB63191ADE0B300042C359 /* main.m in Sources */,
+				650454C01B4D3EBD00651434 /* HomeController.m in Sources */,
 				6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */,
 				65E8F2971ADF7FB2005BD0F0 /* StatusMessagePair.m in Sources */,
 				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
 				6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */,
 				65E8F2961ADF7FB2005BD0F0 /* NSObject+Utility.m in Sources */,
-				65CA24051ADE286C008FD86D /* IndexViewController.m in Sources */,
+				6525A7CF1B50B4D8005F2D6D /* RootController.m in Sources */,
 				65E8F2991ADF7FB2005BD0F0 /* FilePathUtility.m in Sources */,
 				65E8F2981ADF7FB2005BD0F0 /* NSObject+ValidObject.m in Sources */,
 			);

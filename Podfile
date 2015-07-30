@@ -3,6 +3,9 @@ platform :ios, '7.0'
 pod 'MBProgressHUD'
 pod 'Masonry'
 pod 'AFNetworking'
+pod 'DTCoreText'
+pod 'MMDrawerController'
+pod 'SDWebImage'
 target 'yamibo' do
 end
 
