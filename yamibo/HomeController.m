@@ -7,6 +7,11 @@
 //
 
 #import "HomeController.h"
+/**
+ *  @author 李思良, 15-08-17
+ *
+ *  @brief  首页
+ */
 @interface HomeController ()
 
 @end

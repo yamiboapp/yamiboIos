@@ -285,11 +285,27 @@
 		65BB63421ADE0C440042C359 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				65BCF1E31B8186CC003457F4 /* ArticleList */,
+				65BCF1E21B8186A1003457F4 /* ArticleDetail */,
 				650454C11B4D3F1500651434 /* Menu */,
 				65CA24021ADE2850008FD86D /* Home */,
 				65A4DB551ADE0F4C00251E2F /* Base */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		65BCF1E21B8186A1003457F4 /* ArticleDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ArticleDetail;
+			sourceTree = "<group>";
+		};
+		65BCF1E31B8186CC003457F4 /* ArticleList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ArticleList;
 			sourceTree = "<group>";
 		};
 		65CA24021ADE2850008FD86D /* Home */ = {
