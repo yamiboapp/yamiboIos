@@ -14,6 +14,9 @@
 #ifndef yamibo_Constance_h
 #define yamibo_Constance_h
 
+#include "ColorConstance.h"
+#include "NotificationConstance.h"
+
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)

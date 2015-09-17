@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self showCustomNavigationMenuButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,5 +29,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)onNavigationLeftButtonClicked
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
+}
 
 @end

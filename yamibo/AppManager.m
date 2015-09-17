@@ -32,6 +32,7 @@
     self = [super init];
     if (self) {
         _isTradionChinese = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isTradition"] boolValue];
+        _isNoImgMode = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isNoImgMode"] boolValue];
     }
     return self;
 }
@@ -39,6 +40,12 @@
 - (void)setIsTradionChinese:(BOOL)isTradionChinese {
     _isTradionChinese = isTradionChinese;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_isTradionChinese] forKey:@"isTradition"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setIsNoImgMode:(BOOL)isNoImgMode {
+    _isNoImgMode = isNoImgMode;
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_isTradionChinese] forKey:@"isNoImgMode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end

@@ -10,6 +10,11 @@
 		38A7F8624BB17F573DBB244D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E27CD2202FE8D2FD1477FE4B /* libPods.a */; };
 		650454C01B4D3EBD00651434 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650454BF1B4D3EBD00651434 /* HomeController.m */; };
 		650454C41B4D3F2D00651434 /* MenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650454C31B4D3F2D00651434 /* MenuController.m */; };
+		650DDD821BAB0E5D004ACFF2 /* YColor+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 650DDD811BAB0E5D004ACFF2 /* YColor+Ext.m */; settings = {ASSET_TAGS = (); }; };
+		650DDD881BAB1856004ACFF2 /* common_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 650DDD861BAB1856004ACFF2 /* common_back@2x.png */; settings = {ASSET_TAGS = (); }; };
+		650DDD891BAB1856004ACFF2 /* common_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 650DDD871BAB1856004ACFF2 /* common_back@3x.png */; settings = {ASSET_TAGS = (); }; };
+		650DDD8C1BAB189C004ACFF2 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 650DDD8A1BAB189C004ACFF2 /* menu@2x.png */; settings = {ASSET_TAGS = (); }; };
+		650DDD8D1BAB189C004ACFF2 /* menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 650DDD8B1BAB189C004ACFF2 /* menu@3x.png */; settings = {ASSET_TAGS = (); }; };
 		6525A7CF1B50B4D8005F2D6D /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6525A7CE1B50B4D8005F2D6D /* RootController.m */; };
 		6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF961ADE1634008EFEE7 /* UIColor+Utility.m */; };
 		6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF981ADE1634008EFEE7 /* UIImage+Utility.m */; };
@@ -48,6 +53,14 @@
 		650454BF1B4D3EBD00651434 /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
 		650454C21B4D3F2D00651434 /* MenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuController.h; sourceTree = "<group>"; };
 		650454C31B4D3F2D00651434 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuController.m; sourceTree = "<group>"; };
+		650DDD7F1BAB0DD8004ACFF2 /* ColorConstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorConstance.h; sourceTree = "<group>"; };
+		650DDD801BAB0E5D004ACFF2 /* YColor+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YColor+Ext.h"; sourceTree = "<group>"; };
+		650DDD811BAB0E5D004ACFF2 /* YColor+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YColor+Ext.m"; sourceTree = "<group>"; };
+		650DDD861BAB1856004ACFF2 /* common_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_back@2x.png"; sourceTree = "<group>"; };
+		650DDD871BAB1856004ACFF2 /* common_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_back@3x.png"; sourceTree = "<group>"; };
+		650DDD8A1BAB189C004ACFF2 /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
+		650DDD8B1BAB189C004ACFF2 /* menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@3x.png"; sourceTree = "<group>"; };
+		650DDD8E1BAB1B5F004ACFF2 /* NotificationConstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationConstance.h; sourceTree = "<group>"; };
 		6525A7CD1B50B4D8005F2D6D /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
 		6525A7CE1B50B4D8005F2D6D /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
 		6541DF941ADE1634008EFEE7 /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
@@ -137,6 +150,33 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		650DDD831BAB1831004ACFF2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				650DDD841BAB1831004ACFF2 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		650DDD841BAB1831004ACFF2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				650DDD851BAB1831004ACFF2 /* Common */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		650DDD851BAB1831004ACFF2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				650DDD8A1BAB189C004ACFF2 /* menu@2x.png */,
+				650DDD8B1BAB189C004ACFF2 /* menu@3x.png */,
+				650DDD861BAB1856004ACFF2 /* common_back@2x.png */,
+				650DDD871BAB1856004ACFF2 /* common_back@3x.png */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		6541DF931ADE161E008EFEE7 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +238,7 @@
 				65BB631B1ADE0B300042C359 /* AppDelegate.m */,
 				65BB63231ADE0B300042C359 /* Images.xcassets */,
 				65BB63251ADE0B300042C359 /* LaunchScreen.xib */,
+				650DDD831BAB1831004ACFF2 /* Resources */,
 				65BB63161ADE0B300042C359 /* Supporting Files */,
 			);
 			path = yamibo;
@@ -271,6 +312,8 @@
 			isa = PBXGroup;
 			children = (
 				656531EF1AE298B000486ECF /* Constance.h */,
+				650DDD7F1BAB0DD8004ACFF2 /* ColorConstance.h */,
+				650DDD8E1BAB1B5F004ACFF2 /* NotificationConstance.h */,
 			);
 			name = Constance;
 			sourceTree = "<group>";
@@ -331,6 +374,8 @@
 				65E8F2921ADF7FB2005BD0F0 /* FilePathUtility.m */,
 				65E8F2931ADF7FB2005BD0F0 /* Utility.h */,
 				65E8F2941ADF7FB2005BD0F0 /* Utility.m */,
+				650DDD801BAB0E5D004ACFF2 /* YColor+Ext.h */,
+				650DDD811BAB0E5D004ACFF2 /* YColor+Ext.m */,
 			);
 			name = NSUtility;
 			sourceTree = "<group>";
@@ -429,9 +474,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650DDD881BAB1856004ACFF2 /* common_back@2x.png in Resources */,
+				650DDD8C1BAB189C004ACFF2 /* menu@2x.png in Resources */,
+				650DDD8D1BAB189C004ACFF2 /* menu@3x.png in Resources */,
 				65BB63271ADE0B300042C359 /* LaunchScreen.xib in Resources */,
 				65E8F2A91ADF8870005BD0F0 /* Localizable.strings in Resources */,
 				65BB63241ADE0B300042C359 /* Images.xcassets in Resources */,
+				650DDD891BAB1856004ACFF2 /* common_back@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +544,7 @@
 				6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */,
 				65E8F2971ADF7FB2005BD0F0 /* StatusMessagePair.m in Sources */,
 				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
+				650DDD821BAB0E5D004ACFF2 /* YColor+Ext.m in Sources */,
 				6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */,
 				65E8F2961ADF7FB2005BD0F0 /* NSObject+Utility.m in Sources */,
 				6525A7CF1B50B4D8005F2D6D /* RootController.m in Sources */,
@@ -629,6 +679,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = yamibo/PrefixHeader.pch;
 				INFOPLIST_FILE = yamibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -643,6 +694,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = yamibo/PrefixHeader.pch;
 				INFOPLIST_FILE = yamibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

@@ -33,6 +33,7 @@
     self.shouldStretchDrawer = NO;
     self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
     self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
+//    self.showsShadow = false;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openCloseDrawer) name:KDrawerChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCenterViewController:) name:KChangeCenterViewNotification object:nil];
