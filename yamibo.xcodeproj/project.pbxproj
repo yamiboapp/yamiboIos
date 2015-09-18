@@ -20,6 +20,9 @@
 		6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF981ADE1634008EFEE7 /* UIImage+Utility.m */; };
 		6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */; };
 		6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */; };
+		655ABCCE1BAB95FE0023F92B /* HomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ABCCD1BAB95FE0023F92B /* HomeBannerView.m */; settings = {ASSET_TAGS = (); }; };
+		655ABCD11BAB966D0023F92B /* HomeHotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ABCD01BAB966D0023F92B /* HomeHotView.m */; settings = {ASSET_TAGS = (); }; };
+		655ABCD71BABB6C50023F92B /* KDCycleBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ABCD61BABB6C50023F92B /* KDCycleBannerView.m */; settings = {ASSET_TAGS = (); }; };
 		655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D00DF1B4D189E00F0FFBE /* AppManager.m */; };
 		656531F21AE29C6D00486ECF /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 656531F11AE29C6D00486ECF /* LocationManager.m */; };
 		656531F41AE29DA800486ECF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656531F31AE29DA800486ECF /* CoreLocation.framework */; };
@@ -73,6 +76,12 @@
 		6541DF9B1ADE1634008EFEE7 /* UIView+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utility.h"; sourceTree = "<group>"; };
 		6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utility.m"; sourceTree = "<group>"; };
 		6541DFA11ADE16F4008EFEE7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		655ABCCC1BAB95FE0023F92B /* HomeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerView.h; sourceTree = "<group>"; };
+		655ABCCD1BAB95FE0023F92B /* HomeBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerView.m; sourceTree = "<group>"; };
+		655ABCCF1BAB966D0023F92B /* HomeHotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHotView.h; sourceTree = "<group>"; };
+		655ABCD01BAB966D0023F92B /* HomeHotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHotView.m; sourceTree = "<group>"; };
+		655ABCD51BABB6C50023F92B /* KDCycleBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDCycleBannerView.h; sourceTree = "<group>"; };
+		655ABCD61BABB6C50023F92B /* KDCycleBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDCycleBannerView.m; sourceTree = "<group>"; };
 		655D00DE1B4D189E00F0FFBE /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
 		655D00DF1B4D189E00F0FFBE /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
 		656531EF1AE298B000486ECF /* Constance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constance.h; sourceTree = "<group>"; };
@@ -193,6 +202,26 @@
 			name = UIView;
 			sourceTree = "<group>";
 		};
+		655ABCCB1BAB947D0023F92B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				655ABCCC1BAB95FE0023F92B /* HomeBannerView.h */,
+				655ABCCD1BAB95FE0023F92B /* HomeBannerView.m */,
+				655ABCCF1BAB966D0023F92B /* HomeHotView.h */,
+				655ABCD01BAB966D0023F92B /* HomeHotView.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		655ABCD41BABB6C50023F92B /* KDCycleBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				655ABCD51BABB6C50023F92B /* KDCycleBannerView.h */,
+				655ABCD61BABB6C50023F92B /* KDCycleBannerView.m */,
+			);
+			path = KDCycleBannerView;
+			sourceTree = "<group>";
+		};
 		65A4DB551ADE0F4C00251E2F /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +311,7 @@
 		65BB633D1ADE0BFF0042C359 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				655ABCD41BABB6C50023F92B /* KDCycleBannerView */,
 				65E8F2871ADF7F9E005BD0F0 /* NSUtility */,
 				6541DF931ADE161E008EFEE7 /* UIView */,
 			);
@@ -321,6 +351,7 @@
 		65BB63411ADE0C3A0042C359 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				655ABCCB1BAB947D0023F92B /* Home */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -534,8 +565,11 @@
 				6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */,
 				65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */,
 				659D28971B4CF5F1007B7526 /* ChineseTransform.m in Sources */,
+				655ABCD11BAB966D0023F92B /* HomeHotView.m in Sources */,
+				655ABCD71BABB6C50023F92B /* KDCycleBannerView.m in Sources */,
 				655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */,
 				6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */,
+				655ABCCE1BAB95FE0023F92B /* HomeBannerView.m in Sources */,
 				65E8F29A1ADF7FB2005BD0F0 /* Utility.m in Sources */,
 				65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */,
 				650454C41B4D3F2D00651434 /* MenuController.m in Sources */,

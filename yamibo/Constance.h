@@ -9,7 +9,7 @@
 /**
  *  @author 李思良, 15-04-24 11:04:47
  *
- *  @brief  常用全局变量，如颜色等，请定义在此处.
+ *  @brief  常用全局变量色等，请定义在此处.
  */
 #ifndef yamibo_Constance_h
 #define yamibo_Constance_h
@@ -27,7 +27,6 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_HEIGHT == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_HEIGHT == 736.0)
 
-#define KDrawerChangeNotification                   @"drawerchange"
-#define KChangeCenterViewNotification               @"centerviewchange"
-#define KDrawerEnableSwipeNotification              @"drawerswipe"
+#define SCALE_NUM(number)   number * SCREEN_WIDTH / 375
+
 #endif
