@@ -31,7 +31,7 @@
 
     self.leftDrawerViewController = leftDrawer;
     self.shouldStretchDrawer = NO;
-    self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
     self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
 //    self.showsShadow = false;
     
@@ -55,6 +55,7 @@
     switch (index) {
         case CenterControllerHome:
             self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[HomeController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
             break;
         default:
             break;

@@ -6,6 +6,7 @@ pod 'AFNetworking'
 pod 'DTCoreText'
 pod 'MMDrawerController'
 pod 'SDWebImage'
+pod 'MJRefresh'
 target 'yamibo' do
 end
 

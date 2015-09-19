@@ -21,7 +21,7 @@
  *
  *  @return
  */
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 /**
  *  @author 李思良, 15-07-08
  *

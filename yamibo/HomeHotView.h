@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class HomeController;
+/**
+ *  @author 李思良, 15-09-18
+ *
+ *  @brief  首页热点界面
+ */
 @interface HomeHotView : UIView
+
+- (void)viewWillAppear;
 
 @end

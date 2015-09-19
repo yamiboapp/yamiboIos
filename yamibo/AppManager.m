@@ -11,12 +11,12 @@
 
 @implementation AppManager
 
-+ (id)allocWithZone:(NSZone*)zone
++ (instancetype)allocWithZone:(NSZone*)zone
 {
     return [self sharedInstance];
 }
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static dispatch_once_t once;
     static id instance = nil;
@@ -31,21 +31,21 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _isTradionChinese = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isTradition"] boolValue];
-        _isNoImgMode = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isNoImgMode"] boolValue];
+        _isTradionChinese = [[NSUserDefaults standardUserDefaults] boolForKey:@"isTradition"];
+        _isNoImgMode =[[NSUserDefaults standardUserDefaults] boolForKey:@"isNoImgMode"];
     }
     return self;
 }
 
 - (void)setIsTradionChinese:(BOOL)isTradionChinese {
     _isTradionChinese = isTradionChinese;
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_isTradionChinese] forKey:@"isTradition"];
+    [[NSUserDefaults standardUserDefaults] setBool:_isTradionChinese forKey:@"isTradition"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setIsNoImgMode:(BOOL)isNoImgMode {
     _isNoImgMode = isNoImgMode;
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:_isTradionChinese] forKey:@"isNoImgMode"];
+    [[NSUserDefaults standardUserDefaults] setBool:_isNoImgMode forKey:@"isNoImgMode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end
