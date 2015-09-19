@@ -39,7 +39,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCenterViewController:) name:KChangeCenterViewNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeEnable:) name:KDrawerEnableSwipeNotification object:nil];
 }
-
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
 - (void)openCloseDrawer
 {
     if (self.openSide == MMDrawerSideLeft) {
@@ -72,7 +74,6 @@
         self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
     }
 }
-
 
 - (void)dealloc
 {

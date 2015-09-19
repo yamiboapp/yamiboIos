@@ -46,6 +46,8 @@
 		65BB63331ADE0B300042C359 /* yamiboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB63321ADE0B300042C359 /* yamiboTests.m */; };
 		65C7B05B1BAD3C6F00036BB8 /* ForumListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C7B05A1BAD3C6F00036BB8 /* ForumListTableView.m */; settings = {ASSET_TAGS = (); }; };
 		65C7B05E1BAD52EB00036BB8 /* ForumListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C7B05D1BAD52EB00036BB8 /* ForumListTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		65E350761BAD9D020040A60D /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E350751BAD9D020040A60D /* MenuTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		65E350791BADA6C00040A60D /* ProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E350781BADA6C00040A60D /* ProfileManager.m */; settings = {ASSET_TAGS = (); }; };
 		65E8F2961ADF7FB2005BD0F0 /* NSObject+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F28C1ADF7FB2005BD0F0 /* NSObject+Utility.m */; };
 		65E8F2971ADF7FB2005BD0F0 /* StatusMessagePair.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F28E1ADF7FB2005BD0F0 /* StatusMessagePair.m */; };
 		65E8F2981ADF7FB2005BD0F0 /* NSObject+ValidObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F2901ADF7FB2005BD0F0 /* NSObject+ValidObject.m */; };
@@ -142,6 +144,10 @@
 		65C7B05A1BAD3C6F00036BB8 /* ForumListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumListTableView.m; sourceTree = "<group>"; };
 		65C7B05C1BAD52EB00036BB8 /* ForumListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumListTableViewCell.h; sourceTree = "<group>"; };
 		65C7B05D1BAD52EB00036BB8 /* ForumListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumListTableViewCell.m; sourceTree = "<group>"; };
+		65E350741BAD9D020040A60D /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewCell.h; sourceTree = "<group>"; };
+		65E350751BAD9D020040A60D /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCell.m; sourceTree = "<group>"; };
+		65E350771BADA6C00040A60D /* ProfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileManager.h; sourceTree = "<group>"; };
+		65E350781BADA6C00040A60D /* ProfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileManager.m; sourceTree = "<group>"; };
 		65E8F2881ADF7FB2005BD0F0 /* NSUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSUtility.h; sourceTree = "<group>"; };
 		65E8F28B1ADF7FB2005BD0F0 /* NSObject+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Utility.h"; sourceTree = "<group>"; };
 		65E8F28C1ADF7FB2005BD0F0 /* NSObject+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Utility.m"; sourceTree = "<group>"; };
@@ -418,6 +424,8 @@
 				659D28961B4CF5F1007B7526 /* ChineseTransform.m */,
 				655D00DE1B4D189E00F0FFBE /* AppManager.h */,
 				655D00DF1B4D189E00F0FFBE /* AppManager.m */,
+				65E350771BADA6C00040A60D /* ProfileManager.h */,
+				65E350781BADA6C00040A60D /* ProfileManager.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -436,6 +444,7 @@
 		65BB63411ADE0C3A0042C359 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				65E350731BAD9B130040A60D /* Menu */,
 				65C7B0581BAD3B4600036BB8 /* Forum */,
 				6597FCAD1BAC530B009025E3 /* Base */,
 				6597FCA91BAC5199009025E3 /* Feed */,
@@ -488,6 +497,15 @@
 				650454BF1B4D3EBD00651434 /* HomeController.m */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		65E350731BAD9B130040A60D /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				65E350741BAD9D020040A60D /* MenuTableViewCell.h */,
+				65E350751BAD9D020040A60D /* MenuTableViewCell.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		65E8F2871ADF7F9E005BD0F0 /* NSUtility */ = {
@@ -662,6 +680,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */,
+				65E350791BADA6C00040A60D /* ProfileManager.m in Sources */,
 				6597FCA21BAC37BF009025E3 /* TAAbstractDotView.m in Sources */,
 				65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */,
 				659D28971B4CF5F1007B7526 /* ChineseTransform.m in Sources */,
@@ -695,6 +714,7 @@
 				65E8F2991ADF7FB2005BD0F0 /* FilePathUtility.m in Sources */,
 				6597FCB01BAC5319009025E3 /* YTableView.m in Sources */,
 				65E8F2981ADF7FB2005BD0F0 /* NSObject+ValidObject.m in Sources */,
+				65E350761BAD9D020040A60D /* MenuTableViewCell.m in Sources */,
 				6597FCA41BAC37BF009025E3 /* TADotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

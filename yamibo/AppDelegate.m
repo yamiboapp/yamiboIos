@@ -25,6 +25,7 @@
     // Override point for customization after application launch.
     self.window.rootViewController = [[RootController alloc] init];
     [self.window makeKeyAndVisible];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
 }
 
