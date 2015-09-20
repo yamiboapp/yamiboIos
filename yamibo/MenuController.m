@@ -32,7 +32,7 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.scrollEnabled = false;
-    _tableView.tableFooterView = [UIView new];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 1)];
     [_tableView registerClass:[MenuTableViewCell class] forCellReuseIdentifier:KMenuTableViewCell];
     [_tableView registerClass:[MenuTableViewCell class] forCellReuseIdentifier:KMenuTableHeadCell];
 }
@@ -64,5 +64,10 @@
         [menuItem loadTitle:_itemNames[indexPath.row - 1] andIcon:nil];
     }
     return menuItem;
+}
+#pragma tableview delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dic = @{kLeftDrawerSelectionIndexKey:@(indexPath.row)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:KChangeCenterViewNotification object:nil userInfo:dic];
 }
 @end

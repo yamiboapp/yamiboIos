@@ -21,8 +21,6 @@
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
         self.delegate = self;
-        self.backgroundColor = [UIColor clearColor];
-        self.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self registerClass:[ForumListTableViewCell class] forCellReuseIdentifier:KForumListTableViewCell];
     }
     return self;

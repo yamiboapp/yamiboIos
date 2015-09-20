@@ -9,6 +9,7 @@
 #import "RootController.h"
 #import "MenuController.h"
 #import "HomeController.h"
+#import "CollectController.h"
 @interface RootController () {
     MenuController *leftDrawer;
 }
@@ -57,6 +58,10 @@
     switch (index) {
         case CenterControllerHome:
             self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[HomeController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
+            break;
+        case CenterControllerCollect:
+            self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[CollectController alloc] init]];
             self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
             break;
         default:

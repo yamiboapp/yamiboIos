@@ -11,8 +11,12 @@
 #define kLeftDrawerSelectionIndexKey            @"LeftDrawerSelectionIndex"
 
 typedef NS_ENUM(NSInteger, CenterControllerIndex) {
-    CenterControllerProfile = -1,
+    CenterControllerProfile = 0,
     CenterControllerHome,
+    CenterControllerCollect,
+    CenterControllerMessage,
+    CenterControllerNear,
+    CenterControllerConfig,
 };
 @interface MenuController : BaseViewController
 

@@ -11,5 +11,8 @@
 #define KMenuTableViewCell  @"KMenuTableViewCell"
 #define KMenuTableHeadCell  @"KMenuTableHeadCell"
 @interface MenuTableViewCell : UITableViewCell
+
+
+
 - (void)loadTitle:(NSString *)title andIcon:(UIImage *)icon;
 @end

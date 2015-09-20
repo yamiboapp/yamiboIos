@@ -39,20 +39,71 @@
 }
 - (void)initHeadView {
     self.backgroundColor = KCOLOR_RED_6D2C1D;
-    YFaceImageView *face = [[YFaceImageView alloc] init];
+    UIImageView *face = [[UIImageView alloc] init];
     [self addSubview:face];
     [face mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(SCALE_NUM(66));
         make.top.mas_equalTo(SCALE_NUM(45));
         make.centerX.equalTo(self);
     }];
-    [face setUserId:[ProfileManager sharedInstance].userId pic:[ProfileManager sharedInstance].avaturl];
+    [face sd_setImageWithURL:[NSURL URLWithString:[ProfileManager sharedInstance].avaturl]];
     face.layer.cornerRadius = SCALE_NUM(66)/2;
     face.clipsToBounds = true;
     face.backgroundColor = [UIColor yellowColor];
     
     if ([[ProfileManager sharedInstance] checkLogin]) {
+        UILabel *nameLabel = [[UILabel alloc] init];
+        [self addSubview:nameLabel];
+        [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(face.mas_bottom).offset(9);
+            make.centerX.equalTo(face);
+        }];
+        nameLabel.textAlignment = NSTextAlignmentCenter;
+        nameLabel.font = KFONT(14);
+        nameLabel.textColor = KCOLOR_YELLOW_FDF5D8;
+        nameLabel.text = @"南ことり";
         
+        UIImageView *genderTint = [[UIImageView alloc] init];
+        [self addSubview:genderTint];
+        [genderTint mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(nameLabel.mas_right).offset(8);
+            make.top.bottom.equalTo(nameLabel);
+            make.width.equalTo(genderTint.mas_height);
+        }];
+        genderTint.backgroundColor = [UIColor blueColor];
+        
+        UILabel *idLabel = [[UILabel alloc] init];
+        [self addSubview:idLabel];
+        [idLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(nameLabel.mas_bottom).offset(10);
+            make.centerX.equalTo(nameLabel);
+        }];
+        idLabel.font = KFONT(10);
+        idLabel.textAlignment = NSTextAlignmentCenter;
+        idLabel.textColor = KCOLOR_YELLOW_FDF5D8;
+        idLabel.text = @"UID:123456";
+        
+        UILabel *levelLabel = [[UILabel alloc] init];
+        [self addSubview:levelLabel];
+        [levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(idLabel.mas_bottom).offset(8);
+            make.centerX.equalTo(nameLabel);
+        }];
+        levelLabel.font = KFONT(12);
+        levelLabel.textAlignment = NSTextAlignmentCenter;
+        levelLabel.textColor = KCOLOR_YELLOW_FDF5D8;
+        levelLabel.text = @"等级";
+        
+        UILabel *scoreLabel = [[UILabel alloc] init];
+        [self addSubview:scoreLabel];
+        [scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(levelLabel.mas_bottom).offset(9);
+            make.centerX.equalTo(nameLabel);
+        }];
+        scoreLabel.font = KFONT(12);
+        scoreLabel.textColor = KCOLOR_YELLOW_FDF5D8;
+        scoreLabel.textAlignment = NSTextAlignmentCenter;
+        scoreLabel.text = @"积分：233";
     } else {
         UILabel *loginLabel = [[UILabel alloc] init];
         [self addSubview:loginLabel];
