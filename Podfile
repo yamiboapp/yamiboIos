@@ -7,6 +7,8 @@ pod 'DTCoreText'
 pod 'MMDrawerController'
 pod 'SDWebImage'
 pod 'MJRefresh'
+pod 'UITableView+FDTemplateLayoutCell'
+pod 'REMenu'
 target 'yamibo' do
 end
 

@@ -19,6 +19,11 @@
 		65378E071BAE9027001B27FD /* CollectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E061BAE9027001B27FD /* CollectController.m */; settings = {ASSET_TAGS = (); }; };
 		65378E0B1BAE95F2001B27FD /* CollectTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E0A1BAE95F2001B27FD /* CollectTableView.m */; settings = {ASSET_TAGS = (); }; };
 		65378E0E1BAE960D001B27FD /* CollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E0D1BAE960D001B27FD /* CollectTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		65378E121BAECEE1001B27FD /* NeighborController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E111BAECEE1001B27FD /* NeighborController.m */; settings = {ASSET_TAGS = (); }; };
+		65378E151BAED081001B27FD /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65378E131BAED081001B27FD /* more@2x.png */; settings = {ASSET_TAGS = (); }; };
+		65378E161BAED081001B27FD /* more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65378E141BAED081001B27FD /* more@3x.png */; settings = {ASSET_TAGS = (); }; };
+		65378E1A1BAEDA28001B27FD /* NeighborTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E191BAEDA28001B27FD /* NeighborTableView.m */; settings = {ASSET_TAGS = (); }; };
+		65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E1C1BAEDB5B001B27FD /* NeighborTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF961ADE1634008EFEE7 /* UIColor+Utility.m */; };
 		6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF981ADE1634008EFEE7 /* UIImage+Utility.m */; };
 		6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */; };
@@ -90,6 +95,14 @@
 		65378E0A1BAE95F2001B27FD /* CollectTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableView.m; sourceTree = "<group>"; };
 		65378E0C1BAE960D001B27FD /* CollectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectTableViewCell.h; sourceTree = "<group>"; };
 		65378E0D1BAE960D001B27FD /* CollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableViewCell.m; sourceTree = "<group>"; };
+		65378E101BAECEE1001B27FD /* NeighborController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborController.h; sourceTree = "<group>"; };
+		65378E111BAECEE1001B27FD /* NeighborController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborController.m; sourceTree = "<group>"; };
+		65378E131BAED081001B27FD /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
+		65378E141BAED081001B27FD /* more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@3x.png"; sourceTree = "<group>"; };
+		65378E181BAEDA28001B27FD /* NeighborTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborTableView.h; sourceTree = "<group>"; };
+		65378E191BAEDA28001B27FD /* NeighborTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborTableView.m; sourceTree = "<group>"; };
+		65378E1B1BAEDB5B001B27FD /* NeighborTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborTableViewCell.h; sourceTree = "<group>"; };
+		65378E1C1BAEDB5B001B27FD /* NeighborTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborTableViewCell.m; sourceTree = "<group>"; };
 		6541DF941ADE1634008EFEE7 /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
 		6541DF951ADE1634008EFEE7 /* UIColor+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utility.h"; sourceTree = "<group>"; };
 		6541DF961ADE1634008EFEE7 /* UIColor+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utility.m"; sourceTree = "<group>"; };
@@ -233,6 +246,8 @@
 		650DDD851BAB1831004ACFF2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				65378E131BAED081001B27FD /* more@2x.png */,
+				65378E141BAED081001B27FD /* more@3x.png */,
 				650DDD8A1BAB189C004ACFF2 /* menu@2x.png */,
 				650DDD8B1BAB189C004ACFF2 /* menu@3x.png */,
 				650DDD861BAB1856004ACFF2 /* common_back@2x.png */,
@@ -259,6 +274,26 @@
 				65378E0D1BAE960D001B27FD /* CollectTableViewCell.m */,
 			);
 			name = Collect;
+			sourceTree = "<group>";
+		};
+		65378E0F1BAECEB9001B27FD /* Neighbor */ = {
+			isa = PBXGroup;
+			children = (
+				65378E101BAECEE1001B27FD /* NeighborController.h */,
+				65378E111BAECEE1001B27FD /* NeighborController.m */,
+			);
+			name = Neighbor;
+			sourceTree = "<group>";
+		};
+		65378E171BAEDA11001B27FD /* Neighbor */ = {
+			isa = PBXGroup;
+			children = (
+				65378E181BAEDA28001B27FD /* NeighborTableView.h */,
+				65378E191BAEDA28001B27FD /* NeighborTableView.m */,
+				65378E1B1BAEDB5B001B27FD /* NeighborTableViewCell.h */,
+				65378E1C1BAEDB5B001B27FD /* NeighborTableViewCell.m */,
+			);
+			name = Neighbor;
 			sourceTree = "<group>";
 		};
 		6541DF931ADE161E008EFEE7 /* UIView */ = {
@@ -473,6 +508,7 @@
 		65BB63411ADE0C3A0042C359 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				65378E171BAEDA11001B27FD /* Neighbor */,
 				65378E081BAE95DD001B27FD /* Collect */,
 				65E350731BAD9B130040A60D /* Menu */,
 				65C7B0581BAD3B4600036BB8 /* Forum */,
@@ -486,6 +522,7 @@
 		65BB63421ADE0C440042C359 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				65378E0F1BAECEB9001B27FD /* Neighbor */,
 				65378E041BAE9011001B27FD /* Collect */,
 				65BCF1E31B8186CC003457F4 /* ArticleList */,
 				65BCF1E21B8186A1003457F4 /* ArticleDetail */,
@@ -655,11 +692,13 @@
 			files = (
 				650DDD881BAB1856004ACFF2 /* common_back@2x.png in Resources */,
 				650DDD8C1BAB189C004ACFF2 /* menu@2x.png in Resources */,
+				65378E161BAED081001B27FD /* more@3x.png in Resources */,
 				650DDD8D1BAB189C004ACFF2 /* menu@3x.png in Resources */,
 				65BB63271ADE0B300042C359 /* LaunchScreen.xib in Resources */,
 				65E8F2A91ADF8870005BD0F0 /* Localizable.strings in Resources */,
 				65BB63241ADE0B300042C359 /* Images.xcassets in Resources */,
 				650DDD891BAB1856004ACFF2 /* common_back@3x.png in Resources */,
+				65378E151BAED081001B27FD /* more@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +768,7 @@
 				6597FCAC1BAC51BE009025E3 /* FeedListTableViewCell.m in Sources */,
 				65BB63191ADE0B300042C359 /* main.m in Sources */,
 				65378E0E1BAE960D001B27FD /* CollectTableViewCell.m in Sources */,
+				65378E1A1BAEDA28001B27FD /* NeighborTableView.m in Sources */,
 				650454C01B4D3EBD00651434 /* HomeController.m in Sources */,
 				6597FCA71BAC37BF009025E3 /* SDCycleScrollView.m in Sources */,
 				6597FCB61BAC56B9009025E3 /* HotFeedListTableView.m in Sources */,
@@ -737,9 +777,11 @@
 				65C7B05E1BAD52EB00036BB8 /* ForumListTableViewCell.m in Sources */,
 				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
 				650DDD821BAB0E5D004ACFF2 /* YColor+Ext.m in Sources */,
+				65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */,
 				6597FCA11BAC37BF009025E3 /* NSData+SDDataCache.m in Sources */,
 				65378E0B1BAE95F2001B27FD /* CollectTableView.m in Sources */,
 				6597FCA81BAC37BF009025E3 /* UIView+SDExtension.m in Sources */,
+				65378E121BAECEE1001B27FD /* NeighborController.m in Sources */,
 				6597FCA51BAC37BF009025E3 /* TAPageControl.m in Sources */,
 				6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */,
 				65E8F2961ADF7FB2005BD0F0 /* NSObject+Utility.m in Sources */,
