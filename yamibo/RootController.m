@@ -10,6 +10,7 @@
 #import "MenuController.h"
 #import "HomeController.h"
 #import "CollectController.h"
+#import "MessageController.h"
 #import "NeighborController.h"
 @interface RootController () {
     MenuController *leftDrawer;
@@ -63,6 +64,10 @@
             break;
         case CenterControllerCollect:
             self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[CollectController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
+            break;
+        case CenterControllerMessage:
+            self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[MessageController alloc] init]];
             self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
             break;
         case CenterControllerNear:
