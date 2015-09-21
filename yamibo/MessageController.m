@@ -7,8 +7,7 @@
 //
 
 #import "MessageController.h"
-#import "PrivateMessageTableView.h"
-#import "PublicMessageTableView.h"
+#import "MessageTableView.h"
 
 @interface MessageController ()
 @property (strong, nonatomic)   PrivateMessageTableView *PrivateMessageView;
@@ -23,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configNavigation];
-    [self initSwitch];
+    [self initView];
 
 }
 - (void) configNavigation {
@@ -103,6 +102,7 @@
         [_tintLine layoutIfNeeded];
     }];
 }
+
 - (void)onNavigationLeftButtonClicked
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];

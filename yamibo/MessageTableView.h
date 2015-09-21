@@ -1,5 +1,5 @@
 //
-//  PrivateMessageTableView.h
+//  MessageTableView.h
 //  yamibo
 //
 //  Created by shuang yang on 9/21/15.
@@ -8,8 +8,9 @@
 
 #import "YTableView.h"
 
-@interface PrivateMessageTableView : YTableView
+@interface MessageTableView : YTableView
 
+- (instancetype)initWithSectionName:(NSString *)name;
 - (void)refreshData;
 
 @end
