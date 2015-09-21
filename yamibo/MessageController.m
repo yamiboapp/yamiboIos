@@ -10,8 +10,7 @@
 #import "MessageTableView.h"
 
 @interface MessageController ()
-@property (strong, nonatomic)   PrivateMessageTableView *PrivateMessageView;
-@property (strong, nonatomic)   PublicMessageTableView *PublicMessageView;
+
 
 @property (strong, nonatomic)   UIView *container;
 @property (strong, nonatomic)   UIView *tintLine;
@@ -22,15 +21,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configNavigation];
+    [self initSwitch];
     [self initView];
-
+    
 }
 - (void) configNavigation {
     [self showCustomNavigationMenuButton];
     self.title = @"消息";
 }
+- (void)initView {
+    MessageTableView *PrivateMessageView = [[MessageTableView alloc]initWithSectionName:@"私人信息"];
+    [self.view addSubview:PrivateMessageView];
+    [PrivateMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.mas_equalTo(43);
+    }];
+    [PrivateMessageView refreshData];
+}
 - (void)initSwitch {
-
+    
     UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:@[@"公共信息", @"私人信息"]];
     UIView *back = [[UIView alloc]init];
     [self.view addSubview:back];
@@ -39,7 +48,7 @@
         make.height.mas_equalTo(43);
     }];
     back.backgroundColor = KCOLOR_YELLOW_FDF5D8;
-
+    
     [back addSubview:segment];
     [segment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(back).insets(UIEdgeInsetsMake(0, 50, 0, 50));
@@ -102,7 +111,6 @@
         [_tintLine layoutIfNeeded];
     }];
 }
-
 - (void)onNavigationLeftButtonClicked
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
