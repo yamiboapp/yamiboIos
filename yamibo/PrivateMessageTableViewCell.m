@@ -25,7 +25,6 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self configCell];
         [self initBack];
-        [self initView];
     }
     return self;
 }
