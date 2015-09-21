@@ -28,6 +28,7 @@
 		6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF981ADE1634008EFEE7 /* UIImage+Utility.m */; };
 		6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */; };
 		6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */; };
+		654934571BB0205A005141C6 /* CommunicationrManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 654934561BB0205A005141C6 /* CommunicationrManager.m */; settings = {ASSET_TAGS = (); }; };
 		655ABCCE1BAB95FE0023F92B /* HomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ABCCD1BAB95FE0023F92B /* HomeBannerView.m */; settings = {ASSET_TAGS = (); }; };
 		655ABCD11BAB966D0023F92B /* HomeHotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ABCD01BAB966D0023F92B /* HomeHotView.m */; settings = {ASSET_TAGS = (); }; };
 		655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D00DF1B4D189E00F0FFBE /* AppManager.m */; };
@@ -113,6 +114,8 @@
 		6541DF9B1ADE1634008EFEE7 /* UIView+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utility.h"; sourceTree = "<group>"; };
 		6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utility.m"; sourceTree = "<group>"; };
 		6541DFA11ADE16F4008EFEE7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		654934551BB0205A005141C6 /* CommunicationrManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationrManager.h; sourceTree = "<group>"; };
+		654934561BB0205A005141C6 /* CommunicationrManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationrManager.m; sourceTree = "<group>"; };
 		655ABCCC1BAB95FE0023F92B /* HomeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerView.h; sourceTree = "<group>"; };
 		655ABCCD1BAB95FE0023F92B /* HomeBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerView.m; sourceTree = "<group>"; };
 		655ABCCF1BAB966D0023F92B /* HomeHotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHotView.h; sourceTree = "<group>"; };
@@ -490,6 +493,8 @@
 				655D00DF1B4D189E00F0FFBE /* AppManager.m */,
 				65E350771BADA6C00040A60D /* ProfileManager.h */,
 				65E350781BADA6C00040A60D /* ProfileManager.m */,
+				654934551BB0205A005141C6 /* CommunicationrManager.h */,
+				654934561BB0205A005141C6 /* CommunicationrManager.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -750,6 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */,
+				654934571BB0205A005141C6 /* CommunicationrManager.m in Sources */,
 				65E350791BADA6C00040A60D /* ProfileManager.m in Sources */,
 				6597FCA21BAC37BF009025E3 /* TAAbstractDotView.m in Sources */,
 				65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */,

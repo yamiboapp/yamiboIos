@@ -9,6 +9,7 @@
 #import "HomeController.h"
 #import "HomeHotView.h"
 #import "ForumListTableView.h"
+#import "CommunicationrManager.h"
 /**
  *  @author 李思良, 15-08-17
  *
@@ -68,6 +69,11 @@
         _hotView.hidden = true;
         _forumList.hidden = false;
     }
+}
+- (void)viewDidAppear:(BOOL)animated {
+//    [CommunicationrManager getProfile:^(NSString *message) {
+//        
+//    }];
 }
 - (void)onNavigationLeftButtonClicked
 {
