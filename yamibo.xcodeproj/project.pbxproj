@@ -62,11 +62,9 @@
 		65E8F2991ADF7FB2005BD0F0 /* FilePathUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F2921ADF7FB2005BD0F0 /* FilePathUtility.m */; };
 		65E8F29A1ADF7FB2005BD0F0 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F2941ADF7FB2005BD0F0 /* Utility.m */; };
 		65E8F2A91ADF8870005BD0F0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65E8F2AB1ADF8870005BD0F0 /* Localizable.strings */; };
-		BA8B26AC1BB014F900173D5B /* PrivateMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AB1BB014F900173D5B /* PrivateMessageTableView.m */; settings = {ASSET_TAGS = (); }; };
-		BA8B26AF1BB0155400173D5B /* PrivateMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AE1BB0155400173D5B /* PrivateMessageTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		BA8B26AC1BB014F900173D5B /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AB1BB014F900173D5B /* MessageTableView.m */; settings = {ASSET_TAGS = (); }; };
+		BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		BA8B26B61BB0184500173D5B /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26B51BB0184500173D5B /* MessageController.m */; settings = {ASSET_TAGS = (); }; };
-		BA8B26B91BB0194B00173D5B /* PublicMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26B81BB0194B00173D5B /* PublicMessageTableView.m */; settings = {ASSET_TAGS = (); }; };
-		BA8B26C01BB0411300173D5B /* PublicMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26BF1BB0411300173D5B /* PublicMessageTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,16 +188,12 @@
 		65E8F2AC1ADF8871005BD0F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		65E8F2AD1ADF8872005BD0F0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6EB444121147463741FE2AE8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		BA8B26AA1BB014F900173D5B /* PrivateMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessageTableView.h; sourceTree = "<group>"; };
-		BA8B26AB1BB014F900173D5B /* PrivateMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessageTableView.m; sourceTree = "<group>"; };
-		BA8B26AD1BB0155400173D5B /* PrivateMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessageTableViewCell.h; sourceTree = "<group>"; };
-		BA8B26AE1BB0155400173D5B /* PrivateMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessageTableViewCell.m; sourceTree = "<group>"; };
+		BA8B26AA1BB014F900173D5B /* MessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableView.h; sourceTree = "<group>"; };
+		BA8B26AB1BB014F900173D5B /* MessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableView.m; sourceTree = "<group>"; };
+		BA8B26AD1BB0155400173D5B /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		BA8B26B41BB0184500173D5B /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
 		BA8B26B51BB0184500173D5B /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
-		BA8B26B71BB0194B00173D5B /* PublicMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMessageTableView.h; sourceTree = "<group>"; };
-		BA8B26B81BB0194B00173D5B /* PublicMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMessageTableView.m; sourceTree = "<group>"; };
-		BA8B26BE1BB0411300173D5B /* PublicMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicMessageTableViewCell.h; sourceTree = "<group>"; };
-		BA8B26BF1BB0411300173D5B /* PublicMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicMessageTableViewCell.m; sourceTree = "<group>"; };
 		E27CD2202FE8D2FD1477FE4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB92675E9DEB19D94621841F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -425,17 +419,17 @@
 		65BB63151ADE0B300042C359 /* yamibo */ = {
 			isa = PBXGroup;
 			children = (
+				65BB63231ADE0B300042C359 /* Images.xcassets */,
+				65BB631B1ADE0B300042C359 /* AppDelegate.m */,
+				65BB631A1ADE0B300042C359 /* AppDelegate.h */,
+				65BB63251ADE0B300042C359 /* LaunchScreen.xib */,
 				65BB63401ADE0C220042C359 /* Constance */,
 				65BB633D1ADE0BFF0042C359 /* Utility */,
-				65BB633C1ADE0BE70042C359 /* Vender */,
 				65BB633E1ADE0C060042C359 /* Model */,
+				65BB633C1ADE0BE70042C359 /* Vender */,
 				65BB633F1ADE0C130042C359 /* Service */,
 				65BB63411ADE0C3A0042C359 /* View */,
 				65BB63421ADE0C440042C359 /* Controller */,
-				65BB631A1ADE0B300042C359 /* AppDelegate.h */,
-				65BB631B1ADE0B300042C359 /* AppDelegate.m */,
-				65BB63231ADE0B300042C359 /* Images.xcassets */,
-				65BB63251ADE0B300042C359 /* LaunchScreen.xib */,
 				650DDD831BAB1831004ACFF2 /* Resources */,
 				65BB63161ADE0B300042C359 /* Supporting Files */,
 			);
@@ -616,14 +610,10 @@
 		BA8B26A61BB0128B00173D5B /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				BA8B26AD1BB0155400173D5B /* PrivateMessageTableViewCell.h */,
-				BA8B26AE1BB0155400173D5B /* PrivateMessageTableViewCell.m */,
-				BA8B26AA1BB014F900173D5B /* PrivateMessageTableView.h */,
-				BA8B26AB1BB014F900173D5B /* PrivateMessageTableView.m */,
-				BA8B26B71BB0194B00173D5B /* PublicMessageTableView.h */,
-				BA8B26B81BB0194B00173D5B /* PublicMessageTableView.m */,
-				BA8B26BE1BB0411300173D5B /* PublicMessageTableViewCell.h */,
-				BA8B26BF1BB0411300173D5B /* PublicMessageTableViewCell.m */,
+				BA8B26AA1BB014F900173D5B /* MessageTableView.h */,
+				BA8B26AB1BB014F900173D5B /* MessageTableView.m */,
+				BA8B26AD1BB0155400173D5B /* MessageTableViewCell.h */,
+				BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -806,7 +796,6 @@
 				65E8F29A1ADF7FB2005BD0F0 /* Utility.m in Sources */,
 				65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */,
 				650454C41B4D3F2D00651434 /* MenuController.m in Sources */,
-				BA8B26B91BB0194B00173D5B /* PublicMessageTableView.m in Sources */,
 				6597FCAC1BAC51BE009025E3 /* FeedListTableViewCell.m in Sources */,
 				65BB63191ADE0B300042C359 /* main.m in Sources */,
 				65378E0E1BAE960D001B27FD /* CollectTableViewCell.m in Sources */,
@@ -817,7 +806,7 @@
 				6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */,
 				65E8F2971ADF7FB2005BD0F0 /* StatusMessagePair.m in Sources */,
 				65C7B05E1BAD52EB00036BB8 /* ForumListTableViewCell.m in Sources */,
-				BA8B26AF1BB0155400173D5B /* PrivateMessageTableViewCell.m in Sources */,
+				BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */,
 				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
 				650DDD821BAB0E5D004ACFF2 /* YColor+Ext.m in Sources */,
 				BA8B26B61BB0184500173D5B /* MessageController.m in Sources */,
@@ -832,11 +821,10 @@
 				6525A7CF1B50B4D8005F2D6D /* RootController.m in Sources */,
 				65C7B05B1BAD3C6F00036BB8 /* ForumListTableView.m in Sources */,
 				65E8F2991ADF7FB2005BD0F0 /* FilePathUtility.m in Sources */,
-				BA8B26AC1BB014F900173D5B /* PrivateMessageTableView.m in Sources */,
+				BA8B26AC1BB014F900173D5B /* MessageTableView.m in Sources */,
 				6597FCB01BAC5319009025E3 /* YTableView.m in Sources */,
 				65E8F2981ADF7FB2005BD0F0 /* NSObject+ValidObject.m in Sources */,
 				65E350761BAD9D020040A60D /* MenuTableViewCell.m in Sources */,
-				BA8B26C01BB0411300173D5B /* PublicMessageTableViewCell.m in Sources */,
 				6597FCA41BAC37BF009025E3 /* TADotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

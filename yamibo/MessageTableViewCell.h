@@ -1,5 +1,5 @@
 //
-//  PrivateMessageTableViewCell.h
+//  MessageTableViewCell.h
 //  yamibo
 //
 //  Created by shuang yang on 9/21/15.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#define KNeighborTableViewCell  @"KNeighborTableViewCell"
+#define KMessageTableViewCell  @"KMessageTableViewCell"
 
-@interface PrivateMessageTableViewCell : UITableViewCell
+@interface MessageTableViewCell : UITableViewCell
 
 - (void)loadData;
 
