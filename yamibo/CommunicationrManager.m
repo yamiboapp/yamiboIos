@@ -9,7 +9,7 @@
 #import "CommunicationrManager.h"
 #import "AFNetworking.h"
 
-#define KBaseUrl    @"http://ceshi.yamibo.com/chobits/test.php"
+#define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
 @implementation CommunicationrManager
 
@@ -42,10 +42,7 @@
 
 + (AFHTTPRequestOperationManager *)defaultManager {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
-    [manager.requestSerializer setValue:@"application/json; charset=utf-8"
-                     forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.requestSerializer.HTTPShouldHandleCookies = true;
     return manager;
 }

@@ -70,11 +70,6 @@
         _forumList.hidden = false;
     }
 }
-- (void)viewDidAppear:(BOOL)animated {
-//    [CommunicationrManager getProfile:^(NSString *message) {
-//        
-//    }];
-}
 - (void)onNavigationLeftButtonClicked
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
