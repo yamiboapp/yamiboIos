@@ -9,6 +9,9 @@
 #import "RootController.h"
 #import "MenuController.h"
 #import "HomeController.h"
+#import "CollectController.h"
+#import "MessageController.h"
+#import "NeighborController.h"
 @interface RootController () {
     MenuController *leftDrawer;
 }
@@ -31,14 +34,17 @@
 
     self.leftDrawerViewController = leftDrawer;
     self.shouldStretchDrawer = NO;
-    self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
     self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
+//    self.showsShadow = false;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openCloseDrawer) name:KDrawerChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCenterViewController:) name:KChangeCenterViewNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeEnable:) name:KDrawerEnableSwipeNotification object:nil];
 }
-
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
 - (void)openCloseDrawer
 {
     if (self.openSide == MMDrawerSideLeft) {
@@ -54,6 +60,19 @@
     switch (index) {
         case CenterControllerHome:
             self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[HomeController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
+            break;
+        case CenterControllerCollect:
+            self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[CollectController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
+            break;
+        case CenterControllerMessage:
+            self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[MessageController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
+            break;
+        case CenterControllerNear:
+            self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[NeighborController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
             break;
         default:
             break;
@@ -70,7 +89,6 @@
         self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
     }
 }
-
 
 - (void)dealloc
 {

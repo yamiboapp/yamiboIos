@@ -21,12 +21,19 @@
  *
  *  @return
  */
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 /**
  *  @author 李思良, 15-07-08
  *
  *  @brief  是否开启繁体模式
  */
 @property (assign, nonatomic) BOOL isTradionChinese;
+
+/**
+ *  @author 李思良, 15-09-17
+ *
+ *  @brief  是否开启无图模式
+ */
+@property (assign, nonatomic) BOOL isNoImgMode;
 
 @end

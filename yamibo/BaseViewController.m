@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "MBProgressHUD.h"
+
 @interface BaseViewController () {
 }
 
@@ -30,9 +31,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.navigationController.navigationBarHidden = true;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = KCOLOR_YELLOW_FFEDBE;
+    [self initNavigation];
+}
+- (void)initNavigation {
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self.navigationController.navigationBar setBarTintColor:KCOLOR_RED_6D2C1D];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,9 +45,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
+- (void)showCustomNavigationBackButton {
+    [self showNomalNavigationLeftButton:@"" action:@selector(onNavigationLeftButtonClicked) imgName:@"common_back" frame:CGRectMake(0, 0, 9, 14)];
+}
+
+- (void)showCustomNavigationMenuButton {
+    [self showNomalNavigationLeftButton:@"" action:@selector(onNavigationLeftButtonClicked) imgName:@"menu" frame:CGRectMake(0, 0, 15, 15)];
+}
+
+- (void)showCustomNavigationMoreButton {
+    [self showNomalNavigationRightButtonWithImage:@"" action:@selector(onNavigationRightButtonClicked) imgName:@"more" frame:CGRectMake(0, 0, 18, 64)];
 }
 
 - (void)showMessage:(NSString*)message;
@@ -71,7 +82,59 @@
         [hud removeFromSuperview];
     }];
 }
+- (void)showNomalNavigationLeftButton:(NSString *)title action:(SEL)selector imgName:(NSString *)imgName frame:(CGRect)frame
+{
+    //right barbutton view
+    _navigationLeftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _navigationLeftButton = [[UIButton alloc] initWithFrame:frame];
+    if (nil != imgName)
+    {
+        [_navigationLeftButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+        [_navigationLeftButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateHighlighted];
+    }
+    else
+    {
+        [_navigationLeftButton setTitle:title forState:UIControlStateNormal];
+        [_navigationLeftButton setTitleColor:[UIColor hexChangeFloat:@"F4453C"] forState:UIControlStateNormal];
+        [_navigationLeftButton setTitleColor:[UIColor hexChangeFloat:@"494949"] forState:UIControlStateDisabled];
+        _navigationLeftButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+        [_navigationLeftButton sizeToFit];
+    }
+    [_navigationLeftButton addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btnNavLeftItem = [[UIBarButtonItem alloc] initWithCustomView:_navigationLeftButton];
+    self.navigationItem.leftBarButtonItem = btnNavLeftItem;
+}
+- (void)showNomalNavigationRightButtonWithImage:(NSString *)title action:(SEL)selector imgName:(NSString *)imgName frame:(CGRect)frame {
+    //right barbutton view
+    _navigationRightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _navigationRightButton.frame = frame;
+    if (nil != imgName)
+    {
+        [_navigationRightButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+        [_navigationRightButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateHighlighted];
+    }
+    else
+    {
+        [_navigationRightButton setTitle:title forState:UIControlStateNormal];
+        [_navigationRightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_navigationRightButton setTitleColor:[UIColor hexChangeFloat:@"c3c9c9"] forState:UIControlStateDisabled];
+        _navigationRightButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
+        [_navigationRightButton sizeToFit];
+    }
+    
+    [_navigationRightButton addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btnNavRightItem = [[UIBarButtonItem alloc] initWithCustomView:_navigationRightButton];
+    self.navigationItem.rightBarButtonItem = btnNavRightItem;
+}
 
+- (void)onNavigationLeftButtonClicked
+{
+    [self.view endEditing:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)onNavigationRightButtonClicked {
+    
+}
 #pragma mark Hide/Show StatusBar
 - (BOOL)prefersStatusBarHidden
 {
