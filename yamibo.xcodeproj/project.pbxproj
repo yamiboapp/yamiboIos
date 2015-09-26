@@ -64,6 +64,8 @@
 		65E8F2991ADF7FB2005BD0F0 /* FilePathUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F2921ADF7FB2005BD0F0 /* FilePathUtility.m */; };
 		65E8F29A1ADF7FB2005BD0F0 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E8F2941ADF7FB2005BD0F0 /* Utility.m */; };
 		65E8F2A91ADF8870005BD0F0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65E8F2AB1ADF8870005BD0F0 /* Localizable.strings */; };
+		65F50C211BB656F4007DC23C /* HotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F50C201BB656F4007DC23C /* HotModel.m */; settings = {ASSET_TAGS = (); }; };
+		65FC571A1BB6760100FC85A5 /* ForumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC57191BB6760100FC85A5 /* ForumModel.m */; settings = {ASSET_TAGS = (); }; };
 		BA8B26AC1BB014F900173D5B /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AB1BB014F900173D5B /* MessageTableView.m */; settings = {ASSET_TAGS = (); }; };
 		BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		BA8B26B61BB0184500173D5B /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26B51BB0184500173D5B /* MessageController.m */; settings = {ASSET_TAGS = (); }; };
@@ -193,6 +195,11 @@
 		65E8F2AA1ADF8870005BD0F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65E8F2AC1ADF8871005BD0F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		65E8F2AD1ADF8872005BD0F0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		65F50C1E1BB653D1007DC23C /* UrlConstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UrlConstance.h; sourceTree = "<group>"; };
+		65F50C1F1BB656F4007DC23C /* HotModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotModel.h; sourceTree = "<group>"; };
+		65F50C201BB656F4007DC23C /* HotModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotModel.m; sourceTree = "<group>"; };
+		65FC57181BB6760100FC85A5 /* ForumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumModel.h; sourceTree = "<group>"; };
+		65FC57191BB6760100FC85A5 /* ForumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumModel.m; sourceTree = "<group>"; };
 		6EB444121147463741FE2AE8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BA8B26AA1BB014F900173D5B /* MessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableView.h; sourceTree = "<group>"; };
 		BA8B26AB1BB014F900173D5B /* MessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableView.m; sourceTree = "<group>"; };
@@ -490,6 +497,10 @@
 		65BB633E1ADE0C060042C359 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				65F50C1F1BB656F4007DC23C /* HotModel.h */,
+				65F50C201BB656F4007DC23C /* HotModel.m */,
+				65FC57181BB6760100FC85A5 /* ForumModel.h */,
+				65FC57191BB6760100FC85A5 /* ForumModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -518,6 +529,7 @@
 				650DDD7F1BAB0DD8004ACFF2 /* ColorConstance.h */,
 				650DDD8E1BAB1B5F004ACFF2 /* NotificationConstance.h */,
 				6597FCB71BAC60A4009025E3 /* FontConstance.h */,
+				65F50C1E1BB653D1007DC23C /* UrlConstance.h */,
 			);
 			name = Constance;
 			sourceTree = "<group>";
@@ -618,14 +630,10 @@
 		BA8B26A61BB0128B00173D5B /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				BA8B26AD1BB0155400173D5B /* PrivateMessageTableViewCell.h */,
-				BA8B26AE1BB0155400173D5B /* PrivateMessageTableViewCell.m */,
-				BA8B26AA1BB014F900173D5B /* PrivateMessageTableView.h */,
-				BA8B26AB1BB014F900173D5B /* PrivateMessageTableView.m */,
-				BA8B26B71BB0194B00173D5B /* PublicMessageTableView.h */,
-				BA8B26B81BB0194B00173D5B /* PublicMessageTableView.m */,
-				BA8B26BE1BB0411300173D5B /* PublicMessageTableViewCell.h */,
-				BA8B26BF1BB0411300173D5B /* PublicMessageTableViewCell.m */,
+				BA8B26AD1BB0155400173D5B /* MessageTableViewCell.h */,
+				BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */,
+				BA8B26AA1BB014F900173D5B /* MessageTableView.h */,
+				BA8B26AB1BB014F900173D5B /* MessageTableView.m */,
 				654934581BB049F5005141C6 /* MessageSwitchView.h */,
 				654934591BB049F5005141C6 /* MessageSwitchView.m */,
 			);
@@ -833,12 +841,14 @@
 				65378E121BAECEE1001B27FD /* NeighborController.m in Sources */,
 				6597FCA51BAC37BF009025E3 /* TAPageControl.m in Sources */,
 				6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */,
+				65FC571A1BB6760100FC85A5 /* ForumModel.m in Sources */,
 				65E8F2961ADF7FB2005BD0F0 /* NSObject+Utility.m in Sources */,
 				6525A7CF1B50B4D8005F2D6D /* RootController.m in Sources */,
 				65C7B05B1BAD3C6F00036BB8 /* ForumListTableView.m in Sources */,
 				65E8F2991ADF7FB2005BD0F0 /* FilePathUtility.m in Sources */,
 				BA8B26AC1BB014F900173D5B /* MessageTableView.m in Sources */,
 				6597FCB01BAC5319009025E3 /* YTableView.m in Sources */,
+				65F50C211BB656F4007DC23C /* HotModel.m in Sources */,
 				65E8F2981ADF7FB2005BD0F0 /* NSObject+ValidObject.m in Sources */,
 				65E350761BAD9D020040A60D /* MenuTableViewCell.m in Sources */,
 				6597FCA41BAC37BF009025E3 /* TADotView.m in Sources */,

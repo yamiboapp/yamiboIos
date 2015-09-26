@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+@class HotModel;
+@class ForumListModel;
 
 @interface CommunicationrManager : NSObject
 
 + (void)getProfile:(void (^)(NSString *message))completion;
 
 + (void)loginWithName:(NSString *)userName andPwd:(NSString *)pwd andQuestion:(NSString *)questionId andAnswer:(NSString *)answer completion:(void (^)(NSString *message))completion;
+
++ (void)getHot:(void (^)(HotModel *model, NSString *message))completion;
+
++ (void)getForumList:(void (^)(ForumListModel *model, NSString *message))completion;
 @end

@@ -84,7 +84,7 @@
 }
 
 - (void)loadData {
-    [_headImg setUserId:@"233" pic:@"http://www.ineeyou.com/data/attachment/forum/201501/31/145145ihi6nj42hhz4f4qs.png"];
+//    [_headImg setUserId:@"233" pic:@"http://www.ineeyou.com/data/attachment/forum/201501/31/145145ihi6nj42hhz4f4qs.png"];
     _titleLabel.text = @"我对你说:";
     _contentLabel.text = @"约吗";
     _timeLable.text = @"4-22 12:00";

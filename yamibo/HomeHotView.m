@@ -10,6 +10,8 @@
 #import "HomeBannerView.h"
 #import "HotFeedListTableView.h"
 #import "AppManager.h"
+#import "CommunicationrManager.h"
+#import "HotModel.h"
 
 @interface HomeHotView()
 @property (strong, nonatomic) HomeBannerView *banner;
@@ -31,12 +33,15 @@
             make.top.equalTo(_banner.mas_bottom);
             make.left.right.bottom.equalTo(self);
         }];
-        [_tableView refreshData];
     }
     return self;
 }
 - (void)viewWillAppear {
-    BOOL isNopic = [AppManager sharedInstance].isNoImgMode;
+    [self loadData];
+}
+
+- (void)updateBanner:(BOOL)isNopic {
+    isNopic = isNopic || [AppManager sharedInstance].isNoImgMode;
     if (isNopic) {
         _banner.hidden = true;
         [_tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -49,7 +54,15 @@
             make.top.equalTo(_banner.mas_bottom);
             make.left.right.bottom.equalTo(self);
         }];
-
+        
     }
+}
+
+- (void)loadData {
+    [CommunicationrManager getHot:^(HotModel *model, NSString *message) {
+        [self updateBanner:(model.dataImg.count == 0)];
+        [_banner loadData:model.dataImg];
+        [_tableView loadData:model.dataText];
+    }];
 }
 @end

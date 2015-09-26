@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class HomeController;
 /**
  *  @author 李思良, 15-09-18
  *

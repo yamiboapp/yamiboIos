@@ -8,6 +8,8 @@
 
 #import "ForumListTableView.h"
 #import "ForumListTableViewCell.h"
+#import "CommunicationrManager.h"
+#import "ForumModel.h"
 
 @interface ForumListTableView()<UITableViewDataSource, UITableViewDelegate>
 @property (copy, nonatomic) NSArray *dataArray;
@@ -30,20 +32,24 @@
     [self beginLoadNewData];
 }
 - (void)loadNewData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [CommunicationrManager getForumList:^(ForumListModel *model, NSString *message) {
         [self stopLoadNewData];
-    });
+        if (model != nil) {
+            _dataArray = model.forumList;
+            [self reloadData];
+        }
+    }];
 }
 #pragma tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataArray.count+3;
+    return _dataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ForumListTableViewCell *cell = [self dequeueReusableCellWithIdentifier:KForumListTableViewCell];
-    [cell loadData];
+    [cell loadData:_dataArray[indexPath.row]];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
