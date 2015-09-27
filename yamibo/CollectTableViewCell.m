@@ -7,7 +7,7 @@
 //
 
 #import "CollectTableViewCell.h"
-
+#import "ThreadFavoriteModel.h"
 @interface CollectTableViewCell()
 @property (strong, nonatomic) UIView *backView;
 
@@ -87,11 +87,11 @@
     }];
     tint.backgroundColor = [UIColor redColor];
 }
-- (void)loadData {
-    _titleLabel.text = @"标题标题标题";
-    _nameLabel.text = @"作者";
-    _timeLabel.text = @"2015-09-20";
-    _commentLabel.text = @"999";
+- (void)loadData:(ThreadFavoriteModel *)data {
+    _titleLabel.text = data.title;
+    _nameLabel.text = data.authorName;
+    _timeLabel.text = data.date;
+    _commentLabel.text = data.replyNum;
 }
 
 @end

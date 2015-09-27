@@ -26,7 +26,7 @@
 
 @interface HotModel : JSONModel
 
-@property   (strong, nonatomic) NSArray<DataImg, ConvertOnDemand> *dataImg;
-@property   (strong, nonatomic) NSArray<DataImg, ConvertOnDemand> *dataText;
+@property   (strong, nonatomic) NSArray<DataImg> *dataImg;
+@property   (strong, nonatomic) NSArray<DataImg> *dataText;
 
 @end

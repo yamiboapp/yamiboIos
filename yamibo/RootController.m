@@ -13,6 +13,8 @@
 #import "MessageController.h"
 #import "NeighborController.h"
 #import "LoginController.h"
+#import "ProfileManager.h"
+#import "CommunicationrManager.h"
 @interface RootController () {
     MenuController *leftDrawer;
 }
@@ -44,6 +46,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([[ProfileManager sharedInstance] checkLogin]) {
+        [CommunicationrManager getProfile:^(NSString *message) {
+            
+        }];
+    }
 }
 - (void)openCloseDrawer
 {

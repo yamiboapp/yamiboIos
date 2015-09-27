@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ThreadFavoriteModel;
 #define KCollectTableViewCell @"KCollectTableViewCell"
 @interface CollectTableViewCell : UITableViewCell
 
-- (void)loadData;
+- (void)loadData:(ThreadFavoriteModel *)data;
 
 @end

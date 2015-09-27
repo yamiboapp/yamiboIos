@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class HotModel;
 @class ForumListModel;
+@class ThreadFavoriteListModel;
 
 @interface CommunicationrManager : NSObject
 
@@ -19,4 +20,7 @@
 + (void)getHot:(void (^)(HotModel *model, NSString *message))completion;
 
 + (void)getForumList:(void (^)(ForumListModel *model, NSString *message))completion;
+
++ (void)getFavoriteList:(int)page completion:(void (^)(ThreadFavoriteListModel *model, NSString *message))completion;
+
 @end

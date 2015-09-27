@@ -52,6 +52,7 @@
 		6597FCB61BAC56B9009025E3 /* HotFeedListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6597FCB51BAC56B9009025E3 /* HotFeedListTableView.m */; settings = {ASSET_TAGS = (); }; };
 		659D28971B4CF5F1007B7526 /* ChineseTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 659D28961B4CF5F1007B7526 /* ChineseTransform.m */; };
 		65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A4DB571ADE0F5B00251E2F /* BaseViewController.m */; };
+		65AB48BD1BB7AFDD00B7D173 /* ThreadFavoriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AB48BC1BB7AFDD00B7D173 /* ThreadFavoriteModel.m */; settings = {ASSET_TAGS = (); }; };
 		65BB63191ADE0B300042C359 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB63181ADE0B300042C359 /* main.m */; };
 		65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BB631B1ADE0B300042C359 /* AppDelegate.m */; };
 		65BB63241ADE0B300042C359 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65BB63231ADE0B300042C359 /* Images.xcassets */; };
@@ -173,6 +174,8 @@
 		659D28961B4CF5F1007B7526 /* ChineseTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseTransform.m; sourceTree = "<group>"; };
 		65A4DB561ADE0F5B00251E2F /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		65A4DB571ADE0F5B00251E2F /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		65AB48BB1BB7AFDD00B7D173 /* ThreadFavoriteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadFavoriteModel.h; sourceTree = "<group>"; };
+		65AB48BC1BB7AFDD00B7D173 /* ThreadFavoriteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadFavoriteModel.m; sourceTree = "<group>"; };
 		65BB63131ADE0B300042C359 /* yamibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yamibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65BB63171ADE0B300042C359 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65BB63181ADE0B300042C359 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 				65F50C201BB656F4007DC23C /* HotModel.m */,
 				65FC57181BB6760100FC85A5 /* ForumModel.h */,
 				65FC57191BB6760100FC85A5 /* ForumModel.m */,
+				65AB48BB1BB7AFDD00B7D173 /* ThreadFavoriteModel.h */,
+				65AB48BC1BB7AFDD00B7D173 /* ThreadFavoriteModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -844,6 +849,7 @@
 				6597FCA21BAC37BF009025E3 /* TAAbstractDotView.m in Sources */,
 				65BB631C1ADE0B300042C359 /* AppDelegate.m in Sources */,
 				659D28971B4CF5F1007B7526 /* ChineseTransform.m in Sources */,
+				65AB48BD1BB7AFDD00B7D173 /* ThreadFavoriteModel.m in Sources */,
 				655ABCD11BAB966D0023F92B /* HomeHotView.m in Sources */,
 				658ABB851BAD0AAB00BAB4AD /* YFaceImageView.m in Sources */,
 				655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */,

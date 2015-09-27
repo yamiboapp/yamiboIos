@@ -24,6 +24,6 @@
 
 @interface ForumListModel : JSONModel
 
-@property   (strong, nonatomic) NSArray<ForumModel, ConvertOnDemand> *forumList;
+@property   (strong, nonatomic) NSArray<ForumModel> *forumList;
 
 @end

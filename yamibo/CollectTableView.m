@@ -8,6 +8,8 @@
 
 #import "CollectTableView.h"
 #import "CollectTableViewCell.h"
+#import "CommunicationrManager.h"
+#import "ThreadFavoriteModel.h"
 
 @interface CollectTableView()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -32,19 +34,36 @@
 }
 
 - (void)loadNewData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _dataArray = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@"",@"",@""]];
+    [CommunicationrManager getFavoriteList:0 completion:^(ThreadFavoriteListModel *model, NSString *message) {
         [self stopLoadNewData];
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            _dataArray = [NSMutableArray arrayWithArray:model.favList];
+        }
+        if (model.favList.count < 20) {
+            [self hiddenFooter:true];
+        } else {
+            [self hiddenFooter:false];
+        }
         [self reloadData];
-        [self hiddenFooter:false];
-    });
+    }];
 }
 - (void)loadMoreData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_dataArray addObjectsFromArray:@[@"", @""]];
+    [CommunicationrManager getFavoriteList:(int)_dataArray.count / 20 completion:^(ThreadFavoriteListModel *model, NSString *message) {
         [self stopLoadMoreData];
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            [_dataArray addObjectsFromArray:model.favList];
+        }
+        if (model.favList.count < 20) {
+            [self hiddenFooter:true];
+        } else {
+            [self hiddenFooter:false];
+        }
         [self reloadData];
-    });
+    }];
 }
 #pragma tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -61,7 +80,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CollectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KCollectTableViewCell];
-    [cell loadData];
+    [cell loadData:_dataArray[indexPath.row]];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{

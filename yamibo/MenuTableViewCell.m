@@ -92,7 +92,7 @@
         levelLabel.font = KFONT(12);
         levelLabel.textAlignment = NSTextAlignmentCenter;
         levelLabel.textColor = KCOLOR_YELLOW_FDF5D8;
-        levelLabel.text = @"等级";
+        levelLabel.text = [ProfileManager sharedInstance].rank;
         
         UILabel *scoreLabel = [[UILabel alloc] init];
         [self addSubview:scoreLabel];
@@ -103,7 +103,7 @@
         scoreLabel.font = KFONT(12);
         scoreLabel.textColor = KCOLOR_YELLOW_FDF5D8;
         scoreLabel.textAlignment = NSTextAlignmentCenter;
-        scoreLabel.text = @"积分：233";
+        scoreLabel.text = [NSString stringWithFormat:@"积分：%@", [ProfileManager sharedInstance].credit];
     } else {
         UILabel *loginLabel = [[UILabel alloc] init];
         [self addSubview:loginLabel];

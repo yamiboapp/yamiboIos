@@ -96,8 +96,8 @@
     _answerField = [self configField:3];
     
 #if DEBUG
-    _nameField.text = @"iosceshi";
-    _pwdField.text = @"abcd@123";
+    _nameField.text = @"麦师傅";
+    _pwdField.text = @"@M0m0ka";
 #endif
     
 }
@@ -134,6 +134,9 @@
     }
     [Utility showHUDWithTitle:@"正在登录..."];
     [CommunicationrManager loginWithName:_nameField.text andPwd:_pwdField.text andQuestion:[NSString stringWithFormat:@"%d", _selectedQuestion] andAnswer:_answerField.text completion:^(NSString *message) {
+        [CommunicationrManager getProfile:^(NSString *message) {
+            
+        }];
         [Utility hiddenProgressHUD];
         if (message != nil) {
             [Utility showTitle:message];
