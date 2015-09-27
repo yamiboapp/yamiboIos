@@ -33,12 +33,6 @@
  *  @brief  登陆token
  */
 @property (strong, nonatomic) NSString *authToken;
-/**
- *  @author 李思良, 15-09-19
- *
- *  @brief  用户头像
- */
-@property (strong, nonatomic) NSString *avaturl;
 
 /**
  *  @author 李思良, 15-09-19

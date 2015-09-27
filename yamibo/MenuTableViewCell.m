@@ -39,14 +39,14 @@
 }
 - (void)initHeadView {
     self.backgroundColor = KCOLOR_RED_6D2C1D;
-    UIImageView *face = [[UIImageView alloc] init];
+    YFaceImageView *face = [[YFaceImageView alloc] init];
     [self addSubview:face];
     [face mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(SCALE_NUM(66));
         make.top.mas_equalTo(SCALE_NUM(45));
         make.centerX.equalTo(self);
     }];
-    [face sd_setImageWithURL:[NSURL URLWithString:[ProfileManager sharedInstance].avaturl]];
+    [face setUserId:[ProfileManager sharedInstance].userId andType:FaceMiddle];
     face.layer.cornerRadius = SCALE_NUM(66)/2;
     face.clipsToBounds = true;
     face.backgroundColor = [UIColor yellowColor];
@@ -61,7 +61,7 @@
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.font = KFONT(14);
         nameLabel.textColor = KCOLOR_YELLOW_FDF5D8;
-        nameLabel.text = @"南ことり";
+        nameLabel.text = [ProfileManager sharedInstance].userName;
         
         UIImageView *genderTint = [[UIImageView alloc] init];
         [self addSubview:genderTint];
@@ -81,7 +81,7 @@
         idLabel.font = KFONT(10);
         idLabel.textAlignment = NSTextAlignmentCenter;
         idLabel.textColor = KCOLOR_YELLOW_FDF5D8;
-        idLabel.text = @"UID:123456";
+        idLabel.text = [NSString stringWithFormat:@"UID:%@", [ProfileManager sharedInstance].userId];
         
         UILabel *levelLabel = [[UILabel alloc] init];
         [self addSubview:levelLabel];

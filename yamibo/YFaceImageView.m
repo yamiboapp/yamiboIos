@@ -8,6 +8,7 @@
 
 #import "YFaceImageView.h"
 #import "UrlConstance.h"
+#import "ProfileManager.h"
 @interface YFaceImageView()
 
 @property (copy, nonatomic) NSArray *typeNames;
@@ -31,7 +32,11 @@
     _userId = uid;
     _faceType = type;
     int nid = [uid intValue];
-    _picUrl = [NSString stringWithFormat:@"%@uc_server/data/avatar/000/%.2d/%.2d/%2.d_avatar_%@.jpg", KURL, nid / 10000, (nid / 100) % 100, nid % 100, _typeNames[_faceType]];
+    if ([_userId isEqualToString:[ProfileManager sharedInstance].userId]) {
+        _picUrl = [NSString stringWithFormat:@"%@uc_server/avatar.php?uid=%@&size=%@", KURL, uid, _typeNames[_faceType]];
+    } else {
+        _picUrl = [NSString stringWithFormat:@"%@uc_server/data/avatar/000/%.2d/%.2d/%2.d_avatar_%@.jpg", KURL, nid / 10000, (nid / 100) % 100, nid % 100, _typeNames[_faceType]];
+    }
     
     [self sd_setImageWithURL:[NSURL URLWithString:_picUrl]];
 }
