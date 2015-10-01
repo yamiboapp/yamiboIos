@@ -26,4 +26,6 @@
 
 + (void)getMessageList:(int)page completion:(void (^)(MessageListModel *model, NSString *message))completion;
 
++ (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion;
+
 @end
