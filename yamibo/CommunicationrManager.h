@@ -23,4 +23,5 @@
 
 + (void)getFavoriteList:(int)page completion:(void (^)(ThreadFavoriteListModel *model, NSString *message))completion;
 
++ (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion;
 @end

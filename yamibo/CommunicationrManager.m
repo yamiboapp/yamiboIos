@@ -97,11 +97,25 @@
     }];
 }
 
++ (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"favthread", @"op":@"delete", @"favid":favId, @"formhash": [ProfileManager sharedInstance].authToken};
+    AFHTTPRequestOperationManager *manager = [self defaultManager];
+    [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
+            completion(nil);
+        } else {
+            completion(@"请先登录");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(@"请求失败");
+    }];
+}
+
 + (AFHTTPRequestOperationManager *)defaultManager {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.requestSerializer.HTTPShouldHandleCookies = true;
-    
+
     return manager;
 }
 
