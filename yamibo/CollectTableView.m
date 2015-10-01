@@ -34,7 +34,7 @@
 }
 
 - (void)loadNewData {
-    [CommunicationrManager getFavoriteList:0 completion:^(ThreadFavoriteListModel *model, NSString *message) {
+    [CommunicationrManager getFavoriteList:1 completion:^(ThreadFavoriteListModel *model, NSString *message) {
         [self stopLoadNewData];
         if (message != nil) {
             [Utility showTitle:message];
@@ -50,7 +50,7 @@
     }];
 }
 - (void)loadMoreData {
-    [CommunicationrManager getFavoriteList:(int)_dataArray.count / 20 completion:^(ThreadFavoriteListModel *model, NSString *message) {
+    [CommunicationrManager getFavoriteList:(int)_dataArray.count / 20 + 1 completion:^(ThreadFavoriteListModel *model, NSString *message) {
         [self stopLoadMoreData];
         if (message != nil) {
             [Utility showTitle:message];

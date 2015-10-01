@@ -83,11 +83,13 @@
     _timeLable.numberOfLines = 5;
 }
 
-- (void)loadData {
-//    [_headImg setUserId:@"233" pic:@"http://www.ineeyou.com/data/attachment/forum/201501/31/145145ihi6nj42hhz4f4qs.png"];
+- (void)loadData:(MessageModel *)data {
+    [_headImg setUserId:data.authorId];
     _titleLabel.text = @"我对你说:";
-    _contentLabel.text = @"约吗";
-    _timeLable.text = @"4-22 12:00";
+    _contentLabel.text = data.summary;
+    _timeLable.text = data.date;
 }
+
+
 
 @end

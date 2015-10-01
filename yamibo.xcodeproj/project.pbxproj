@@ -71,6 +71,7 @@
 		65F50C211BB656F4007DC23C /* HotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F50C201BB656F4007DC23C /* HotModel.m */; settings = {ASSET_TAGS = (); }; };
 		65FC571A1BB6760100FC85A5 /* ForumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC57191BB6760100FC85A5 /* ForumModel.m */; settings = {ASSET_TAGS = (); }; };
 		65FC571C1BB682DE00FC85A5 /* SafeQuestion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65FC571B1BB682DE00FC85A5 /* SafeQuestion.plist */; settings = {ASSET_TAGS = (); }; };
+		BA7F94E51BBCC2CF00034582 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F94E41BBCC2CF00034582 /* MessageModel.m */; settings = {ASSET_TAGS = (); }; };
 		BA8B26AC1BB014F900173D5B /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AB1BB014F900173D5B /* MessageTableView.m */; settings = {ASSET_TAGS = (); }; };
 		BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		BA8B26B61BB0184500173D5B /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26B51BB0184500173D5B /* MessageController.m */; settings = {ASSET_TAGS = (); }; };
@@ -215,6 +216,8 @@
 		65FC57191BB6760100FC85A5 /* ForumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumModel.m; sourceTree = "<group>"; };
 		65FC571B1BB682DE00FC85A5 /* SafeQuestion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SafeQuestion.plist; sourceTree = "<group>"; };
 		6EB444121147463741FE2AE8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BA7F94E31BBCC2CF00034582 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		BA7F94E41BBCC2CF00034582 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		BA8B26AA1BB014F900173D5B /* MessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableView.h; sourceTree = "<group>"; };
 		BA8B26AB1BB014F900173D5B /* MessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableView.m; sourceTree = "<group>"; };
 		BA8B26AD1BB0155400173D5B /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
@@ -537,6 +540,8 @@
 				65FC57191BB6760100FC85A5 /* ForumModel.m */,
 				65AB48BB1BB7AFDD00B7D173 /* ThreadFavoriteModel.h */,
 				65AB48BC1BB7AFDD00B7D173 /* ThreadFavoriteModel.m */,
+				BA7F94E31BBCC2CF00034582 /* MessageModel.h */,
+				BA7F94E41BBCC2CF00034582 /* MessageModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				65C7B05E1BAD52EB00036BB8 /* ForumListTableViewCell.m in Sources */,
 				BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */,
 				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
+				BA7F94E51BBCC2CF00034582 /* MessageModel.m in Sources */,
 				650DDD821BAB0E5D004ACFF2 /* YColor+Ext.m in Sources */,
 				BA8B26B61BB0184500173D5B /* MessageController.m in Sources */,
 				65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */,

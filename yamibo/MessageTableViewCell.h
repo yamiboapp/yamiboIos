@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageModel.h"
 
 #define KMessageTableViewCell  @"KMessageTableViewCell"
 
 @interface MessageTableViewCell : UITableViewCell
 
-- (void)loadData;
+- (void)loadData:(MessageModel *)data;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MessageTableView.h"
 #import "MessageTableViewCell.h"
+#import "CommunicationrManager.h"
 
 @interface MessageTableView()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -36,19 +37,36 @@
 }
 
 - (void)loadNewData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _dataArray = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@"",@"",@""]];
+    [CommunicationrManager getMessageList:1 completion:^(MessageListModel *model, NSString *message) {
         [self stopLoadNewData];
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            _dataArray = [NSMutableArray arrayWithArray:model.msgList];
+        }
+        if (model.msgList.count < 20) {
+            [self hiddenFooter:true];
+        } else {
+            [self hiddenFooter:false];
+        }
         [self reloadData];
-        [self hiddenFooter:false];
-    });
+    }];
 }
 - (void)loadMoreData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_dataArray addObjectsFromArray:@[@"", @""]];
+    [CommunicationrManager getMessageList:(int)_dataArray.count / 20 + 1 completion:^(MessageListModel *model, NSString *message) {
         [self stopLoadMoreData];
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            [_dataArray addObjectsFromArray:model.msgList];
+        }
+        if (model.msgList.count < 20) {
+            [self hiddenFooter:true];
+        } else {
+            [self hiddenFooter:false];
+        }
         [self reloadData];
-    });
+    }];
 }
 #pragma tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -65,7 +83,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMessageTableViewCell];
-    [cell loadData];
+    [cell loadData:_dataArray[indexPath.row]];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
