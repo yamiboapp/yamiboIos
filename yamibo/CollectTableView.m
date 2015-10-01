@@ -86,11 +86,21 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_dataArray removeObjectAtIndex:indexPath.row];
-        [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self deleteRow:indexPath];
     }
 }
-
+- (void)deleteRow:(NSIndexPath *)indexPath {
+    [Utility showHUDWithTitle:@"正在删除"];
+    [CommunicationrManager delFavorite:[_dataArray[indexPath.row] favId] completion:^(NSString *message) {
+        [Utility hiddenProgressHUD];
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            [_dataArray removeObjectAtIndex:indexPath.row];
+            [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }];
+}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }

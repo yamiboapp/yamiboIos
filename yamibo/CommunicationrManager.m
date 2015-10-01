@@ -114,7 +114,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.requestSerializer.HTTPShouldHandleCookies = true;
-    
+
     return manager;
 }
 
