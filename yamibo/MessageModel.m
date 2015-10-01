@@ -13,8 +13,9 @@
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"lastauthorid": @"authorId",
-                                                       @"lastauthor": @"authorName",
+                                                       @"touid": @"toId",
+                                                       @"tousername": @"toName",
+                                                       @"lastauthorid": @"lastId",
                                                        @"lastdateline": @"date",
                                                        @"lastsummary": @"summary"
                                                        }];

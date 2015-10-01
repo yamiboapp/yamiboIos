@@ -96,8 +96,8 @@
     _answerField = [self configField:3];
     
 #if DEBUG
-    _nameField.text = @"麦师傅";
-    _pwdField.text = @"@M0m0ka";
+    _nameField.text = @"peps";
+    _pwdField.text = @"19921030";
 #endif
     
 }

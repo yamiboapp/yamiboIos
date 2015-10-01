@@ -47,7 +47,7 @@
     [_backView addSubview:_headImg];
     [_headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(24);
-        make.width.height.mas_equalTo(48);
+        make.width.height.mas_equalTo(50);
         make.centerY.equalTo(_backView);
     }];
     
@@ -64,30 +64,36 @@
     [_backView addSubview:_contentLabel];
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_titleLabel);
-        make.bottom.equalTo(_headImg).offset(-10);
+        make.top.equalTo(_headImg).offset(22);
+        make.width.mas_equalTo(170);
     }];
     _contentLabel.font = KFONT(11);
     _contentLabel.textColor = KCOLOR_GRAY;
-    
+    _contentLabel.numberOfLines = 2;
     
     _timeLable = [[UILabel alloc] init];
     [_backView addSubview:_timeLable];
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-35);
-        make.width.mas_equalTo(40);
+        make.width.mas_equalTo(55);
         make.top.equalTo(_headImg).offset(3);
     }];
     _timeLable.font = KFONT(10);
     _timeLable.textColor = KCOLOR_GRAY;
     _timeLable.textAlignment = NSTextAlignmentCenter;
-    _timeLable.numberOfLines = 5;
+    _timeLable.numberOfLines = 2;
 }
 
 - (void)loadData:(MessageModel *)data {
-    [_headImg setUserId:data.authorId];
-    _titleLabel.text = @"我对你说:";
+    [_headImg setUserId:data.toId andType:FaceMiddle];
+    if ([data.lastId isEqualToString:data.toId]) {
+        _titleLabel.text = [NSString stringWithFormat:@"%@ 对 您 说", data.toName];
+    } else {
+        _titleLabel.text = [NSString stringWithFormat:@"您 对 %@ 说", data.toName];
+    }
     _contentLabel.text = data.summary;
-    _timeLable.text = data.date;
+    _timeLable.text = @"2012-2-23 18:33";
+    //_timeLable.text = data.date;
 }
 
 
