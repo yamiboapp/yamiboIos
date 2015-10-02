@@ -57,6 +57,10 @@
     [self showNomalNavigationRightButtonWithImage:@"" action:@selector(onNavigationRightButtonClicked) imgName:@"more" frame:CGRectMake(0, 0, 18, 64)];
 }
 
+- (void)showCustomNavigationNewButton {
+    [self showNomalNavigationRightButtonWithImage:@"新建" action:@selector(onNavigationRightButtonClicked) imgName:nil frame:CGRectMake(0, 0, 18, 64)];
+}
+
 - (void)showMessage:(NSString*)message;
 {
     UILabel* tLabelTip = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 38)];

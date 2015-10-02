@@ -29,6 +29,7 @@
 }
 - (void) configNavigation {
     [self showCustomNavigationMenuButton];
+    [self showCustomNavigationNewButton];
     self.title = @"消息";
 }
 - (void)initView {

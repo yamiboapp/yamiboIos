@@ -48,7 +48,12 @@
  *  @brief  导航栏右侧，更多按钮
  */
 - (void)showCustomNavigationMoreButton;
-
+/**
+ *  @author 杨爽, 15-10-01 21:10:40
+ *
+ *  @brief  导航栏右侧，新建按钮
+ */
+- (void)showCustomNavigationNewButton;
 /**
 *  @author 李思良, 15-04-24 11:04:56
 *

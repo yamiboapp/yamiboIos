@@ -88,9 +88,9 @@
 - (void)loadPrivateData:(PrivateMessageModel *)data {
     [_headImg setUserId:data.toId andType:FaceMiddle];
     if ([data.lastId isEqualToString:data.toId]) {
-        _titleLabel.text = [NSString stringWithFormat:@"%@ 对 您 说", data.toName];
+        _titleLabel.text = [NSString stringWithFormat:@"%@ 对 您 说：", data.toName];
     } else {
-        _titleLabel.text = [NSString stringWithFormat:@"您 对 %@ 说", data.toName];
+        _titleLabel.text = [NSString stringWithFormat:@"您 对 %@ 说：", data.toName];
     }
     _contentLabel.text = data.summary;
     _timeLable.text = @"2012-2-23 18:33";
@@ -99,7 +99,7 @@
 
 - (void)loadPublicData:(PublicMessageModel *)data {
     [_headImg setUserId:data.authorId andType:FaceMiddle];
-    _titleLabel.text = [NSString stringWithFormat:@"%@ 说", data.authorName];
+    _titleLabel.text = [NSString stringWithFormat:@"%@ 说：", data.authorName];
     _contentLabel.text = data.summary;
     _timeLable.text = @"2012-2-23 18:33";
     //_timeLable.text = data.date;

@@ -14,7 +14,7 @@
 
 @interface PrivateMessageModel : JSONModel
 
-@property   (strong, nonatomic) NSString *pmid;
+@property   (strong, nonatomic) NSString *pmId;
 @property   (strong, nonatomic) NSString *toId;
 @property   (strong, nonatomic) NSString *toName;
 @property   (strong, nonatomic) NSString *lastId;
@@ -35,7 +35,7 @@
 
 @interface PublicMessageModel : JSONModel
 
-@property   (strong, nonatomic) NSString *pmid;
+@property   (strong, nonatomic) NSString *pmId;
 @property   (strong, nonatomic) NSString *authorId;
 @property   (strong, nonatomic) NSString *authorName;
 @property   (strong, nonatomic) NSString *date;

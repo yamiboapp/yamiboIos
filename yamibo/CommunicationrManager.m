@@ -76,6 +76,8 @@
     NSDictionary *dic = @{@"module":@"forumindex"};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
+            // login时储存的formhash为登录前的formhash,需在此更新
+            [ProfileManager sharedInstance].authToken = responseObject[@"Variables"][@"formhash"];
             completion([[ForumListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请求失败");
@@ -125,6 +127,20 @@
 
 + (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion {
     NSDictionary *dic = @{@"module":@"favthread", @"op":@"delete", @"favid":favId, @"formhash": [ProfileManager sharedInstance].authToken};
+    AFHTTPRequestOperationManager *manager = [self defaultManager];
+    [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
+            completion(nil);
+        } else {
+            completion(@"请先登录");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(@"请求失败");
+    }];
+}
+
++ (void)delMessage:(NSString *)pmId completion:(void (^)(NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"sendpm", @"op":@"delete", @"pmid":pmId, @"formhash": [ProfileManager sharedInstance].authToken};
     AFHTTPRequestOperationManager *manager = [self defaultManager];
     [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {

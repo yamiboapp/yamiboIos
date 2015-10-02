@@ -31,4 +31,6 @@
 
 + (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion;
 
++ (void)delMessage:(NSString *)pmId completion:(void (^)(NSString *message))completion;
+
 @end
