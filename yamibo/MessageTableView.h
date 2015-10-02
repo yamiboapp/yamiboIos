@@ -8,9 +8,14 @@
 
 #import "YTableView.h"
 
+typedef NS_ENUM(NSInteger, MessageViewType) {
+    MessagePrivate = 0,
+    MessagePublic,
+};
+
 @interface MessageTableView : YTableView
 
-- (instancetype)initWithSectionName:(NSString *)name;
+- (instancetype)initWithViewType:(MessageViewType)type;
 - (void)refreshData;
 
 @end

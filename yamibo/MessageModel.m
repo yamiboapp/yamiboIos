@@ -8,11 +8,12 @@
 
 #import "MessageModel.h"
 
-@implementation MessageModel
+@implementation PrivateMessageModel
 
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"pmid": @"pmid",
                                                        @"touid": @"toId",
                                                        @"tousername": @"toName",
                                                        @"lastauthorid": @"lastId",
@@ -22,7 +23,7 @@
 }
 @end
 
-@implementation MessageListModel
+@implementation PrivateMessageListModel
 
 +(JSONKeyMapper*)keyMapper
 {
@@ -32,3 +33,29 @@
 }
 
 @end
+
+@implementation PublicMessageModel
+
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"id": @"pmid",
+                                                       @"authorid": @"authorId",
+                                                       @"author": @"authorName",
+                                                       @"dateline": @"date",
+                                                       @"message": @"summary"
+                                                       }];
+}
+@end
+
+@implementation PublicMessageListModel
+
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"Variables.list": @"msgList"
+                                                       }];
+}
+
+@end
+

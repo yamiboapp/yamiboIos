@@ -10,7 +10,8 @@
 @class HotModel;
 @class ForumListModel;
 @class ThreadFavoriteListModel;
-@class MessageListModel;
+@class PrivateMessageListModel;
+@class PublicMessageListModel;
 
 @interface CommunicationrManager : NSObject
 
@@ -24,7 +25,9 @@
 
 + (void)getFavoriteList:(int)page completion:(void (^)(ThreadFavoriteListModel *model, NSString *message))completion;
 
-+ (void)getMessageList:(int)page completion:(void (^)(MessageListModel *model, NSString *message))completion;
++ (void)getPrivateMessageList:(int)page completion:(void (^)(PrivateMessageListModel *model, NSString *message))completion;
+
++ (void)getPublicMessageList:(int)page completion:(void (^)(PublicMessageListModel *model, NSString *message))completion;
 
 + (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion;
 

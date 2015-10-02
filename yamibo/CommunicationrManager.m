@@ -98,11 +98,23 @@
     }];
 }
 
-+ (void)getMessageList:(int)page completion:(void (^)(MessageListModel *model, NSString *message))completion {
++ (void)getPrivateMessageList:(int)page completion:(void (^)(PrivateMessageListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"mypm", @"page":@(page)};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
-            completion([[MessageListModel alloc] initWithDictionary:responseObject error:nil], nil);
+            completion([[PrivateMessageListModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请重新登录");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, @"加载失败");
+    }];
+}
++ (void)getPublicMessageList:(int)page completion:(void (^)(PublicMessageListModel *, NSString *))completion {
+    NSDictionary *dic = @{@"module":@"publicpm", @"page":@(page)};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
+            completion([[PublicMessageListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请重新登录");
         }

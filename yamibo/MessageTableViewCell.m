@@ -8,6 +8,7 @@
 
 #import "MessageTableViewCell.h"
 #import "YFaceImageView.h"
+#import "MessageModel.h"
 
 @interface MessageTableViewCell()
 @property (strong, nonatomic) UIView *backView;
@@ -84,7 +85,7 @@
     _timeLable.numberOfLines = 2;
 }
 
-- (void)loadData:(MessageModel *)data {
+- (void)loadPrivateData:(PrivateMessageModel *)data {
     [_headImg setUserId:data.toId andType:FaceMiddle];
     if ([data.lastId isEqualToString:data.toId]) {
         _titleLabel.text = [NSString stringWithFormat:@"%@ 对 您 说", data.toName];
@@ -96,6 +97,12 @@
     //_timeLable.text = data.date;
 }
 
-
+- (void)loadPublicData:(PublicMessageModel *)data {
+    [_headImg setUserId:data.authorId andType:FaceMiddle];
+    _titleLabel.text = [NSString stringWithFormat:@"%@ 说", data.authorName];
+    _contentLabel.text = data.summary;
+    _timeLable.text = @"2012-2-23 18:33";
+    //_timeLable.text = data.date;
+}
 
 @end

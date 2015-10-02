@@ -8,11 +8,13 @@
 
 #import "JSONModel.h"
 
-@protocol MessageModel
+#pragma mark 私人消息
+@protocol PrivateMessageModel
 @end
 
-@interface MessageModel : JSONModel
+@interface PrivateMessageModel : JSONModel
 
+@property   (strong, nonatomic) NSString *pmid;
 @property   (strong, nonatomic) NSString *toId;
 @property   (strong, nonatomic) NSString *toName;
 @property   (strong, nonatomic) NSString *lastId;
@@ -21,8 +23,28 @@
 
 @end
 
-@interface MessageListModel : JSONModel
+@interface PrivateMessageListModel : JSONModel
 
-@property (strong, nonatomic) NSArray<MessageModel> *msgList;
+@property (strong, nonatomic) NSArray<PrivateMessageModel> *msgList;
+
+@end
+
+#pragma mark 公共消息
+@protocol PublicMessageModel
+@end
+
+@interface PublicMessageModel : JSONModel
+
+@property   (strong, nonatomic) NSString *pmid;
+@property   (strong, nonatomic) NSString *authorId;
+@property   (strong, nonatomic) NSString *authorName;
+@property   (strong, nonatomic) NSString *date;
+@property   (strong, nonatomic) NSString *summary;
+
+@end
+
+@interface PublicMessageListModel : JSONModel
+
+@property (strong, nonatomic) NSArray<PublicMessageModel> *msgList;
 
 @end

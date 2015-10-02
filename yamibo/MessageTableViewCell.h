@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MessageModel.h"
+
+@class PrivateMessageModel;
+@class PublicMessageModel;
 
 #define KMessageTableViewCell  @"KMessageTableViewCell"
 
 @interface MessageTableViewCell : UITableViewCell
 
-- (void)loadData:(MessageModel *)data;
+- (void)loadPrivateData:(PrivateMessageModel *)data;
+- (void)loadPublicData:(PublicMessageModel *)data;
 
 @end
