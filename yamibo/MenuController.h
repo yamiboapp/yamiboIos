@@ -11,7 +11,8 @@
 #define kLeftDrawerSelectionIndexKey            @"LeftDrawerSelectionIndex"
 
 typedef NS_ENUM(NSInteger, CenterControllerIndex) {
-    CenterControllerProfile = 0,
+    CenterControllerLogin = -1,
+    CenterControllerProfile,
     CenterControllerHome,
     CenterControllerCollect,
     CenterControllerMessage,

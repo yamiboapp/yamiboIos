@@ -9,7 +9,7 @@
 #import "HomeController.h"
 #import "HomeHotView.h"
 #import "ForumListTableView.h"
-#import "CommunicationrManager.h"
+
 /**
  *  @author 李思良, 15-08-17
  *
@@ -30,7 +30,12 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [_hotView viewWillAppear];
+    if (_hotView.hidden) {
+        [_forumList refreshData];
+    } else {
+        [_hotView viewWillAppear];
+    }
+    
 }
 - (void) configNavigation {
     [self showCustomNavigationMenuButton];
@@ -65,9 +70,11 @@
     if (index == 0) {
         _hotView.hidden = false;
         _forumList.hidden = true;
+        [_hotView viewWillAppear];
     } else {
         _hotView.hidden = true;
         _forumList.hidden = false;
+        [_forumList refreshData];
     }
 }
 - (void)onNavigationLeftButtonClicked

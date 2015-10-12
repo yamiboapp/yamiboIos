@@ -15,5 +15,6 @@
 #import "NSObject+ValidObject.h"
 #import "FilePathUtility.h"
 #import "Utility.h"
+#import "Utility+HUD.h"
 #import "YColor+Ext.h"
 #endif

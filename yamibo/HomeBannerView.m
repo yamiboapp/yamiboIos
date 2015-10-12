@@ -11,8 +11,12 @@
 
 #import "HomeBannerView.h"
 #import "SDCycleScrollView.h"
+#import "HotModel.h"
+#import "UrlConstance.h"
+
 @interface HomeBannerView()<SDCycleScrollViewDelegate>
 @property (strong, nonatomic) SDCycleScrollView *scroll;
+@property (strong, nonatomic) NSMutableArray *bannerIds;
 @end
 
 @implementation HomeBannerView
@@ -27,11 +31,25 @@
     return self;
 }
 
+- (void)loadData:(NSArray *)banners {
+    if (banners.count == 0) {
+        return;
+    }
+    NSMutableArray *names = [NSMutableArray array];
+    NSMutableArray *pics = [NSMutableArray array];
+    for (int i = 0; i < banners.count; i ++) {
+        DataImg *data = banners[i];
+        [names addObject:data.title];
+        [pics addObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", KATTACHURL, data.picUrl]]];
+        [_bannerIds addObject:data.feedId];
+    }
+    _scroll.titlesGroup = names;
+    _scroll.imageURLsGroup = pics;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     _scroll.frame = CGRectMake(0, 0, self.width, self.height);
-    _scroll.titlesGroup = @[@"南ことり", @"南ことり"];
-    _scroll.imageURLsGroup = @[[NSURL URLWithString:@"http://m.qqzhi.com/upload/img_2_1833688483D123127279_23.jpg"], [NSURL URLWithString:@"http://i0.hdslb.com/video/31/3195c77f00c38ccefd8fba16e49a151c.jpg"]];
 }
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     

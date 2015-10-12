@@ -9,6 +9,7 @@ pod 'SDWebImage'
 pod 'MJRefresh'
 pod 'UITableView+FDTemplateLayoutCell'
 pod 'REMenu'
+pod 'JSONModel'
 target 'yamibo' do
 end
 

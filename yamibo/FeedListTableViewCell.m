@@ -11,6 +11,7 @@
 
 #import "FeedListTableViewCell.h"
 #import "YFaceImageView.h"
+#import "HotModel.h"
 
 @interface FeedListTableViewCell()
 @property (strong, nonatomic) YFaceImageView *headImg;
@@ -160,16 +161,16 @@
     }];
     tint.backgroundColor = [UIColor redColor];
 }
-- (void)loadData {
+- (void)loadData:(DataImg *)data {
     if (_isNoPicMode) {
         
     } else {
-        [_headImg setUserId:@"233" pic:@"http://www.ineeyou.com/data/attachment/forum/201501/31/145145ihi6nj42hhz4f4qs.png"];
+        [_headImg setUserId:data.authorId andType:FaceMiddle];
     }
-    _nameLabel.text = @"南ことり";
-    _timeLabel.text = @"最新回复：2分钟前";
-    _titleLabel.text = @"标题标题标题标题标题标题标题标题标题标题";
-    _commentLabel.text = @"999";
-    _watchLabel.text = @"999";
+    _nameLabel.text = data.authorName;
+    _timeLabel.text = [NSString stringWithFormat:@"最新回复：%@",data.lastPost];
+    _titleLabel.text = data.title;
+    _commentLabel.text = data.replyNum;
+    _watchLabel.text = data.viewNum;
 }
 @end

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class ForumModel;
 #define KForumListTableViewCell @"KForumListTableViewCell"
 
 @interface ForumListTableViewCell : UITableViewCell
 
-- (void)loadData;
+- (void)loadData:(ForumModel *)data;
 
 @end

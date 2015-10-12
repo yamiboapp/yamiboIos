@@ -12,6 +12,9 @@
 #import "CollectController.h"
 #import "MessageController.h"
 #import "NeighborController.h"
+#import "LoginController.h"
+#import "ProfileManager.h"
+#import "CommunicationrManager.h"
 @interface RootController () {
     MenuController *leftDrawer;
 }
@@ -36,7 +39,6 @@
     self.shouldStretchDrawer = NO;
     self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
     self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-//    self.showsShadow = false;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openCloseDrawer) name:KDrawerChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCenterViewController:) name:KChangeCenterViewNotification object:nil];
@@ -44,6 +46,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([[ProfileManager sharedInstance] checkLogin]) {
+        [CommunicationrManager getProfile:^(NSString *message) {
+            
+        }];
+    }
 }
 - (void)openCloseDrawer
 {
@@ -58,6 +65,10 @@
 {
     CenterControllerIndex index = [notification.userInfo[kLeftDrawerSelectionIndexKey] intValue];
     switch (index) {
+        case CenterControllerLogin:
+            self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
+            break;
         case CenterControllerHome:
             self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[HomeController alloc] init]];
             self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;

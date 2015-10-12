@@ -33,12 +33,26 @@
  *  @brief  登陆token
  */
 @property (strong, nonatomic) NSString *authToken;
+
 /**
- *  @author 李思良, 15-09-19
+ *  @author 李思良, 15-09-27
  *
- *  @brief  用户头像
+ *  @brief  等级
  */
-@property (strong, nonatomic) NSString *avaturl;
+@property (strong, nonatomic) NSString *rank;
+
+/**
+ *  @author 李思良, 15-09-27
+ *
+ *  @brief  性别，0为保密，1为男，2为女
+ */
+@property (strong, nonatomic) NSString *gender;
+/**
+ *  @author 李思良, 15-09-27
+ *
+ *  @brief  积分
+ */
+@property (strong, nonatomic) NSString *credit;
 
 /**
  *  @author 李思良, 15-09-19

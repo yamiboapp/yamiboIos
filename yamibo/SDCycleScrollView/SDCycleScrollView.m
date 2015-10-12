@@ -128,9 +128,9 @@ NSString * const ID = @"cycleCell";
 
 - (void)loadImageWithImageURLsGroup:(NSArray *)imageURLsGroup
 {
-    for (int i = 0; i < imageURLsGroup.count; i++) {
-        [self loadImageAtIndex:i];
-    }
+//    for (int i = 0; i < imageURLsGroup.count; i++) {
+//        [self loadImageAtIndex:i];
+//    }
 }
 
 - (void)loadImageAtIndex:(NSInteger)index
@@ -148,6 +148,7 @@ NSString * const ID = @"cycleCell";
                                            queue:[[NSOperationQueue alloc] init]
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
                                    if (!connectionError) {
+                                       
                                        [self.imagesGroup setObject:[UIImage imageWithData:data] atIndexedSubscript:index];
                                        [data saveDataCacheWithIdentifier:url.absoluteString];
                                    } else { // 加载数据失败
@@ -227,7 +228,7 @@ NSString * const ID = @"cycleCell";
 {
     SDCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     long itemIndex = indexPath.item % self.imagesGroup.count;
-    cell.imageView.image = self.imagesGroup[itemIndex];
+    [cell.imageView sd_setImageWithURL:self.imageURLsGroup[itemIndex]];
     if (_titlesGroup.count) {
         cell.title = _titlesGroup[itemIndex];
     }

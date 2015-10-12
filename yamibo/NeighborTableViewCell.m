@@ -93,7 +93,7 @@
 }
 
 - (void)loadData {
-    [_headImg setUserId:@"233" pic:@"http://www.ineeyou.com/data/attachment/forum/201501/31/145145ihi6nj42hhz4f4qs.png"];
+    [_headImg setUserId:@"123456"];
     _nameLabel.text = @"南ことり";
     _distanceLabel.text = @"200米以内";
     _contentLabel.text = @"这个人是很懒，并没有留下什么这个人是很懒，并没有留下什么这个人是很懒，并没有留下什么";

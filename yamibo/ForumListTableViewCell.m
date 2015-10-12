@@ -7,7 +7,7 @@
 //
 
 #import "ForumListTableViewCell.h"
-
+#import "ForumModel.h"
 @interface ForumListTableViewCell()
 
 @property (strong, nonatomic) UIView *backView;
@@ -78,9 +78,9 @@
     }];
     rightArray.backgroundColor = [UIColor redColor];
 }
-- (void)loadData {
-    _nameLabel.text = @"讨论区（23）";
-    _titleLabel.text = @"介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍";
+- (void)loadData:(ForumModel *)data {
+    _nameLabel.text = [NSString stringWithFormat:@"%@（%@）", data.forumName, data.todayPosts];
+    _titleLabel.text = data.content;
 }
 
 @end

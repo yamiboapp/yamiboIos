@@ -16,4 +16,5 @@
 
 - (void)refreshData;
 
+- (void)loadData:(NSArray *)data;
 @end

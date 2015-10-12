@@ -8,23 +8,27 @@
 
 #import "MessageTableView.h"
 #import "MessageTableViewCell.h"
+#import "CommunicationrManager.h"
+#import "MessageModel.h"
 
 @interface MessageTableView()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (assign, nonatomic) MessageViewType viewType;
 @end
 
 @implementation MessageTableView
 
 - (instancetype)init
 {
-    return [self initWithSectionName:@"私人信息"];
+    return [self initWithViewType:MessagePrivate];
 }
-- (instancetype)initWithSectionName:(NSString *)name {
+- (instancetype)initWithViewType:(MessageViewType)type {
     if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
         self.delegate = self;
+        _viewType = type;
         _dataArray = [NSMutableArray array];
         [self registerClass:[MessageTableViewCell class] forCellReuseIdentifier:KMessageTableViewCell];
     }
@@ -36,19 +40,71 @@
 }
 
 - (void)loadNewData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _dataArray = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@"",@"",@""]];
-        [self stopLoadNewData];
-        [self reloadData];
-        [self hiddenFooter:false];
-    });
+    if (_viewType == MessagePrivate) {
+        [CommunicationrManager getPrivateMessageList:1 completion:^(PrivateMessageListModel *model, NSString *message) {
+            [self stopLoadNewData];
+            if (message != nil) {
+                [Utility showTitle:message];
+            } else {
+                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
+            }
+            if (model.msgList.count < 20) {
+                [self hiddenFooter:true];
+            } else {
+                [self hiddenFooter:false];
+            }
+            [self reloadData];
+        }];
+    } else if (_viewType == MessagePublic) {
+        [CommunicationrManager getPublicMessageList:1 completion:^(PublicMessageListModel *model, NSString *message) {
+            [self stopLoadNewData];
+            if (message != nil) {
+                [Utility showTitle:message];
+            } else {
+                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
+            }
+            if (model.msgList.count < 20) {
+                [self hiddenFooter:true];
+            } else {
+                [self hiddenFooter:false];
+            }
+            [self reloadData];
+        }];
+    }
+
 }
 - (void)loadMoreData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_dataArray addObjectsFromArray:@[@"", @""]];
-        [self stopLoadMoreData];
-        [self reloadData];
-    });
+    if (_viewType == MessagePrivate) {
+        [CommunicationrManager getPrivateMessageList:(int)_dataArray.count / 20 + 1 completion:^(PrivateMessageListModel *model, NSString *message) {
+            [self stopLoadMoreData];
+            if (message != nil) {
+                [Utility showTitle:message];
+            } else {
+                [_dataArray addObjectsFromArray:model.msgList];
+            }
+            if (model.msgList.count < 20) {
+                [self hiddenFooter:true];
+            } else {
+                [self hiddenFooter:false];
+            }
+            [self reloadData];
+        }];
+    } else if (_viewType == MessagePublic) {
+        [CommunicationrManager getPublicMessageList:(int)_dataArray.count / 20 + 1 completion:^(PublicMessageListModel *model, NSString *message) {
+            [self stopLoadMoreData];
+            if (message != nil) {
+                [Utility showTitle:message];
+            } else {
+                [_dataArray addObjectsFromArray:model.msgList];
+            }
+            if (model.msgList.count < 20) {
+                [self hiddenFooter:true];
+            } else {
+                [self hiddenFooter:false];
+            }
+            [self reloadData];
+        }];
+    }
 }
 #pragma tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -65,17 +121,31 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMessageTableViewCell];
-    [cell loadData];
+    if (_viewType == MessagePrivate) {
+        [cell loadPrivateData:_dataArray[indexPath.row]];
+    } else if (_viewType == MessagePublic) {
+        [cell loadPublicData:_dataArray[indexPath.row]];
+    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_dataArray removeObjectAtIndex:indexPath.row];
-        [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self deleteRow:indexPath];
     }
 }
 
+- (void)deleteRow:(NSIndexPath *)indexPath {
+    [Utility showHUDWithTitle:@"正在删除"];
+    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] completion:^(NSString *message) {
+        [Utility hiddenProgressHUD];
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            [_dataArray removeObjectAtIndex:indexPath.row];
+            [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }];
+}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }

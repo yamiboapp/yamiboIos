@@ -11,9 +11,11 @@
 
 @interface MessageController ()
 
+@property (strong, nonatomic) UIView *container;
+@property (strong, nonatomic) UIView *tintLine;
+@property (strong, nonatomic) MessageTableView *privateMessageView;
+@property (strong, nonatomic) MessageTableView *publicMessageView;
 
-@property (strong, nonatomic)   UIView *container;
-@property (strong, nonatomic)   UIView *tintLine;
 @end
 
 @implementation MessageController
@@ -27,20 +29,28 @@
 }
 - (void) configNavigation {
     [self showCustomNavigationMenuButton];
+    [self showCustomNavigationNewButton];
     self.title = @"消息";
 }
 - (void)initView {
-    MessageTableView *PrivateMessageView = [[MessageTableView alloc]initWithSectionName:@"私人信息"];
-    [self.view addSubview:PrivateMessageView];
-    [PrivateMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    _privateMessageView = [[MessageTableView alloc]initWithViewType:MessagePrivate];
+    [self.view addSubview:_privateMessageView];
+    [_privateMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.top.mas_equalTo(43);
     }];
-    [PrivateMessageView refreshData];
+    
+    _publicMessageView = [[MessageTableView alloc]initWithViewType:MessagePublic];
+    [self.view addSubview:_publicMessageView];
+    [_publicMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.mas_equalTo(43);
+    }];
+    [_publicMessageView refreshData];
 }
 - (void)initSwitch {
     
-    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:@[@"公共信息", @"私人信息"]];
+    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:@[@"公共消息", @"私人消息"]];
     UIView *back = [[UIView alloc]init];
     [self.view addSubview:back];
     [back mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,7 +100,19 @@
     _tintLine.backgroundColor = KCOLOR_RED_6D2C1D;
 }
 - (void)changeSeg:(UISegmentedControl *)seg {
-    [self changeTint:seg.selectedSegmentIndex];
+    int index = (int)seg.selectedSegmentIndex;
+    
+    [self changeTint:index];
+    
+    if (index == 0) {
+        _publicMessageView.hidden = false;
+        _privateMessageView.hidden = true;
+        [_publicMessageView refreshData];
+    } else {
+        _publicMessageView.hidden = true;
+        _privateMessageView.hidden = false;
+        [_privateMessageView refreshData];
+    }
 }
 - (void)changeTint:(NSInteger)index {
     if (index == 0) {

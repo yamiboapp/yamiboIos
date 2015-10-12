@@ -9,6 +9,8 @@
 #import "HotFeedListTableView.h"
 #import "FeedListTableViewCell.h"
 #import "AppManager.h"
+#import "CommunicationrManager.h"
+#import "HotModel.h"
 
 @interface HotFeedListTableView()<UITableViewDataSource, UITableViewDelegate>
 @property (copy, nonatomic) NSArray *dataArray;
@@ -44,17 +46,26 @@
     _isNoPicMode = [AppManager sharedInstance].isNoImgMode;
     [self beginLoadNewData];
 }
+- (void)loadData:(NSArray *)data {
+    _isNoPicMode = [AppManager sharedInstance].isNoImgMode;
+    _dataArray = data;
+    [self reloadData];
+}
 - (void)loadNewData {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [CommunicationrManager getHot:^(HotModel *model, NSString *message) {
         [self stopLoadNewData];
-    });
+        if (model != nil) {
+            _dataArray = model.dataText;
+            [self reloadData];
+        }
+    }];
 }
 #pragma tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataArray.count+3;
+    return _dataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FeedListTableViewCell *cell;
@@ -63,7 +74,7 @@
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:KFeedListTableViewCell forIndexPath:indexPath];
     }
-    [cell loadData];
+    [cell loadData:_dataArray[indexPath.row]];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

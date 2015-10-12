@@ -14,4 +14,6 @@
  */
 @interface HomeBannerView : UIView
 
+- (void)loadData:(NSArray *)banners;
+
 @end

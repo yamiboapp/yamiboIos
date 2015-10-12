@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class DataImg;
+
 #define KFeedListTableViewCell      @"KFeedListTableViewCell"
 #define KNoImgFeedListTableViewCell @"KNoImgFeedListTableViewCell"
 /**
@@ -17,6 +19,6 @@
  */
 @interface FeedListTableViewCell : UITableViewCell
 
-- (void)loadData;
+- (void)loadData:(DataImg *)data;
 
 @end

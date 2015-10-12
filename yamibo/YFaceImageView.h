@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, FaceType) {
+    FaceSmall = 0,
+    FaceMiddle,
+    FaceBig
+};
+
 @interface YFaceImageView : UIImageView
 
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *picUrl;
+@property (assign, nonatomic) FaceType faceType;
 
-- (void)setUserId:(NSString *)uid pic:(NSString *)pic;
+- (void)setUserId:(NSString *)uid andType:(FaceType)type;
 
 @end

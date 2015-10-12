@@ -8,6 +8,7 @@
 
 #import "MenuController.h"
 #import "MenuTableViewCell.h"
+#import "ProfileManager.h"
 @interface MenuController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *itemNames;
@@ -58,16 +59,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuTableViewCell *menuItem;
     if (indexPath.row == 0) {
-        menuItem = [tableView dequeueReusableCellWithIdentifier:KMenuTableHeadCell];
+        menuItem = [[MenuTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KMenuTableHeadCell];
     } else {
-        menuItem = [tableView dequeueReusableCellWithIdentifier:KMenuTableViewCell];
+        menuItem = [[MenuTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KMenuTableViewCell];
         [menuItem loadTitle:_itemNames[indexPath.row - 1] andIcon:nil];
     }
     return menuItem;
 }
 #pragma tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dic = @{kLeftDrawerSelectionIndexKey:@(indexPath.row)};
+    int index = (int)indexPath.row;
+    if (index == 0 && ![[ProfileManager sharedInstance] checkLogin]) {
+        index = -1;
+    }
+    NSDictionary *dic = @{kLeftDrawerSelectionIndexKey:@(index)};
     [[NSNotificationCenter defaultCenter] postNotificationName:KChangeCenterViewNotification object:nil userInfo:dic];
 }
 @end
