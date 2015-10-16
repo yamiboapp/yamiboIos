@@ -141,6 +141,7 @@
     MessageDetailController *detailContronller = [[MessageDetailController alloc] init];
     [detailContronller setViewType:[[notification.userInfo objectForKey:@"messageViewType"] intValue]];
     [detailContronller setToId:[[notification.userInfo objectForKey:@"toId"] intValue]];
+    [detailContronller setToName:[notification.userInfo objectForKey:@"toName"]];
     [self.navigationController pushViewController:detailContronller animated:YES];
 }
 

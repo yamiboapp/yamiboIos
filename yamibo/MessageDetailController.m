@@ -19,7 +19,7 @@
 }
 - (void)configNavigation {
     [self showCustomNavigationBackButton];
-    self.title = @"与xx的对话";
+    self.title = [NSString stringWithFormat:@"与 %@ 的对话", _toName];
 }
 - (void)initView {
     MessageDetailTableView *tableView = [[MessageDetailTableView alloc] initWithViewType:_viewType andToId:_toId];

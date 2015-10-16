@@ -148,7 +148,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"toId":[_dataArray[indexPath.row] toId]};
+    NSDictionary *dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"toId":[_dataArray[indexPath.row] toId], @"toName":[_dataArray[indexPath.row] toName]};
     [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToMessageDetail object:nil userInfo:dic];
 }
 

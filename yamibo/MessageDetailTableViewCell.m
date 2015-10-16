@@ -69,15 +69,15 @@
 
     [_headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_backView).offset(24);
-        make.top.equalTo(_backView).offset(14);
+        make.top.equalTo(_backView).offset(15);
         make.width.height.mas_equalTo(50);
-        make.bottom.equalTo(_backView.mas_bottom).offset(-15);
     }];
     
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_headImg.mas_right).offset(20);
         make.right.equalTo(_backView).offset(-24);
-        make.top.equalTo(_headImg).offset(1);
+        make.top.equalTo(_headImg);
+        make.height.mas_greaterThanOrEqualTo(40);
     }];
     
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,7 +85,12 @@
         make.top.equalTo(_contentLabel.mas_bottom).offset(10);
         make.bottom.equalTo(_backView.mas_bottom).offset(-15);
     }];
-
+    [_backView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow
+                                                   forAxis:UILayoutConstraintAxisVertical];
+    
+    [_contentLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh
+                                             forAxis:UILayoutConstraintAxisVertical];
+    
 }
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data {
@@ -102,4 +107,13 @@
     //_timeLable.text = data.date;
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGFloat totalHeight = 0;
+    totalHeight += [_contentLabel sizeThatFits:size].height;
+    totalHeight += [_timeLable sizeThatFits:size].height;
+    totalHeight += 60; // margins
+    totalHeight = MAX(totalHeight, 79);
+    return CGSizeMake(size.width, totalHeight);
+}
 @end
