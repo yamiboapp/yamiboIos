@@ -8,8 +8,8 @@
 
 #import "MessageModel.h"
 
+#pragma mark private message
 @implementation PrivateMessageModel
-
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
@@ -24,18 +24,16 @@
 @end
 
 @implementation PrivateMessageListModel
-
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"Variables.list": @"msgList"
                                                        }];
 }
-
 @end
 
+#pragma mark public message
 @implementation PublicMessageModel
-
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
@@ -49,13 +47,59 @@
 @end
 
 @implementation PublicMessageListModel
-
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"Variables.list": @"msgList"
                                                        }];
 }
+@end
 
+#pragma mark private message detail
+@implementation PrivateMessageDetailModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"pmid": @"pmId",
+                                                       @"plid": @"plId",
+                                                       @"msgfromid": @"fromId",
+                                                       @"msgtoid": @"toId",
+                                                       @"author": @"authorName",
+                                                       @"dateline": @"date",
+                                                       @"message": @"message"
+                                                       }];
+}
+@end
+
+@implementation PrivateMessageDetailListModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"Variables.list": @"msgList"
+                                                       }];
+}
+@end
+
+#pragma mark public message detail
+@implementation PublicMessageDetailModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"id": @"pmId",
+                                                       @"authorid": @"authorId",
+                                                       @"author": @"authorName",
+                                                       @"dateline": @"date",
+                                                       @"message": @"summary"
+                                                       }];
+}
+@end
+
+@implementation PublicMessageDetailListModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"Variables.list": @"msgList"
+                                                       }];
+}
 @end
 

@@ -86,7 +86,7 @@
         completion(nil, @"请求失败");
     }];
 }
-
+#pragma mark favorite
 + (void)getFavoriteList:(int)page completion:(void (^)(ThreadFavoriteListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"myfavthread", @"page":@(page)};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -100,6 +100,20 @@
     }];
 }
 
++ (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"favthread", @"op":@"delete", @"favid":favId, @"formhash": [ProfileManager sharedInstance].authToken};
+    AFHTTPRequestOperationManager *manager = [self defaultManager];
+    [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
+            completion(nil);
+        } else {
+            completion(@"请先登录");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(@"请求失败");
+    }];
+}
+#pragma mark message
 + (void)getPrivateMessageList:(int)page completion:(void (^)(PrivateMessageListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"mypm", @"page":@(page)};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -124,21 +138,6 @@
         completion(nil, @"加载失败");
     }];
 }
-
-+ (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion {
-    NSDictionary *dic = @{@"module":@"favthread", @"op":@"delete", @"favid":favId, @"formhash": [ProfileManager sharedInstance].authToken};
-    AFHTTPRequestOperationManager *manager = [self defaultManager];
-    [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
-            completion(nil);
-        } else {
-            completion(@"请先登录");
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completion(@"请求失败");
-    }];
-}
-
 + (void)delMessage:(NSString *)pmId completion:(void (^)(NSString *message))completion {
     NSDictionary *dic = @{@"module":@"sendpm", @"op":@"delete", @"pmid":pmId, @"formhash": [ProfileManager sharedInstance].authToken};
     AFHTTPRequestOperationManager *manager = [self defaultManager];
@@ -152,7 +151,20 @@
         completion(@"请求失败");
     }];
 }
++ (void)getPrivateMessageDetailList:(int)page toId:(NSInteger)toId completion:(void (^)(PrivateMessageDetailListModel *model, NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"mypm", @"subop":@("view"), @"touid":@(toId), @"page":@(page)};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject]) {
+            completion([[PrivateMessageDetailListModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请求失败");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, @"加载失败");
+    }];
+}
 
+#pragma mark -
 + (AFHTTPRequestOperationManager *)defaultManager {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];

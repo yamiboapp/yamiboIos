@@ -1,35 +1,39 @@
 //
-//  MessageTableView.m
+//  MessageDetailTableView.m
 //  yamibo
 //
-//  Created by shuang yang on 9/21/15.
+//  Created by shuang yang on 10/15/15.
 //  Copyright © 2015 lsl. All rights reserved.
 //
 
-#import "MessageTableView.h"
-#import "MessageTableViewCell.h"
+#import "MessageDetailTableView.h"
+#import "MessageDetailTableViewCell.h"
 #import "CommunicationrManager.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
-@interface MessageTableView()<UITableViewDelegate, UITableViewDataSource>
+@interface MessageDetailTableView()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) MessageViewType viewType;
+@property (assign, nonatomic) NSInteger toId;
 @end
 
-@implementation MessageTableView
-
+@implementation MessageDetailTableView
 - (instancetype)init
 {
-    return [self initWithViewType:MessagePrivate];
+    return [self initWithViewType:MessagePrivate andToId:0];
 }
-- (instancetype)initWithViewType:(MessageViewType)type {
+- (instancetype)initWithViewType:(MessageViewType)type andToId:(NSInteger)toId{
     if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
         self.delegate = self;
         _viewType = type;
+        _toId = toId;
         _dataArray = [NSMutableArray array];
-        [self registerClass:[MessageTableViewCell class] forCellReuseIdentifier:KMessageTableViewCell];
+        [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell];
+        self.estimatedRowHeight = 200;
+        self.fd_debugLogEnabled = YES;
     }
     return self;
 }
@@ -40,7 +44,7 @@
 
 - (void)loadNewData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageList:1 completion:^(PrivateMessageListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageDetailList:1 toId:_toId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
             [self stopLoadNewData];
             if (message != nil) {
                 [Utility showTitle:message];
@@ -70,11 +74,11 @@
             [self reloadData];
         }];
     }
-
+    
 }
 - (void)loadMoreData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageList:(int)_dataArray.count / 20 + 1 completion:^(PrivateMessageListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageDetailList:1 toId:1 completion:^(PrivateMessageDetailListModel *model, NSString *message) {
             [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
@@ -115,28 +119,34 @@
     return _dataArray.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 77.f;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMessageTableViewCell];
+- (void)configureCell:(MessageDetailTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
     if (_viewType == MessagePrivate) {
         [cell loadPrivateData:_dataArray[indexPath.row]];
     } else if (_viewType == MessagePublic) {
         [cell loadPublicData:_dataArray[indexPath.row]];
     }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MessageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell];
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self deleteRow:indexPath];
-    }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell cacheByIndexPath:indexPath configuration:^(id cell) {
+        [self configureCell:cell atIndexPath:indexPath];
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self deleteRow:indexPath];
 }
 
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
-    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] completion:^(NSString *message) {
+    /*[CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] completion:^(NSString *message) {
         [Utility hiddenProgressHUD];
         if (message != nil) {
             [Utility showTitle:message];
@@ -144,12 +154,7 @@
             [_dataArray removeObjectAtIndex:indexPath.row];
             [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-    }];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"toId":[_dataArray[indexPath.row] toId]};
-    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToMessageDetail object:nil userInfo:dic];
+    }];*/
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -164,4 +169,5 @@
 {
     return YES;
 }
+
 @end

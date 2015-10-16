@@ -8,7 +8,12 @@
 
 #import "JSONModel.h"
 
-#pragma mark 私人消息
+typedef NS_ENUM(NSInteger, MessageViewType) {
+    MessagePrivate = 0,
+    MessagePublic = 1,
+};
+
+#pragma mark private message
 @protocol PrivateMessageModel
 @end
 
@@ -29,7 +34,7 @@
 
 @end
 
-#pragma mark 公共消息
+#pragma mark public message
 @protocol PublicMessageModel
 @end
 
@@ -48,3 +53,47 @@
 @property (strong, nonatomic) NSArray<PublicMessageModel> *msgList;
 
 @end
+
+#pragma mark private message detail
+@protocol PrivateMessageDetailModel
+@end
+
+@interface PrivateMessageDetailModel : JSONModel
+
+@property   (strong, nonatomic) NSString *pmId;
+@property   (strong, nonatomic) NSString *plId;
+@property   (strong, nonatomic) NSString *toId;
+@property   (strong, nonatomic) NSString *fromId;
+@property   (strong, nonatomic) NSString *authorName;
+@property   (strong, nonatomic) NSString *date;
+@property   (strong, nonatomic) NSString *message;
+
+@end
+
+@interface PrivateMessageDetailListModel : JSONModel
+
+@property (strong, nonatomic) NSArray<PrivateMessageDetailModel> *msgList;
+
+@end
+
+#pragma mark public message detail
+@protocol PublicMessageDetailModel
+@end
+
+@interface PublicMessageDetailModel : JSONModel
+
+@property   (strong, nonatomic) NSString *pmId;
+@property   (strong, nonatomic) NSString *toId;
+@property   (strong, nonatomic) NSString *toName;
+@property   (strong, nonatomic) NSString *lastId;
+@property   (strong, nonatomic) NSString *date;
+@property   (strong, nonatomic) NSString *summary;
+
+@end
+
+@interface PublicMessageDetailListModel : JSONModel
+
+@property (strong, nonatomic) NSArray<PublicMessageDetailModel> *msgList;
+
+@end
+
