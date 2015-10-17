@@ -74,6 +74,7 @@
 		BA61E3B21BD0AC8800F6E474 /* MessageDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3B11BD0AC8800F6E474 /* MessageDetailTableView.m */; settings = {ASSET_TAGS = (); }; };
 		BA61E3B51BD0ACED00F6E474 /* MessageDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3B41BD0ACED00F6E474 /* MessageDetailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		BA61E3B81BD0ADCB00F6E474 /* MessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3B71BD0ADCB00F6E474 /* MessageDetailController.m */; settings = {ASSET_TAGS = (); }; };
+		BA61E3BB1BD1B70800F6E474 /* YTableViewReverse.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3BA1BD1B70800F6E474 /* YTableViewReverse.m */; settings = {ASSET_TAGS = (); }; };
 		BA7F94E51BBCC2CF00034582 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F94E41BBCC2CF00034582 /* MessageModel.m */; settings = {ASSET_TAGS = (); }; };
 		BA7F951B1BBE583800034582 /* bg-forum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F95111BBE583800034582 /* bg-forum@2x.png */; settings = {ASSET_TAGS = (); }; };
 		BA7F951C1BBE583800034582 /* bg-forum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F95121BBE583800034582 /* bg-forum@3x.png */; settings = {ASSET_TAGS = (); }; };
@@ -235,6 +236,8 @@
 		BA61E3B41BD0ACED00F6E474 /* MessageDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailTableViewCell.m; sourceTree = "<group>"; };
 		BA61E3B61BD0ADCB00F6E474 /* MessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailController.h; sourceTree = "<group>"; };
 		BA61E3B71BD0ADCB00F6E474 /* MessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailController.m; sourceTree = "<group>"; };
+		BA61E3B91BD1B70800F6E474 /* YTableViewReverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTableViewReverse.h; sourceTree = "<group>"; };
+		BA61E3BA1BD1B70800F6E474 /* YTableViewReverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTableViewReverse.m; sourceTree = "<group>"; };
 		BA7F94E31BBCC2CF00034582 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		BA7F94E41BBCC2CF00034582 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		BA7F95111BBE583800034582 /* bg-forum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-forum@2x.png"; sourceTree = "<group>"; };
@@ -458,6 +461,8 @@
 			children = (
 				6597FCAE1BAC5319009025E3 /* YTableView.h */,
 				6597FCAF1BAC5319009025E3 /* YTableView.m */,
+				BA61E3B91BD1B70800F6E474 /* YTableViewReverse.h */,
+				BA61E3BA1BD1B70800F6E474 /* YTableViewReverse.m */,
 				658ABB831BAD0AAB00BAB4AD /* YFaceImageView.h */,
 				658ABB841BAD0AAB00BAB4AD /* YFaceImageView.m */,
 			);
@@ -931,6 +936,7 @@
 				65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */,
 				650454C41B4D3F2D00651434 /* MenuController.m in Sources */,
 				6597FCAC1BAC51BE009025E3 /* FeedListTableViewCell.m in Sources */,
+				BA61E3BB1BD1B70800F6E474 /* YTableViewReverse.m in Sources */,
 				65BB63191ADE0B300042C359 /* main.m in Sources */,
 				65378E0E1BAE960D001B27FD /* CollectTableViewCell.m in Sources */,
 				65378E1A1BAEDA28001B27FD /* NeighborTableView.m in Sources */,

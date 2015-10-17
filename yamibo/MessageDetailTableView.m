@@ -15,6 +15,10 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) MessageViewType viewType;
 @property (assign, nonatomic) NSInteger toId;
+@property (assign, nonatomic) float msgCount;
+@property (assign, nonatomic) float perPage;
+@property (assign, nonatomic) int currentPage;
+
 @end
 
 @implementation MessageDetailTableView
@@ -33,7 +37,6 @@
         _dataArray = [NSMutableArray array];
         [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell];
         self.estimatedRowHeight = 200;
-        self.fd_debugLogEnabled = YES;
     }
     return self;
 }
@@ -45,18 +48,28 @@
 - (void)loadNewData {
     if (_viewType == MessagePrivate) {
         [CommunicationrManager getPrivateMessageDetailList:1 toId:_toId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
-            [self stopLoadNewData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
+                _msgCount = [model.count intValue];
+                _perPage = [model.perPage intValue];
+                _currentPage = ceil(_msgCount / _perPage);
+                [CommunicationrManager getPrivateMessageDetailList:_currentPage toId:_toId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+                    [self stopLoadNewData];
+                    if (message != nil) {
+                        [Utility showTitle:message];
+                    } else {
+                        _dataArray = [NSMutableArray arrayWithArray:model.msgList];
+                    }
+                    if (model.msgList.count < _perPage) {
+                        [self hiddenHeader:YES];
+                    } else {
+                        [self hiddenHeader:NO];
+                    }
+                    [self hiddenFooter:YES];
+                    [self reloadData];
+                }];
             }
-            if (model.msgList.count < 20) {
-                [self hiddenFooter:true];
-            } else {
-                [self hiddenFooter:false];
-            }
-            [self reloadData];
         }];
     } else if (_viewType == MessagePublic) {
         [CommunicationrManager getPublicMessageList:1 completion:^(PublicMessageListModel *model, NSString *message) {
@@ -78,17 +91,19 @@
 }
 - (void)loadMoreData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageDetailList:1 toId:1 completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageDetailList:--_currentPage toId:_toId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
             [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:model.msgList];
+                //[_dataArray addObjectsFromArray:model.msgList];
+                [_dataArray replaceObjectsInRange:NSMakeRange(0,0)
+                                withObjectsFromArray:model.msgList];
             }
-            if (model.msgList.count < 20) {
-                [self hiddenFooter:true];
+            if (model.msgList.count < _perPage) {
+                [self hiddenHeader:YES];
             } else {
-                [self hiddenFooter:false];
+                [self hiddenHeader:NO];
             }
             [self reloadData];
         }];

@@ -13,6 +13,7 @@
 @interface MessageTableView()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) MessageViewType viewType;
+@property (assign, nonatomic) int perPage;
 @end
 
 @implementation MessageTableView
@@ -23,6 +24,8 @@
 }
 - (instancetype)initWithViewType:(MessageViewType)type {
     if (self = [super init]) {
+        [CommunicationrManager loginWithName:@"peps" andPwd:@"19921030" andQuestion:@"" andAnswer:@"" completion:^(NSString *message) {
+         }];
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
@@ -47,10 +50,11 @@
             } else {
                 _dataArray = [NSMutableArray arrayWithArray:model.msgList];
             }
-            if (model.msgList.count < 20) {
-                [self hiddenFooter:true];
+            _perPage = [model.perPage intValue];
+            if (model.msgList.count < _perPage) {
+                [self hiddenFooter:YES];
             } else {
-                [self hiddenFooter:false];
+                [self hiddenFooter:NO];
             }
             [self reloadData];
         }];
@@ -62,10 +66,11 @@
             } else {
                 _dataArray = [NSMutableArray arrayWithArray:model.msgList];
             }
-            if (model.msgList.count < 20) {
-                [self hiddenFooter:true];
+            _perPage = [model.perPage intValue];
+            if (model.msgList.count < _perPage) {
+                [self hiddenFooter:YES];
             } else {
-                [self hiddenFooter:false];
+                [self hiddenFooter:NO];
             }
             [self reloadData];
         }];
@@ -74,32 +79,32 @@
 }
 - (void)loadMoreData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageList:(int)_dataArray.count / 20 + 1 completion:^(PrivateMessageListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageList:(int)_dataArray.count / _perPage + 1 completion:^(PrivateMessageListModel *model, NSString *message) {
             [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
                 [_dataArray addObjectsFromArray:model.msgList];
             }
-            if (model.msgList.count < 20) {
-                [self hiddenFooter:true];
+            if (model.msgList.count < _perPage) {
+                [self hiddenFooter:YES];
             } else {
-                [self hiddenFooter:false];
+                [self hiddenFooter:NO];
             }
             [self reloadData];
         }];
     } else if (_viewType == MessagePublic) {
-        [CommunicationrManager getPublicMessageList:(int)_dataArray.count / 20 + 1 completion:^(PublicMessageListModel *model, NSString *message) {
+        [CommunicationrManager getPublicMessageList:(int)_dataArray.count / _perPage + 1 completion:^(PublicMessageListModel *model, NSString *message) {
             [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
                 [_dataArray addObjectsFromArray:model.msgList];
             }
-            if (model.msgList.count < 20) {
-                [self hiddenFooter:true];
+            if (model.msgList.count < _perPage) {
+                [self hiddenFooter:YES];
             } else {
-                [self hiddenFooter:false];
+                [self hiddenFooter:NO];
             }
             [self reloadData];
         }];

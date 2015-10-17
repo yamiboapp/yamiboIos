@@ -27,7 +27,8 @@
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"Variables.list": @"msgList"
+                                                       @"Variables.list": @"msgList",
+                                                       @"Variables.perpage":@"perPage"
                                                        }];
 }
 @end
@@ -50,7 +51,8 @@
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"Variables.list": @"msgList"
+                                                       @"Variables.list": @"msgList",
+                                                       @"Variables.perpage":@"perPage"
                                                        }];
 }
 @end
@@ -64,7 +66,6 @@
                                                        @"plid": @"plId",
                                                        @"msgfromid": @"fromId",
                                                        @"msgtoid": @"toId",
-                                                       @"author": @"authorName",
                                                        @"dateline": @"date",
                                                        @"message": @"message"
                                                        }];
@@ -75,7 +76,9 @@
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"Variables.list": @"msgList"
+                                                       @"Variables.list": @"msgList",
+                                                       @"Variables.count":@"count",
+                                                       @"Variables.perpage":@"perPage"
                                                        }];
 }
 @end
@@ -85,11 +88,12 @@
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"id": @"pmId",
-                                                       @"authorid": @"authorId",
-                                                       @"author": @"authorName",
+                                                       @"pmid": @"pmId",
+                                                       @"plid": @"plId",
+                                                       @"msgfromid": @"fromId",
+                                                       @"msgtoid": @"toId",
                                                        @"dateline": @"date",
-                                                       @"message": @"summary"
+                                                       @"message": @"message"
                                                        }];
 }
 @end

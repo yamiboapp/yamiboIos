@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @interface PrivateMessageListModel : JSONModel
 
 @property (strong, nonatomic) NSArray<PrivateMessageModel> *msgList;
+@property (strong, nonatomic) NSString* perPage;
 
 @end
 
@@ -51,6 +52,7 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @interface PublicMessageListModel : JSONModel
 
 @property (strong, nonatomic) NSArray<PublicMessageModel> *msgList;
+@property (strong, nonatomic) NSString* perPage;
 
 @end
 
@@ -64,7 +66,6 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @property   (strong, nonatomic) NSString *plId;
 @property   (strong, nonatomic) NSString *toId;
 @property   (strong, nonatomic) NSString *fromId;
-@property   (strong, nonatomic) NSString *authorName;
 @property   (strong, nonatomic) NSString *date;
 @property   (strong, nonatomic) NSString *message;
 
@@ -73,6 +74,8 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @interface PrivateMessageDetailListModel : JSONModel
 
 @property (strong, nonatomic) NSArray<PrivateMessageDetailModel> *msgList;
+@property (strong, nonatomic) NSString* count;
+@property (strong, nonatomic) NSString* perPage;
 
 @end
 

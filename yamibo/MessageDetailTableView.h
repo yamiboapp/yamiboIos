@@ -6,10 +6,10 @@
 //  Copyright © 2015 lsl. All rights reserved.
 //
 
-#import "YTableView.h"
+#import "YTableViewReverse.h"
 #import "MessageModel.h"
 
-@interface MessageDetailTableView : YTableView
+@interface MessageDetailTableView : YTableViewReverse
 
 - (instancetype)initWithViewType:(MessageViewType)type andToId:(NSInteger)toId;
 - (void)refreshData;

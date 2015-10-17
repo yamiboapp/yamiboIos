@@ -139,9 +139,9 @@
 }
 - (void)navigateToDetail:(NSNotification*)notification{
     MessageDetailController *detailContronller = [[MessageDetailController alloc] init];
-    [detailContronller setViewType:[[notification.userInfo objectForKey:@"messageViewType"] intValue]];
-    [detailContronller setToId:[[notification.userInfo objectForKey:@"toId"] intValue]];
-    [detailContronller setToName:[notification.userInfo objectForKey:@"toName"]];
+    detailContronller.viewType = [[notification.userInfo objectForKey:@"messageViewType"] intValue];
+    detailContronller.toId = [[notification.userInfo objectForKey:@"toId"] intValue];
+    detailContronller.toName = [notification.userInfo objectForKey:@"toName"];
     [self.navigationController pushViewController:detailContronller animated:YES];
 }
 
