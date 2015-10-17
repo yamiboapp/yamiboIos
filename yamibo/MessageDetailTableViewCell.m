@@ -26,11 +26,20 @@
     self.contentView.bounds = [UIScreen mainScreen].bounds;
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self configCell];
-        [self initView];
-        [self setupConstrains];
+    if ([reuseIdentifier  isEqual: KMessageDetailTableViewCell_In]) {
+        if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+            [self configCell];
+            [self initView];
+            [self setupConstrainsIn];
+        }
+    } else {
+        if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+            [self configCell];
+            [self initView];
+            [self setupConstrainsOut];
+        }
     }
+
     return self;
 }
 - (void)configCell {
@@ -55,12 +64,12 @@
     _timeLable = [[UILabel alloc] init];
     _timeLable.font = KFONT(10);
     _timeLable.textColor = KCOLOR_GRAY;
-    //_timeLable.textAlignment = NSTextAlignmentLeft;
-    _timeLable.numberOfLines = 1;
+    _timeLable.textAlignment = NSTextAlignmentCenter;
+    _timeLable.numberOfLines = 2;
     [_backView addSubview:_timeLable];
 }
 
-- (void)setupConstrains {
+- (void)setupConstrainsIn {
     
     [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.contentView);
@@ -75,22 +84,45 @@
     
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_headImg.mas_right).offset(20);
-        make.right.equalTo(_backView).offset(-24);
         make.top.equalTo(_headImg);
-        make.height.mas_greaterThanOrEqualTo(40);
+        make.bottom.equalTo(_backView).offset(-15);
+        make.width.mas_lessThanOrEqualTo(190);
+        make.height.mas_greaterThanOrEqualTo(50);
     }];
     
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_contentLabel.mas_right);
-        make.top.equalTo(_contentLabel.mas_bottom).offset(10);
-        make.bottom.equalTo(_backView.mas_bottom).offset(-15);
+        make.width.mas_equalTo(50);
+        make.top.equalTo(_backView.mas_top).offset(15);
+        make.right.equalTo(_backView.mas_right).offset(-24);
     }];
-    [_backView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow
-                                                   forAxis:UILayoutConstraintAxisVertical];
+}
+
+- (void)setupConstrainsOut {
     
-    [_contentLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh
-                                             forAxis:UILayoutConstraintAxisVertical];
+    [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView).offset(-1);
+    }];
     
+    [_headImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_backView).offset(-24);
+        make.top.equalTo(_backView).offset(15);
+        make.width.height.mas_equalTo(50);
+    }];
+    
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_headImg.mas_left).offset(-20);
+        make.top.equalTo(_headImg);
+        make.bottom.equalTo(_backView).offset(-15);
+        make.width.mas_lessThanOrEqualTo(190);
+        make.height.mas_greaterThanOrEqualTo(50);
+    }];
+    
+    [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(50);
+        make.top.equalTo(_backView).offset(15);
+        make.left.equalTo(_backView).offset(24);
+    }];
 }
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data {

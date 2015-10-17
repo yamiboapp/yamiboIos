@@ -35,7 +35,8 @@
         _viewType = type;
         _toId = toId;
         _dataArray = [NSMutableArray array];
-        [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell];
+        [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_In];
+        [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_Out];
         self.estimatedRowHeight = 200;
     }
     return self;
@@ -144,15 +145,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell];
+    PrivateMessageDetailModel *data = _dataArray[indexPath.row];
+    MessageDetailTableViewCell *cell;
+    if (data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_In];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_Out];
+    }
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell cacheByIndexPath:indexPath configuration:^(id cell) {
-        [self configureCell:cell atIndexPath:indexPath];
-    }];
+    PrivateMessageDetailModel *data = _dataArray[indexPath.row];
+    if (data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
+        return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell_In cacheByIndexPath:indexPath configuration:^(id cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }];
+    } else {
+        return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell_Out cacheByIndexPath:indexPath configuration:^(id cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -24,8 +24,8 @@
 }
 - (instancetype)initWithViewType:(MessageViewType)type {
     if (self = [super init]) {
-        [CommunicationrManager loginWithName:@"peps" andPwd:@"19921030" andQuestion:@"" andAnswer:@"" completion:^(NSString *message) {
-         }];
+        /*[CommunicationrManager loginWithName:@"peps" andPwd:@"19921030" andQuestion:@"" andAnswer:@"" completion:^(NSString *message) {
+         }];*/
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
