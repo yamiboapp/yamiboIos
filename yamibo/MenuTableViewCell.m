@@ -32,10 +32,9 @@
     return self;
 }
 - (void)initAccessory {
-    UIView *rightArray = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 15)];
-    rightArray.backgroundColor = [UIColor redColor];
+    UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 15)];
+    [rightArray setImage:[UIImage imageNamed:@"accessory-more"]];
     self.accessoryView = rightArray;
-    
 }
 - (void)initHeadView {
     self.backgroundColor = KCOLOR_RED_6D2C1D;
@@ -126,11 +125,10 @@
     _iconView = [[UIImageView alloc] init];
     [self addSubview:_iconView];
     [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(15);
-        make.left.mas_equalTo(15);
+        //make.left.mas_equalTo(15);
         make.centerY.equalTo(self);
+        make.centerX.mas_equalTo(self).offset(-115);
     }];
-    _iconView.backgroundColor = [UIColor redColor];
     
     _titleLabel = [[UILabel alloc] init];
     [self addSubview:_titleLabel];
@@ -143,5 +141,11 @@
 }
 - (void)loadTitle:(NSString *)title andIcon:(UIImage *)icon {
     _titleLabel.text = title;
+    [_iconView setImage:icon];
+    [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(icon.size.width);
+        make.height.mas_equalTo(icon.size.height);
+
+    }];
 }
 @end
