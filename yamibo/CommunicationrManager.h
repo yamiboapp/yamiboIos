@@ -33,7 +33,7 @@
 
 + (void)getPublicMessageList:(int)page completion:(void (^)(PublicMessageListModel *model, NSString *message))completion;
 
-+ (void)delMessage:(NSString *)pmId completion:(void (^)(NSString *message))completion;
++ (void)delMessage:(NSString *)pmId orConversation:(NSString *)toId completion:(void (^)(NSString *message))completion;
 
 + (void)getPrivateMessageDetailList:(int)page toId:(NSInteger)toId completion:(void (^)(PrivateMessageDetailListModel *model, NSString *message))completion;
 

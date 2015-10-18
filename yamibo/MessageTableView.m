@@ -24,8 +24,10 @@
 }
 - (instancetype)initWithViewType:(MessageViewType)type {
     if (self = [super init]) {
+#if DEBUG
         [CommunicationrManager loginWithName:@"peps" andPwd:@"19921030" andQuestion:@"" andAnswer:@"" completion:^(NSString *message) {
-         }];
+        }];
+#endif
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
@@ -141,7 +143,7 @@
 
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
-    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] completion:^(NSString *message) {
+    [CommunicationrManager delMessage:@"" orConversation:[_dataArray[indexPath.row] toId] completion:^(NSString *message) {
         [Utility hiddenProgressHUD];
         if (message != nil) {
             [Utility showTitle:message];

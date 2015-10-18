@@ -11,11 +11,13 @@
 @class PrivateMessageDetailModel;
 @class PublicMessageDetailModel;
 
-#define KMessageDetailTableViewCell  @"KMessageDetailTableViewCell"
+#define KMessageDetailTableViewCell_In  @"KMessageDetailTableViewCell_In"
+#define KMessageDetailTableViewCell_Out  @"KMessageDetailTableViewCell_Out"
 
 @interface MessageDetailTableViewCell : UITableViewCell
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data;
 - (void)loadPublicData:(PublicMessageDetailModel *)data;
+- (void)cellBgColor:(BOOL)longPressed;
 
 @end

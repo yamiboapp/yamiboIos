@@ -19,7 +19,6 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 
 @interface PrivateMessageModel : JSONModel
 
-@property   (strong, nonatomic) NSString *pmId;
 @property   (strong, nonatomic) NSString *toId;
 @property   (strong, nonatomic) NSString *toName;
 @property   (strong, nonatomic) NSString *lastId;
@@ -63,7 +62,6 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @interface PrivateMessageDetailModel : JSONModel
 
 @property   (strong, nonatomic) NSString *pmId;
-@property   (strong, nonatomic) NSString *plId;
 @property   (strong, nonatomic) NSString *toId;
 @property   (strong, nonatomic) NSString *fromId;
 @property   (strong, nonatomic) NSString *date;

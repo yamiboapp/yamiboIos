@@ -18,7 +18,8 @@
 @property (assign, nonatomic) float msgCount;
 @property (assign, nonatomic) float perPage;
 @property (assign, nonatomic) int currentPage;
-
+@property (strong, nonatomic) UIView *editingMenuView;              //click cell to open the option panel
+@property (strong, nonatomic) MessageDetailTableViewCell *longPressedCell;
 @end
 
 @implementation MessageDetailTableView
@@ -35,7 +36,8 @@
         _viewType = type;
         _toId = toId;
         _dataArray = [NSMutableArray array];
-        [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell];
+        [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_In];
+        [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_Out];
         self.estimatedRowHeight = 200;
     }
     return self;
@@ -141,27 +143,96 @@
     } else if (_viewType == MessagePublic) {
         [cell loadPublicData:_dataArray[indexPath.row]];
     }
+    UILongPressGestureRecognizer *msgLPGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(mMsgLongPress:)];
+    [msgLPGR setNumberOfTouchesRequired:1];
+    [msgLPGR setAllowableMovement:100];
+    [msgLPGR setMinimumPressDuration:0.5];
+    [cell addGestureRecognizer:msgLPGR];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell];
+    PrivateMessageDetailModel *data = _dataArray[indexPath.row];
+    MessageDetailTableViewCell *cell;
+    if (data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_In];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_Out];
+    }
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell cacheByIndexPath:indexPath configuration:^(id cell) {
-        [self configureCell:cell atIndexPath:indexPath];
+    PrivateMessageDetailModel *data = _dataArray[indexPath.row];
+    if (data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
+        return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell_In cacheByIndexPath:indexPath configuration:^(id cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }];
+    } else {
+        return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell_Out cacheByIndexPath:indexPath configuration:^(id cell) {
+            [self configureCell:cell atIndexPath:indexPath];
+        }];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+
+#pragma mark popup option view
+-(void)mMsgLongPress:(UILongPressGestureRecognizer *)recognizer{
+    
+    CGPoint touchP = [recognizer locationInView:self];
+    NSIndexPath *indexPath = [self indexPathForRowAtPoint:touchP];
+    _longPressedCell = [self cellForRowAtIndexPath:indexPath];
+
+    
+    if (indexPath != nil) {
+        [_longPressedCell cellBgColor:YES];
+
+        if (recognizer.state == UIGestureRecognizerStateBegan) {
+            if (!_editingMenuView) {
+                [self initEditingMenuView];
+            } else {
+                [_editingMenuView setHidden:NO];
+                _editingMenuView.alpha = 0;
+            }
+            
+            [_editingMenuView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.center.mas_equalTo(_longPressedCell);
+                make.width.mas_equalTo(80);
+                make.height.mas_equalTo(40);
+            }];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                _editingMenuView.alpha = 1;
+            } completion:nil];
+        }
+    }
+}
+-(void)initEditingMenuView {
+    _editingMenuView = [[UIView alloc] init];
+    _editingMenuView.alpha = 0;
+    [self addSubview:_editingMenuView];
+    
+    UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    deleteBtn.backgroundColor = KCOLOR_RED_FC481F;
+    [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+
+    [deleteBtn addTarget:self action:@selector(deleteBtnPressed) forControlEvents:UIControlEventTouchDown];
+    [deleteBtn addTarget:self action:@selector(deleteBtnDepressed) forControlEvents:UIControlEventTouchUpInside];
+
+    [_editingMenuView addSubview:deleteBtn];
+    
+    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(_editingMenuView);
     }];
 }
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self deleteRow:indexPath];
-}
-
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
-    /*[CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] completion:^(NSString *message) {
+    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"" completion:^(NSString *message) {
         [Utility hiddenProgressHUD];
         if (message != nil) {
             [Utility showTitle:message];
@@ -169,12 +240,29 @@
             [_dataArray removeObjectAtIndex:indexPath.row];
             [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-    }];*/
+    }];
+    [Utility hiddenProgressHUD];
+
+}
+-(void)deleteBtnPressed {
+}
+-(void)deleteBtnDepressed {
+    [_editingMenuView setHidden:YES];
+    NSIndexPath *indexPath = [self indexPathForCell:_longPressedCell];
+    [self deleteRow:indexPath];
+}
+-(id)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+
+    id hitView = [super hitTest:point withEvent:event];
+    CGRect rect = _editingMenuView.frame;
+    if (!CGRectContainsPoint(rect, point)) {
+        [_longPressedCell cellBgColor:NO];
+        [_editingMenuView setHidden:YES];
+    }
+    return hitView;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
+#pragma mark inheritance
 
 - (BOOL)showHeaderRefresh
 {
