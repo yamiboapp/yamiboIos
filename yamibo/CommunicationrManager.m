@@ -162,10 +162,10 @@
         if ([self jsonOKForResponseObject:responseObject]) {
             completion(nil);
         } else {
-            completion(@"请求失败1");
+            completion(@"请求失败");
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completion(@"请求失败2");
+        completion(@"请求失败");
     }];
 }
 
