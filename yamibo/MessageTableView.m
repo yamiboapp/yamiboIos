@@ -143,7 +143,7 @@
 
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
-    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] completion:^(NSString *message) {
+    [CommunicationrManager delMessage:@"" orConversation:[_dataArray[indexPath.row] toId] completion:^(NSString *message) {
         [Utility hiddenProgressHUD];
         if (message != nil) {
             [Utility showTitle:message];

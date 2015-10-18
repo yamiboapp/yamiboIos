@@ -10,6 +10,7 @@ pod 'MJRefresh'
 pod 'UITableView+FDTemplateLayoutCell'
 pod 'REMenu'
 pod 'JSONModel'
+pod 'SwipeBack'
 target 'yamibo' do
 end
 

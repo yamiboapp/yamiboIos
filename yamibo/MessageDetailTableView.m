@@ -232,17 +232,15 @@
 }
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
-    /*[CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] completion:^(NSString *message) {
-     [Utility hiddenProgressHUD];
-     if (message != nil) {
-     [Utility showTitle:message];
-     } else {
-     [_dataArray removeObjectAtIndex:indexPath.row];
-     [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-     }
-     }];*/
-    [_dataArray removeObjectAtIndex:indexPath.row];
-    [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"" completion:^(NSString *message) {
+        [Utility hiddenProgressHUD];
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            [_dataArray removeObjectAtIndex:indexPath.row];
+            [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }];
     [Utility hiddenProgressHUD];
 
 }
