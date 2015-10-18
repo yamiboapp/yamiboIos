@@ -18,5 +18,6 @@
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data;
 - (void)loadPublicData:(PublicMessageDetailModel *)data;
+- (void)cellBgColor:(BOOL)longPressed;
 
 @end

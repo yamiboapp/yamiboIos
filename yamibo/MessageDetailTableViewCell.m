@@ -139,13 +139,12 @@
     //_timeLable.text = data.date;
 }
 
-- (CGSize)sizeThatFits:(CGSize)size
-{
-    CGFloat totalHeight = 0;
-    totalHeight += [_contentLabel sizeThatFits:size].height;
-    totalHeight += [_timeLable sizeThatFits:size].height;
-    totalHeight += 60; // margins
-    totalHeight = MAX(totalHeight, 79);
-    return CGSizeMake(size.width, totalHeight);
+- (void)cellBgColor:(BOOL)longPressed {
+    if (longPressed) {
+        _backView.backgroundColor = KCOLOR_GRAY_70;
+    } else {
+        _backView.backgroundColor = KCOLOR_YELLOW_FDF5D8;
+    }
 }
+
 @end
