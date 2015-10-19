@@ -7,11 +7,9 @@
 //
 
 #import "YTableView.h"
+#import "MessageModel.h"
 
-typedef NS_ENUM(NSInteger, MessageViewType) {
-    MessagePrivate = 0,
-    MessagePublic,
-};
+#define kMessageSelectionIndexKey            @"kMessageSelectionIndexKey"
 
 @interface MessageTableView : YTableView
 

@@ -42,4 +42,11 @@
  *  @brief  进入版块
  */
 #define KNotification_ToForumDetail      @"KNotification_ToForumDetail"
+/**
+ *  @author 杨爽, 15-10-15 21:10:27
+ *
+ *  @brief  进入具体消息
+ */
+#define KNotification_ToMessageDetail      @"KNotification_ToMessageDetail"
+
 #endif /* NotificationConstance_h */

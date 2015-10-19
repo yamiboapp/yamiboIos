@@ -46,7 +46,7 @@
 }
 
 - (void)showCustomNavigationBackButton {
-    [self showNomalNavigationLeftButton:@"" action:@selector(onNavigationLeftButtonClicked) imgName:@"common_back" frame:CGRectMake(0, 0, 9, 14)];
+    [self showNomalNavigationLeftButton:@"" action:@selector(onNavigationLeftButtonClicked) imgName:@"back" frame:CGRectMake(0, 0, 9, 14)];
 }
 
 - (void)showCustomNavigationMenuButton {

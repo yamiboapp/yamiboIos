@@ -8,6 +8,7 @@
 
 #import "MessageController.h"
 #import "MessageTableView.h"
+#import "MessageDetailController.h"
 
 @interface MessageController ()
 
@@ -25,9 +26,9 @@
     [self configNavigation];
     [self initSwitch];
     [self initView];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateToDetail:) name:KNotification_ToMessageDetail object:nil];
 }
-- (void) configNavigation {
+- (void)configNavigation {
     [self showCustomNavigationMenuButton];
     [self showCustomNavigationNewButton];
     self.title = @"消息";
@@ -133,9 +134,15 @@
         [_tintLine layoutIfNeeded];
     }];
 }
-- (void)onNavigationLeftButtonClicked
-{
+- (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
+}
+- (void)navigateToDetail:(NSNotification*)notification{
+    MessageDetailController *detailContronller = [[MessageDetailController alloc] init];
+    detailContronller.viewType = [[notification.userInfo objectForKey:@"messageViewType"] intValue];
+    detailContronller.toId = [[notification.userInfo objectForKey:@"toId"] intValue];
+    detailContronller.toName = [notification.userInfo objectForKey:@"toName"];
+    [self.navigationController pushViewController:detailContronller animated:YES];
 }
 
 @end
