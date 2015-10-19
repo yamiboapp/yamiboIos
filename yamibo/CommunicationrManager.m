@@ -12,7 +12,6 @@
 #import "ForumModel.h"
 #import "ProfileManager.h"
 #import "ThreadFavoriteModel.h"
-#import "MessageModel.h"
 
 #define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
@@ -146,7 +145,7 @@
             completion(nil, @"请重新登录");
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completion(nil, @"加载私人消息失败");
+        completion(nil, @"加载消息失败");
     }];
 }
 + (void)getPublicMessageList:(int)page completion:(void (^)(PublicMessageListModel *, NSString *))completion {
@@ -158,7 +157,7 @@
             completion(nil, @"请重新登录");
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completion(nil, @"加载公共消息失败");
+        completion(nil, @"加载消息失败");
     }];
 }
 + (void)getPrivateMessageDetailList:(int)page toId:(NSInteger)toId completion:(void (^)(PrivateMessageDetailListModel *model, NSString *message))completion {
@@ -173,12 +172,28 @@
         completion(nil, @"加载对话失败");
     }];
 }
-+ (void)delMessage:(NSString *)pmId orConversation:(NSString *)toId completion:(void (^)(NSString *message))completion {
++ (void)getPublicMessageDetailList:(NSInteger)pmId completion:(void (^)(PublicMessageDetailListModel *model, NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"publicpm", @"subop":@("viewg"), @"pmid":@(pmId)};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject]) {
+            completion([[PublicMessageDetailListModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"加载消息失败");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, @"加载消息失败");
+    }];
+}
++ (void)delMessage:(NSString *)pmId orConversation:(NSString *)toId ofType:(MessageViewType)type completion:(void (^)(NSString *message))completion {
     NSDictionary *dic;
-    if (!toId) {
-        dic = @{@"module":@"sendpm", @"op":@"delete", @"touid":toId, @"formhash": [ProfileManager sharedInstance].authToken};
-    } else if (!pmId) {
-        dic = @{@"module":@"sendpm", @"op":@"delete", @"pmid":pmId, @"formhash": [ProfileManager sharedInstance].authToken};
+    if (type == MessagePrivate) {
+        if (!toId) {
+            dic = @{@"module":@"sendpm", @"op":@"delete", @"touid":toId, @"formhash": [ProfileManager sharedInstance].authToken};
+        } else if (!pmId) {
+            dic = @{@"module":@"sendpm", @"op":@"delete", @"pmid":pmId, @"formhash": [ProfileManager sharedInstance].authToken};
+        }
+    } else if (type == MessagePublic) {
+        dic = @{@"module":@"sendpm", @"op":@"delete", @"gpmid":pmId, @"formhash": [ProfileManager sharedInstance].authToken};
     }
     AFHTTPRequestOperationManager *manager = [self defaultManager];
     [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -138,10 +138,15 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
 - (void)navigateToDetail:(NSNotification*)notification{
+    MessageViewType viewType = [[notification.userInfo objectForKey:@"messageViewType"] intValue];
+    NSDictionary* dic = @{
+                          @"viewType":[NSNumber numberWithInt:viewType],
+                          @"detailId":[notification.userInfo objectForKey:@"detailId"],
+                          @"detailName":[notification.userInfo objectForKey:@"detailName"]
+                          };
+    
     MessageDetailController *detailContronller = [[MessageDetailController alloc] init];
-    detailContronller.viewType = [[notification.userInfo objectForKey:@"messageViewType"] intValue];
-    detailContronller.toId = [[notification.userInfo objectForKey:@"toId"] intValue];
-    detailContronller.toName = [notification.userInfo objectForKey:@"toName"];
+    [detailContronller loadData:dic];
     [self.navigationController pushViewController:detailContronller animated:YES];
 }
 
