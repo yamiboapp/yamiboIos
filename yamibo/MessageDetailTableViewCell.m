@@ -128,15 +128,13 @@
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data {
     [_headImg setUserId:data.fromId andType:FaceMiddle];
     _contentLabel.text = data.message;
-    _timeLable.text = @"2012-2-23 18:33";
     _timeLable.text = data.date;
 }
 
-- (void)loadPublicData:(PublicMessageModel *)data {
+- (void)loadPublicData:(PublicMessageDetailModel *)data {
     [_headImg setUserId:data.authorId andType:FaceMiddle];
-    _contentLabel.text = data.summary;
-    _timeLable.text = @"2012-2-23 18:33";
-    //_timeLable.text = data.date;
+    _contentLabel.text = data.message;
+    _timeLable.text = data.date;
 }
 
 - (void)cellBgColor:(BOOL)longPressed {

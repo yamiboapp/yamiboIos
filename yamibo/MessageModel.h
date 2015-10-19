@@ -84,11 +84,10 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @interface PublicMessageDetailModel : JSONModel
 
 @property   (strong, nonatomic) NSString *pmId;
-@property   (strong, nonatomic) NSString *toId;
-@property   (strong, nonatomic) NSString *toName;
-@property   (strong, nonatomic) NSString *lastId;
+@property   (strong, nonatomic) NSString *authorId;
+@property   (strong, nonatomic) NSString *authorName;
 @property   (strong, nonatomic) NSString *date;
-@property   (strong, nonatomic) NSString *summary;
+@property   (strong, nonatomic) NSString *message;
 
 @end
 

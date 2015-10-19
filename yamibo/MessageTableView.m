@@ -143,19 +143,37 @@
 
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
-    [CommunicationrManager delMessage:@"" orConversation:[_dataArray[indexPath.row] toId] completion:^(NSString *message) {
-        [Utility hiddenProgressHUD];
-        if (message != nil) {
-            [Utility showTitle:message];
-        } else {
-            [_dataArray removeObjectAtIndex:indexPath.row];
-            [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    }];
+    if (_viewType == MessagePrivate) {
+        [CommunicationrManager delMessage:@"" orConversation:[_dataArray[indexPath.row] toId] ofType:MessagePrivate completion:^(NSString *message) {
+            [Utility hiddenProgressHUD];
+            if (message != nil) {
+                [Utility showTitle:message];
+            } else {
+                [_dataArray removeObjectAtIndex:indexPath.row];
+                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }];
+    } else if (_viewType == MessagePublic) {
+        [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"" ofType:MessagePublic completion:^(NSString *message) {
+            [Utility hiddenProgressHUD];
+            if (message != nil) {
+                [Utility showTitle:message];
+            } else {
+                [_dataArray removeObjectAtIndex:indexPath.row];
+                [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"toId":[_dataArray[indexPath.row] toId], @"toName":[_dataArray[indexPath.row] toName]};
+    NSDictionary *dic;
+    if (_viewType == MessagePrivate) {
+        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[indexPath.row] toId], @"detailName":[_dataArray[indexPath.row] toName]};
+    } else if (_viewType == MessagePublic) {
+        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[indexPath.row] pmId], @"detailName":[_dataArray[indexPath.row] authorName]};
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToMessageDetail object:nil userInfo:dic];
 }
 
