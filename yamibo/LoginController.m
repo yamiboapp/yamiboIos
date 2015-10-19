@@ -74,7 +74,8 @@
         make.top.mas_equalTo(27);
         make.width.height.mas_equalTo(logoSize);
     }];
-    _logo.backgroundColor = [UIColor redColor];
+    [_logo setImage:[UIImage imageNamed:@"ico-logo"]];
+    //_logo.backgroundColor = [UIColor redColor];
     _logo.layer.cornerRadius = logoSize / 2;
     _logo.clipsToBounds = true;
 }

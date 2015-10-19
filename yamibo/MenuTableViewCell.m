@@ -32,7 +32,7 @@
     return self;
 }
 - (void)initAccessory {
-    UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 15)];
+    UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
     [rightArray setImage:[UIImage imageNamed:@"accessory-more"]];
     self.accessoryView = rightArray;
 }
@@ -62,14 +62,20 @@
         nameLabel.textColor = KCOLOR_YELLOW_FDF5D8;
         nameLabel.text = [ProfileManager sharedInstance].userName;
         
-        UIImageView *genderTint = [[UIImageView alloc] init];
-        [self addSubview:genderTint];
-        [genderTint mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIImageView *genderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 13)];
+        UIImage *genderImg;
+        int gender = [[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"] intValue];
+        if (gender == 1) {
+            genderImg = [UIImage imageNamed:@"gender-male"];
+        } else if (gender == 2) {
+            genderImg = [UIImage imageNamed:@"gender-female"];
+        }
+        [genderImgView setImage:genderImg];
+        [self addSubview:genderImgView];
+        [genderImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(nameLabel.mas_right).offset(8);
-            make.top.bottom.equalTo(nameLabel);
-            make.width.equalTo(genderTint.mas_height);
+            make.centerY.equalTo(nameLabel);
         }];
-        genderTint.backgroundColor = [UIColor blueColor];
         
         UILabel *idLabel = [[UILabel alloc] init];
         [self addSubview:idLabel];
@@ -77,7 +83,7 @@
             make.top.equalTo(nameLabel.mas_bottom).offset(10);
             make.centerX.equalTo(nameLabel);
         }];
-        idLabel.font = KFONT(10);
+        idLabel.font = KFONT(12);
         idLabel.textAlignment = NSTextAlignmentCenter;
         idLabel.textColor = KCOLOR_YELLOW_FDF5D8;
         idLabel.text = [NSString stringWithFormat:@"UID:%@", [ProfileManager sharedInstance].userId];

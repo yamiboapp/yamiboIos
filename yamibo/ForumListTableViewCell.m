@@ -40,19 +40,21 @@
     }];
 }
 - (void)initViews {
-    UIImageView *tint = [[UIImageView alloc] init];
-    [_backView addSubview:tint];
-    [tint mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIImageView *topicImgView = [[UIImageView alloc] init];
+    UIImage *topicImg = [UIImage imageNamed:@"forum-topic"];
+    [topicImgView setImage:topicImg];
+    [_backView addSubview:topicImgView];
+    [topicImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self).offset(24);
-        make.width.height.mas_equalTo(15);
+        make.width.mas_equalTo(topicImg.size.width);
+        make.height.mas_equalTo(topicImg.size.height);
     }];
-    tint.backgroundColor = [UIColor redColor];
     
     _nameLabel = [[UILabel alloc] init];
     [_backView addSubview:_nameLabel];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(tint.mas_right).offset(5);
-        make.top.bottom.equalTo(tint);
+        make.left.equalTo(topicImgView.mas_right).offset(5);
+        make.top.bottom.equalTo(topicImgView);
     }];
     _nameLabel.font = KFONT(14);
     _nameLabel.textColor = KCOLOR_RED_6D2C1D;
@@ -60,14 +62,17 @@
     _titleLabel = [[UILabel alloc] init];
     [_backView addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(tint);
-        make.top.equalTo(tint.mas_bottom).offset(10);
+        make.left.equalTo(topicImgView);
+        make.top.equalTo(topicImgView.mas_bottom).offset(10);
     }];
     _titleLabel.font = KFONT(12);
     _titleLabel.textColor = KCOLOR_GRAY;
     
+    UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
+    [rightArray setImage:[UIImage imageNamed:@"accessory-more"]];
+    self.accessoryView = rightArray;
     
-    UIImageView *rightArray = [[UIImageView alloc] init];
+    /*UIImageView *rightArray = [[UIImageView alloc] init];
     [_backView addSubview:rightArray];
     [rightArray mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(_backView).offset(-22);
@@ -76,7 +81,7 @@
         make.height.mas_equalTo(12);
         make.left.equalTo(_titleLabel.mas_right);
     }];
-    rightArray.backgroundColor = [UIColor redColor];
+    rightArray.backgroundColor = [UIColor redColor];*/
 }
 - (void)loadData:(ForumModel *)data {
     _nameLabel.text = [NSString stringWithFormat:@"%@（%@）", data.forumName, data.todayPosts];

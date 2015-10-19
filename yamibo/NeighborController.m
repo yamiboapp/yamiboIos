@@ -15,6 +15,7 @@
 @interface NeighborController()
 @property (strong, nonatomic) REMenu *menu;
 @property (strong, nonatomic) NSArray *menuNames;
+@property (strong, nonatomic) NSArray *menuImgNames;
 @end
 
 @implementation NeighborController
@@ -32,6 +33,7 @@
 }
 - (void)initMenu {
     _menuNames = @[@"只看妹子", @"只看汉子", @"性别不限", @"清除位置", @"隐私设置"];
+    _menuImgNames = @[@"menu-neighbor-female", @"menu-neighbor-male", @"menu-neighbor-allgender", @"menu-neighbor-clear", @"menu-neighbor-clear"];
     NSMutableArray *items = [NSMutableArray array];
     for (int i = 0; i < 5; i++) {
         [items addObject:[self menuItemAtIndex:i]];
@@ -53,7 +55,7 @@
     __typeof (self) __weak weakSelf = self;
     REMenuItem *item = [[REMenuItem alloc] initWithTitle:_menuNames[index]
                                                 subtitle:nil
-                                                       image:[UIImage imageNamed:@"menu"]
+                                                       image:[UIImage imageNamed:_menuImgNames[index]]
                                             highlightedImage:nil
                                                       action:^(REMenuItem *item) {
                                                           [weakSelf dealMenu:index];
