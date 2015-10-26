@@ -13,13 +13,13 @@
 
 @interface DataImg : JSONModel
 
-@property   (strong, nonatomic) NSString *feedId;
-@property   (strong, nonatomic) NSString *title;
+@property   (strong, nonatomic) NSString<Optional> *feedId;
+@property   (strong, nonatomic) NSString<Optional> *title;
 @property   (strong, nonatomic) NSString *picUrl;
-@property   (strong, nonatomic) NSString *authorName;
-@property   (strong, nonatomic) NSString *authorId;
-@property   (strong, nonatomic) NSString *replyNum;
-@property   (strong, nonatomic) NSString *viewNum;
+@property   (strong, nonatomic) NSString<Optional> *authorName;
+@property   (strong, nonatomic) NSString<Optional> *authorId;
+@property   (strong, nonatomic) NSString<Optional> *replyNum;
+@property   (strong, nonatomic) NSString<Optional> *viewNum;
 @property   (strong, nonatomic) NSString *lastPost;
 
 @end

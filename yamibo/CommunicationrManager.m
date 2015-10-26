@@ -57,7 +57,7 @@
         completion(nil);
     }];
 }
-
+#pragma mark home page
 + (void)getHot:(void (^)(HotModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"hot"};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -76,36 +76,15 @@
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             // login时储存的formhash为登录前的formhash,需在此更新
-            [ProfileManager sharedInstance].authToken = responseObject[@"Variables"][@"formhash"];
-            completion([[ForumListModel alloc] initWithDictionary:responseObject error:nil], nil);
-            // update user profile
             if ([self checkLogin:responseObject]) {
-                [CommunicationrManager getUserProfile:^(NSString *message){
-                    if (message != nil) {
-                        [Utility showTitle:message];
-                    }
-                }];
+                [ProfileManager sharedInstance].authToken = responseObject[@"Variables"][@"formhash"];
             }
+            completion([[ForumListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请求失败");
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completion(nil, @"请求失败");
-    }];
-}
-
-+ (void)getUserProfile:(void (^)(NSString *message))completion {
-    NSDictionary *dic = @{@"module":@"profile"};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([self jsonOKForResponseObject:responseObject]) {
-            NSDictionary* space = responseObject[@"Variables"][@"space"];
-            [ProfileManager sharedInstance].gender = space[@"gender"];
-            completion(nil);
-        } else {
-            completion(@"加载用户资料失败");
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completion(@"加载用户资料失败");
     }];
 }
 #pragma mark favorite
@@ -187,9 +166,9 @@
 + (void)delMessage:(NSString *)pmId orConversation:(NSString *)toId ofType:(MessageViewType)type completion:(void (^)(NSString *message))completion {
     NSDictionary *dic;
     if (type == MessagePrivate) {
-        if (!toId) {
+        if (![toId isEqualToString:@"0"]) {
             dic = @{@"module":@"sendpm", @"op":@"delete", @"touid":toId, @"formhash": [ProfileManager sharedInstance].authToken};
-        } else if (!pmId) {
+        } else if (![pmId isEqualToString:@"0"]) {
             dic = @{@"module":@"sendpm", @"op":@"delete", @"pmid":pmId, @"formhash": [ProfileManager sharedInstance].authToken};
         }
     } else if (type == MessagePublic) {

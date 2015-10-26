@@ -144,7 +144,7 @@
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager delMessage:@"" orConversation:[_dataArray[indexPath.row] toId] ofType:MessagePrivate completion:^(NSString *message) {
+        [CommunicationrManager delMessage:@"0" orConversation:[_dataArray[indexPath.row] toId] ofType:MessagePrivate completion:^(NSString *message) {
             [Utility hiddenProgressHUD];
             if (message != nil) {
                 [Utility showTitle:message];
@@ -154,7 +154,7 @@
             }
         }];
     } else if (_viewType == MessagePublic) {
-        [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"" ofType:MessagePublic completion:^(NSString *message) {
+        [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"0" ofType:MessagePublic completion:^(NSString *message) {
             [Utility hiddenProgressHUD];
             if (message != nil) {
                 [Utility showTitle:message];
