@@ -100,7 +100,6 @@
         self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
     }
 }
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

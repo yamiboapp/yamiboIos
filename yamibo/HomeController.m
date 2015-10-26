@@ -9,6 +9,8 @@
 #import "HomeController.h"
 #import "HomeHotView.h"
 #import "ForumListTableView.h"
+//=========>
+#import "ArticleDetailController.h"
 
 /**
  *  @author 李思良, 15-08-17
@@ -27,6 +29,8 @@
     // Do any additional setup after loading the view.
     [self configNavigation];
     [self initView];
+    //==============>
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController) name:KNotification_ToFeedDetail object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -80,6 +84,11 @@
 - (void)onNavigationLeftButtonClicked
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
+}
+//==========>
+- (void)pushToDetailController {
+    ArticleDetailController *articleDetailController = [[ArticleDetailController alloc] init];
+    [self.navigationController pushViewController:articleDetailController animated:YES];
 }
 
 @end

@@ -87,7 +87,8 @@
 
 #pragma tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    //============>
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToFeedDetail object:nil];
 }
 
 - (BOOL)showHeaderRefresh
