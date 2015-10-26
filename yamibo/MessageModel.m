@@ -86,11 +86,10 @@
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"pmid": @"pmId",
-                                                       @"plid": @"plId",
-                                                       @"msgfromid": @"fromId",
-                                                       @"msgtoid": @"toId",
-                                                       @"dateline": @"date",
+                                                       @"id": @"pmId",
+                                                       @"authorid": @"authorId",
+                                                       @"author": @"authorName",
+                                                       @"dateline": @"date",                                                       
                                                        @"message": @"message"
                                                        }];
 }

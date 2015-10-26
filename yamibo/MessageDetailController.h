@@ -10,7 +10,7 @@
 #import "MessageModel.h"
 
 @interface MessageDetailController : BaseViewController
-@property (assign, nonatomic) NSInteger toId;
-@property (assign, nonatomic) NSString *toName;
-@property (assign, nonatomic) MessageViewType viewType;
+
+- (void)loadData:(NSDictionary*)data;
+
 @end

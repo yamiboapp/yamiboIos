@@ -11,6 +11,7 @@ pod 'UITableView+FDTemplateLayoutCell'
 pod 'REMenu'
 pod 'JSONModel'
 pod 'SwipeBack'
+pod 'HMSegmentedControl'
 target 'yamibo' do
 end
 

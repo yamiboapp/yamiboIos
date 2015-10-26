@@ -11,7 +11,7 @@
 
 @interface MessageDetailTableView : YTableViewReverse
 
-- (instancetype)initWithViewType:(MessageViewType)type andToId:(NSInteger)toId;
+- (instancetype)initWithViewType:(MessageViewType)type andDetailId:(NSInteger)detailId;
 - (void)refreshData;
 
 @end

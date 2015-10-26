@@ -14,7 +14,7 @@
 @interface MessageDetailTableView()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) MessageViewType viewType;
-@property (assign, nonatomic) NSInteger toId;
+@property (assign, nonatomic) NSInteger detailId;
 @property (assign, nonatomic) float msgCount;
 @property (assign, nonatomic) float perPage;
 @property (assign, nonatomic) int currentPage;
@@ -25,16 +25,16 @@
 @implementation MessageDetailTableView
 - (instancetype)init
 {
-    return [self initWithViewType:MessagePrivate andToId:0];
+    return [self initWithViewType:MessagePrivate andDetailId:0];
 }
-- (instancetype)initWithViewType:(MessageViewType)type andToId:(NSInteger)toId{
+- (instancetype)initWithViewType:(MessageViewType)type andDetailId:(NSInteger)detailId{
     if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
         self.delegate = self;
         _viewType = type;
-        _toId = toId;
+        _detailId = detailId;
         _dataArray = [NSMutableArray array];
         [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_In];
         [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_Out];
@@ -49,14 +49,15 @@
 
 - (void)loadNewData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageDetailList:1 toId:_toId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageDetailList:1 toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+            [self stopLoadNewData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
                 _msgCount = [model.count intValue];
                 _perPage = [model.perPage intValue];
                 _currentPage = ceil(_msgCount / _perPage);
-                [CommunicationrManager getPrivateMessageDetailList:_currentPage toId:_toId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+                [CommunicationrManager getPrivateMessageDetailList:_currentPage toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
                     [self stopLoadNewData];
                     if (message != nil) {
                         [Utility showTitle:message];
@@ -74,31 +75,27 @@
             }
         }];
     } else if (_viewType == MessagePublic) {
-        [CommunicationrManager getPublicMessageList:1 completion:^(PublicMessageListModel *model, NSString *message) {
+        [CommunicationrManager getPublicMessageDetailList:_detailId completion:^(PublicMessageDetailListModel *model, NSString *message) {
             [self stopLoadNewData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
                 _dataArray = [NSMutableArray arrayWithArray:model.msgList];
-            }
-            if (model.msgList.count < 20) {
                 [self hiddenFooter:true];
-            } else {
-                [self hiddenFooter:false];
+                [self reloadData];
             }
-            [self reloadData];
         }];
     }
     
 }
 - (void)loadMoreData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageDetailList:--_currentPage toId:_toId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageDetailList:--_currentPage toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
             [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                //[_dataArray addObjectsFromArray:model.msgList];
+                //从后往前加载
                 [_dataArray replaceObjectsInRange:NSMakeRange(0,0)
                                 withObjectsFromArray:model.msgList];
             }
@@ -106,21 +103,6 @@
                 [self hiddenHeader:YES];
             } else {
                 [self hiddenHeader:NO];
-            }
-            [self reloadData];
-        }];
-    } else if (_viewType == MessagePublic) {
-        [CommunicationrManager getPublicMessageList:(int)_dataArray.count / 20 + 1 completion:^(PublicMessageListModel *model, NSString *message) {
-            [self stopLoadMoreData];
-            if (message != nil) {
-                [Utility showTitle:message];
-            } else {
-                [_dataArray addObjectsFromArray:model.msgList];
-            }
-            if (model.msgList.count < 20) {
-                [self hiddenFooter:true];
-            } else {
-                [self hiddenFooter:false];
             }
             [self reloadData];
         }];
@@ -153,18 +135,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PrivateMessageDetailModel *data = _dataArray[indexPath.row];
     MessageDetailTableViewCell *cell;
-    if (data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
+
+    if (_viewType == MessagePublic || data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
         cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_In];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_Out];
     }
+    
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     PrivateMessageDetailModel *data = _dataArray[indexPath.row];
-    if (data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
+    if (_viewType == MessagePublic || data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
         return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell_In cacheByIndexPath:indexPath configuration:^(id cell) {
             [self configureCell:cell atIndexPath:indexPath];
         }];
@@ -232,7 +216,7 @@
 }
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
-    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"" completion:^(NSString *message) {
+    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"0" ofType:_viewType completion:^(NSString *message) {
         [Utility hiddenProgressHUD];
         if (message != nil) {
             [Utility showTitle:message];

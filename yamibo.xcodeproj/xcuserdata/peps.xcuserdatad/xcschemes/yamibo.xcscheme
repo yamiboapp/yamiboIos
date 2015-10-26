@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-<<<<<<< Updated upstream
-   LastUpgradeVersion = "0700"
-=======
-<<<<<<< Updated upstream
-   LastUpgradeVersion = "0640"
-=======
-   LastUpgradeVersion = "0700"
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+   LastUpgradeVersion = "0710"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -28,32 +20,6 @@
                ReferencedContainer = "container:yamibo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65BB632B1ADE0B300042C359"
-               BuildableName = "yamiboTests.xctest"
-               BlueprintName = "yamiboTests"
-               ReferencedContainer = "container:yamibo.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
-   </BuildAction>
-   <TestAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Debug">
-=======
->>>>>>> Stashed changes
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -61,10 +27,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -86,41 +48,18 @@
             ReferencedContainer = "container:yamibo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-   </TestAction>
-   <LaunchAction
-=======
->>>>>>> Stashed changes
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-<<<<<<< Updated upstream
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-=======
-<<<<<<< Updated upstream
-      buildConfiguration = "Debug"
-      ignoresPersistentStateOnLaunch = "NO"
-      debugDocumentVersioning = "YES"
-=======
-      ignoresPersistentStateOnLaunch = "NO"
-      debugDocumentVersioning = "YES"
-      debugServiceExtension = "internal"
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
@@ -136,23 +75,10 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = ""
-      useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
-=======
->>>>>>> Stashed changes
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
