@@ -11,6 +11,7 @@
 #import "ForumListTableView.h"
 //=========>
 #import "ArticleDetailController.h"
+#import "ArticleListController.h"
 
 /**
  *  @author 李思良, 15-08-17
@@ -30,7 +31,8 @@
     [self configNavigation];
     [self initView];
     //==============>
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController) name:KNotification_ToFeedDetail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToFeedDetail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToForumDetail object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -86,9 +88,27 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
 //==========>
-- (void)pushToDetailController {
-    ArticleDetailController *articleDetailController = [[ArticleDetailController alloc] init];
-    [self.navigationController pushViewController:articleDetailController animated:YES];
-}
+- (void)pushToDetailController:(NSNotification*)notification{
+    if ([notification.name isEqualToString:KNotification_ToFeedDetail]) {
+        ArticleDetailController *articleDetailController = [[ArticleDetailController alloc] init];
+        [self.navigationController pushViewController:articleDetailController animated:YES];
+    }
+    if ([notification.name isEqualToString:KNotification_ToFeedDetail]) {
+        NSDictionary* dic = @{
+                              
+                              @"forumID":[notification.userInfo objectForKey:@"forumID"],
+                              
+                              @"forumName":[notification.userInfo objectForKey:@"forumName"]
+                              
+                              };
+        
+        
+        
+        ArticleListController *forumdetailContronller = [[ArticleListController alloc] init];
+        [forumdetailContronller loadData:dic];
+        [self.navigationController pushViewController:forumdetailContronller animated:YES];
+    }
 
+    
+}
 @end

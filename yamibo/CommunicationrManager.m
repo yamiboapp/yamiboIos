@@ -12,6 +12,7 @@
 #import "ForumModel.h"
 #import "ProfileManager.h"
 #import "ThreadFavoriteModel.h"
+#import "ArticleModel.h"
 
 #define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
@@ -80,6 +81,20 @@
                 [ProfileManager sharedInstance].authToken = responseObject[@"Variables"][@"formhash"];
             }
             completion([[ForumListModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请求失败");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, @"请求失败");
+    }];
+}
+#pragma mark article
++ (void)getArticleList:(NSString *)fId andPage:(int)page andFilter:(NSString *)filter andTypeId:(NSString *)typeId
+            completion:(void (^)(ArticleListModel *model, NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"forumdisplay", @"fid":fId, @"page":@(page), @"filter":filter, @"typeid":typeId};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject]) {
+            completion([[ArticleListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请求失败");
         }

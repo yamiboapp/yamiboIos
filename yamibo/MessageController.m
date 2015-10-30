@@ -27,7 +27,7 @@
     [self configNavigation];
     [self initSwitch];
     [self initView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateToDetail:) name:KNotification_ToMessageDetail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToMessageDetail object:nil];
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];
@@ -103,7 +103,7 @@
 - (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
-- (void)navigateToDetail:(NSNotification*)notification{
+- (void)pushToDetailController:(NSNotification*)notification{
     MessageViewType viewType = [[notification.userInfo objectForKey:@"messageViewType"] intValue];
     NSDictionary* dic = @{
                           @"viewType":[NSNumber numberWithInt:viewType],
