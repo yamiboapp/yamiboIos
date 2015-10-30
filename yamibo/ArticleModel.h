@@ -32,8 +32,8 @@
 
 @property   (strong, nonatomic) NSArray<ArticleModel> *articleList;
 @property   (strong, nonatomic) ForumModel *forum;
-@property   (strong, nonatomic) NSArray<ForumModel,Optional> *subforumList;
-@property   (strong, nonatomic) NSDictionary *articleTypes;
+@property   (strong, nonatomic) NSArray<ForumModel> *subforumList;
+@property   (strong, nonatomic) NSDictionary<Optional> *articleTypes;
 @property   (strong, nonatomic) NSString *perPage;
 
 @end

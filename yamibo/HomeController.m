@@ -93,17 +93,11 @@
         ArticleDetailController *articleDetailController = [[ArticleDetailController alloc] init];
         [self.navigationController pushViewController:articleDetailController animated:YES];
     }
-    if ([notification.name isEqualToString:KNotification_ToFeedDetail]) {
+    if ([notification.name isEqualToString:KNotification_ToForumDetail]) {
         NSDictionary* dic = @{
-                              
-                              @"forumID":[notification.userInfo objectForKey:@"forumID"],
-                              
+                              @"forumID":[notification.userInfo objectForKey:@"forumId"],
                               @"forumName":[notification.userInfo objectForKey:@"forumName"]
-                              
                               };
-        
-        
-        
         ArticleListController *forumdetailContronller = [[ArticleListController alloc] init];
         [forumdetailContronller loadData:dic];
         [self.navigationController pushViewController:forumdetailContronller animated:YES];

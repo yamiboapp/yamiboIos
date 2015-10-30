@@ -57,7 +57,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = @{@"forumId":[_dataArray[indexPath.row] forumId], @"forumName":[_dataArray[indexPath.row] forumName]};
-    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToMessageDetail object:nil userInfo:dic];
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToForumDetail object:nil userInfo:dic];
 }
 - (BOOL)showHeaderRefresh
 {
