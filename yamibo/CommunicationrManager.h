@@ -23,6 +23,8 @@
 
 + (void)getForumList:(void (^)(ForumListModel *model, NSString *message))completion;
 
++ (void)getArticleList:(NSString *)fId andPage:(int)page andFilter:(NSString *)filter andTypeId:(NSString *)typeId andPerPage:(NSString *)perPage completion:(void (^)(ArticleListModel *model, NSString *message))completion;
+
 + (void)getFavoriteList:(int)page completion:(void (^)(ThreadFavoriteListModel *model, NSString *message))completion;
 
 + (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion;
