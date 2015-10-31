@@ -41,6 +41,7 @@
         make.left.right.bottom.equalTo(self.view);
         make.top.mas_equalTo(44);
     }];
+    [_privateMessageView refreshData];
     
     _publicMessageView = [[MessageTableView alloc]initWithViewType:MessagePublic];
     [self.view addSubview:_publicMessageView];
@@ -69,7 +70,7 @@
     segment.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segment.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     segment.selectionIndicatorEdgeInsets = UIEdgeInsetsMake(0, -20, 0, -40);
-    segment.selectedSegmentIndex = 0;
+    segment.selectedSegmentIndex = 1;
 
     [back addSubview:segment];
     
@@ -93,11 +94,11 @@
     if (index == 0) {
         _publicMessageView.hidden = false;
         _privateMessageView.hidden = true;
-        [_publicMessageView refreshData];
+        //[_publicMessageView refreshData];
     } else {
         _publicMessageView.hidden = true;
         _privateMessageView.hidden = false;
-        [_privateMessageView refreshData];
+        //[_privateMessageView refreshData];
     }
 }
 - (void)onNavigationLeftButtonClicked {

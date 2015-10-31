@@ -16,8 +16,9 @@
 
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSString *forumName;
-@property (strong, nonatomic) NSMutableArray *subforumList;
-
+@property (strong, nonatomic) NSMutableArray *subforumNames;
+@property (strong, nonatomic) NSMutableArray *subforumIds;
+@property (strong, nonatomic) ArticleListTableView *articleListView;
 @property (assign, nonatomic) BOOL hasSwith;
 
 @end
@@ -29,26 +30,30 @@
     [self configNavigation];
     [self initView];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToArticleDetail object:nil];
-    _subforumList = [NSMutableArray arrayWithObject:_forumName];
+    _subforumNames = [NSMutableArray arrayWithObject:_forumName];
+    _subforumIds = [NSMutableArray arrayWithObject:_forumId];
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];
     self.title = _forumName;
 }
-- (void)initArticleListView {
-    ArticleListTableView *articleView = [[ArticleListTableView alloc] initWithForumId:_forumId];
-    [self.view addSubview:articleView];
+- (void)initArticleListView:(NSString *)fid {
+    if (_articleListView) {
+        [_articleListView removeFromSuperview];
+    }
+    _articleListView = [[ArticleListTableView alloc] initWithForumId:fid];
+    [self.view addSubview:_articleListView];
     if (_hasSwith == YES) {
-        [articleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_articleListView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.view);
             make.top.mas_equalTo(44);
         }];
     } else {
-        [articleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_articleListView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
         }];
     }
-    [articleView refreshData];
+    [_articleListView refreshData];
 }
 - (void)initView {
     [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:@"" andTypeId:@"" andPerPage:@"1"
@@ -66,9 +71,10 @@
             
             for (int i = 0; i < [model.subforumList count]; ++i) {
                 ForumModel *subforum = model.subforumList[i];
-                [_subforumList addObject:subforum.forumName];
+                [_subforumNames addObject:subforum.forumName];
+                [_subforumIds addObject:subforum.forumId];
             }
-            HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:_subforumList];
+            HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:_subforumNames];
             segment.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                            KCOLOR_GRAY, NSForegroundColorAttributeName,
                                            KFONT(15), NSFontAttributeName,
@@ -97,14 +103,13 @@
             _hasSwith = false;
         }
         
-        [self initArticleListView];
+        [self initArticleListView:_forumId];
     }];
 }
 
 - (void)changeSeg:(HMSegmentedControl *)seg {
     long index = (long)seg.selectedSegmentIndex;
-    
-    
+    [self initArticleListView:_subforumIds[index]];
 }
 - (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
