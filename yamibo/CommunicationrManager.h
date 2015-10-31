@@ -11,6 +11,8 @@
 @class HotModel;
 @class ForumListModel;
 @class ThreadFavoriteListModel;
+@class ArticleListModel;
+
 
 @interface CommunicationrManager : NSObject
 
@@ -21,6 +23,8 @@
 + (void)getHot:(void (^)(HotModel *model, NSString *message))completion;
 
 + (void)getForumList:(void (^)(ForumListModel *model, NSString *message))completion;
+
++ (void)getArticleList:(NSString *)fId andPage:(int)page andFilter:(NSString *)filter andTypeId:(NSString *)typeId andPerPage:(NSString *)perPage completion:(void (^)(ArticleListModel *model, NSString *message))completion;
 
 + (void)getFavoriteList:(int)page completion:(void (^)(ThreadFavoriteListModel *model, NSString *message))completion;
 

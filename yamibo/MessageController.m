@@ -27,7 +27,7 @@
     [self configNavigation];
     [self initSwitch];
     [self initView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(navigateToDetail:) name:KNotification_ToMessageDetail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToMessageDetail object:nil];
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];
@@ -39,14 +39,14 @@
     [self.view addSubview:_privateMessageView];
     [_privateMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
-        make.top.mas_equalTo(43);
+        make.top.mas_equalTo(44);
     }];
     
     _publicMessageView = [[MessageTableView alloc]initWithViewType:MessagePublic];
     [self.view addSubview:_publicMessageView];
     [_publicMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
-        make.top.mas_equalTo(43);
+        make.top.mas_equalTo(44);
     }];
     [_publicMessageView refreshData];
 }
@@ -103,7 +103,7 @@
 - (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
-- (void)navigateToDetail:(NSNotification*)notification{
+- (void)pushToDetailController:(NSNotification*)notification{
     MessageViewType viewType = [[notification.userInfo objectForKey:@"messageViewType"] intValue];
     NSDictionary* dic = @{
                           @"viewType":[NSNumber numberWithInt:viewType],
