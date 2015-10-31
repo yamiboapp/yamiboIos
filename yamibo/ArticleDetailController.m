@@ -8,7 +8,8 @@
 
 #import "ArticleDetailController.h"
 
-#import "AFNetworking.h"
+#import "ArticleDetailTableView.h"
+
 #import "YPostContentView.h"
 
 @interface ArticleDetailController ()<YPostContentViewDelegate>
@@ -16,6 +17,8 @@
     YPostContentView *_contentView;
     NSString *_message1;
 }
+
+@property (nonatomic, strong) ArticleDetailTableView *postList;
 @end
 
 @implementation ArticleDetailController
@@ -25,7 +28,8 @@
     // Do any additional setup after loading the view.
     
     [self configNavigation];
-    [self loadThreadDetail];
+    [self initView];
+//    [self loadThreadDetail];
     
 }
 
@@ -47,19 +51,28 @@
 #pragma mark - Layout
 - (void)configNavigation {
     [self showCustomNavigationBackButton];
+    [self showCustomNavigationCollectButton];
+    [self initSwitch];
+}
+
+- (void)initSwitch {
+    UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:@[@"查看全部", @"只看楼主"]];
+    segment.tintColor = KCOLOR_YELLOW_FDF5D8;
+    segment.selectedSegmentIndex = 0;
+    [segment addTarget:self action:@selector(changeSegment:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = segment;
+}
+
+- (void)initView {
+    _postList = [[ArticleDetailTableView alloc] init];
+    [self.view addSubview:_postList];
+    [_postList mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    [_postList refreshData];
 }
 
 - (void)loadThreadDetail {
-//    NSDictionary *paraDict = @{@"module": @"viewthread",
-//                               @"tid": @229825,
-//                               @"page": @1,
-//                               @"ppp": @10,
-//                               @"authorid": @163436};
-//    [[AFHTTPRequestOperationManager manager] POST:@"http://ceshi.yamibo.com/chobits/index.php?" parameters:paraDict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        NSLog(@"%@", responseObject);
-//    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-//        NSLog(@"error = %@", error);
-//    }];
     
     // 解析[attach]xxx[/attach] 查找attachlist 找到替换
     _message1 = @"<i class=\"pstatus\"> 本帖最后由 彼世此世 于 2015-8-5 20:45 编辑 </i><br />\n<br />\nHappyYellowRabbit 陽、河合朗、雪子三人組的原創同人百合本<br />\r\n這次是關於食物的本子www<br />\r\n<br />\r\n<a href=\"http://www.toranoana.jp/mailorder/article/04/0030/30/42/040030304210.html\" target=\"_blank\"><font color=\"Red\">&gt;&gt;买买买&lt;&lt;</font></a><br />\r\n<br />\r\n<a href=\"http://www.yamibo.com/misc.php?mod=tag&amp;id=14250\" target=\"_blank\"><font color=\"RoyalBlue\">&gt;&gt;食百合相關內容&lt;&lt;</font></a><br />\r\n<br />\r\n内容是三位老师的短篇外加一个短文和一个短篇<br />\r\n先做了第一篇，中间的彩图和剩下的内容之后会慢慢放上来的，接下来请食用吧<img src=\"static/image/smiley/gexing/019.gif\" smilieid=\"344\" border=\"0\" alt=\"\" /><br />\r\n<br />\r\n改圖僅供試看，請勿用於其他用途，喜歡作者的作品，請購買正版！<br />\r\n-------------------------------------------轉載請保留以下文字資訊-------------------------------------------<br />\r\n圖源：biiiiiii<br />\r\n翻譯：Nexuse<br />\r\n校對：好の貓<br />\r\n修圖：atj<br />\r\n改圖：彼世此世<br />\r\n製作：百合會<br />\r\n<a href=\"http://www.yamibo.com/www.yamibo.com\" target=\"_blank\">www.yamibo.com</a><br />\r\n-------------------------------------------------------------------------------------------------------------<br />\r\n[attach]523181[/attach]<br />\r\n<br />\r\n[attach]523182[/attach]<br />\r\n<br />\r\n[attach]523191[/attach]<br />\r\n<br />\r\n[attach]523183[/attach]<br />\r\n<br />\r\n[attach]523184[/attach]<br />\r\n<br />\r\n[attach]523185[/attach]<br />\r\n<br />\r\n[attach]523186[/attach]<br />\r\n<br />\r\n[attach]523187[/attach]<br />\r\n<br />\r\n[attach]523188[/attach]<br />\r\n<br />\r\n[attach]523189[/attach]<br />\r\n<br />\r\n[attach]523190[/attach]<br />\r\n<br />\r\n[attach]523174[/attach]<br />\r\n<br />\r\n[attach]523175[/attach]<br />\r\n<br />\r\n[attach]523176[/attach]<br />\r\n<br />\r\n[attach]523177[/attach]<br />\r\n<br />\r\n[attach]523178[/attach]<br />\r\n<br />\r\n[attach]523179[/attach]<br />\r\n<br />\r\n[attach]523180[/attach]<br />\r\n-------------------------------------------------------------------------------------------------------------<br />\r\n个人还是蛮喜欢这作者的画风的，可惜目前还没百合连载<img src=\"static/image/smiley/gexing/025.gif\" smilieid=\"351\" border=\"0\" alt=\"\" /><br />\r\n<br />\r\n<h1>My Custom Objects</h1><br /><object src=\"data/attachment/forum/201507/31/134629jc6ctpvn6t311c8n.jpg\"></object>";
@@ -92,5 +105,20 @@
 //        make.height.mas_equalTo(size.height);
 //    }];
 //}
+
+
+#pragma mark - Click Events
+
+- (void)changeSegment:(UISegmentedControl *)seg {
+    NSLog(@"seg change index");
+}
+
+
+#pragma mark - Override Methods
+
+- (void)onNavigationRightButtonClicked {
+    NSLog(@"Fav Button Click");
+}
+
 
 @end

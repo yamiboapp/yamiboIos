@@ -56,12 +56,12 @@
 }
 
 
-- (void)layoutSubviews {
+//- (void)layoutSubviews {
+////    [super layoutSubviews];
+//    [self.attributedTextContentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+//    
 //    [super layoutSubviews];
-    [self.attributedTextContentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    
-    [super layoutSubviews];
-}
+//}
 
 //- (void)layoutSubviews {
 //    [super layoutSubviews];
@@ -94,15 +94,7 @@
     }
     else if ([attachment isKindOfClass:[DTObjectTextAttachment class]]) {
         
-        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width+30, frame.size.height+30)];
-        containView.backgroundColor = [UIColor grayColor];
-        
-        DTLinkButton *button = [[DTLinkButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        button.backgroundColor = [UIColor redColor];
-        [containView addSubview:button];
-        
-        
-        DTLazyImageView *imageView = [[DTLazyImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(button.frame), CGRectGetMaxY(button.frame), frame.size.width, frame.size.width)];
+        DTLazyImageView *imageView = [[DTLazyImageView alloc] initWithFrame:frame];
         
         if ([[AppManager sharedInstance] isNoImgMode]) {
         } else {
@@ -110,7 +102,7 @@
             imageView.url = attachment.contentURL;
         }
         
-        return containView;
+        return imageView;
     }
     
     return nil;
