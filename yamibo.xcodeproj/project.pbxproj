@@ -29,7 +29,6 @@
 		6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */; };
 		6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */; };
 		654934571BB0205A005141C6 /* CommunicationrManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 654934561BB0205A005141C6 /* CommunicationrManager.m */; };
-		6549345A1BB049F5005141C6 /* MessageSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 654934591BB049F5005141C6 /* MessageSwitchView.m */; };
 		655ABCCE1BAB95FE0023F92B /* HomeBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ABCCD1BAB95FE0023F92B /* HomeBannerView.m */; };
 		655ABCD11BAB966D0023F92B /* HomeHotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655ABCD01BAB966D0023F92B /* HomeHotView.m */; };
 		655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D00DF1B4D189E00F0FFBE /* AppManager.m */; };
@@ -172,8 +171,6 @@
 		6541DFA11ADE16F4008EFEE7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		654934551BB0205A005141C6 /* CommunicationrManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationrManager.h; sourceTree = "<group>"; };
 		654934561BB0205A005141C6 /* CommunicationrManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationrManager.m; sourceTree = "<group>"; };
-		654934581BB049F5005141C6 /* MessageSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSwitchView.h; sourceTree = "<group>"; };
-		654934591BB049F5005141C6 /* MessageSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSwitchView.m; sourceTree = "<group>"; };
 		655ABCCC1BAB95FE0023F92B /* HomeBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerView.h; sourceTree = "<group>"; };
 		655ABCCD1BAB95FE0023F92B /* HomeBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerView.m; sourceTree = "<group>"; };
 		655ABCCF1BAB966D0023F92B /* HomeHotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHotView.h; sourceTree = "<group>"; };
@@ -827,8 +824,6 @@
 				BA61E3B11BD0AC8800F6E474 /* MessageDetailTableView.m */,
 				BA61E3B31BD0ACED00F6E474 /* MessageDetailTableViewCell.h */,
 				BA61E3B41BD0ACED00F6E474 /* MessageDetailTableViewCell.m */,
-				654934581BB049F5005141C6 /* MessageSwitchView.h */,
-				654934591BB049F5005141C6 /* MessageSwitchView.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1105,7 +1100,6 @@
 				6597FCA71BAC37BF009025E3 /* SDCycleScrollView.m in Sources */,
 				6597FCB61BAC56B9009025E3 /* HotFeedListTableView.m in Sources */,
 				6541DFA01ADE1634008EFEE7 /* UIView+Utility.m in Sources */,
-				6549345A1BB049F5005141C6 /* MessageSwitchView.m in Sources */,
 				65E8F2971ADF7FB2005BD0F0 /* StatusMessagePair.m in Sources */,
 				65C7B05E1BAD52EB00036BB8 /* ForumListTableViewCell.m in Sources */,
 				BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */,

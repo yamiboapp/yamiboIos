@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ArticleListTableViewCell : UITableView
+#define KArticleListTableViewCell  @"KArticleListTableViewCell"
+
+@class ArticleModel;
+
+@interface ArticleListTableViewCell : UITableViewCell
+
+- (void)loadData:(ArticleModel *)data;
 
 @end

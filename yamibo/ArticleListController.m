@@ -10,12 +10,15 @@
 #import "HMSegmentedControl.h"
 #import "CommunicationrManager.h"
 #import "ArticleModel.h"
+#import "ArticleListTableView.h"
 
 @interface ArticleListController()
 
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSString *forumName;
 @property (strong, nonatomic) NSMutableArray *subforumList;
+
+@property (assign, nonatomic) BOOL hasSwith;
 
 @end
 
@@ -24,22 +27,35 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configNavigation];
-    [self initSwitch];
     [self initView];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToArticleDetail object:nil];
+    _subforumList = [NSMutableArray arrayWithObject:_forumName];
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];
-    [self showCustomNavigationNewButton];
     self.title = _forumName;
 }
-- (void)initView {
-    
+- (void)initArticleListView {
+    ArticleListTableView *articleView = [[ArticleListTableView alloc] initWithForumId:_forumId];
+    [self.view addSubview:articleView];
+    if (_hasSwith == YES) {
+        [articleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.top.mas_equalTo(44);
+        }];
+    } else {
+        [articleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+    [articleView refreshData];
 }
-- (void)initSwitch {
+- (void)initView {
     [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:@"" andTypeId:@"" andPerPage:@"1"
     completion:^(ArticleListModel *model, NSString *message) {
+        //switch
         if ([model.subforumList count] > 0) {
+            _hasSwith = YES;
             UIView *back = [[UIView alloc]init];
             back.backgroundColor = KCOLOR_YELLOW_FDF5D8;
             [self.view addSubview:back];
@@ -48,9 +64,6 @@
                 make.height.mas_equalTo(43);
             }];
             
-            if (!_subforumList) {
-                _subforumList = [[NSMutableArray alloc] init];
-            }
             for (int i = 0; i < [model.subforumList count]; ++i) {
                 ForumModel *subforum = model.subforumList[i];
                 [_subforumList addObject:subforum.forumName];
@@ -71,6 +84,7 @@
             segment.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleDynamic;
             segment.userDraggable = YES;
             segment.segmentEdgeInset = UIEdgeInsetsMake(0, 20, 0, 20);
+            segment.selectionIndicatorEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 20);
             segment.selectedSegmentIndex = 0;
             
             [back addSubview:segment];
@@ -79,9 +93,12 @@
             }];
             
             [segment addTarget:self action:@selector(changeSeg:) forControlEvents:UIControlEventValueChanged];
+        } else {
+            _hasSwith = false;
         }
-
-    }];  
+        
+        [self initArticleListView];
+    }];
 }
 
 - (void)changeSeg:(HMSegmentedControl *)seg {

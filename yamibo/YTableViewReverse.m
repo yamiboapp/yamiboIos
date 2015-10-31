@@ -76,13 +76,13 @@
 {
     [self.footer beginRefreshing];
 }
-
+/*
 //拉取更多数据
 - (void)beginLoadMoreData
 {
     [self.header beginRefreshing];
 }
-
+*/
 //停止拉取新数据
 - (void)stopLoadNewData
 {

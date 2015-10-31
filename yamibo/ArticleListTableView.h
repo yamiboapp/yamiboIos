@@ -10,4 +10,7 @@
 
 @interface ArticleListTableView : YTableView
 
+- (instancetype)initWithForumId:(NSString *)fid;
+- (void)refreshData;
+
 @end
