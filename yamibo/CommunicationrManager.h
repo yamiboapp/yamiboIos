@@ -11,6 +11,7 @@
 @class HotModel;
 @class ForumListModel;
 @class ThreadFavoriteListModel;
+@class ArticleDetailModel;
 
 @interface CommunicationrManager : NSObject
 
@@ -36,5 +37,5 @@
 
 + (void)delMessage:(NSString *)pmId orConversation:(NSString *)toId ofType:(MessageViewType)type completion:(void (^)(NSString *message))completion;
 
-
++ (void)getArticleDetailList:(int)page threadID:(NSInteger)tid postPerPage:(int)ppp authorID:(NSInteger)uid completion:(void (^)(ArticleDetailModel *model, NSString *message))completion;
 @end

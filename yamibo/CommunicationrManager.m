@@ -186,6 +186,20 @@
     }];
 }
 
+#pragma mark article detail
++ (void)getArticleDetailList:(int)page threadID:(NSInteger)tid postPerPage:(int)ppp authorID:(NSInteger)uid completion:(void (^)(ArticleDetailModel *, NSString *))completion {
+    NSDictionary *dict = @{@"module": @"viewthread",
+                           @"tid": @(tid),
+                           @"page": @(page),
+                           @"ppp": @(ppp),
+                           @"authorid": @(uid)};
+    [[self defaultManager] POST:KBaseUrl parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 #pragma mark -
 + (AFHTTPRequestOperationManager *)defaultManager {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
