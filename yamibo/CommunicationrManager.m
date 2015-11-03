@@ -13,6 +13,7 @@
 #import "ProfileManager.h"
 #import "ThreadFavoriteModel.h"
 #import "ArticleModel.h"
+#import "ArticleDetailModel.h"
 
 #define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
@@ -197,6 +198,24 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completion(@"请求失败");
+    }];
+}
+
+#pragma mark article detail
++ (void)getArticleDetailList:(int)page threadID:(NSInteger)tid postPerPage:(int)ppp authorID:(NSInteger)uid completion:(void (^)(ArticleDetailModel *, NSString *))completion {
+    NSDictionary *dict = @{@"module": @"viewthread",
+                           @"tid": @(tid),
+                           @"page": @(page),
+                           @"ppp": @(ppp),
+                           @"authorid": @(uid)};
+    [[self defaultManager] POST:KBaseUrl parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
+            completion([[ArticleDetailModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请重新登录");
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        completion(nil, @"内容加载失败");
     }];
 }
 

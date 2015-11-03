@@ -55,6 +55,12 @@
  */
 - (void)showCustomNavigationNewButton;
 /**
+ *  @author sssixone, 15-11-01 04:11:37
+ *
+ *  @brief  导航栏右侧, 收藏按钮
+ */
+- (void)showCustomNavigationCollectButton;
+/**
 *  @author 李思良, 15-04-24 11:04:56
 *
 *  @brief  类似android的快速消息提醒

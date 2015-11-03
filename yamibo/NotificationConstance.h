@@ -49,4 +49,6 @@
  */
 #define KNotification_ToMessageDetail      @"KNotification_ToMessageDetail"
 
+#define kNotification_NeedToPop           @"KNotification_NeedToPop"
+
 #endif /* NotificationConstance_h */

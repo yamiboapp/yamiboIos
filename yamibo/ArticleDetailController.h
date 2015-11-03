@@ -10,4 +10,6 @@
 
 @interface ArticleDetailController : BaseViewController
 
+- (void)loadData:(NSDictionary *)data;
+
 @end
