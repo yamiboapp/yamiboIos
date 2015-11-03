@@ -70,6 +70,10 @@
 		65F50C211BB656F4007DC23C /* HotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F50C201BB656F4007DC23C /* HotModel.m */; settings = {ASSET_TAGS = (); }; };
 		65FC571A1BB6760100FC85A5 /* ForumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC57191BB6760100FC85A5 /* ForumModel.m */; settings = {ASSET_TAGS = (); }; };
 		65FC571C1BB682DE00FC85A5 /* SafeQuestion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65FC571B1BB682DE00FC85A5 /* SafeQuestion.plist */; settings = {ASSET_TAGS = (); }; };
+		BA5334801BE35E98000979F4 /* ArticleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA53347F1BE35E98000979F4 /* ArticleListController.m */; };
+		BA5334831BE35F46000979F4 /* ArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5334821BE35F46000979F4 /* ArticleModel.m */; };
+		BA5334871BE36427000979F4 /* ArticleListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5334861BE36427000979F4 /* ArticleListTableView.m */; };
+		BA53348A1BE3646B000979F4 /* ArticleListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5334891BE3646B000979F4 /* ArticleListTableViewCell.m */; };
 		BA61E3B21BD0AC8800F6E474 /* MessageDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3B11BD0AC8800F6E474 /* MessageDetailTableView.m */; settings = {ASSET_TAGS = (); }; };
 		BA61E3B51BD0ACED00F6E474 /* MessageDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3B41BD0ACED00F6E474 /* MessageDetailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		BA61E3B81BD0ADCB00F6E474 /* MessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3B71BD0ADCB00F6E474 /* MessageDetailController.m */; settings = {ASSET_TAGS = (); }; };
@@ -706,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				D85DA2A21BE54BDC006B6DFA /* ArticleDetail */,
+				BA5334841BE363DF000979F4 /* Article */,
 				BA8B26A61BB0128B00173D5B /* Message */,
 				65378E171BAEDA11001B27FD /* Neighbor */,
 				65378E081BAE95DD001B27FD /* Collect */,

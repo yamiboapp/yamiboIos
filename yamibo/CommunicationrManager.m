@@ -13,6 +13,7 @@
 #import "ProfileManager.h"
 #import "ThreadFavoriteModel.h"
 #import "ArticleModel.h"
+#import "ArticleDetailModel.h"
 
 #define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
@@ -208,9 +209,13 @@
                            @"ppp": @(ppp),
                            @"authorid": @(uid)};
     [[self defaultManager] POST:KBaseUrl parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
+            completion([[ArticleDetailModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请重新登录");
+        }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        NSLog(@"Error: %@", error);
+        completion(nil, @"内容加载失败");
     }];
 }
 

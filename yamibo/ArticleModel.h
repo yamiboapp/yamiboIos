@@ -24,6 +24,7 @@
 @property   (strong, nonatomic) NSString *replyNum;
 @property   (strong, nonatomic) NSString *viewNum;
 @property   (strong, nonatomic) NSString *isDigest;
+@property   (strong, nonatomic) NSString<Optional> *isClosed;
 
 @end
 

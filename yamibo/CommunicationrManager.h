@@ -11,7 +11,9 @@
 @class HotModel;
 @class ForumListModel;
 @class ThreadFavoriteListModel;
+@class ArticleListModel;
 @class ArticleDetailModel;
+
 
 @interface CommunicationrManager : NSObject
 

@@ -10,6 +10,7 @@
 
 @interface ArticleDetailTableView : YTableView
 
+- (instancetype)initWithParaData:(NSDictionary *)paraDict;
 - (void)refreshData;
 
 @end

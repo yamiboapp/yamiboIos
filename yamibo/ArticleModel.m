@@ -23,6 +23,7 @@
                                                        @"replies": @"replyNum",
                                                        @"views": @"viewNum",
                                                        @"digest": @"isDigest",
+                                                       @"closed": @"isClosed"
                                                        }];
 }
 @end

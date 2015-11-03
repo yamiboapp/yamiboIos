@@ -91,6 +91,8 @@
 - (void)pushToDetailController:(NSNotification*)notification{
     if ([notification.name isEqualToString:KNotification_ToFeedDetail]) {
         ArticleDetailController *articleDetailController = [[ArticleDetailController alloc] init];
+        NSDictionary *paraDict = notification.userInfo;
+        [articleDetailController loadData:paraDict];
         [self.navigationController pushViewController:articleDetailController animated:YES];
     }
     if ([notification.name isEqualToString:KNotification_ToForumDetail]) {

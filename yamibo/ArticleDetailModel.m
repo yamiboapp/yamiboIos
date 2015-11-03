@@ -8,6 +8,24 @@
 
 #import "ArticleDetailModel.h"
 
+@implementation PostModel
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"pid": @"postID",
+                                                       @"tid": @"articleID",
+                                                       @"first": @"floorNum",
+                                                       @"author": @"authorName",
+                                                       @"authorid": @"authorID",
+                                                       @"dateline": @"postTime",
+                                                       @"message": @"postContent"}];
+}
+@end
+
+
 @implementation ArticleDetailModel
+
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{@"Variables.thread": @"articleInfo",
+                                                       @"Variables.postlist": @"postList"}];
+}
 
 @end

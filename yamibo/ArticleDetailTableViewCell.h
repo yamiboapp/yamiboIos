@@ -10,6 +10,10 @@
 
 #define kArticleDetailTableViewCell @"kArticleDetailTableViewCell"
 
+@class PostModel;
+
 @interface ArticleDetailTableViewCell : UITableViewCell
+
+- (void)loadData:(PostModel *)postModel;
 
 @end

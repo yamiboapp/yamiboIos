@@ -20,4 +20,16 @@
     // Configure the view for the selected state
 }
 
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self configureCell];
+    }
+    return self;
+}
+
+- (void)configureCell {
+    self.backgroundColor = KCOLOR_YELLOW_FDF5D8;
+}
+
 @end

@@ -19,10 +19,13 @@
 }
 
 @property (nonatomic, strong) ArticleDetailTableView *postList;
+@property (nonatomic, strong) NSDictionary *paraDict;
+
 @end
 
 @implementation ArticleDetailController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -30,7 +33,18 @@
     [self configNavigation];
     [self initView];
 //    [self loadThreadDetail];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToPreviousController:) name:kNotification_NeedToPop object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +61,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - configure
+- (void)loadData:(NSDictionary *)data {
+    _paraDict = data;
+}
 
 #pragma mark - Layout
 - (void)configNavigation {
@@ -64,7 +82,7 @@
 }
 
 - (void)initView {
-    _postList = [[ArticleDetailTableView alloc] init];
+    _postList = [[ArticleDetailTableView alloc] initWithParaData:_paraDict];
     [self.view addSubview:_postList];
     [_postList mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -118,6 +136,11 @@
 
 - (void)onNavigationRightButtonClicked {
     NSLog(@"Fav Button Click");
+}
+
+#pragma mark - Observer
+- (void)popToPreviousController:(NSNotification *)notification {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
