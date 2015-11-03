@@ -35,6 +35,14 @@
     self.title = @"消息";
 }
 - (void)initView {
+    _publicMessageView = [[MessageTableView alloc]initWithViewType:MessagePublic];
+    [self.view addSubview:_publicMessageView];
+    [_publicMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.mas_equalTo(44);
+    }];
+    //[_publicMessageView refreshData];
+    
     _privateMessageView = [[MessageTableView alloc]initWithViewType:MessagePrivate];
     [self.view addSubview:_privateMessageView];
     [_privateMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -42,14 +50,6 @@
         make.top.mas_equalTo(44);
     }];
     [_privateMessageView refreshData];
-    
-    _publicMessageView = [[MessageTableView alloc]initWithViewType:MessagePublic];
-    [self.view addSubview:_publicMessageView];
-    [_publicMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.top.mas_equalTo(44);
-    }];
-    [_publicMessageView refreshData];
 }
 - (void)initSwitch {
     UIView *back = [[UIView alloc]init];
@@ -94,11 +94,11 @@
     if (index == 0) {
         _publicMessageView.hidden = false;
         _privateMessageView.hidden = true;
-        //[_publicMessageView refreshData];
+        [_publicMessageView refreshData];
     } else {
         _publicMessageView.hidden = true;
         _privateMessageView.hidden = false;
-        //[_privateMessageView refreshData];
+        [_privateMessageView refreshData];
     }
 }
 - (void)onNavigationLeftButtonClicked {

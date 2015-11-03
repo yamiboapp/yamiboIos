@@ -16,17 +16,20 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) int perPage;
 @property (strong, nonatomic) NSString *forumId;
+@property (strong, nonatomic) NSString *typeId;
+
 @end
 
 @implementation ArticleListTableView
 
-- (instancetype)initWithForumId:(NSString *)fid {
+- (instancetype)initWithForumId:(NSString *)fid andTypeId:(NSString *)tid {
     if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
         self.delegate = self;
         _forumId = fid;
+        _typeId = tid;
         _dataArray = [NSMutableArray array];
         [self registerClass:[ArticleListTableViewCell class] forCellReuseIdentifier:KArticleListTableViewCell];
         self.estimatedRowHeight = 200;
@@ -38,7 +41,7 @@
 }
 
 - (void)loadNewData {
-    [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:@"" andTypeId:@"" andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
+    [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:@"" andTypeId:_typeId andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
         [self stopLoadNewData];
         if (message != nil) {
             [Utility showTitle:message];

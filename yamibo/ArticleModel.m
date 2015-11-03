@@ -34,7 +34,7 @@
                                                        @"Variables.forum_threadlist": @"articleList",
                                                        @"Variables.forum":@"forum",
                                                        @"Variables.sublist":@"subforumList",
-                                                       @"Variables.threadtypes":@"articleTypes",
+                                                       @"Variables.threadtypes.types":@"articleTypes",
                                                        @"Variables.tpp":@"perPage"
                                                        }];
 }
