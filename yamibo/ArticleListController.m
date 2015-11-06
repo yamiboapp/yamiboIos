@@ -15,7 +15,7 @@
 
 #define KMENUITEMHEIGHT 40
 
-@interface ArticleListController()
+@interface ArticleListController()<ArticleListRightMenuDelegate>
 
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSString *forumName;
@@ -25,8 +25,8 @@
 @property (assign, nonatomic) BOOL hasSwith;
 
 @property (strong, nonatomic) REMenu *rightMenu;
-@property (strong, nonatomic) NSArray *rightMenuNames;
-@property (strong, nonatomic) NSArray *rightMenuIds;
+@property (strong, nonatomic) NSMutableArray *rightMenuNames;
+@property (strong, nonatomic) NSMutableArray *rightMenuIds;
 
 @end
 
@@ -56,11 +56,14 @@
     _rightMenu.font = KFONT(12);
     _rightMenu.textColor = [UIColor whiteColor];
 }
-- (void)initArticleListView:(NSString *)fid andTypeId:(NSString *)tid{
+- (void)initArticleListView:(NSString *)fid andTypeId:(NSString *)tid andFilter:(NSString *)filter{
     if (_articleListView) {
         [_articleListView removeFromSuperview];
     }
-    _articleListView = [[ArticleListTableView alloc] initWithForumId:fid andTypeId:tid];
+    _articleListView = [[ArticleListTableView alloc] initWithForumId:fid andFilter:filter andTypeId:tid];
+    
+    [_articleListView setRightMenuDelegate:self];
+    
     [self.view addSubview:_articleListView];
     if (_hasSwith) {
         [_articleListView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,18 +125,15 @@
             _hasSwith = false;
         }
         
-        //right menu
-        _rightMenuNames = [model.articleTypes allValues];
-        _rightMenuIds = [model.articleTypes allKeys];
-        [self initRightMenu];
-        
-        [self initArticleListView:_forumId andTypeId:@""];
+        [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
     }];
 }
 
 - (void)changeSeg:(HMSegmentedControl *)seg {
     long index = (long)seg.selectedSegmentIndex;
-    [self initArticleListView:_subforumIds[index] andTypeId:@""];
+    [self initArticleListView:_subforumIds[index] andTypeId:@"" andFilter:@""];
+    [self.rightMenu close];
+    self.rightMenu = nil;
 }
 
 - (REMenuItem *)menuItemAtIndex:(int)index {
@@ -149,7 +149,11 @@
 }
 
 - (void)dealMenu:(int)index {
-    [self initArticleListView:_forumId andTypeId:_rightMenuIds[index]];
+    if (index == 0) { //精华
+        [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"digest"];
+    } else {
+        [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"typeid"];
+    }
 }
 
 - (void)onNavigationLeftButtonClicked {
@@ -164,6 +168,16 @@
     _forumId = data[@"forumID"];
     _forumName = data[@"forumName"];
 }
-
+#pragma mark article list right menu delegate
+- (void)reloadRightMenu:(NSDictionary *)data {
+    _rightMenuNames = [NSMutableArray arrayWithObjects:@"精华", nil];
+    _rightMenuIds = [NSMutableArray arrayWithObjects:@"", nil];
+    [_rightMenuNames addObjectsFromArray:[data allValues]];
+    [_rightMenuIds addObjectsFromArray:[data allKeys]];
+    [self initRightMenu];
+}
+- (void)closeRightMenu {
+    [self.rightMenu close];
+}
 @end
 

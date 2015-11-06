@@ -91,7 +91,7 @@
 }
 #pragma mark article
 + (void)getArticleList:(NSString *)fId andPage:(int)page andFilter:(NSString *)filter andTypeId:(NSString *)typeId andPerPage:(NSString *)perPage completion:(void (^)(ArticleListModel *model, NSString *message))completion {
-    NSDictionary *dic = @{@"module":@"forumdisplay", @"fid":fId, @"page":@(page), @"filter":filter, @"typeid":typeId, @"tpp":perPage};
+    NSDictionary *dic = @{@"module":@"forumdisplay", @"fid":fId, @"page":@(page), @"typeid":typeId, @"filter":filter, @"tpp":perPage};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[ArticleListModel alloc] initWithDictionary:responseObject error:nil], nil);
