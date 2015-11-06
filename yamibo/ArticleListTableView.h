@@ -8,9 +8,17 @@
 
 #import "YTableView.h"
 
+@protocol ArticleListRightMenuDelegate
+
+- (void)reloadRightMenu:(NSDictionary*)data;
+- (void)closeRightMenu;
+
+@end
+
 @interface ArticleListTableView : YTableView
 
-- (instancetype)initWithForumId:(NSString *)fid;
+- (instancetype)initWithForumId:(NSString *)fid andFilter:(NSString *)filter andTypeId:(NSString *)tid;
 - (void)refreshData;
+@property (nonatomic, weak) id<ArticleListRightMenuDelegate> rightMenuDelegate;
 
 @end

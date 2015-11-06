@@ -11,14 +11,22 @@
 #import "CommunicationrManager.h"
 #import "ArticleModel.h"
 #import "ArticleListTableView.h"
+#import "REMenu.h"
 
-@interface ArticleListController()
+#define KMENUITEMHEIGHT 40
+
+@interface ArticleListController()<ArticleListRightMenuDelegate>
 
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSString *forumName;
-@property (strong, nonatomic) NSMutableArray *subforumList;
-
+@property (strong, nonatomic) NSMutableArray *subforumNames;
+@property (strong, nonatomic) NSMutableArray *subforumIds;
+@property (strong, nonatomic) ArticleListTableView *articleListView;
 @property (assign, nonatomic) BOOL hasSwith;
+
+@property (strong, nonatomic) REMenu *rightMenu;
+@property (strong, nonatomic) NSMutableArray *rightMenuNames;
+@property (strong, nonatomic) NSMutableArray *rightMenuIds;
 
 @end
 
@@ -29,26 +37,45 @@
     [self configNavigation];
     [self initView];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToArticleDetail object:nil];
-    _subforumList = [NSMutableArray arrayWithObject:_forumName];
+    _subforumNames = [NSMutableArray arrayWithObject:_forumName];
+    _subforumIds = [NSMutableArray arrayWithObject:_forumId];
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];
     self.title = _forumName;
+    [self showCustomNavigationMoreButton];
 }
-- (void)initArticleListView {
-    ArticleListTableView *articleView = [[ArticleListTableView alloc] initWithForumId:_forumId];
-    [self.view addSubview:articleView];
-    if (_hasSwith == YES) {
-        [articleView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+- (void)initRightMenu {
+    NSMutableArray *items = [NSMutableArray array];
+    for (int i = 0; i < [_rightMenuNames count]; i++) {
+        [items addObject:[self menuItemAtIndex:i]];
+    }
+    _rightMenu = [[REMenu alloc] initWithItems:items];
+    _rightMenu.itemHeight = KMENUITEMHEIGHT;
+    _rightMenu.font = KFONT(12);
+    _rightMenu.textColor = [UIColor whiteColor];
+}
+- (void)initArticleListView:(NSString *)fid andTypeId:(NSString *)tid andFilter:(NSString *)filter{
+    if (_articleListView) {
+        [_articleListView removeFromSuperview];
+    }
+    _articleListView = [[ArticleListTableView alloc] initWithForumId:fid andFilter:filter andTypeId:tid];
+    
+    [_articleListView setRightMenuDelegate:self];
+    
+    [self.view addSubview:_articleListView];
+    if (_hasSwith) {
+        [_articleListView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.view);
             make.top.mas_equalTo(44);
         }];
     } else {
-        [articleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_articleListView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
         }];
     }
-    [articleView refreshData];
+    [_articleListView refreshData];
 }
 - (void)initView {
     [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:@"" andTypeId:@"" andPerPage:@"1"
@@ -63,12 +90,13 @@
                 make.left.right.top.equalTo(self.view);
                 make.height.mas_equalTo(43);
             }];
-            
+            //subforum names
             for (int i = 0; i < [model.subforumList count]; ++i) {
                 ForumModel *subforum = model.subforumList[i];
-                [_subforumList addObject:subforum.forumName];
+                [_subforumNames addObject:subforum.forumName];
+                [_subforumIds addObject:subforum.forumId];
             }
-            HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:_subforumList];
+            HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:_subforumNames];
             segment.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                            KCOLOR_GRAY, NSForegroundColorAttributeName,
                                            KFONT(15), NSFontAttributeName,
@@ -97,22 +125,59 @@
             _hasSwith = false;
         }
         
-        [self initArticleListView];
+        [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
     }];
 }
 
 - (void)changeSeg:(HMSegmentedControl *)seg {
     long index = (long)seg.selectedSegmentIndex;
-    
-    
+    [self initArticleListView:_subforumIds[index] andTypeId:@"" andFilter:@""];
+    [self.rightMenu close];
+    self.rightMenu = nil;
 }
+
+- (REMenuItem *)menuItemAtIndex:(int)index {
+    __typeof (self) __weak weakSelf = self;
+    REMenuItem *item = [[REMenuItem alloc] initWithTitle:_rightMenuNames[index]
+                                                subtitle:nil
+                                                   image:nil
+                                        highlightedImage:nil
+                                                  action:^(REMenuItem *item) {
+                                                      [weakSelf dealMenu:index];
+                                                  }];
+    return item;
+}
+
+- (void)dealMenu:(int)index {
+    if (index == 0) { //精华
+        [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"digest"];
+    } else {
+        [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"typeid"];
+    }
+}
+
 - (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
+}
+- (void)onNavigationRightButtonClicked {
+    if (self.rightMenu.isOpen)
+        return [self.rightMenu close];
+    [self.rightMenu showFromRect:CGRectMake(self.view.right - 80, 0, 80, self.view.height) inView:self.view];
 }
 - (void)loadData:(NSDictionary *)data {
     _forumId = data[@"forumID"];
     _forumName = data[@"forumName"];
 }
-
+#pragma mark article list right menu delegate
+- (void)reloadRightMenu:(NSDictionary *)data {
+    _rightMenuNames = [NSMutableArray arrayWithObjects:@"精华", nil];
+    _rightMenuIds = [NSMutableArray arrayWithObjects:@"", nil];
+    [_rightMenuNames addObjectsFromArray:[data allValues]];
+    [_rightMenuIds addObjectsFromArray:[data allKeys]];
+    [self initRightMenu];
+}
+- (void)closeRightMenu {
+    [self.rightMenu close];
+}
 @end
 

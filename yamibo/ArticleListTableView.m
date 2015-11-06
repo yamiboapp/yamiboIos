@@ -16,17 +16,23 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) int perPage;
 @property (strong, nonatomic) NSString *forumId;
+@property (strong, nonatomic) NSString *typeId;
+@property (strong, nonatomic) NSString *filter;
+
+
 @end
 
 @implementation ArticleListTableView
 
-- (instancetype)initWithForumId:(NSString *)fid {
+- (instancetype)initWithForumId:(NSString *)fid andFilter:(NSString *)filter andTypeId:(NSString *)tid {
     if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.dataSource = self;
         self.delegate = self;
         _forumId = fid;
+        _typeId = tid;
+        _filter = filter;
         _dataArray = [NSMutableArray array];
         [self registerClass:[ArticleListTableViewCell class] forCellReuseIdentifier:KArticleListTableViewCell];
         self.estimatedRowHeight = 200;
@@ -38,12 +44,13 @@
 }
 
 - (void)loadNewData {
-    [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:@"" andTypeId:@"" andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
+    [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:_filter andTypeId:_typeId andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
         [self stopLoadNewData];
         if (message != nil) {
             [Utility showTitle:message];
         } else {
             _dataArray = [NSMutableArray arrayWithArray:model.articleList];
+            [self.rightMenuDelegate reloadRightMenu:model.articleTypes];
         }
         if (model.articleList.count < 10) {
             [self hiddenFooter:true];
@@ -54,7 +61,7 @@
     }];
 }
 - (void)loadMoreData {
-    [CommunicationrManager getArticleList:_forumId andPage:(int)_dataArray.count / 10 + 1 andFilter:@"" andTypeId:@"" andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
+    [CommunicationrManager getArticleList:_forumId andPage:(int)_dataArray.count / 10 + 1 andFilter:_filter andTypeId:@"" andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
         [self stopLoadMoreData];
         if (message != nil) {
             [Utility showTitle:message];
@@ -97,6 +104,7 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.rightMenuDelegate closeRightMenu];
 /*    NSDictionary *dic;
         dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[indexPath.row] toId], @"detailName":[_dataArray[indexPath.row] toName]};
     

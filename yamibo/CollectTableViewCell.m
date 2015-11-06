@@ -78,14 +78,16 @@
     _commentLabel.font = KFONT(8);
     _commentLabel.textColor = KCOLOR_GRAY;
     
-    UIImageView *tint = [[UIImageView alloc] init];
-    [_backView addSubview:tint];
-    [tint mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_commentLabel.mas_left).offset(-4);
+    UIImageView *commentImgView = [[UIImageView alloc] init];
+    UIImage *commentImg = [UIImage imageNamed:@"forum-comment"];
+    [commentImgView setImage:commentImg];
+    [_backView addSubview:commentImgView];
+    [commentImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(_commentLabel);
-        make.width.mas_equalTo(8);
+        make.width.mas_equalTo(commentImg.size.width);
+        make.height.mas_equalTo(commentImg.size.height);
+        make.right.equalTo(_commentLabel.mas_left).offset(-4);
     }];
-    tint.backgroundColor = [UIColor redColor];
 }
 - (void)loadData:(ThreadFavoriteModel *)data {
     _titleLabel.text = data.title;
