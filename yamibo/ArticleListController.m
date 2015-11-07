@@ -7,10 +7,11 @@
 //
 
 #import "ArticleListController.h"
-#import "HMSegmentedControl.h"
-#import "CommunicationrManager.h"
 #import "ArticleModel.h"
 #import "ArticleListTableView.h"
+#import "ArticleDetailController.h"
+#import "CommunicationrManager.h"
+#import "HMSegmentedControl.h"
 #import "REMenu.h"
 
 #define KMENUITEMHEIGHT 40
@@ -36,7 +37,6 @@
     // Do any additional setup after loading the view.
     [self configNavigation];
     [self initView];
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToArticleDetail object:nil];
     _subforumNames = [NSMutableArray arrayWithObject:_forumName];
     _subforumIds = [NSMutableArray arrayWithObject:_forumId];
 }
@@ -165,7 +165,7 @@
     [self.rightMenu showFromRect:CGRectMake(self.view.right - 80, 0, 80, self.view.height) inView:self.view];
 }
 - (void)loadData:(NSDictionary *)data {
-    _forumId = data[@"forumID"];
+    _forumId = data[@"forumId"];
     _forumName = data[@"forumName"];
 }
 #pragma mark article list right menu delegate

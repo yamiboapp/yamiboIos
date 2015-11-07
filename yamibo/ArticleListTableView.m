@@ -109,10 +109,11 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.rightMenuDelegate closeRightMenu];
-/*    NSDictionary *dic;
-        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[indexPath.row] toId], @"detailName":[_dataArray[indexPath.row] toName]};
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToMessageDetail object:nil userInfo:dic];*/
+    ArticleModel *article = [_dataArray objectAtIndex:indexPath.row];
+    NSDictionary *dic = @{@"threadID": article.articleId,
+                              @"authorID": article.authorId};
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToFeedDetail object:nil userInfo:dic];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
