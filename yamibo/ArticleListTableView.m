@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSString *typeId;
 @property (strong, nonatomic) NSString *filter;
-
+@property (strong, nonatomic) NSDictionary *articleTypes;
 
 @end
 
@@ -33,7 +33,7 @@
         _forumId = fid;
         _typeId = tid;
         _filter = filter;
-        _dataArray = [NSMutableArray array];
+        //_dataArray = [NSMutableArray array];
         [self registerClass:[ArticleListTableViewCell class] forCellReuseIdentifier:KArticleListTableViewCell];
         self.estimatedRowHeight = 200;
     }
@@ -50,6 +50,7 @@
             [Utility showTitle:message];
         } else {
             _dataArray = [NSMutableArray arrayWithArray:model.articleList];
+            _articleTypes = [NSDictionary dictionaryWithDictionary:model.articleTypes];
             [self.rightMenuDelegate reloadRightMenu:model.articleTypes];
         }
         if (model.articleList.count < 10) {
@@ -95,7 +96,10 @@
 }
 - (void)configureCell:(ArticleListTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
-    [cell loadData:_dataArray[indexPath.row]];
+    ArticleModel *article = _dataArray[indexPath.row];
+    NSString *typeId = article.typeId;
+    NSString *typeName = _articleTypes[typeId];
+    [cell loadData:_dataArray[indexPath.row] andTypeName:typeName];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

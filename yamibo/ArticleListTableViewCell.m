@@ -11,12 +11,12 @@
 
 @interface ArticleListTableViewCell()
 @property (strong, nonatomic) UIView *backView;
-
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UILabel *lastPostLabel;
 @property (strong, nonatomic) UILabel *commentLabel;
 @property (strong, nonatomic) UILabel *watchLabel;
+@property (assign, nonatomic) NSString *digestImgName;
 @end
 
 @implementation ArticleListTableViewCell
@@ -126,16 +126,47 @@
         make.right.equalTo(_commentLabel.mas_left).offset(-2);
     }];
 
+    UIImageView *digestImgView = [[UIImageView alloc] init];
+    UIImage *digestImg = [UIImage imageNamed:_digestImgName];
+    [digestImgView setImage:digestImg];
+    [_backView addSubview:digestImgView];
+    [digestImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(_backView);
+        make.width.mas_equalTo(digestImg.size.width);
+        make.height.mas_equalTo(digestImg.size.height);
+    }];
 
 }
-- (void)loadData:(ArticleModel *)data {
-    _titleLabel.text = data.title;
+- (void)loadData:(ArticleModel *)data andTypeName:(NSString *)typeName{
+    NSMutableAttributedString *titleText;
+    if (typeName) {
+        _titleLabel.text = [NSString stringWithFormat:@"[%@] %@", typeName, data.title];
+        titleText = [[NSMutableAttributedString alloc] initWithString: _titleLabel.text];
+        [titleText addAttribute:NSForegroundColorAttributeName value:KCOLOR_BLUE_0066FF range:NSMakeRange(0, typeName.length + 2)];
+        [titleText addAttribute:NSForegroundColorAttributeName value:KCOLOR_RED_6D2C1D range:NSMakeRange(typeName.length + 2, data.title.length)];
+    } else {
+        _titleLabel.text = data.title;
+        titleText = [[NSMutableAttributedString alloc] initWithString: _titleLabel.text];
+    }
+    if ([data.attachmentNum intValue] != 0) {
+        NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
+        textAttachment.image = [UIImage imageNamed:@"forum-attachment"];
+        NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        [titleText appendAttributedString:attrStringWithImage];
+    }
+    [_titleLabel setAttributedText: titleText];
+
     _nameLabel.text = data.authorName;
     NSString *localLastPost = [data.lastPost toLocalTime];
     NSString *formattedLastPost = [localLastPost formatLastPost];
     _lastPostLabel.text = [NSString stringWithFormat:@"最新回复：%@", formattedLastPost];
     _commentLabel.text = data.replyNum;
     _watchLabel.text = data.viewNum;
+    if ([data.isDigest intValue] == 1) {
+        _digestImgName = @"forum-digest";
+    } else {
+        _digestImgName = @"";
+    }
 }
 
 

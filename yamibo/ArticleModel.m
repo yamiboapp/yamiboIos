@@ -22,7 +22,9 @@
                                                        @"lastposter": @"lastPoster",
                                                        @"replies": @"replyNum",
                                                        @"views": @"viewNum",
+                                                       @"typeid": @"typeId",
                                                        @"digest": @"isDigest",
+                                                       @"attachment": @"attachmentNum",
                                                        @"closed": @"isClosed"
                                                        }];
 }

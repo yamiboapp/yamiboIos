@@ -14,6 +14,6 @@
 
 @interface ArticleListTableViewCell : UITableViewCell
 
-- (void)loadData:(ArticleModel *)data;
+- (void)loadData:(ArticleModel *)data andTypeName:(NSString *)typeName;
 
 @end
