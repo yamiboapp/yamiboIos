@@ -82,6 +82,7 @@
 		BA61E3BF1BD462C400F6E474 /* accessory-more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA61E3BD1BD462C400F6E474 /* accessory-more@3x.png */; };
 		BA65E9031BED734B00D8E037 /* forum-digest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65E9011BED734A00D8E037 /* forum-digest@2x.png */; };
 		BA65E9041BED734B00D8E037 /* forum-digest@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65E9021BED734B00D8E037 /* forum-digest@3x.png */; };
+		BA65E90C1BEE0EAD00D8E037 /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA65E90B1BEE0EAD00D8E037 /* SettingController.m */; };
 		BA7F94E51BBCC2CF00034582 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F94E41BBCC2CF00034582 /* MessageModel.m */; };
 		BA7F951B1BBE583800034582 /* menu-forum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F95111BBE583800034582 /* menu-forum@2x.png */; };
 		BA7F951C1BBE583800034582 /* menu-forum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F95121BBE583800034582 /* menu-forum@3x.png */; };
@@ -285,6 +286,8 @@
 		BA61E3BD1BD462C400F6E474 /* accessory-more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accessory-more@3x.png"; sourceTree = "<group>"; };
 		BA65E9011BED734A00D8E037 /* forum-digest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-digest@2x.png"; sourceTree = "<group>"; };
 		BA65E9021BED734B00D8E037 /* forum-digest@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-digest@3x.png"; sourceTree = "<group>"; };
+		BA65E90A1BEE0EAD00D8E037 /* SettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingController.h; sourceTree = "<group>"; };
+		BA65E90B1BEE0EAD00D8E037 /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
 		BA7F94E31BBCC2CF00034582 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		BA7F94E41BBCC2CF00034582 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		BA7F95111BBE583800034582 /* menu-forum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-forum@2x.png"; sourceTree = "<group>"; };
@@ -730,6 +733,7 @@
 		65BB63421ADE0C440042C359 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BA65E9051BEE0BC400D8E037 /* Setting */,
 				658D6F401BB6AE080058CEEF /* Login */,
 				BA8B26B01BB017E000173D5B /* Message */,
 				65378E0F1BAECEB9001B27FD /* Neighbor */,
@@ -821,6 +825,15 @@
 				BA5334891BE3646B000979F4 /* ArticleListTableViewCell.m */,
 			);
 			name = Article;
+			sourceTree = "<group>";
+		};
+		BA65E9051BEE0BC400D8E037 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				BA65E90A1BEE0EAD00D8E037 /* SettingController.h */,
+				BA65E90B1BEE0EAD00D8E037 /* SettingController.m */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		BA7F95101BBE582000034582 /* MainMenu */ = {
@@ -1116,6 +1129,7 @@
 				D85DA2A81BE5594D006B6DFA /* ArticleDetailTableViewCell.m in Sources */,
 				D85DA2A51BE55911006B6DFA /* ArticleDetailTableView.m in Sources */,
 				654934571BB0205A005141C6 /* CommunicationrManager.m in Sources */,
+				BA65E90C1BEE0EAD00D8E037 /* SettingController.m in Sources */,
 				658D6F4A1BB6E4C20058CEEF /* MBProgressHUD+BWMExtension.m in Sources */,
 				65E350791BADA6C00040A60D /* ProfileManager.m in Sources */,
 				BA61E3B81BD0ADCB00F6E474 /* MessageDetailController.m in Sources */,

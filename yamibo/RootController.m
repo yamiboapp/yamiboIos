@@ -13,6 +13,7 @@
 #import "MessageController.h"
 #import "NeighborController.h"
 #import "LoginController.h"
+#import "SettingController.h"
 #import "ProfileManager.h"
 #import "CommunicationrManager.h"
 @interface RootController () {
@@ -83,6 +84,10 @@
             break;
         case CenterControllerNear:
             self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[NeighborController alloc] init]];
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
+            break;
+        case CenterControllerConfig:
+            self.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[SettingController alloc] init]];
             self.openDrawerGestureModeMask = MMOpenDrawerGestureModePanningNavigationBar;
             break;
         default:

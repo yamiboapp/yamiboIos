@@ -33,7 +33,6 @@
         _forumId = fid;
         _typeId = tid;
         _filter = filter;
-        //_dataArray = [NSMutableArray array];
         [self registerClass:[ArticleListTableViewCell class] forCellReuseIdentifier:KArticleListTableViewCell];
         self.estimatedRowHeight = 200;
     }
