@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view.
     [self initTableView];
     _itemNames = @[@"论坛", @"收藏", @"消息", @"附近的人", @"设置"];
-    _iconImgs = @[[UIImage imageNamed:@"menu-forum"], [UIImage imageNamed:@"menu-forum"], [UIImage imageNamed:@"menu-msg"], [UIImage imageNamed:@"menu-neighbor"], [UIImage imageNamed:@"menu-set"]];
+    _iconImgs = @[[UIImage imageNamed:@"menu-forum"], [UIImage imageNamed:@"menu-favor"], [UIImage imageNamed:@"menu-msg"], [UIImage imageNamed:@"menu-neighbor"], [UIImage imageNamed:@"menu-set"]];
 }
 
 - (void)initTableView {

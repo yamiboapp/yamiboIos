@@ -31,7 +31,7 @@
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];
-    [self showCustomNavigationNewButton];
+    [self showCustomNavigationButtonWithTitle:@"新建"];
     self.title = @"消息";
 }
 - (void)initView {

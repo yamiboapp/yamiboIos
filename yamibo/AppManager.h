@@ -35,5 +35,12 @@
  *  @brief  是否开启无图模式
  */
 @property (assign, nonatomic) BOOL isNoImgMode;
+/**
+ *  @author Shuang Yang, 15-11-09
+ *
+ *  @brief  是否开启夜间模式
+ */
+@property (assign, nonatomic) BOOL isNightMode;
+
 
 @end

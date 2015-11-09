@@ -39,6 +39,7 @@
     [self initView];
     _subforumNames = [NSMutableArray arrayWithObject:_forumName];
     _subforumIds = [NSMutableArray arrayWithObject:_forumId];
+
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];

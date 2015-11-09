@@ -51,9 +51,9 @@
 /**
  *  @author 杨爽, 15-10-01 21:10:40
  *
- *  @brief  导航栏右侧，新建按钮
+ *  @brief  导航栏右侧，自定义按钮名
  */
-- (void)showCustomNavigationNewButton;
+- (void)showCustomNavigationButtonWithTitle:(NSString *)title;
 /**
  *  @author sssixone, 15-11-01 04:11:37
  *

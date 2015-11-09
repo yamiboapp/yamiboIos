@@ -41,30 +41,42 @@
 }
 - (void)initView {
     _backView = [[UIView alloc] init];
-    _backView.backgroundColor = KCOLOR_YELLOW_FDF5D8;
+    _backView.normalBackgroundColor = KCOLOR_YELLOW_FDF5D8;
+    _backView.nightBackgroundColor = UIColorFromRGB(0x343434);
+
     [self.contentView addSubview:_backView];
     
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.font = KFONT(15);
-    _titleLabel.textColor = KCOLOR_RED_6D2C1D;
+    _titleLabel.normalTextColor = KCOLOR_RED_6D2C1D;
+    _titleLabel.nightTextColor = [UIColor whiteColor];
     _titleLabel.numberOfLines = 0;
     [_backView addSubview:_titleLabel];
 
     
     _nameLabel = [[UILabel alloc] init];
     _nameLabel.font = KFONT(11);
-    _nameLabel.textColor = KCOLOR_GRAY;
+    _nameLabel.normalTextColor = KCOLOR_GRAY;
+    _nameLabel.nightTextColor = [UIColor whiteColor];
     [_backView addSubview:_nameLabel];
     
     _lastPostLabel = [[UILabel alloc] init];
     _lastPostLabel.font = KFONT(11);
-    _lastPostLabel.textColor = KCOLOR_GRAY;
+    _lastPostLabel.normalTextColor = KCOLOR_GRAY;
+    _lastPostLabel.nightTextColor = [UIColor whiteColor];
     [_backView addSubview:_lastPostLabel];
+    
+    _commentLabel = [[UILabel alloc] init];
+    [_backView addSubview:_commentLabel];
+    _commentLabel.font = KFONT(9);
+    _commentLabel.normalTextColor = KCOLOR_GRAY;
+    _commentLabel.nightTextColor = [UIColor whiteColor];
     
     _watchLabel = [[UILabel alloc] init];
     [_backView addSubview:_watchLabel];
     _watchLabel.font = KFONT(11);
-    _watchLabel.textColor = KCOLOR_GRAY;
+    _watchLabel.normalTextColor = KCOLOR_GRAY;
+    _watchLabel.nightTextColor = [UIColor whiteColor];
 }
 - (void)setupConstrains {
     [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,14 +118,10 @@
         make.right.equalTo(_watchLabel.mas_left).offset(-2);
     }];
     
-    _commentLabel = [[UILabel alloc] init];
-    [_backView addSubview:_commentLabel];
     [_commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(watchImgView.mas_left).offset(-5);
         make.top.bottom.equalTo(_nameLabel);
     }];
-    _commentLabel.font = KFONT(9);
-    _commentLabel.textColor = KCOLOR_GRAY;
     
     UIImageView *commentImgView = [[UIImageView alloc] init];
     UIImage *commentImg = [UIImage imageNamed:@"forum-comment"];

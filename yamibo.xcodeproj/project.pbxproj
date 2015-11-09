@@ -35,7 +35,6 @@
 		656531F21AE29C6D00486ECF /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 656531F11AE29C6D00486ECF /* LocationManager.m */; };
 		656531F41AE29DA800486ECF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656531F31AE29DA800486ECF /* CoreLocation.framework */; };
 		658ABB851BAD0AAB00BAB4AD /* YFaceImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 658ABB841BAD0AAB00BAB4AD /* YFaceImageView.m */; };
-		658D6F431BB6AE420058CEEF /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 658D6F421BB6AE420058CEEF /* LoginController.m */; };
 		658D6F461BB6E44D0058CEEF /* Utility+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 658D6F451BB6E44D0058CEEF /* Utility+HUD.m */; };
 		658D6F4A1BB6E4C20058CEEF /* MBProgressHUD+BWMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 658D6F491BB6E4C20058CEEF /* MBProgressHUD+BWMExtension.m */; };
 		6597FCA11BAC37BF009025E3 /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6597FC911BAC37BF009025E3 /* NSData+SDDataCache.m */; };
@@ -70,6 +69,10 @@
 		65F50C211BB656F4007DC23C /* HotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F50C201BB656F4007DC23C /* HotModel.m */; };
 		65FC571A1BB6760100FC85A5 /* ForumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC57191BB6760100FC85A5 /* ForumModel.m */; };
 		65FC571C1BB682DE00FC85A5 /* SafeQuestion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65FC571B1BB682DE00FC85A5 /* SafeQuestion.plist */; };
+		BA28B7C41BF05586003B4633 /* menu-favor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA28B7C21BF05586003B4633 /* menu-favor@2x.png */; };
+		BA28B7C51BF05586003B4633 /* menu-favor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA28B7C31BF05586003B4633 /* menu-favor@3x.png */; };
+		BA28B7C71BF06183003B4633 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA28B7C61BF06183003B4633 /* LoginController.m */; };
+		BA28B7EA1BF0933D003B4633 /* NKColorSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = BA28B7E91BF0933D003B4633 /* NKColorSwitch.m */; };
 		BA5334801BE35E98000979F4 /* ArticleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA53347F1BE35E98000979F4 /* ArticleListController.m */; };
 		BA5334831BE35F46000979F4 /* ArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5334821BE35F46000979F4 /* ArticleModel.m */; };
 		BA5334871BE36427000979F4 /* ArticleListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5334861BE36427000979F4 /* ArticleListTableView.m */; };
@@ -193,7 +196,6 @@
 		658ABB831BAD0AAB00BAB4AD /* YFaceImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFaceImageView.h; sourceTree = "<group>"; };
 		658ABB841BAD0AAB00BAB4AD /* YFaceImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFaceImageView.m; sourceTree = "<group>"; };
 		658D6F411BB6AE420058CEEF /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
-		658D6F421BB6AE420058CEEF /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		658D6F441BB6E44D0058CEEF /* Utility+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Utility+HUD.h"; sourceTree = "<group>"; };
 		658D6F451BB6E44D0058CEEF /* Utility+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Utility+HUD.m"; sourceTree = "<group>"; };
 		658D6F481BB6E4C20058CEEF /* MBProgressHUD+BWMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+BWMExtension.h"; sourceTree = "<group>"; };
@@ -266,6 +268,11 @@
 		65FC57191BB6760100FC85A5 /* ForumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumModel.m; sourceTree = "<group>"; };
 		65FC571B1BB682DE00FC85A5 /* SafeQuestion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SafeQuestion.plist; sourceTree = "<group>"; };
 		6EB444121147463741FE2AE8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BA28B7C21BF05586003B4633 /* menu-favor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-favor@2x.png"; sourceTree = "<group>"; };
+		BA28B7C31BF05586003B4633 /* menu-favor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-favor@3x.png"; sourceTree = "<group>"; };
+		BA28B7C61BF06183003B4633 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		BA28B7E81BF0933C003B4633 /* NKColorSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKColorSwitch.h; sourceTree = "<group>"; };
+		BA28B7E91BF0933D003B4633 /* NKColorSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKColorSwitch.m; sourceTree = "<group>"; };
 		BA53347E1BE35E98000979F4 /* ArticleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListController.h; sourceTree = "<group>"; };
 		BA53347F1BE35E98000979F4 /* ArticleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListController.m; sourceTree = "<group>"; };
 		BA5334811BE35F46000979F4 /* ArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleModel.h; sourceTree = "<group>"; };
@@ -497,7 +504,7 @@
 			isa = PBXGroup;
 			children = (
 				658D6F411BB6AE420058CEEF /* LoginController.h */,
-				658D6F421BB6AE420058CEEF /* LoginController.m */,
+				BA28B7C61BF06183003B4633 /* LoginController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -650,6 +657,7 @@
 		65BB633C1ADE0BE70042C359 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				BA28B7E71BF0933C003B4633 /* NKColorSwitch */,
 				658D6F471BB6E4A80058CEEF /* MBProgressHUD+BWMExtension */,
 				6597FC8F1BAC37BF009025E3 /* SDCycleScrollView */,
 			);
@@ -816,6 +824,15 @@
 			name = NSUtility;
 			sourceTree = "<group>";
 		};
+		BA28B7E71BF0933C003B4633 /* NKColorSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				BA28B7E81BF0933C003B4633 /* NKColorSwitch.h */,
+				BA28B7E91BF0933D003B4633 /* NKColorSwitch.m */,
+			);
+			path = NKColorSwitch;
+			sourceTree = "<group>";
+		};
 		BA5334841BE363DF000979F4 /* Article */ = {
 			isa = PBXGroup;
 			children = (
@@ -847,6 +864,8 @@
 				BA7F95161BBE583800034582 /* menu-set@3x.png */,
 				BA7F95191BBE583800034582 /* menu-neighbor@2x.png */,
 				BA7F951A1BBE583800034582 /* menu-neighbor@3x.png */,
+				BA28B7C21BF05586003B4633 /* menu-favor@2x.png */,
+				BA28B7C31BF05586003B4633 /* menu-favor@3x.png */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -1043,6 +1062,7 @@
 				D85DA2AC1BE561C4006B6DFA /* btn-fav.png in Resources */,
 				65378E161BAED081001B27FD /* more@3x.png in Resources */,
 				BA65E9031BED734B00D8E037 /* forum-digest@2x.png in Resources */,
+				BA28B7C41BF05586003B4633 /* menu-favor@2x.png in Resources */,
 				650DDD8D1BAB189C004ACFF2 /* menu@3x.png in Resources */,
 				BAFF9BEA1BD486F1004BAD2B /* menu-neighbor-allgender@2x.png in Resources */,
 				BAFF9BEF1BD486F1004BAD2B /* menu-neighbor-male@3x.png in Resources */,
@@ -1064,6 +1084,7 @@
 				BAFF9BD21BD4763F004BAD2B /* forum-comment@3x.png in Resources */,
 				BA7F951C1BBE583800034582 /* menu-forum@3x.png in Resources */,
 				65BB63241ADE0B300042C359 /* Images.xcassets in Resources */,
+				BA28B7C51BF05586003B4633 /* menu-favor@3x.png in Resources */,
 				BAFF9BD51BD47661004BAD2B /* forum-view@2x.png in Resources */,
 				650DDD891BAB1856004ACFF2 /* back@3x.png in Resources */,
 				D844D86D1BD957A900404533 /* forum-attachment@2x.png in Resources */,
@@ -1146,6 +1167,7 @@
 				6597FCA31BAC37BF009025E3 /* TAAnimatedDotView.m in Sources */,
 				65378E071BAE9027001B27FD /* CollectController.m in Sources */,
 				65E8F29A1ADF7FB2005BD0F0 /* Utility.m in Sources */,
+				BA28B7C71BF06183003B4633 /* LoginController.m in Sources */,
 				65A4DB581ADE0F5B00251E2F /* BaseViewController.m in Sources */,
 				650454C41B4D3F2D00651434 /* MenuController.m in Sources */,
 				BA5334871BE36427000979F4 /* ArticleListTableView.m in Sources */,
@@ -1168,6 +1190,7 @@
 				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
 				BA7F94E51BBCC2CF00034582 /* MessageModel.m in Sources */,
 				650DDD821BAB0E5D004ACFF2 /* YColor+Ext.m in Sources */,
+				BA28B7EA1BF0933D003B4633 /* NKColorSwitch.m in Sources */,
 				BA8B26B61BB0184500173D5B /* MessageController.m in Sources */,
 				65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */,
 				6597FCA11BAC37BF009025E3 /* NSData+SDDataCache.m in Sources */,
@@ -1175,7 +1198,6 @@
 				6597FCA81BAC37BF009025E3 /* UIView+SDExtension.m in Sources */,
 				65378E121BAECEE1001B27FD /* NeighborController.m in Sources */,
 				6597FCA51BAC37BF009025E3 /* TAPageControl.m in Sources */,
-				658D6F431BB6AE420058CEEF /* LoginController.m in Sources */,
 				6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */,
 				BA53348A1BE3646B000979F4 /* ArticleListTableViewCell.m in Sources */,
 				65FC571A1BB6760100FC85A5 /* ForumModel.m in Sources */,

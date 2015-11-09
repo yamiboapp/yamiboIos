@@ -51,6 +51,7 @@
 
 - (void) configNavigation {
     [self showCustomNavigationMenuButton];
+    [self showCustomNavigationButtonWithTitle:@"注册"];
     self.title = @"登陆";
 }
 - (void)initView {
