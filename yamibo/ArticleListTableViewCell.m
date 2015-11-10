@@ -8,6 +8,7 @@
 
 #import "ArticleListTableViewCell.h"
 #import "ArticleModel.h"
+#import "DTCoreText/DTCoreText.h"
 
 @interface ArticleListTableViewCell()
 @property (strong, nonatomic) UIView *backView;
@@ -49,7 +50,7 @@
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.font = KFONT(15);
     _titleLabel.normalTextColor = KCOLOR_RED_6D2C1D;
-    _titleLabel.nightTextColor = [UIColor whiteColor];
+//    _titleLabel.nightTextColor = [UIColor whiteColor];
     _titleLabel.numberOfLines = 0;
     [_backView addSubview:_titleLabel];
 
@@ -146,23 +147,33 @@
 
 }
 - (void)loadData:(ArticleModel *)data andTypeName:(NSString *)typeName{
-    NSMutableAttributedString *titleText;
+    NSString *titleStr;
     if (typeName) {
-        _titleLabel.text = [NSString stringWithFormat:@"[%@] %@", typeName, data.title];
-        titleText = [[NSMutableAttributedString alloc] initWithString: _titleLabel.text];
-        [titleText addAttribute:NSForegroundColorAttributeName value:KCOLOR_BLUE_0066FF range:NSMakeRange(0, typeName.length + 2)];
-        [titleText addAttribute:NSForegroundColorAttributeName value:KCOLOR_RED_6D2C1D range:NSMakeRange(typeName.length + 2, data.title.length)];
+        titleStr = [NSString stringWithFormat:@"[%@] %@", typeName, data.title];
     } else {
-        _titleLabel.text = data.title;
-        titleText = [[NSMutableAttributedString alloc] initWithString: _titleLabel.text];
+        titleStr = data.title;
     }
+
+    titleStr = [titleStr stringFromHTML];
+    //add attributes
+    NSMutableAttributedString *mutAttrTitleStr = [[NSMutableAttributedString alloc] initWithString: titleStr];
+    if (typeName) {
+        [mutAttrTitleStr addAttribute:NSForegroundColorAttributeName value:KCOLOR_BLUE_0066FF range:NSMakeRange(0, typeName.length + 2)];
+        [mutAttrTitleStr addAttribute:NSForegroundColorAttributeName value:KCOLOR_RED_6D2C1D range:NSMakeRange(typeName.length + 2, titleStr.length - typeName.length - 2)];
+        
+    } else {
+        [mutAttrTitleStr addAttribute:NSForegroundColorAttributeName value:KCOLOR_RED_6D2C1D range:NSMakeRange(0,  titleStr.length)];
+    }
+    //add attachment
     if ([data.attachmentNum intValue] != 0) {
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
         textAttachment.image = [UIImage imageNamed:@"forum-attachment"];
         NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
-        [titleText appendAttributedString:attrStringWithImage];
+        [mutAttrTitleStr appendAttributedString:attrStringWithImage];
     }
-    [_titleLabel setAttributedText: titleText];
+
+    [_titleLabel setAttributedText:mutAttrTitleStr];
+
 
     _nameLabel.text = data.authorName;
     NSString *localLastPost = [data.lastPost toLocalTime];

@@ -10,6 +10,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "ChineseTransform.h"
 #import "AppManager.h"
+#import "DTCoreText/DTCoreText.h"
 
 @implementation NSString (MD5)
 
@@ -133,6 +134,21 @@
     [dateFormatter setTimeZone:localTimeZone];
     NSString *localDate = [dateFormatter stringFromDate:sourceDate];
     return localDate;
+}
+
+@end
+
+@implementation NSString (stringFromHTML)
+- (NSString*)stringFromHTML {
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithHTMLData:data
+                                                                            options:@{
+                                                                                      DTUseiOS6Attributes:@"1",
+                                                                                      }
+                                                                 documentAttributes:nil];
+    NSString *plainText = [attrStr string];
+    //remove \n
+    return [plainText substringWithRange:NSMakeRange(0, plainText.length - 1)];
 }
 
 @end

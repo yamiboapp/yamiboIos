@@ -176,7 +176,7 @@
     }
     _nameLabel.text = data.authorName;
     _timeLabel.text = [NSString stringWithFormat:@"最新回复：%@",data.lastPost];
-    _titleLabel.text = data.title;
+    _titleLabel.text = [data.title stringFromHTML];
     _commentLabel.text = data.replyNum;
     _watchLabel.text = data.viewNum;
 }

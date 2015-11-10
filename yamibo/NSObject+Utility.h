@@ -68,6 +68,17 @@
 
 @end
 
+@interface NSString (stringFromHTML)
+/**
+ *  @author Shuang Yang, 15-11-10
+ *
+ *  @brief  Decode simple HTML tags (no images/links)
+ *
+ *  @return Plain text
+ */
+- (NSString*)stringFromHTML;
+@end
+
 @interface NSData (MD5)
 
 /**
