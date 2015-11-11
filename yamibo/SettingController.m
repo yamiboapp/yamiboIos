@@ -79,6 +79,9 @@
     [btn setBackgroundImage:[UIImage imageWithColor:KCOLOR_RED_6D2C1D] forState:UIControlStateNormal];
     [btn setTitle:@"退出登陆" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+    
+    /*DTRichTextEditorView *field = [[DTRichTextEditorView alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
+    [self.view addSubview:field];*/
 }
 #pragma mark tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
