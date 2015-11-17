@@ -9,6 +9,9 @@
 #import "HomeController.h"
 #import "HomeHotView.h"
 #import "ForumListTableView.h"
+//=========>
+#import "ArticleDetailController.h"
+#import "ArticleListController.h"
 
 /**
  *  @author 李思良, 15-08-17
@@ -27,6 +30,9 @@
     // Do any additional setup after loading the view.
     [self configNavigation];
     [self initView];
+    //==============>
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToFeedDetail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToForumDetail object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -81,5 +87,18 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
-
+//==========>
+- (void)pushToDetailController:(NSNotification*)notification{
+    if ([notification.name isEqualToString:KNotification_ToFeedDetail]) {
+        ArticleDetailController *articleDetailController = [[ArticleDetailController alloc] init];
+        NSDictionary *paraDict = notification.userInfo;
+        [articleDetailController loadData:paraDict];
+        [self.navigationController pushViewController:articleDetailController animated:YES];
+    }
+    if ([notification.name isEqualToString:KNotification_ToForumDetail]) {
+        ArticleListController *forumdetailContronller = [[ArticleListController alloc] init];
+        [forumdetailContronller loadData:notification.userInfo];
+        [self.navigationController pushViewController:forumdetailContronller animated:YES];
+    }
+}
 @end

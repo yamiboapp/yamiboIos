@@ -44,6 +44,41 @@
 
 @end
 
+@interface NSString (formatLastPost)
+/**
+ *  @author Shuang Yang, 15-10-31
+ *
+ *  @brief  格式化最新回复时间
+ *
+ *  @return 
+ */
+- (NSString*)formatLastPost;
+
+@end
+
+@interface NSString (toLocalTime)
+/**
+ *  @author Shuang Yang, 15-10-31
+ *
+ *  @brief  讲北京时间转换为系统当地时间
+ *
+ *  @return 转换后的当地时间string
+ */
+- (NSString*)toLocalTime;
+
+@end
+
+@interface NSString (stringFromHTML)
+/**
+ *  @author Shuang Yang, 15-11-10
+ *
+ *  @brief  Decode simple HTML tags (no images/links)
+ *
+ *  @return Plain text
+ */
+- (NSString*)stringFromHTML;
+@end
+
 @interface NSData (MD5)
 
 /**

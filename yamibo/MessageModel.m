@@ -8,12 +8,11 @@
 
 #import "MessageModel.h"
 
+#pragma mark private message
 @implementation PrivateMessageModel
-
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"pmid": @"pmId",
                                                        @"touid": @"toId",
                                                        @"tousername": @"toName",
                                                        @"lastauthorid": @"lastId",
@@ -24,18 +23,17 @@
 @end
 
 @implementation PrivateMessageListModel
-
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"Variables.list": @"msgList"
+                                                       @"Variables.list": @"msgList",
+                                                       @"Variables.perpage":@"perPage"
                                                        }];
 }
-
 @end
 
+#pragma mark public message
 @implementation PublicMessageModel
-
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
@@ -49,13 +47,60 @@
 @end
 
 @implementation PublicMessageListModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"Variables.list": @"msgList",
+                                                       @"Variables.perpage":@"perPage"
+                                                       }];
+}
+@end
 
+#pragma mark private message detail
+@implementation PrivateMessageDetailModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"pmid": @"pmId",
+                                                       @"msgfromid": @"fromId",
+                                                       @"msgtoid": @"toId",
+                                                       @"dateline": @"date",
+                                                       @"message": @"message"
+                                                       }];
+}
+@end
+
+@implementation PrivateMessageDetailListModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"Variables.list": @"msgList",
+                                                       @"Variables.count":@"count",
+                                                       @"Variables.perpage":@"perPage"
+                                                       }];
+}
+@end
+
+#pragma mark public message detail
+@implementation PublicMessageDetailModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"id": @"pmId",
+                                                       @"authorid": @"authorId",
+                                                       @"author": @"authorName",
+                                                       @"dateline": @"date",                                                       
+                                                       @"message": @"message"
+                                                       }];
+}
+@end
+
+@implementation PublicMessageDetailListModel
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"Variables.list": @"msgList"
                                                        }];
 }
-
 @end
 

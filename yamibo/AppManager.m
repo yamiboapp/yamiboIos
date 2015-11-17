@@ -48,4 +48,14 @@
     [[NSUserDefaults standardUserDefaults] setBool:_isNoImgMode forKey:@"isNoImgMode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+- (void)setIsNightMode:(BOOL)isNightMode {
+    if (isNightMode) {
+        [DKNightVersionManager nightFalling];
+    } else {
+        [DKNightVersionManager dawnComing];
+    }
+    _isNightMode = isNightMode;
+    [[NSUserDefaults standardUserDefaults] setBool:_isNightMode forKey:@"isNightMode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 @end

@@ -134,32 +134,39 @@
     _watchLabel.font = KFONT(9);
     _watchLabel.textColor = KCOLOR_GRAY;
     
-    UIImageView *tint = [[UIImageView alloc] init];
-    [info addSubview:tint];
-    [tint mas_makeConstraints:^(MASConstraintMaker *make) {
+
+    
+    UIImageView *watchImgView = [[UIImageView alloc] init];
+    UIImage *watchImg = [UIImage imageNamed:@"forum-view"];
+    [watchImgView setImage:watchImg];
+    [info addSubview:watchImgView];
+    [watchImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(info);
-        make.width.mas_equalTo(9);
+        make.width.mas_equalTo(watchImg.size.width);
+        make.height.mas_equalTo(watchImg.size.height);
         make.right.equalTo(_watchLabel.mas_left).offset(-2);
     }];
-    tint.backgroundColor = [UIColor redColor];
     
     _commentLabel = [[UILabel alloc] init];
     [info addSubview:_commentLabel];
     [_commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(tint.mas_left).offset(-5);
+        make.right.equalTo(watchImgView.mas_left).offset(-5);
         make.top.bottom.equalTo(info);
     }];
     _commentLabel.font = KFONT(9);
     _commentLabel.textColor = KCOLOR_GRAY;
     
-    tint = [[UIImageView alloc] init];
-    [info addSubview:tint];
-    [tint mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIImageView *commentImgView = [[UIImageView alloc] init];
+    UIImage *commentImg = [UIImage imageNamed:@"forum-comment"];
+    [commentImgView setImage:commentImg];
+    [info addSubview:commentImgView];
+    [commentImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(info);
-        make.width.mas_equalTo(9);
+        make.width.mas_equalTo(commentImg.size.width);
+        make.height.mas_equalTo(commentImg.size.height);
         make.right.equalTo(_commentLabel.mas_left).offset(-2);
     }];
-    tint.backgroundColor = [UIColor redColor];
+    
 }
 - (void)loadData:(DataImg *)data {
     if (_isNoPicMode) {
@@ -169,7 +176,7 @@
     }
     _nameLabel.text = data.authorName;
     _timeLabel.text = [NSString stringWithFormat:@"最新回复：%@",data.lastPost];
-    _titleLabel.text = data.title;
+    _titleLabel.text = [data.title stringFromHTML];
     _commentLabel.text = data.replyNum;
     _watchLabel.text = data.viewNum;
 }

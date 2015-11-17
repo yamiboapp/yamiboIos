@@ -16,7 +16,7 @@
 
 @property   (strong, nonatomic) NSString *forumId;
 @property   (strong, nonatomic) NSString *forumName;
-@property   (strong, nonatomic) NSString *todayPosts;
+@property   (strong, nonatomic) NSString<Optional> *todayPosts;
 @property   (strong, nonatomic) NSString<Optional> *content;
 
 @end

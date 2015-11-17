@@ -12,6 +12,7 @@
 @interface MenuController ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *itemNames;
+@property (strong, nonatomic) NSArray *iconImgs;
 @end
 
 @implementation MenuController
@@ -21,6 +22,7 @@
     // Do any additional setup after loading the view.
     [self initTableView];
     _itemNames = @[@"论坛", @"收藏", @"消息", @"附近的人", @"设置"];
+    _iconImgs = @[[UIImage imageNamed:@"menu-forum"], [UIImage imageNamed:@"menu-favor"], [UIImage imageNamed:@"menu-msg"], [UIImage imageNamed:@"menu-neighbor"], [UIImage imageNamed:@"menu-set"]];
 }
 
 - (void)initTableView {
@@ -62,7 +64,7 @@
         menuItem = [[MenuTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KMenuTableHeadCell];
     } else {
         menuItem = [[MenuTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KMenuTableViewCell];
-        [menuItem loadTitle:_itemNames[indexPath.row - 1] andIcon:nil];
+        [menuItem loadTitle:_itemNames[indexPath.row - 1] andIcon:_iconImgs[indexPath.row - 1]];
     }
     return menuItem;
 }

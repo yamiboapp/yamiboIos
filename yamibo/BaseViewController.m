@@ -46,7 +46,7 @@
 }
 
 - (void)showCustomNavigationBackButton {
-    [self showNomalNavigationLeftButton:@"" action:@selector(onNavigationLeftButtonClicked) imgName:@"common_back" frame:CGRectMake(0, 0, 9, 14)];
+    [self showNomalNavigationLeftButton:@"" action:@selector(onNavigationLeftButtonClicked) imgName:@"back" frame:CGRectMake(0, 0, 9, 14)];
 }
 
 - (void)showCustomNavigationMenuButton {
@@ -57,10 +57,14 @@
     [self showNomalNavigationRightButtonWithImage:@"" action:@selector(onNavigationRightButtonClicked) imgName:@"more" frame:CGRectMake(0, 0, 18, 64)];
 }
 
-- (void)showCustomNavigationNewButton {
-    [self showNomalNavigationRightButtonWithImage:@"新建" action:@selector(onNavigationRightButtonClicked) imgName:nil frame:CGRectMake(0, 0, 18, 64)];
+- (void)showCustomNavigationButtonWithTitle:(NSString *)title {
+    [self showNomalNavigationRightButtonWithImage:title action:@selector(onNavigationRightButtonClicked) imgName:nil frame:CGRectMake(0, 0, 18, 64)];
 }
 
+- (void)showCustomNavigationCollectButton {
+    [self showNomalNavigationRightButtonWithImage:@"" action:@selector(onNavigationRightButtonClicked) imgName:@"btn-fav" frame:CGRectMake(0, 0, 15, 14)];
+}
+   
 - (void)showMessage:(NSString*)message;
 {
     UILabel* tLabelTip = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 38)];

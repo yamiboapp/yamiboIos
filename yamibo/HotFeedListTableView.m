@@ -87,7 +87,11 @@
 
 #pragma tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    //============>
+    DataImg *hotTextModel = [_dataArray objectAtIndex:indexPath.row];
+    NSDictionary *notDict = @{@"threadID": hotTextModel.feedId,
+                              @"authorID": hotTextModel.authorId};
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToFeedDetail object:nil userInfo:notDict];
 }
 
 - (BOOL)showHeaderRefresh
