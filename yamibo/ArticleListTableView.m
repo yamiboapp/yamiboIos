@@ -61,7 +61,7 @@
     }];
 }
 - (void)loadMoreData {
-    [CommunicationrManager getArticleList:_forumId andPage:(int)_dataArray.count / 10 + 1 andFilter:_filter andTypeId:_typeId andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
+    [CommunicationrManager getArticleList:_forumId andPage:(int)_dataArray.count / 10 + 1 andFilter:_filter andTypeId:@"" andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
         [self stopLoadMoreData];
         if (message != nil) {
             [Utility showTitle:message];

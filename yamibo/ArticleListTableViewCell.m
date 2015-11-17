@@ -50,7 +50,7 @@
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.font = KFONT(15);
     _titleLabel.normalTextColor = KCOLOR_RED_6D2C1D;
-    _titleLabel.nightTextColor = [UIColor whiteColor];
+//    _titleLabel.nightTextColor = [UIColor whiteColor];
     _titleLabel.numberOfLines = 0;
     [_backView addSubview:_titleLabel];
 

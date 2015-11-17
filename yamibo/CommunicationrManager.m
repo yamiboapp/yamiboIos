@@ -23,7 +23,7 @@
     NSDictionary *dic = @{@"module":@"profile"};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
-            [ProfileManager sharedInstance].rank = [responseObject[@"Variables"][@"space"][@"group"][@"grouptitle"] stringFromHTML];
+            [ProfileManager sharedInstance].rank = responseObject[@"Variables"][@"space"][@"group"][@"grouptitle"];
             [ProfileManager sharedInstance].credit = responseObject[@"Variables"][@"space"][@"credits"];
             [ProfileManager sharedInstance].gender = responseObject[@"Variables"][@"space"][@"gender"];
             completion(nil);
@@ -89,12 +89,10 @@
         completion(nil, @"请求失败");
     }];
 }
-#pragma mark article list
+#pragma mark article
 + (void)getArticleList:(NSString *)fId andPage:(int)page andFilter:(NSString *)filter andTypeId:(NSString *)typeId andPerPage:(NSString *)perPage completion:(void (^)(ArticleListModel *model, NSString *message))completion {
-    //FIXME:Why is dic not working?
-    //NSDictionary *dic = @{@"module":@"forumdisplay", @"fid":fId, @"page":@(page), @"typeid":typeId, @"filter":filter, @"tpp":perPage};
-    NSString *url = [NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%d",KBaseUrl, @"module", @"forumdisplay", @"fid", fId, @"typeid", typeId, @"filter", filter, @"tpp", perPage, @"page", page];
-    [[self defaultManager] POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *dic = @{@"module":@"forumdisplay", @"fid":fId, @"page":@(page), @"typeid":typeId, @"filter":filter, @"tpp":perPage};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[ArticleListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {

@@ -132,8 +132,7 @@
 
 - (void)changeSeg:(HMSegmentedControl *)seg {
     long index = (long)seg.selectedSegmentIndex;
-    _forumId = _subforumIds[index];
-    [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
+    [self initArticleListView:_subforumIds[index] andTypeId:@"" andFilter:@""];
     [self.rightMenu close];
     self.rightMenu = nil;
 }
