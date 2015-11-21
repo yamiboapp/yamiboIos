@@ -148,7 +148,11 @@
                                                                  documentAttributes:nil];
     NSString *plainText = [attrStr string];
     //remove \n
-    return [plainText substringWithRange:NSMakeRange(0, plainText.length - 1)];
+    if ([plainText characterAtIndex:(plainText.length - 1)] == '\n') {
+        return [plainText substringWithRange:NSMakeRange(0, plainText.length - 1)];
+    } else {
+        return plainText;
+    }
 }
 
 @end

@@ -12,7 +12,7 @@ pod 'REMenu'
 pod 'JSONModel'
 pod 'SwipeBack'
 pod 'HMSegmentedControl'
-pod "DKNightVersion"
+pod 'DKNightVersion'
 target 'yamibo' do
 end
 
