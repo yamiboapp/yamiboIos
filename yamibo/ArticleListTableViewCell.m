@@ -17,7 +17,7 @@
 @property (strong, nonatomic) UILabel *lastPostLabel;
 @property (strong, nonatomic) UILabel *commentLabel;
 @property (strong, nonatomic) UILabel *watchLabel;
-@property (assign, nonatomic) NSString *digestImgName;
+@property (strong, nonnull) UIImageView *digestImgView;
 @end
 
 @implementation ArticleListTableViewCell
@@ -113,7 +113,7 @@
     [watchImgView setImage:watchImg];
     [_backView addSubview:watchImgView];
     [watchImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(_nameLabel);
+        make.centerY.equalTo(_nameLabel);
         make.width.mas_equalTo(watchImg.size.width);
         make.height.mas_equalTo(watchImg.size.height);
         make.right.equalTo(_watchLabel.mas_left).offset(-2);
@@ -129,20 +129,17 @@
     [commentImgView setImage:commentImg];
     [_backView addSubview:commentImgView];
     [commentImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(_nameLabel);
+        make.centerY.equalTo(_nameLabel);
         make.width.mas_equalTo(commentImg.size.width);
         make.height.mas_equalTo(commentImg.size.height);
         make.right.equalTo(_commentLabel.mas_left).offset(-2);
     }];
 
-    UIImageView *digestImgView = [[UIImageView alloc] init];
-    UIImage *digestImg = [UIImage imageNamed:_digestImgName];
-    [digestImgView setImage:digestImg];
-    [_backView addSubview:digestImgView];
-    [digestImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    _digestImgView = [[UIImageView alloc] init];
+    [_backView addSubview:_digestImgView];
+    [_digestImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(_backView);
-        make.width.mas_equalTo(digestImg.size.width);
-        make.height.mas_equalTo(digestImg.size.height);
+        make.width.height.mas_equalTo(30);
     }];
 
 }
@@ -181,10 +178,9 @@
     _lastPostLabel.text = [NSString stringWithFormat:@"最新回复：%@", formattedLastPost];
     _commentLabel.text = data.replyNum;
     _watchLabel.text = data.viewNum;
-    if ([data.isDigest intValue] == 1) {
-        _digestImgName = @"forum-digest";
-    } else {
-        _digestImgName = @"";
+    if ([data.digest intValue] != 0) {
+        UIImage *digestImg = [UIImage imageNamed:@"forum-digest"];
+        [_digestImgView setImage:digestImg];
     }
 }
 

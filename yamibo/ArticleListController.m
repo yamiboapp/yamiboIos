@@ -151,7 +151,9 @@
 }
 
 - (void)dealMenu:(int)index {
-    if (index == 0) { //精华
+    if (index == 0) { //全部
+        [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
+    } else if (index == 1) { //精华
         [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"digest"];
     } else {
         [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"typeid"];
@@ -172,7 +174,7 @@
 }
 #pragma mark article list right menu delegate
 - (void)reloadRightMenu:(NSDictionary *)data {
-    _rightMenuNames = [NSMutableArray arrayWithObjects:@"精华", nil];
+    _rightMenuNames = [NSMutableArray arrayWithObjects:@"全部", @"精华", nil];
     _rightMenuIds = [NSMutableArray arrayWithObjects:@"", nil];
     [_rightMenuNames addObjectsFromArray:[data allValues]];
     [_rightMenuIds addObjectsFromArray:[data allKeys]];

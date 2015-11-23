@@ -79,9 +79,6 @@
     [btn setBackgroundImage:[UIImage imageWithColor:KCOLOR_RED_6D2C1D] forState:UIControlStateNormal];
     [btn setTitle:@"退出登陆" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-    
-    /*DTRichTextEditorView *field = [[DTRichTextEditorView alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
-    [self.view addSubview:field];*/
 }
 #pragma mark tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -122,7 +119,7 @@
     //title
     UILabel *titleLabel = [[UILabel alloc] init];
     [cell addSubview:titleLabel];
-    NSArray *titles = @[@[@"显示头像",@"显示图片",@"夜间模式",@"发帖模式",@"非Wi-Fi网络提示",@"清除缓存"], @[@"版本",@"开发者"]];
+    NSArray *titles = @[@[@"显示繁体", @"显示图片",@"夜间模式",@"发帖模式",@"非Wi-Fi网络提示",@"清除缓存"], @[@"版本",@"开发者"]];
     titleLabel.text = titles[indexPath.section][indexPath.row];
     titleLabel.font = KFONT(15);
     titleLabel.textColor = KCOLOR_RED_6D2C1D;
@@ -148,7 +145,12 @@
     switch (indexPath.section) {
         case 0:
             switch (indexPath.row) {
-                case 0:
+                case 0: //显示繁体
+                    if ([AppManager sharedInstance].isTradionChinese) {
+                        rightSwitch.on = YES;
+                    } else {
+                        rightSwitch.on = NO;
+                    }
                     cell.accessoryView = rightSwitch;
                     break;
                 case 1: //显示图片
@@ -211,7 +213,12 @@
 
 - (void)switchValueChanged:(UISwitch *)sender {
     switch (sender.tag) {
-        case 0: //显示头像
+        case 0: //显示繁体
+            if (sender.isOn) {
+                [AppManager sharedInstance].isTradionChinese = YES;
+            } else {
+                [AppManager sharedInstance].isTradionChinese = NO;
+            }
             break;
         case 1: //显示图片
             if (sender.isOn) {

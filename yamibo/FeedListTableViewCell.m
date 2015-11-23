@@ -141,7 +141,7 @@
     [watchImgView setImage:watchImg];
     [info addSubview:watchImgView];
     [watchImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(info);
+        make.centerY.equalTo(info);
         make.width.mas_equalTo(watchImg.size.width);
         make.height.mas_equalTo(watchImg.size.height);
         make.right.equalTo(_watchLabel.mas_left).offset(-2);
@@ -161,7 +161,7 @@
     [commentImgView setImage:commentImg];
     [info addSubview:commentImgView];
     [commentImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(info);
+        make.centerY.equalTo(info);
         make.width.mas_equalTo(commentImg.size.width);
         make.height.mas_equalTo(commentImg.size.height);
         make.right.equalTo(_commentLabel.mas_left).offset(-2);

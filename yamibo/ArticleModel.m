@@ -23,7 +23,7 @@
                                                        @"replies": @"replyNum",
                                                        @"views": @"viewNum",
                                                        @"typeid": @"typeId",
-                                                       @"digest": @"isDigest",
+                                                       @"digest": @"digest",
                                                        @"attachment": @"attachmentNum",
                                                        @"closed": @"isClosed"
                                                        }];

@@ -24,7 +24,7 @@
 @property   (strong, nonatomic) NSString *replyNum;
 @property   (strong, nonatomic) NSString *viewNum;
 @property   (strong, nonatomic) NSString *typeId;
-@property   (strong, nonatomic) NSString *isDigest;
+@property   (strong, nonatomic) NSString *digest;
 @property   (strong, nonatomic) NSString *attachmentNum;
 @property   (strong, nonatomic) NSString<Optional> *isClosed;
 
