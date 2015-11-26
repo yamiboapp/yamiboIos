@@ -10,7 +10,6 @@
 #import "AppManager.h"
 #import "NKColorSwitch.h"
 
-#define KSettingTableViewCell @"KSettingTableViewCell"
 @interface SettingController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *cells;
@@ -44,7 +43,7 @@
 }
 
 
-- (void) configNavigation {
+- (void)configNavigation {
     [self showCustomNavigationMenuButton];
     self.title = @"设置";
 }
@@ -57,7 +56,6 @@
     _tableView.bounces = NO;
     _tableView.scrollEnabled = NO;
     _tableView.backgroundColor = KCOLOR_YELLOW_FFEDBE;
-    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:KSettingTableViewCell];
     _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,6 +77,12 @@
     [btn setBackgroundImage:[UIImage imageWithColor:KCOLOR_RED_6D2C1D] forState:UIControlStateNormal];
     [btn setTitle:@"退出登陆" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+}
+- (void)logout { //TODO: logout
+    
+}
+- (void)onNavigationLeftButtonClicked {
+    [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
 #pragma mark tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -239,11 +243,5 @@
         default:
             break;
     }
-}
-- (void)logout { //TODO: logout
-    
-}
-- (void)onNavigationLeftButtonClicked {
-    [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
 @end

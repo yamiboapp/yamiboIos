@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "MBProgressHUD.h"
+#import "ProfileController.h"
 
 @interface BaseViewController () {
 }
@@ -33,6 +34,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = KCOLOR_YELLOW_FFEDBE;
     [self initNavigation];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openProfile:) name:KNotification_OpenProfile object:nil];
 }
 - (void)initNavigation {
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -142,6 +144,13 @@
 }
 - (void)onNavigationRightButtonClicked {
     
+}
+
+- (void)openProfile:(NSNotification *)notification {
+    ProfileController *profileController = [[ProfileController alloc] init];
+    NSString *uid = notification.userInfo[@"userId"];
+    [profileController loadDate:uid];
+    [self.navigationController pushViewController:profileController animated:YES];
 }
 #pragma mark Hide/Show StatusBar
 - (BOOL)prefersStatusBarHidden

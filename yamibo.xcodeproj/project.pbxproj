@@ -98,6 +98,8 @@
 		BA8B26AC1BB014F900173D5B /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AB1BB014F900173D5B /* MessageTableView.m */; };
 		BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */; };
 		BA8B26B61BB0184500173D5B /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26B51BB0184500173D5B /* MessageController.m */; };
+		BAF401611C06B3E300EC161D /* ProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF401601C06B3E300EC161D /* ProfileModel.m */; };
+		BAF401651C06B93900EC161D /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF401641C06B93900EC161D /* ProfileController.m */; };
 		BAFF9BC61BD46958004BAD2B /* ico-avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF9BC21BD46958004BAD2B /* ico-avatar@2x.png */; };
 		BAFF9BC71BD46958004BAD2B /* ico-avatar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF9BC31BD46958004BAD2B /* ico-avatar@3x.png */; };
 		BAFF9BC81BD46958004BAD2B /* ico-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF9BC41BD46958004BAD2B /* ico-logo@2x.png */; };
@@ -311,6 +313,10 @@
 		BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		BA8B26B41BB0184500173D5B /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
 		BA8B26B51BB0184500173D5B /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
+		BAF4015F1C06B3E300EC161D /* ProfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileModel.h; sourceTree = "<group>"; };
+		BAF401601C06B3E300EC161D /* ProfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileModel.m; sourceTree = "<group>"; };
+		BAF401631C06B93900EC161D /* ProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileController.h; sourceTree = "<group>"; };
+		BAF401641C06B93900EC161D /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileController.m; sourceTree = "<group>"; };
 		BAFF9BC21BD46958004BAD2B /* ico-avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico-avatar@2x.png"; sourceTree = "<group>"; };
 		BAFF9BC31BD46958004BAD2B /* ico-avatar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico-avatar@3x.png"; sourceTree = "<group>"; };
 		BAFF9BC41BD46958004BAD2B /* ico-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico-logo@2x.png"; sourceTree = "<group>"; };
@@ -678,6 +684,8 @@
 			children = (
 				BA5334811BE35F46000979F4 /* ArticleModel.h */,
 				BA5334821BE35F46000979F4 /* ArticleModel.m */,
+				D85DA2AF1BE57D3B006B6DFA /* ArticleDetailModel.h */,
+				D85DA2B01BE57D3B006B6DFA /* ArticleDetailModel.m */,
 				65F50C1F1BB656F4007DC23C /* HotModel.h */,
 				65F50C201BB656F4007DC23C /* HotModel.m */,
 				65FC57181BB6760100FC85A5 /* ForumModel.h */,
@@ -686,8 +694,8 @@
 				65AB48BC1BB7AFDD00B7D173 /* ThreadFavoriteModel.m */,
 				BA7F94E31BBCC2CF00034582 /* MessageModel.h */,
 				BA7F94E41BBCC2CF00034582 /* MessageModel.m */,
-				D85DA2AF1BE57D3B006B6DFA /* ArticleDetailModel.h */,
-				D85DA2B01BE57D3B006B6DFA /* ArticleDetailModel.m */,
+				BAF4015F1C06B3E300EC161D /* ProfileModel.h */,
+				BAF401601C06B3E300EC161D /* ProfileModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -741,6 +749,7 @@
 		65BB63421ADE0C440042C359 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BAF401621C06B92100EC161D /* Profile */,
 				BA65E9051BEE0BC400D8E037 /* Setting */,
 				658D6F401BB6AE080058CEEF /* Login */,
 				BA8B26B01BB017E000173D5B /* Message */,
@@ -894,6 +903,15 @@
 				BA61E3B71BD0ADCB00F6E474 /* MessageDetailController.m */,
 			);
 			name = Message;
+			sourceTree = "<group>";
+		};
+		BAF401621C06B92100EC161D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				BAF401631C06B93900EC161D /* ProfileController.h */,
+				BAF401641C06B93900EC161D /* ProfileController.m */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		BAFF9BCA1BD471FD004BAD2B /* Forum */ = {
@@ -1146,6 +1164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF401651C06B93900EC161D /* ProfileController.m in Sources */,
 				6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */,
 				D85DA2A81BE5594D006B6DFA /* ArticleDetailTableViewCell.m in Sources */,
 				D85DA2A51BE55911006B6DFA /* ArticleDetailTableView.m in Sources */,
@@ -1195,6 +1214,7 @@
 				65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */,
 				6597FCA11BAC37BF009025E3 /* NSData+SDDataCache.m in Sources */,
 				65378E0B1BAE95F2001B27FD /* CollectTableView.m in Sources */,
+				BAF401611C06B3E300EC161D /* ProfileModel.m in Sources */,
 				6597FCA81BAC37BF009025E3 /* UIView+SDExtension.m in Sources */,
 				65378E121BAECEE1001B27FD /* NeighborController.m in Sources */,
 				6597FCA51BAC37BF009025E3 /* TAPageControl.m in Sources */,

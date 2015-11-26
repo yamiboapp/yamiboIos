@@ -14,6 +14,7 @@
 #import "ThreadFavoriteModel.h"
 #import "ArticleModel.h"
 #import "ArticleDetailModel.h"
+#import "ProfileModel.h"
 
 #define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
@@ -32,6 +33,19 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completion(@"加载失败");
+    }];
+}
+
++ (void)getProfileWithUid:(NSString*)uid completion:(void (^)(ProfileModel *model, NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"profile", @"uid":uid};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject]) {
+            completion([[ProfileModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请求失败");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, @"请求失败");
     }];
 }
 

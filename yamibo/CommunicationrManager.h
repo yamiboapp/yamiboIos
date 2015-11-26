@@ -13,11 +13,13 @@
 @class ThreadFavoriteListModel;
 @class ArticleListModel;
 @class ArticleDetailModel;
-
+@class ProfileModel;
 
 @interface CommunicationrManager : NSObject
 
 + (void)getProfile:(void (^)(NSString *message))completion;
+
++ (void)getProfileWithUid:(NSString*)uid completion:(void (^)(ProfileModel *model, NSString *message))completion;
 
 + (void)loginWithName:(NSString *)userName andPwd:(NSString *)pwd andQuestion:(NSString *)questionId andAnswer:(NSString *)answer completion:(void (^)(NSString *message))completion;
 

@@ -9,6 +9,7 @@
 #import "YFaceImageView.h"
 #import "UrlConstance.h"
 #import "ProfileManager.h"
+
 @interface YFaceImageView()
 
 @property (copy, nonatomic) NSArray *typeNames;
@@ -42,6 +43,9 @@
 }
 
 - (void)openProfile {
-    
+    NSDictionary *dic = @{
+                          @"userId":_userId
+                          };    
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_OpenProfile object:nil userInfo:dic];
 }
 @end

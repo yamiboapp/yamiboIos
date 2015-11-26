@@ -10,7 +10,7 @@
 #import "MessageTableView.h"
 #import "MessageDetailController.h"
 #import "HMSegmentedControl.h"
-
+#import "ProfileController.h"
 @interface MessageController ()
 
 @property (strong, nonatomic) UIView *container;
