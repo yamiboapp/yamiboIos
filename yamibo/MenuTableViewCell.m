@@ -32,9 +32,9 @@
     return self;
 }
 - (void)initAccessory {
-    UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
-    [rightArray setImage:[UIImage imageNamed:@"accessory-more"]];
-    self.accessoryView = rightArray;
+    UIImageView *rightArrowImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
+    [rightArrowImgView setImage:[UIImage imageNamed:@"arrow-right"]];
+    self.accessoryView = rightArrowImgView;
 }
 - (void)initHeadView {
     self.backgroundColor = KCOLOR_RED_6D2C1D;

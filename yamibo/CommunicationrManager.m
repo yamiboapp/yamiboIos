@@ -228,7 +228,8 @@
                            @"tid": @(tid),
                            @"page": @(page),
                            @"ppp": @(ppp),
-                           @"authorid": @(uid)};
+                           @"authorid": @(uid),
+                           @"mobile": @"no"};
     [[self defaultManager] POST:KBaseUrl parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             completion([[ArticleDetailModel alloc] initWithDictionary:responseObject error:nil], nil);

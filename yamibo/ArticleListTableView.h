@@ -8,10 +8,11 @@
 
 #import "YTableView.h"
 
-@protocol ArticleListRightMenuDelegate
+@protocol ArticleListTabelViewDelegate
 
 - (void)reloadRightMenu:(NSDictionary*)data;
 - (void)closeRightMenu;
+- (void)setPageNumber:(NSInteger)page andTotalPages:(NSInteger)pageNum;
 
 @end
 
@@ -19,6 +20,9 @@
 
 - (instancetype)initWithForumId:(NSString *)fid andFilter:(NSString *)filter andTypeId:(NSString *)tid;
 - (void)refreshData;
-@property (nonatomic, weak) id<ArticleListRightMenuDelegate> rightMenuDelegate;
+- (void)nextPage;
+- (void)previousPage;
+
+@property (nonatomic, weak) id<ArticleListTabelViewDelegate> tableViewDelegate;
 
 @end

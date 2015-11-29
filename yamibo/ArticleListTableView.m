@@ -12,9 +12,10 @@
 #import "ArticleModel.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 
-@interface ArticleListTableView()<UITableViewDelegate, UITableViewDataSource>
+@interface ArticleListTableView()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (strong, nonatomic) NSMutableArray *dataArray;
-@property (assign, nonatomic) int perPage;
+@property (assign, nonatomic) int pageNum;
+@property (assign, nonatomic) int curPage;
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSString *typeId;
 @property (strong, nonatomic) NSString *filter;
@@ -33,6 +34,7 @@
         _forumId = fid;
         _typeId = tid;
         _filter = filter;
+        _curPage = 1;
         [self registerClass:[ArticleListTableViewCell class] forCellReuseIdentifier:KArticleListTableViewCell];
         self.estimatedRowHeight = 200;
     }
@@ -50,7 +52,9 @@
         } else {
             _dataArray = [NSMutableArray arrayWithArray:model.articleList];
             _articleTypes = [NSDictionary dictionaryWithDictionary:model.articleTypes];
-            [self.rightMenuDelegate reloadRightMenu:model.articleTypes];
+            [self.tableViewDelegate reloadRightMenu:model.articleTypes];
+            _pageNum = [model.articleNum intValue] / 10;
+            [self.tableViewDelegate setPageNumber:1 andTotalPages:_pageNum];
         }
         if (model.articleList.count < 10) {
             [self hiddenFooter:true];
@@ -77,7 +81,43 @@
     }];
 
 }
-#pragma mark - Table view data source
+- (void)nextPage {
+    if (_curPage * 10 < [_dataArray count]) {
+        [self scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_curPage*10 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    } else {
+        [CommunicationrManager getArticleList:_forumId andPage:(int)_dataArray.count / 10 + 1 andFilter:_filter andTypeId:_typeId andPerPage:@"10" completion:^(ArticleListModel *model, NSString *message) {
+            [self stopLoadMoreData];
+            if (message != nil) {
+                [Utility showTitle:message];
+            } else {
+                [_dataArray addObjectsFromArray:model.articleList];
+            }
+            if (model.articleList.count < 10) {
+                [self hiddenFooter:true];
+            } else {
+                [self hiddenFooter:false];
+            }
+            [self reloadData];
+            [self scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_curPage * 10 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }];
+    }
+}
+- (void)previousPage {
+    if (_curPage == 1) {
+        [self scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    } else {
+        [self scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(_curPage - 2) * 10 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
+- (BOOL)showHeaderRefresh
+{
+    return YES;
+}
+- (BOOL)showFooterRefresh
+{
+    return YES;
+}
+#pragma mark UITableViewDataSource UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -107,7 +147,7 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.rightMenuDelegate closeRightMenu];
+    [self.tableViewDelegate closeRightMenu];
     
     ArticleModel *article = [_dataArray objectAtIndex:indexPath.row];
     NSDictionary *dic = @{@"threadID": article.articleId,
@@ -119,13 +159,13 @@
     return NO;
 }
 
-- (BOOL)showHeaderRefresh
-{
-    return YES;
-}
-- (BOOL)showFooterRefresh
-{
-    return YES;
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([[self indexPathsForVisibleRows] count] > 0) {
+        NSIndexPath *firstVisibleIndexPath = [[self indexPathsForVisibleRows] objectAtIndex:0];
+        _curPage = (int)(firstVisibleIndexPath.row / 10 + 1);
+        [self.tableViewDelegate setPageNumber:_curPage andTotalPages:_pageNum];
+    }
 }
 
 @end

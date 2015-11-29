@@ -241,9 +241,9 @@
         [cell addSubview:line];
         line.backgroundColor = KCOLOR_YELLOW_FFEDBE;
         //accessory
-        UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
-        [rightArray setImage:[UIImage imageNamed:@"accessory-more"]];
-        cell.accessoryView = rightArray;
+        UIImageView *rightArrowImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
+        [rightArrowImgView setImage:[UIImage imageNamed:@"arrow-right"]];
+        cell.accessoryView = rightArrowImgView;
         
         //constrains
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

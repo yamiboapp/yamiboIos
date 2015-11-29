@@ -16,14 +16,16 @@
 
 #define KMENUITEMHEIGHT 40
 
-@interface ArticleListController()<ArticleListRightMenuDelegate>
+@interface ArticleListController()<ArticleListTabelViewDelegate>
 
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSString *forumName;
+
 @property (strong, nonatomic) NSMutableArray *subforumNames;
 @property (strong, nonatomic) NSMutableArray *subforumIds;
-@property (strong, nonatomic) ArticleListTableView *articleListView;
 @property (assign, nonatomic) BOOL hasSwith;
+@property (strong, nonatomic) ArticleListTableView *articleListView;
+@property (strong, nonatomic) UILabel *pageLabel;
 
 @property (strong, nonatomic) REMenu *rightMenu;
 @property (strong, nonatomic) NSMutableArray *rightMenuNames;
@@ -37,6 +39,7 @@
     // Do any additional setup after loading the view.
     [self configNavigation];
     [self initView];
+    [self initFooter];
     _subforumNames = [NSMutableArray arrayWithObject:_forumName];
     _subforumIds = [NSMutableArray arrayWithObject:_forumId];
 
@@ -62,18 +65,20 @@
         [_articleListView removeFromSuperview];
     }
     _articleListView = [[ArticleListTableView alloc] initWithForumId:fid andFilter:filter andTypeId:tid];
-    
-    [_articleListView setRightMenuDelegate:self];
-    
     [self.view addSubview:_articleListView];
+    [_articleListView setTableViewDelegate:self];
+    
+    //constraint
     if (_hasSwith) {
         [_articleListView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(self.view);
+            make.left.right.equalTo(self.view);
             make.top.mas_equalTo(44);
+            make.bottom.mas_equalTo(-44);
         }];
     } else {
         [_articleListView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
+            make.left.right.top.equalTo(self.view);
+            make.bottom.mas_equalTo(-44);
         }];
     }
     [_articleListView refreshData];
@@ -125,17 +130,97 @@
         } else {
             _hasSwith = false;
         }
-        
+        //page count
+        [self setPageNumber:1 andTotalPages:[model.articleNum intValue]/10];
+
+        //article list
         [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
     }];
 }
+- (void)initFooter {
+    UIView *footerView = [[UIView alloc] init];
+    [self.view addSubview:footerView];
 
+    UIButton *refreshBtn = [[UIButton alloc] init];
+    UIImage *refreshImg = [UIImage imageNamed:@"btn-refresh"];
+    [refreshBtn setImage:refreshImg forState:UIControlStateNormal];
+    [footerView addSubview:refreshBtn];
+    [refreshBtn addTarget:self action:@selector(refreshArticleList) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *createBtn = [[UIButton alloc] init];
+    UIImage *createImg = [UIImage imageNamed:@"btn-create"];
+    [createBtn setImage:createImg forState:UIControlStateNormal];
+    [footerView addSubview:createBtn];
+    [createBtn addTarget:self action:@selector(newArticle) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *rightArrowBtn = [[UIButton alloc] init];
+    [rightArrowBtn setImage:[UIImage imageNamed:@"arrow-right"] forState:UIControlStateNormal];
+    [footerView addSubview:rightArrowBtn];
+    [rightArrowBtn addTarget:self action:@selector(nextPage) forControlEvents:UIControlEventTouchUpInside];
+    //rightArrowBtn.bounds = CGRectMake(0, 0, 44, 45);
+    
+    
+    UIButton *leftArrowBtn = [[UIButton alloc] init];
+    [leftArrowBtn setImage:[UIImage imageNamed:@"arrow-left"] forState:UIControlStateNormal];
+    [footerView addSubview:leftArrowBtn];
+    [leftArrowBtn addTarget:self action:@selector(previousPage) forControlEvents:UIControlEventTouchUpInside];
+
+
+    _pageLabel = [[UILabel alloc] init];
+    [footerView addSubview:_pageLabel];
+    _pageLabel.font = KFONT(15);
+    _pageLabel.textColor = KCOLOR_RED_6D2C1D;
+    _pageLabel.textAlignment = NSTextAlignmentCenter;
+    
+    //constraint
+    [footerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(44);
+    }];
+    [refreshBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footerView);
+        make.left.equalTo(footerView).offset(13);
+        make.width.height.mas_equalTo(40);
+    }];
+    [createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footerView);
+        make.left.equalTo(refreshBtn.mas_right).offset(5);
+        make.width.height.mas_equalTo(40);
+    }];
+    [rightArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(footerView).offset(-8);
+        make.centerY.equalTo(footerView);
+        make.width.height.mas_equalTo(40);
+    }];
+    [_pageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footerView);
+        make.right.equalTo(rightArrowBtn.mas_left).offset(-5);
+    }];
+    [leftArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footerView);
+        make.right.equalTo(_pageLabel.mas_left).offset(-5);
+        make.width.height.mas_equalTo(40);
+    }];
+}
 - (void)changeSeg:(HMSegmentedControl *)seg {
     long index = (long)seg.selectedSegmentIndex;
     _forumId = _subforumIds[index];
     [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
+    _pageLabel.text = @"";
     [self.rightMenu close];
     self.rightMenu = nil;
+}
+- (void)refreshArticleList {
+    [_articleListView refreshData];
+}
+- (void)newArticle {
+    NSLog(@"create btn pressed\n");
+}
+- (void)previousPage {
+    [_articleListView previousPage];
+}
+- (void)nextPage {
+    [_articleListView nextPage];
 }
 
 - (REMenuItem *)menuItemAtIndex:(int)index {
@@ -172,7 +257,7 @@
     _forumId = data[@"forumId"];
     _forumName = data[@"forumName"];
 }
-#pragma mark article list right menu delegate
+#pragma mark ArticleListTabelViewDelegate
 - (void)reloadRightMenu:(NSDictionary *)data {
     _rightMenuNames = [NSMutableArray arrayWithObjects:@"全部", @"精华", nil];
     _rightMenuIds = [NSMutableArray arrayWithObjects:@"", nil];
@@ -182,6 +267,9 @@
 }
 - (void)closeRightMenu {
     [self.rightMenu close];
+}
+- (void)setPageNumber:(NSInteger)page andTotalPages:(NSInteger)pageNum {
+    _pageLabel.text = [NSString stringWithFormat:@"%ld/%ld", page, pageNum];
 }
 @end
 

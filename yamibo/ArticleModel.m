@@ -38,7 +38,8 @@
                                                        @"Variables.forum":@"forum",
                                                        @"Variables.sublist":@"subforumList",
                                                        @"Variables.threadtypes.types":@"articleTypes",
-                                                       @"Variables.tpp":@"perPage"
+                                                       @"Variables.tpp":@"perPage",
+                                                       @"Variables.forum.threads": @"articleNum"
                                                        }];
 }
 @end

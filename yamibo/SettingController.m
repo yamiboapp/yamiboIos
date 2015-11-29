@@ -132,8 +132,8 @@
     [cell addSubview:line];
     line.backgroundColor = KCOLOR_YELLOW_FFEDBE;
     //accessory
-    UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
-    [rightArray setImage:[UIImage imageNamed:@"accessory-more"]];
+    UIImageView *rightArrowImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
+    [rightArrowImgView setImage:[UIImage imageNamed:@"arrow-right"]];
     
     NKColorSwitch *rightSwitch = [[NKColorSwitch alloc] initWithFrame:CGRectMake(0, 0, 55, 26)];
     rightSwitch.onTintColor = KCOLOR_RED_6D2C1D;
@@ -174,7 +174,7 @@
                     cell.accessoryView = rightSwitch;
                     break;
                 case 3:
-                    cell.accessoryView = rightArray;
+                    cell.accessoryView = rightArrowImgView;
                     break;
                 case 4:
                     cell.accessoryView = rightSwitch;
@@ -194,7 +194,7 @@
                     cell.accessoryView = rightLabel;
                     break;
                 case 1:
-                    cell.accessoryView = rightArray;
+                    cell.accessoryView = rightArrowImgView;
                     break;
                 default:
                     break;

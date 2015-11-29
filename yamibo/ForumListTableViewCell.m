@@ -68,20 +68,20 @@
     _titleLabel.font = KFONT(12);
     _titleLabel.textColor = KCOLOR_GRAY;
     
-    UIImageView *rightArray = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
-    [rightArray setImage:[UIImage imageNamed:@"accessory-more"]];
-    self.accessoryView = rightArray;
+    UIImageView *rightArrowImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 8, 13)];
+    [rightArrowImgView setImage:[UIImage imageNamed:@"arrow-right"]];
+    self.accessoryView = rightArrowImgView;
     
-    /*UIImageView *rightArray = [[UIImageView alloc] init];
-    [_backView addSubview:rightArray];
-    [rightArray mas_makeConstraints:^(MASConstraintMaker *make) {
+    /*UIImageView *rightArrowImgView = [[UIImageView alloc] init];
+    [_backView addSubview:rightArrowImgView];
+    [rightArrowImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(_backView).offset(-22);
         make.centerY.equalTo(_titleLabel);
         make.width.mas_equalTo(8);
         make.height.mas_equalTo(12);
         make.left.equalTo(_titleLabel.mas_right);
     }];
-    rightArray.backgroundColor = [UIColor redColor];*/
+    rightArrowImgView.backgroundColor = [UIColor redColor];*/
 }
 - (void)loadData:(ForumModel *)data {
     _nameLabel.text = [NSString stringWithFormat:@"%@（%@）", data.forumName, data.todayPosts];
