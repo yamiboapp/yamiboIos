@@ -56,7 +56,14 @@
     return 78;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dic = @{@"forumId":[_dataArray[indexPath.row] forumId], @"forumName":[_dataArray[indexPath.row] forumName]};
+    NSMutableArray *forumIdList = [_dataArray valueForKey:@"forumId"];
+    NSMutableArray *forumNameList = [_dataArray valueForKey:@"forumName"];
+    NSDictionary *dic = @{
+                          @"forumId":[_dataArray[indexPath.row] forumId],
+                          @"forumName":[_dataArray[indexPath.row] forumName],
+                          @"forumIdList":forumIdList,
+                          @"forumNameList":forumNameList
+                          };
     [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToForumDetail object:nil userInfo:dic];
 }
 - (BOOL)showHeaderRefresh

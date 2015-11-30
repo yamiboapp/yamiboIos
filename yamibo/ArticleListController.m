@@ -10,6 +10,7 @@
 #import "ArticleModel.h"
 #import "ArticleListTableView.h"
 #import "ArticleDetailController.h"
+#import "PostController.h"
 #import "CommunicationrManager.h"
 #import "HMSegmentedControl.h"
 #import "REMenu.h"
@@ -27,9 +28,19 @@
 @property (strong, nonatomic) ArticleListTableView *articleListView;
 @property (strong, nonatomic) UILabel *pageLabel;
 
+@property (strong, nonatomic) REMenu *middleMenu;
+@property (strong, nonatomic) NSMutableArray *middleMenuNames;
+@property (strong, nonatomic) NSMutableArray *middleMenuIds;
+@property (strong, nonatomic) NSMutableArray *forumNameList;
+@property (strong, nonatomic) NSMutableArray *forunIdList;
+
 @property (strong, nonatomic) REMenu *rightMenu;
 @property (strong, nonatomic) NSMutableArray *rightMenuNames;
 @property (strong, nonatomic) NSMutableArray *rightMenuIds;
+@property (assign, nonatomic) BOOL didLoadRightMenu;
+
+@property (strong, nonatomic) UIButton *titleBtn;
+
 
 @end
 
@@ -40,27 +51,54 @@
     [self configNavigation];
     [self initView];
     [self initFooter];
+    [self initMiddleMenu];
     _subforumNames = [NSMutableArray arrayWithObject:_forumName];
     _subforumIds = [NSMutableArray arrayWithObject:_forumId];
 
 }
+- (void)viewWillAppear:(BOOL)animated {
+    _titleBtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+}
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];
-    self.title = _forumName;
+    //self.title = _forumName;
     [self showCustomNavigationMoreButton];
+    
+    _titleBtn = [[UIButton alloc] init];
+    [_titleBtn setTitle:[NSString stringWithFormat:@"%@ ",_forumName] forState:UIControlStateNormal];
+    _titleBtn.titleLabel.tintColor =[UIColor whiteColor];
+    self.navigationItem.titleView = _titleBtn;
+    [_titleBtn setImage:[UIImage imageNamed:@"arrow-down-white"] forState:UIControlStateNormal];
+    _titleBtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    _titleBtn.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    _titleBtn.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+
+    [_titleBtn sizeToFit];
+    [_titleBtn addTarget:self action:@selector(onNavigationTitleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initRightMenu {
     NSMutableArray *items = [NSMutableArray array];
     for (int i = 0; i < [_rightMenuNames count]; i++) {
-        [items addObject:[self menuItemAtIndex:i]];
+        [items addObject:[self menuItemAtIndex:i withMenu:@"right"]];
     }
     _rightMenu = [[REMenu alloc] initWithItems:items];
     _rightMenu.itemHeight = KMENUITEMHEIGHT;
     _rightMenu.font = KFONT(12);
     _rightMenu.textColor = [UIColor whiteColor];
 }
+- (void)initMiddleMenu {
+    NSMutableArray *items = [NSMutableArray array];
+    for (int i = 0; i < [_middleMenuNames count]; i++) {
+        [items addObject:[self menuItemAtIndex:i withMenu:@"middle"]];
+    }
+    _middleMenu = [[REMenu alloc] initWithItems:items];
+    _middleMenu.itemHeight = KMENUITEMHEIGHT;
+    _middleMenu.font = KFONT(12);
+    _middleMenu.textColor = [UIColor whiteColor];
+}
 - (void)initArticleListView:(NSString *)fid andTypeId:(NSString *)tid andFilter:(NSString *)filter{
+    _didLoadRightMenu = NO;
     if (_articleListView) {
         [_articleListView removeFromSuperview];
     }
@@ -127,6 +165,7 @@
             }];
             
             [segment addTarget:self action:@selector(changeSeg:) forControlEvents:UIControlEventValueChanged];
+            
         } else {
             _hasSwith = false;
         }
@@ -157,14 +196,11 @@
     [rightArrowBtn setImage:[UIImage imageNamed:@"arrow-right"] forState:UIControlStateNormal];
     [footerView addSubview:rightArrowBtn];
     [rightArrowBtn addTarget:self action:@selector(nextPage) forControlEvents:UIControlEventTouchUpInside];
-    //rightArrowBtn.bounds = CGRectMake(0, 0, 44, 45);
-    
     
     UIButton *leftArrowBtn = [[UIButton alloc] init];
     [leftArrowBtn setImage:[UIImage imageNamed:@"arrow-left"] forState:UIControlStateNormal];
     [footerView addSubview:leftArrowBtn];
     [leftArrowBtn addTarget:self action:@selector(previousPage) forControlEvents:UIControlEventTouchUpInside];
-
 
     _pageLabel = [[UILabel alloc] init];
     [footerView addSubview:_pageLabel];
@@ -202,6 +238,19 @@
         make.width.height.mas_equalTo(40);
     }];
 }
+- (void)loadData:(NSDictionary *)data {
+    _forumId = data[@"forumId"];
+    _forumName = data[@"forumName"];
+    
+    _forumNameList = data[@"forumNameList"];
+    _middleMenuNames = [_forumNameList mutableCopy];
+    [_middleMenuNames removeObject:_forumName];
+    
+    _forunIdList = data[@"forumIdList"];
+    _middleMenuIds = [_forunIdList mutableCopy];
+    [_middleMenuNames removeObject:_forumId];
+}
+#pragma mark segment
 - (void)changeSeg:(HMSegmentedControl *)seg {
     long index = (long)seg.selectedSegmentIndex;
     _forumId = _subforumIds[index];
@@ -210,11 +259,21 @@
     [self.rightMenu close];
     self.rightMenu = nil;
 }
+#pragma mark footer
 - (void)refreshArticleList {
     [_articleListView refreshData];
 }
 - (void)newArticle {
-    NSLog(@"create btn pressed\n");
+    if (_didLoadRightMenu) {
+        PostController *postController = [[PostController alloc] init];
+        NSDictionary *dic = @{
+                              @"forumId":_forumId,
+                              @"typeNames":_rightMenuNames,
+                              @"typeIds":_rightMenuIds
+                              };
+        [postController loadData:dic];
+        [self.navigationController pushViewController:postController animated:YES];
+    }
 }
 - (void)previousPage {
     [_articleListView previousPage];
@@ -222,26 +281,49 @@
 - (void)nextPage {
     [_articleListView nextPage];
 }
-
-- (REMenuItem *)menuItemAtIndex:(int)index {
+#pragma mark navigation bar
+- (REMenuItem *)menuItemAtIndex:(int)index withMenu:(NSString *)menu{
     __typeof (self) __weak weakSelf = self;
-    REMenuItem *item = [[REMenuItem alloc] initWithTitle:_rightMenuNames[index]
-                                                subtitle:nil
-                                                   image:nil
-                                        highlightedImage:nil
-                                                  action:^(REMenuItem *item) {
-                                                      [weakSelf dealMenu:index];
-                                                  }];
+    REMenuItem *item;
+    if ([menu isEqualToString:@"right"]) { //right menu
+        item = [[REMenuItem alloc] initWithTitle:_rightMenuNames[index]
+                                        subtitle:nil
+                                           image:nil
+                                highlightedImage:nil
+                                          action:^(REMenuItem *item) {
+                                              [weakSelf dealMenu:index withMenu:@"right"];
+                                          }];
+    } else { //middle menu
+        item = [[REMenuItem alloc] initWithTitle:_middleMenuNames[index]
+                                        subtitle:nil
+                                           image:nil
+                                highlightedImage:nil
+                                          action:^(REMenuItem *item) {
+                                              [weakSelf dealMenu:index withMenu:@"middle"];
+                                          }];
+    }
     return item;
 }
 
-- (void)dealMenu:(int)index {
-    if (index == 0) { //全部
-        [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
-    } else if (index == 1) { //精华
-        [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"digest"];
+- (void)dealMenu:(int)index withMenu:(NSString *)menu {
+    if ([menu isEqualToString:@"right"]) {
+        if (index == 0) { //全部
+            [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
+        } else if (index == 1) { //精华
+            [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"digest"];
+        } else {
+            [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"typeid"];
+        }
     } else {
-        [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"typeid"];
+        ArticleListController *articleListController = [[ArticleListController alloc] init];
+        [self.navigationController pushViewController:articleListController animated:YES];
+        NSDictionary *dic = @{
+                              @"forumId":_middleMenuIds[index],
+                              @"forumName":_middleMenuNames[index],
+                              @"forumIdList":_forunIdList,
+                              @"forumNameList":_forumNameList
+                              };
+        [articleListController loadData:dic];
     }
 }
 
@@ -253,21 +335,24 @@
         return [self.rightMenu close];
     [self.rightMenu showFromRect:CGRectMake(self.view.right - 80, 0, 80, self.view.height) inView:self.view];
 }
-- (void)loadData:(NSDictionary *)data {
-    _forumId = data[@"forumId"];
-    _forumName = data[@"forumName"];
+- (void)onNavigationTitleButtonClicked {
+    if (self.middleMenu.isOpen)
+        return [self.middleMenu close];
+    [self.middleMenu showFromRect:CGRectMake(self.view.right / 2 - 100, 0, 200, self.view.height) inView:self.view];
 }
 #pragma mark ArticleListTabelViewDelegate
 - (void)reloadRightMenu:(NSDictionary *)data {
     _rightMenuNames = [NSMutableArray arrayWithObjects:@"全部", @"精华", nil];
-    _rightMenuIds = [NSMutableArray arrayWithObjects:@"", nil];
+    _rightMenuIds = [NSMutableArray arrayWithObjects:@"", @"", nil];
     [_rightMenuNames addObjectsFromArray:[data allValues]];
     [_rightMenuIds addObjectsFromArray:[data allKeys]];
     [self initRightMenu];
+    _didLoadRightMenu = YES;
 }
 - (void)closeRightMenu {
     [self.rightMenu close];
 }
+//TODO: 选择type后无法计算页数, 需要修改api
 - (void)setPageNumber:(NSInteger)page andTotalPages:(NSInteger)pageNum {
     _pageLabel.text = [NSString stringWithFormat:@"%ld/%ld", page, pageNum];
 }

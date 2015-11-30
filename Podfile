@@ -13,6 +13,7 @@ pod 'JSONModel'
 pod 'SwipeBack'
 pod 'HMSegmentedControl'
 pod 'DKNightVersion'
+pod 'UITextView+Placeholder'
 target 'yamibo' do
 end
 
