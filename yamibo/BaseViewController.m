@@ -17,8 +17,7 @@
 
 @implementation BaseViewController
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
         // Custom initialization
@@ -29,13 +28,21 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = KCOLOR_YELLOW_FFEDBE;
     [self initNavigation];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openProfile:) name:KNotification_OpenProfile object:nil];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)initNavigation {
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     [self.navigationController.navigationBar setBarTintColor:KCOLOR_RED_6D2C1D];

@@ -10,6 +10,7 @@
 #import "ProfileModel.h"
 #import "CommunicationrManager.h"
 #import "YFaceImageView.h"
+#import "BlogListController.h"
 
 @interface ProfileController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSString *userId;
@@ -49,11 +50,7 @@
 - (void)getUserData {
     [CommunicationrManager getProfileWithUid:_userId completion:^(ProfileModel *model, NSString *message) {
         _userData = model;
-        if ([_userId isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]]) {
-            _isMyProfile = YES;
-        } else {
-            _isMyProfile = NO;
-        }
+        _isMyProfile = [_userId isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]];
         if (_isMyProfile) {
             self.title = @"我的主页";
         } else {
@@ -83,7 +80,7 @@
     _userId = uid;
 }
 
-#pragma mark tableview datasource
+#pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (_isMyProfile) {
         return 2;
@@ -128,7 +125,7 @@
             return nil;
     }
 }
-#pragma mark tableview delegate
+#pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.01f;
 }
@@ -214,6 +211,7 @@
         }];
         [levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(scoreLabel);
+            make.left.greaterThanOrEqualTo(genderImgView.mas_right).offset(20);
             make.width.mas_equalTo(70);
             make.height.mas_equalTo(19);
             make.centerY.equalTo(nameLabel);
@@ -268,6 +266,17 @@
         [btnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(cell);
         }];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        if (indexPath.row == 2) { //日志
+            BlogListController *blogController = [[BlogListController alloc] init];
+            NSDictionary *dic = @{@"userId":_userId, @"userName":_userData.userName};
+            [blogController loadDate:dic];
+            [self.navigationController pushViewController:blogController animated:YES];
+        }
     }
 }
 

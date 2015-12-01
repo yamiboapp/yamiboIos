@@ -23,19 +23,14 @@
  *  @author 李思良, 15-09-19
  *
  *  @brief  打开用户详情
- *
- *  @return
  */
 #define KNotification_OpenProfile       @"KNotification_OpenProfile"
 /**
  *  @author 李思良, 15-09-19
  *
  *  @brief  进入具体帖子
- *
- *  @return
  */
 #define KNotification_ToFeedDetail      @"KNotification_ToFeedDetail"
-
 /**
  *  @author 李思良, 15-09-19
  *
@@ -43,12 +38,22 @@
  */
 #define KNotification_ToForumDetail      @"KNotification_ToForumDetail"
 /**
- *  @author 杨爽, 15-10-15 21:10:27
+ *  @author 杨爽, 15-10-15
  *
  *  @brief  进入具体消息
  */
 #define KNotification_ToMessageDetail      @"KNotification_ToMessageDetail"
-
+/**
+ *  @author Shuang Yang, 15-11-30
+ *
+ *  @brief  进入具体日志
+ */
+#define KNotification_ToBlogDetail      @"KNotification_ToBlogDetail"
+/**
+ *  @author Shuang Yang, 15-11-30
+ *
+ *  @brief  Pop current viewController from navigationController
+ */
 #define kNotification_NeedToPop           @"KNotification_NeedToPop"
 
 #endif /* NotificationConstance_h */

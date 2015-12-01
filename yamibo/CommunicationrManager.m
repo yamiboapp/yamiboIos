@@ -15,6 +15,7 @@
 #import "ArticleModel.h"
 #import "ArticleDetailModel.h"
 #import "ProfileModel.h"
+#import "BlogModel.h"
 
 #define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
@@ -240,7 +241,33 @@
         completion(nil, @"内容加载失败");
     }];
 }
+#pragma mark blog
++ (void)getBlogListWithUid:(NSString *)uid andPage:(int)page completion:(void (^)(BlogListModel *model, NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"blog", @"uid":uid, @"page":@(page)};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject]) {
+            completion([[BlogListModel alloc] initWithDictionary:responseObject error:nil], nil);            
+        } else {
+            completion(nil, @"请求失败");
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        completion(nil, @"请求失败");
+    }];
 
+}
++ (void)getBlogDetailWithBlogId:(NSString *)bid completion:(void (^)(BlogDetailModel *model, NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"blog", @"op":@"view", @"blogid":bid};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject]) {
+                completion([[BlogDetailModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请求失败");
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        completion(nil, @"请求失败");
+    }];
+    
+}
 #pragma mark -
 + (AFHTTPRequestOperationManager *)defaultManager {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

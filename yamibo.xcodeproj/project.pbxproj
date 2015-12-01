@@ -86,10 +86,15 @@
 		BA65E9031BED734B00D8E037 /* forum-digest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65E9011BED734A00D8E037 /* forum-digest@2x.png */; };
 		BA65E9041BED734B00D8E037 /* forum-digest@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65E9021BED734B00D8E037 /* forum-digest@3x.png */; };
 		BA65E90C1BEE0EAD00D8E037 /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA65E90B1BEE0EAD00D8E037 /* SettingController.m */; };
+		BA6F652C1C0D72A90024A341 /* BlogDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F652B1C0D72A90024A341 /* BlogDetailController.m */; };
 		BA72C0CC1C0B0005004DE25D /* arrow-down-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72C0CA1C0B0005004DE25D /* arrow-down-white@2x.png */; };
 		BA72C0CD1C0B0005004DE25D /* arrow-down-white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72C0CB1C0B0005004DE25D /* arrow-down-white@3x.png */; };
 		BA72C0CF1C0B1163004DE25D /* arrow-down-gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72C0CE1C0B1163004DE25D /* arrow-down-gray@3x.png */; };
 		BA72C0D11C0B1286004DE25D /* arrow-down-gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72C0D01C0B1286004DE25D /* arrow-down-gray@2x.png */; };
+		BA72C0D41C0C1E25004DE25D /* BlogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA72C0D31C0C1E25004DE25D /* BlogModel.m */; };
+		BA72C0D91C0C2655004DE25D /* BlogListController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA72C0D81C0C2655004DE25D /* BlogListController.m */; };
+		BA72C0DC1C0C2AA2004DE25D /* BlogListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA72C0DB1C0C2AA2004DE25D /* BlogListTableView.m */; };
+		BA72C0DF1C0C2ADB004DE25D /* BlogListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA72C0DE1C0C2ADB004DE25D /* BlogListTableViewCell.m */; };
 		BA7F94E51BBCC2CF00034582 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F94E41BBCC2CF00034582 /* MessageModel.m */; };
 		BA7F951B1BBE583800034582 /* menu-forum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F95111BBE583800034582 /* menu-forum@2x.png */; };
 		BA7F951C1BBE583800034582 /* menu-forum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F95121BBE583800034582 /* menu-forum@3x.png */; };
@@ -310,10 +315,20 @@
 		BA65E9021BED734B00D8E037 /* forum-digest@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-digest@3x.png"; sourceTree = "<group>"; };
 		BA65E90A1BEE0EAD00D8E037 /* SettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingController.h; sourceTree = "<group>"; };
 		BA65E90B1BEE0EAD00D8E037 /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
+		BA6F652A1C0D72A90024A341 /* BlogDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogDetailController.h; sourceTree = "<group>"; };
+		BA6F652B1C0D72A90024A341 /* BlogDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogDetailController.m; sourceTree = "<group>"; };
 		BA72C0CA1C0B0005004DE25D /* arrow-down-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-down-white@2x.png"; sourceTree = "<group>"; };
 		BA72C0CB1C0B0005004DE25D /* arrow-down-white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-down-white@3x.png"; sourceTree = "<group>"; };
 		BA72C0CE1C0B1163004DE25D /* arrow-down-gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-down-gray@3x.png"; sourceTree = "<group>"; };
 		BA72C0D01C0B1286004DE25D /* arrow-down-gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-down-gray@2x.png"; sourceTree = "<group>"; };
+		BA72C0D21C0C1E25004DE25D /* BlogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogModel.h; sourceTree = "<group>"; };
+		BA72C0D31C0C1E25004DE25D /* BlogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogModel.m; sourceTree = "<group>"; };
+		BA72C0D71C0C2655004DE25D /* BlogListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogListController.h; sourceTree = "<group>"; };
+		BA72C0D81C0C2655004DE25D /* BlogListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogListController.m; sourceTree = "<group>"; };
+		BA72C0DA1C0C2AA2004DE25D /* BlogListTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogListTableView.h; sourceTree = "<group>"; };
+		BA72C0DB1C0C2AA2004DE25D /* BlogListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogListTableView.m; sourceTree = "<group>"; };
+		BA72C0DD1C0C2ADB004DE25D /* BlogListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogListTableViewCell.h; sourceTree = "<group>"; };
+		BA72C0DE1C0C2ADB004DE25D /* BlogListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogListTableViewCell.m; sourceTree = "<group>"; };
 		BA7F94E31BBCC2CF00034582 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		BA7F94E41BBCC2CF00034582 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		BA7F95111BBE583800034582 /* menu-forum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-forum@2x.png"; sourceTree = "<group>"; };
@@ -735,6 +750,8 @@
 				BA7F94E41BBCC2CF00034582 /* MessageModel.m */,
 				BAF4015F1C06B3E300EC161D /* ProfileModel.h */,
 				BAF401601C06B3E300EC161D /* ProfileModel.m */,
+				BA72C0D21C0C1E25004DE25D /* BlogModel.h */,
+				BA72C0D31C0C1E25004DE25D /* BlogModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -771,6 +788,7 @@
 		65BB63411ADE0C3A0042C359 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BA72C0D51C0C261F004DE25D /* Blog */,
 				D85DA2A21BE54BDC006B6DFA /* ArticleDetail */,
 				BA5334841BE363DF000979F4 /* ArticleList */,
 				BA8B26A61BB0128B00173D5B /* Message */,
@@ -788,6 +806,7 @@
 		65BB63421ADE0C440042C359 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BA72C0D61C0C263F004DE25D /* Blog */,
 				BAB8BA551C09F1D000C92B75 /* Post */,
 				BAF401621C06B92100EC161D /* Profile */,
 				BA65E9051BEE0BC400D8E037 /* Setting */,
@@ -900,6 +919,28 @@
 				BA65E90B1BEE0EAD00D8E037 /* SettingController.m */,
 			);
 			name = Setting;
+			sourceTree = "<group>";
+		};
+		BA72C0D51C0C261F004DE25D /* Blog */ = {
+			isa = PBXGroup;
+			children = (
+				BA72C0DA1C0C2AA2004DE25D /* BlogListTableView.h */,
+				BA72C0DB1C0C2AA2004DE25D /* BlogListTableView.m */,
+				BA72C0DD1C0C2ADB004DE25D /* BlogListTableViewCell.h */,
+				BA72C0DE1C0C2ADB004DE25D /* BlogListTableViewCell.m */,
+			);
+			name = Blog;
+			sourceTree = "<group>";
+		};
+		BA72C0D61C0C263F004DE25D /* Blog */ = {
+			isa = PBXGroup;
+			children = (
+				BA72C0D71C0C2655004DE25D /* BlogListController.h */,
+				BA72C0D81C0C2655004DE25D /* BlogListController.m */,
+				BA6F652A1C0D72A90024A341 /* BlogDetailController.h */,
+				BA6F652B1C0D72A90024A341 /* BlogDetailController.m */,
+			);
+			name = Blog;
 			sourceTree = "<group>";
 		};
 		BA7F95101BBE582000034582 /* MainMenu */ = {
@@ -1229,6 +1270,7 @@
 				6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */,
 				D85DA2A81BE5594D006B6DFA /* ArticleDetailTableViewCell.m in Sources */,
 				D85DA2A51BE55911006B6DFA /* ArticleDetailTableView.m in Sources */,
+				BA72C0D41C0C1E25004DE25D /* BlogModel.m in Sources */,
 				654934571BB0205A005141C6 /* CommunicationrManager.m in Sources */,
 				BA65E90C1BEE0EAD00D8E037 /* SettingController.m in Sources */,
 				658D6F4A1BB6E4C20058CEEF /* MBProgressHUD+BWMExtension.m in Sources */,
@@ -1240,6 +1282,7 @@
 				65AB48BD1BB7AFDD00B7D173 /* ThreadFavoriteModel.m in Sources */,
 				655ABCD11BAB966D0023F92B /* HomeHotView.m in Sources */,
 				658ABB851BAD0AAB00BAB4AD /* YFaceImageView.m in Sources */,
+				BA72C0D91C0C2655004DE25D /* BlogListController.m in Sources */,
 				655D00E01B4D189E00F0FFBE /* AppManager.m in Sources */,
 				6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */,
 				655ABCCE1BAB95FE0023F92B /* HomeBannerView.m in Sources */,
@@ -1268,18 +1311,21 @@
 				D8D70CE41BCECF0300870C36 /* YPostContentView.m in Sources */,
 				D8D70CE11BCEC13E00870C36 /* ArticleDetailController.m in Sources */,
 				656531F21AE29C6D00486ECF /* LocationManager.m in Sources */,
+				BA72C0DF1C0C2ADB004DE25D /* BlogListTableViewCell.m in Sources */,
 				BA7F94E51BBCC2CF00034582 /* MessageModel.m in Sources */,
 				650DDD821BAB0E5D004ACFF2 /* YColor+Ext.m in Sources */,
 				BAB8BA581C09F22D00C92B75 /* PostController.m in Sources */,
 				BA28B7EA1BF0933D003B4633 /* NKColorSwitch.m in Sources */,
 				BA8B26B61BB0184500173D5B /* MessageController.m in Sources */,
 				65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */,
+				BA6F652C1C0D72A90024A341 /* BlogDetailController.m in Sources */,
 				6597FCA11BAC37BF009025E3 /* NSData+SDDataCache.m in Sources */,
 				65378E0B1BAE95F2001B27FD /* CollectTableView.m in Sources */,
 				BAF401611C06B3E300EC161D /* ProfileModel.m in Sources */,
 				6597FCA81BAC37BF009025E3 /* UIView+SDExtension.m in Sources */,
 				65378E121BAECEE1001B27FD /* NeighborController.m in Sources */,
 				6597FCA51BAC37BF009025E3 /* TAPageControl.m in Sources */,
+				BA72C0DC1C0C2AA2004DE25D /* BlogListTableView.m in Sources */,
 				6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */,
 				BA53348A1BE3646B000979F4 /* ArticleListTableViewCell.m in Sources */,
 				65FC571A1BB6760100FC85A5 /* ForumModel.m in Sources */,

@@ -131,7 +131,6 @@
     return [tableView fd_heightForCellWithIdentifier:KArticleListTableViewCell cacheByIndexPath:indexPath configuration:^(id cell) {
         [self configureCell:cell atIndexPath:indexPath];
     }];
-    return 70;
 }
 - (void)configureCell:(ArticleListTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"

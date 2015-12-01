@@ -27,7 +27,14 @@
     [self configNavigation];
     [self initSwitch];
     [self initView];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToMessageDetail object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)configNavigation {
     [self showCustomNavigationMenuButton];

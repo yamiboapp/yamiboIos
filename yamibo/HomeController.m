@@ -87,7 +87,7 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
-//==========>
+#pragma mark - Observer
 - (void)pushToDetailController:(NSNotification*)notification{
     if ([notification.name isEqualToString:KNotification_ToFeedDetail]) {
         ArticleDetailController *articleDetailController = [[ArticleDetailController alloc] init];

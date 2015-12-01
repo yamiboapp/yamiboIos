@@ -14,6 +14,8 @@
 @class ArticleListModel;
 @class ArticleDetailModel;
 @class ProfileModel;
+@class BlogListModel;
+@class BlogDetailModel;
 
 @interface CommunicationrManager : NSObject
 
@@ -44,4 +46,8 @@
 + (void)delMessage:(NSString *)pmId orConversation:(NSString *)toId ofType:(MessageViewType)type completion:(void (^)(NSString *message))completion;
 
 + (void)getArticleDetailList:(int)page threadID:(NSInteger)tid postPerPage:(int)ppp authorID:(NSInteger)uid completion:(void (^)(ArticleDetailModel *model, NSString *message))completion;
+
++ (void)getBlogListWithUid:(NSString *)uid andPage:(int)page completion:(void (^)(BlogListModel *model, NSString *message))completion;
+
++ (void)getBlogDetailWithBlogId:(NSString *)bid completion:(void (^)(BlogDetailModel *model, NSString *message))completion ;
 @end

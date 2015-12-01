@@ -32,7 +32,7 @@
 @property (strong, nonatomic) NSMutableArray *middleMenuNames;
 @property (strong, nonatomic) NSMutableArray *middleMenuIds;
 @property (strong, nonatomic) NSMutableArray *forumNameList;
-@property (strong, nonatomic) NSMutableArray *forunIdList;
+@property (strong, nonatomic) NSMutableArray *forumIdList;
 
 @property (strong, nonatomic) REMenu *rightMenu;
 @property (strong, nonatomic) NSMutableArray *rightMenuNames;
@@ -246,9 +246,9 @@
     _middleMenuNames = [_forumNameList mutableCopy];
     [_middleMenuNames removeObject:_forumName];
     
-    _forunIdList = data[@"forumIdList"];
-    _middleMenuIds = [_forunIdList mutableCopy];
-    [_middleMenuNames removeObject:_forumId];
+    _forumIdList = data[@"forumIdList"];
+    _middleMenuIds = [_forumIdList mutableCopy];
+    [_middleMenuIds removeObject:_forumId];
 }
 #pragma mark segment
 - (void)changeSeg:(HMSegmentedControl *)seg {
@@ -320,7 +320,7 @@
         NSDictionary *dic = @{
                               @"forumId":_middleMenuIds[index],
                               @"forumName":_middleMenuNames[index],
-                              @"forumIdList":_forunIdList,
+                              @"forumIdList":_forumIdList,
                               @"forumNameList":_forumNameList
                               };
         [articleListController loadData:dic];
