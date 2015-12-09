@@ -13,6 +13,7 @@
 @interface MessageTableView()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) MessageViewType viewType;
+@property (assign, nonatomic) int msgCount;
 @property (assign, nonatomic) int perPage;
 @end
 
@@ -46,13 +47,14 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
-            }
-            _perPage = [model.perPage intValue];
-            if (model.msgList.count < _perPage) {
-                [self hiddenFooter:YES];
-            } else {
-                [self hiddenFooter:NO];
+                _dataArray = [NSMutableArray arrayWithArray:[[model.msgList reverseObjectEnumerator] allObjects]];
+                _msgCount = [model.count intValue];
+                _perPage = [model.perPage intValue];
+                if (model.msgList.count < _perPage || _msgCount == _perPage) {
+                    [self hiddenFooter:YES];
+                } else {
+                    [self hiddenFooter:NO];
+                }
             }
             [self reloadData];
         }];
@@ -62,13 +64,14 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
-            }
-            _perPage = [model.perPage intValue];
-            if (model.msgList.count < _perPage) {
-                [self hiddenFooter:YES];
-            } else {
-                [self hiddenFooter:NO];
+                _dataArray = [NSMutableArray arrayWithArray:[[model.msgList reverseObjectEnumerator] allObjects]];
+                _msgCount = [model.count intValue];
+                _perPage = [model.perPage intValue];
+                if (model.msgList.count < _perPage || _msgCount == _perPage) {
+                    [self hiddenFooter:YES];
+                } else {
+                    [self hiddenFooter:NO];
+                }
             }
             [self reloadData];
         }];
@@ -82,7 +85,7 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:model.msgList];
+                [_dataArray addObjectsFromArray:[[model.msgList reverseObjectEnumerator] allObjects]];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];
@@ -97,7 +100,7 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:model.msgList];
+                [_dataArray addObjectsFromArray:[[model.msgList reverseObjectEnumerator] allObjects]];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];

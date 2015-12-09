@@ -34,7 +34,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.showsVerticalScrollIndicator = NO;
-//        self.scrollEnabled = NO;
+        self.scrollEnabled = NO;
         self.textDelegate = self;
     }
     return self;

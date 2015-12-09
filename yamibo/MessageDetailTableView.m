@@ -15,9 +15,8 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) MessageViewType viewType;
 @property (assign, nonatomic) NSInteger detailId;
-@property (assign, nonatomic) float msgCount;
-@property (assign, nonatomic) float perPage;
-@property (assign, nonatomic) int currentPage;
+@property (assign, nonatomic) int msgCount;
+@property (assign, nonatomic) int perPage;
 @property (strong, nonatomic) UIView *editingMenuView;              //click cell to open the option panel
 @property (strong, nonatomic) MessageDetailTableViewCell *longPressedCell;
 @end
@@ -53,25 +52,18 @@
             [self stopLoadNewData];
             if (message != nil) {
                 [Utility showTitle:message];
+                
             } else {
+                _dataArray = [NSMutableArray arrayWithArray:[[model.msgList reverseObjectEnumerator] allObjects]];
                 _msgCount = [model.count intValue];
                 _perPage = [model.perPage intValue];
-                _currentPage = ceil(_msgCount / _perPage);
-                [CommunicationrManager getPrivateMessageDetailList:_currentPage toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
-                    [self stopLoadNewData];
-                    if (message != nil) {
-                        [Utility showTitle:message];
-                    } else {
-                        _dataArray = [NSMutableArray arrayWithArray:model.msgList];
-                    }
-                    if (model.msgList.count < _perPage) {
-                        [self hiddenHeader:YES];
-                    } else {
-                        [self hiddenHeader:NO];
-                    }
-                    [self hiddenFooter:YES];
-                    [self reloadData];
-                }];
+                //FIXME: 所有类似tableview都需注意_msgCount == _perPage的情况
+                if (model.msgList.count < _perPage || _msgCount == _perPage) {
+                    [self hiddenHeader:YES];
+                } else {
+                    [self hiddenHeader:NO];
+                }
+                [self reloadData];
             }
         }];
     } else if (_viewType == MessagePublic) {
@@ -81,23 +73,23 @@
                 [Utility showTitle:message];
             } else {
                 _dataArray = [NSMutableArray arrayWithArray:model.msgList];
-                [self hiddenFooter:true];
+                [self hiddenHeader:YES];
                 [self reloadData];
             }
         }];
     }
-    
+    [self hiddenFooter:YES];
 }
 - (void)loadMoreData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageDetailList:--_currentPage toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageDetailList:(int)_dataArray.count / _perPage + 1 toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
             [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
                 //从后往前加载
                 [_dataArray replaceObjectsInRange:NSMakeRange(0,0)
-                                withObjectsFromArray:model.msgList];
+                                withObjectsFromArray:[[model.msgList reverseObjectEnumerator] allObjects]];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenHeader:YES];
@@ -119,7 +111,7 @@
 }
 
 - (void)configureCell:(MessageDetailTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    cell.fd_enforceFrameLayout = NO; // Enable to use "-sizeThatFits:"
+    cell.fd_enforceFrameLayout = YES; // Enable to use "-sizeThatFits:"
     if (_viewType == MessagePrivate) {
         [cell loadPrivateData:_dataArray[indexPath.row]];
     } else if (_viewType == MessagePublic) {

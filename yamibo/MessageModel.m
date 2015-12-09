@@ -27,7 +27,8 @@
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"Variables.list": @"msgList",
-                                                       @"Variables.perpage":@"perPage"
+                                                       @"Variables.perpage":@"perPage",
+                                                       @"Variables.count":@"count"
                                                        }];
 }
 @end
@@ -51,7 +52,8 @@
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"Variables.list": @"msgList",
-                                                       @"Variables.perpage":@"perPage"
+                                                       @"Variables.perpage":@"perPage",
+                                                       @"Variables.count":@"count",
                                                        }];
 }
 @end
@@ -99,7 +101,7 @@
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
-                                                       @"Variables.list": @"msgList"
+                                                       @"Variables.list": @"msgList",
                                                        }];
 }
 @end

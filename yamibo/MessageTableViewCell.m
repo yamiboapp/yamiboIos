@@ -93,16 +93,16 @@
         _titleLabel.text = [NSString stringWithFormat:@"您 对 %@ 说：", data.toName];
     }
     _contentLabel.text = data.summary;
-    _timeLable.text = @"2012-2-23 18:33";
-    //_timeLable.text = data.date;
+    //_timeLable.text = @"2012-2-23 18:33";
+    _timeLable.text = data.date;
 }
 
 - (void)loadPublicData:(PublicMessageModel *)data {
     [_headImg setUserId:data.authorId andType:FaceMiddle];
     _titleLabel.text = [NSString stringWithFormat:@"%@ 说：", data.authorName];
     _contentLabel.text = data.summary;
-    _timeLable.text = @"2012-2-23 18:33";
-    //_timeLable.text = data.date;
+    //_timeLable.text = @"2012-2-23 18:33";
+    _timeLable.text = data.date;
 }
 
 @end

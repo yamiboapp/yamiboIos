@@ -9,11 +9,12 @@
 #import "MessageDetailTableViewCell.h"
 #import "YFaceImageView.h"
 #import "MessageModel.h"
+#import "YPostContentView.h"
 
 @interface MessageDetailTableViewCell()
 @property (strong, nonatomic) UIView *backView;
 @property (strong, nonatomic) YFaceImageView *headImg;
-@property (strong, nonatomic) UILabel *contentLabel;
+@property (strong, nonatomic) YPostContentView *contentLabel;
 @property (strong, nonatomic) UILabel *timeLable;
 @end
 @implementation MessageDetailTableViewCell
@@ -52,10 +53,10 @@
     _backView.backgroundColor = KCOLOR_YELLOW_FDF5D8;
     [self.contentView addSubview:_backView];
     
-    _contentLabel = [[UILabel alloc] init];
-    _contentLabel.numberOfLines = 0;
-    _contentLabel.font = KFONT(12);
-    _contentLabel.textColor = KCOLOR_GRAY;
+    _contentLabel = [[YPostContentView alloc] init];
+    //_contentLabel.numberOfLines = 0;
+    //_contentLabel.font = KFONT(12);
+    //_contentLabel.textColor = KCOLOR_GRAY;
     [_backView addSubview:_contentLabel];
     
     _headImg = [[YFaceImageView alloc] init];
@@ -86,7 +87,7 @@
         make.left.equalTo(_headImg.mas_right).offset(20);
         make.top.equalTo(_headImg);
         make.bottom.equalTo(_backView).offset(-15);
-        make.width.mas_lessThanOrEqualTo(190);
+        make.width.mas_equalTo(190);
         make.height.mas_greaterThanOrEqualTo(50);
     }];
     
@@ -114,7 +115,7 @@
         make.right.equalTo(_headImg.mas_left).offset(-20);
         make.top.equalTo(_headImg);
         make.bottom.equalTo(_backView).offset(-15);
-        make.width.mas_lessThanOrEqualTo(190);
+        make.width.mas_equalTo(190);
         make.height.mas_greaterThanOrEqualTo(50);
     }];
     
@@ -127,14 +128,24 @@
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data {
     [_headImg setUserId:data.fromId andType:FaceMiddle];
-    _contentLabel.text = data.message;
+ //   _contentLabel.text = data.message;
+    [_contentLabel setContentHtml:data.message];
     _timeLable.text = data.date;
 }
 
 - (void)loadPublicData:(PublicMessageDetailModel *)data {
     [_headImg setUserId:data.authorId andType:FaceMiddle];
-    _contentLabel.text = data.message;
+ //   _contentLabel.text = data.message;
     _timeLable.text = data.date;
+}
+
+- (CGSize)sizeThatFits:(CGSize)size {
+    CGFloat x = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190].height;
+    if (x > 50) {
+        return CGSizeMake(self.contentView.width, x + 30);
+    } else {
+        return CGSizeMake(self.contentView.width, 80);
+    }
 }
 
 - (void)cellBgColor:(BOOL)longPressed {
