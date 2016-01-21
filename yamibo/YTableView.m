@@ -14,16 +14,18 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
+    __weak typeof(self) weakSelf = self;
+
     if (self = [super initWithFrame:frame])
     {
         if ([self showHeaderRefresh])
         {
             self.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-                if (![self.footer isRefreshing]) {
-                    [self.footer resetNoMoreData];
-                    [self loadNewData];
+                if (![weakSelf.footer isRefreshing]) {
+                    [weakSelf.footer resetNoMoreData];
+                    [weakSelf loadNewData];
                 } else {
-                    [self.header endRefreshing];
+                    [weakSelf.header endRefreshing];
                 }
             }];
         }
@@ -31,10 +33,10 @@
         if ([self showFooterRefresh])
         {
             self.footer = [MJRefreshAutoStateFooter footerWithRefreshingBlock:^{
-                if (![self.header isRefreshing]) {
-                    [self loadMoreData];
+                if (![weakSelf.header isRefreshing]) {
+                    [weakSelf loadMoreData];
                 } else {
-                    [self.footer endRefreshing];
+                    [weakSelf.footer endRefreshing];
                 }
             }];
             self.footer.automaticallyHidden = NO;

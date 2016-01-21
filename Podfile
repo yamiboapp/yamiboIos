@@ -14,6 +14,7 @@ pod 'SwipeBack'
 pod 'HMSegmentedControl'
 pod 'DKNightVersion'
 pod 'UITextView+Placeholder'
+pod 'FastImageCache'
 target 'yamibo' do
 end
 

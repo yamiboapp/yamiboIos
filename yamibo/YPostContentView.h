@@ -21,7 +21,6 @@
 @property (nonatomic, weak) id<YPostContentViewDelegate> postContentViewDelegate;
 @property (nonatomic, assign, readonly) CGFloat displayHeight;
 
-
 - (void)setContentHtml:(NSString *)html;
 
 #pragma mark - TODO

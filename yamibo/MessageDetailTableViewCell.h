@@ -10,7 +10,7 @@
 
 @class PrivateMessageDetailModel;
 @class PublicMessageDetailModel;
-
+#import "YPostContentView.h"
 #define KMessageDetailTableViewCell_In  @"KMessageDetailTableViewCell_In"
 #define KMessageDetailTableViewCell_Out  @"KMessageDetailTableViewCell_Out"
 
@@ -19,5 +19,8 @@
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data;
 - (void)loadPublicData:(PublicMessageDetailModel *)data;
 - (void)cellBgColor:(BOOL)longPressed;
+@property (strong, nonatomic) YPostContentView *contentLabel;
+@property (assign, nonatomic, getter=getHeight) CGFloat height;
+@property (assign, nonatomic) int pmid;
 
 @end

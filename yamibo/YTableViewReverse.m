@@ -15,19 +15,20 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
+    __weak typeof(self) weakSelf = self;
     if (self = [super initWithFrame:frame])
     {
         if ([self showHeaderRefresh])
         {
             self.header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
-                ((MJRefreshStateHeader *)self.header).lastUpdatedTimeText = ^NSString*(NSDate *lastUpdatedTime){
+                ((MJRefreshStateHeader *)weakSelf.header).lastUpdatedTimeText = ^NSString*(NSDate *lastUpdatedTime){
                     return nil;
                 };
 
-                if (![self.footer isRefreshing]) {
-                    [self loadMoreData];
+                if (![weakSelf.footer isRefreshing]) {
+                    [weakSelf loadMoreData];
                 } else {
-                    [self.header endRefreshing];
+                    [weakSelf.header endRefreshing];
                 }
             }];
             ((MJRefreshStateHeader *)self.header).lastUpdatedTimeLabel.hidden = YES;
@@ -39,13 +40,13 @@
         if ([self showFooterRefresh])
         {
             self.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-                if (![self.header isRefreshing]) {
-                    [self loadNewData];
+                if (![weakSelf.header isRefreshing]) {
+                    [weakSelf loadNewData];
                 } else {
-                    [self.footer endRefreshing];
+                    [weakSelf.footer endRefreshing];
                 }
             }];
-            self.footer.automaticallyHidden = NO;
+            weakSelf.footer.automaticallyHidden = NO;
             //[(MJRefreshAutoNormalFooter *)self.footer setTitle:@"上拉可以刷新" forState:MJRefreshStateWillRefresh];
             [(MJRefreshAutoNormalFooter *)self.footer setTitle:@"正在刷新数据中..." forState:MJRefreshStateRefreshing];
         }

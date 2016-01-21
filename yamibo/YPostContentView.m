@@ -41,7 +41,7 @@
 }
 
 - (CGFloat)displayHeight {
-    CGSize displaySize = [_attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:self.frame.size.width];
+    CGSize displaySize = [_attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190];
     return displaySize.height;
 }
 
@@ -76,7 +76,6 @@
 #pragma mark - DTAttributedTextContentViewDelegate
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame {
-    
     if ([attachment isKindOfClass:[DTImageTextAttachment class]]) {
         
         DTLazyImageView *imageView = [[DTLazyImageView alloc] initWithFrame:frame];
@@ -146,6 +145,8 @@
     
     if (didUpdate) {
         [self relayoutText];
+        NSDictionary *dic = @{@"height":[NSNumber numberWithFloat:self.displayHeight], @"pmid":[NSNumber numberWithLong:self.tag]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"peps" object:nil userInfo:dic];
     }
 }
 

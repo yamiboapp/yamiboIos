@@ -9,12 +9,10 @@
 #import "MessageDetailTableViewCell.h"
 #import "YFaceImageView.h"
 #import "MessageModel.h"
-#import "YPostContentView.h"
 
 @interface MessageDetailTableViewCell()
 @property (strong, nonatomic) UIView *backView;
 @property (strong, nonatomic) YFaceImageView *headImg;
-@property (strong, nonatomic) YPostContentView *contentLabel;
 @property (strong, nonatomic) UILabel *timeLable;
 @end
 @implementation MessageDetailTableViewCell
@@ -26,6 +24,7 @@
     // Fix the bug in iOS7 - initial constraints warning
     self.contentView.bounds = [UIScreen mainScreen].bounds;
 }
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ([reuseIdentifier  isEqual: KMessageDetailTableViewCell_In]) {
         if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -88,7 +87,7 @@
         make.top.equalTo(_headImg);
         make.bottom.equalTo(_backView).offset(-15);
         make.width.mas_equalTo(190);
-        make.height.mas_greaterThanOrEqualTo(50);
+        //make.height.mas_greaterThanOrEqualTo(50);
     }];
     
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,10 +126,14 @@
 }
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data {
+    /*if ([data.pmId intValue]== 493323) {
+        int y=1;
+    }*/
     [_headImg setUserId:data.fromId andType:FaceMiddle];
  //   _contentLabel.text = data.message;
-    [_contentLabel setContentHtml:data.message];
+    //[_contentLabel setContentHtml:data.message];
     _timeLable.text = data.date;
+    _pmid = [data.pmId intValue];
 }
 
 - (void)loadPublicData:(PublicMessageDetailModel *)data {
@@ -138,16 +141,20 @@
  //   _contentLabel.text = data.message;
     _timeLable.text = data.date;
 }
-
-- (CGSize)sizeThatFits:(CGSize)size {
-    CGFloat x = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190].height;
-    if (x > 50) {
-        return CGSizeMake(self.contentView.width, x + 30);
-    } else {
-        return CGSizeMake(self.contentView.width, 80);
+- (CGFloat)getHeight {
+    if (_height == 0) {
+        CGFloat x = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190].height;
+        if (x > 51) {
+            _height = x + 30;
+        } else {
+            _height = 81;
+        }
     }
+    return _height;
 }
-
+/*- (CGSize)sizeThatFits:(CGSize)size {
+    return CGSizeMake(self.frame.size.width, [self getHeight]);
+}*/
 - (void)cellBgColor:(BOOL)longPressed {
     if (longPressed) {
         _backView.backgroundColor = KCOLOR_GRAY_70;
@@ -155,5 +162,4 @@
         _backView.backgroundColor = KCOLOR_YELLOW_FDF5D8;
     }
 }
-
 @end
