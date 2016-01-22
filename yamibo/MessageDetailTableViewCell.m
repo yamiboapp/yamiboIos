@@ -53,9 +53,6 @@
     [self.contentView addSubview:_backView];
     
     _contentLabel = [[YPostContentView alloc] init];
-    //_contentLabel.numberOfLines = 0;
-    //_contentLabel.font = KFONT(12);
-    //_contentLabel.textColor = KCOLOR_GRAY;
     [_backView addSubview:_contentLabel];
     
     _headImg = [[YFaceImageView alloc] init];
@@ -87,7 +84,6 @@
         make.top.equalTo(_headImg);
         make.bottom.equalTo(_backView).offset(-15);
         make.width.mas_equalTo(190);
-        //make.height.mas_greaterThanOrEqualTo(50);
     }];
     
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -115,7 +111,6 @@
         make.top.equalTo(_headImg);
         make.bottom.equalTo(_backView).offset(-15);
         make.width.mas_equalTo(190);
-        make.height.mas_greaterThanOrEqualTo(50);
     }];
     
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,14 +121,12 @@
 }
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data {
-    /*if ([data.pmId intValue]== 493323) {
-        int y=1;
-    }*/
     [_headImg setUserId:data.fromId andType:FaceMiddle];
- //   _contentLabel.text = data.message;
-    //[_contentLabel setContentHtml:data.message];
+    
+    [_contentLabel setContentHtml:data.message];
     _timeLable.text = data.date;
     _pmid = [data.pmId intValue];
+    
 }
 
 - (void)loadPublicData:(PublicMessageDetailModel *)data {
@@ -141,20 +134,17 @@
  //   _contentLabel.text = data.message;
     _timeLable.text = data.date;
 }
+
 - (CGFloat)getHeight {
-    if (_height == 0) {
-        CGFloat x = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190].height;
-        if (x > 51) {
-            _height = x + 30;
-        } else {
-            _height = 81;
-        }
+    CGFloat x = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190].height;
+    if (x > 51) {
+        _height = x + 30;
+    } else {
+        _height = 81;
     }
     return _height;
 }
-/*- (CGSize)sizeThatFits:(CGSize)size {
-    return CGSizeMake(self.frame.size.width, [self getHeight]);
-}*/
+
 - (void)cellBgColor:(BOOL)longPressed {
     if (longPressed) {
         _backView.backgroundColor = KCOLOR_GRAY_70;

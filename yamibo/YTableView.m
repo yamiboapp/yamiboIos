@@ -8,7 +8,7 @@
 
 #import "YTableView.h"
 #import "MJRefresh.h"
-#import "UITableView+FDTemplateLayoutCell.h"
+//#import "UITableView+FDTemplateLayoutCell.h"
 
 @implementation YTableView
 
@@ -46,7 +46,7 @@
         }
         self.tableFooterView = [UIView new];
     }
-    self.fd_debugLogEnabled = NO;
+//    self.fd_debugLogEnabled = NO;
     return self;
 }
 

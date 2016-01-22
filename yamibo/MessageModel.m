@@ -78,7 +78,8 @@
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"Variables.list": @"msgList",
                                                        @"Variables.count":@"count",
-                                                       @"Variables.perpage":@"perPage"
+                                                       @"Variables.perpage":@"perPage",
+                                                       @"Variables.list.message":@"mList"
                                                        }];
 }
 @end

@@ -13,11 +13,11 @@
 @interface MessageDetailTableView()<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
-@property (strong, atomic) NSMutableArray *cellFlagArray;
-@property (strong, atomic) NSMutableArray *heightArray;
 @property (strong, atomic) NSMutableDictionary *pmidIndexDic;
-
-//@property (strong, atomic) NSMutableArray *cellArray;
+@property (strong, atomic) NSMutableDictionary *pmidHeightDic;
+@property (strong, atomic) NSMutableDictionary *pmidFlagDic; // Recored the pmid that has images
+@property (strong, atomic) NSMutableArray *pmidArray;
+@property (strong, atomic) NSMutableArray *cellFlagArray;
 
 @property (assign, nonatomic) MessageViewType viewType;
 @property (assign, nonatomic) NSInteger detailId;
@@ -41,15 +41,17 @@
         _viewType = type;
         _detailId = detailId;
         _dataArray = [NSMutableArray array];
-        _cellFlagArray = [NSMutableArray array];
-        //_cellArray = [NSMutableArray array];
-        _heightArray = [NSMutableArray array];
         _pmidIndexDic = [NSMutableDictionary dictionary];
-
+        _pmidHeightDic = [NSMutableDictionary dictionary];
+        _pmidFlagDic = [NSMutableDictionary dictionary];
+        _pmidArray = [NSMutableArray array];
+        _cellFlagArray = [NSMutableArray array];
+        
         [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_In];
         [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_Out];
-        self.estimatedRowHeight = 200;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(peps:) name:@"peps" object:nil];
+        self.estimatedRowHeight = 100;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeCell:) name:@"resizeCell" object:nil];
     }
     return self;
 }
@@ -61,79 +63,73 @@
 }
 
 - (void)loadNewData {
-    __unsafe_unretained MessageDetailTableView *weakSelf = self;
     if (_viewType == MessagePrivate) {
         [CommunicationrManager getPrivateMessageDetailList:1 toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
-            [weakSelf stopLoadNewData];
+            [self stopLoadNewData];
             if (message != nil) {
                 [Utility showTitle:message];
                 
             } else {
-                _dataArray = [NSMutableArray arrayWithArray:[[model.msgList reverseObjectEnumerator] allObjects]];
-                //_cellArray = [NSMutableArray array];
-                for (int i = 0; i < model.msgList.count; ++i) {
-                    [_heightArray addObject:@81];
-                }
-                //_cellFlagArray = [NSMutableArray array];
-                for (int i = 0; i < _dataArray.count; ++i) {
+                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
+                int i = 0;
+                for (PrivateMessageDetailModel *data in _dataArray) {
+                    [_pmidIndexDic setObject:@((int)_dataArray.count-i-1) forKey:@([data.pmId intValue])];
                     [_cellFlagArray addObject:@0];
-                    PrivateMessageDetailModel *data = [_dataArray objectAtIndex:i];
-                    [_pmidIndexDic setObject:[NSNumber numberWithInt:i] forKey:data.pmId];
+                    [_pmidArray insertObject:@([data.pmId intValue]) atIndex:0];
+                    ++i;
                 }
 
                 _msgCount = [model.count intValue];
                 _perPage = [model.perPage intValue];
                 //FIXME: 所有类似tableview都需注意_msgCount == _perPage的情况
                 if (model.msgList.count < _perPage || _msgCount == _perPage) {
-                    [weakSelf hiddenHeader:YES];
+                    [self hiddenHeader:YES];
                 } else {
-                    [weakSelf hiddenHeader:NO];
+                    [self hiddenHeader:NO];
                 }
-                [weakSelf reloadData];
+                [self reloadData];
             }
         }];
     } else if (_viewType == MessagePublic) {
         [CommunicationrManager getPublicMessageDetailList:_detailId completion:^(PublicMessageDetailListModel *model, NSString *message) {
-            [weakSelf stopLoadNewData];
+            [self stopLoadNewData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
                 _dataArray = [NSMutableArray arrayWithArray:model.msgList];
-                [weakSelf hiddenHeader:YES];
-                [weakSelf reloadData];
+                [self hiddenHeader:YES];
+                [self reloadData];
             }
         }];
     }
     [self hiddenFooter:YES];
 }
 - (void)loadMoreData {
-    __unsafe_unretained MessageDetailTableView *weakSelf = self;
     if (_viewType == MessagePrivate) {
         [CommunicationrManager getPrivateMessageDetailList:(int)_dataArray.count / _perPage + 1 toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
-            [weakSelf stopLoadMoreData];
+            [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                //从后往前加载
-                [_dataArray replaceObjectsInRange:NSMakeRange(0,0)
-                                withObjectsFromArray:[[model.msgList reverseObjectEnumerator] allObjects]];
-                for (int i = 0; i < model.msgList.count; ++i) {
-                    [_heightArray insertObject:@81 atIndex:0];
-                    //[_cellArray insertObject:[[MessageDetailTableViewCell alloc] init] atIndex:0];
+                [_dataArray addObjectsFromArray:model.msgList];
+                for (PrivateMessageDetailModel *data in model.msgList) {
+                   [_pmidArray insertObject:@([data.pmId intValue]) atIndex:0];
                 }
+
+                int i = 0;
                 _cellFlagArray = [NSMutableArray array];
-                for (int i = 0; i < _dataArray.count; ++i) {
+                for (PrivateMessageDetailModel *data in _dataArray) {
                     [_cellFlagArray addObject:@0];
-                    PrivateMessageDetailModel *data = [_dataArray objectAtIndex:i];
-                    [_pmidIndexDic setObject:[NSNumber numberWithInt:i]  forKey:data.pmId];
+                    [_pmidIndexDic setObject:@((int)_dataArray.count-i-1) forKey:@([data.pmId intValue])];
+                    ++i;
                 }
             }
             if (model.msgList.count < _perPage) {
-                [weakSelf hiddenHeader:YES];
+                [self hiddenHeader:YES];
             } else {
-                [weakSelf hiddenHeader:NO];
+                [self hiddenHeader:NO];
             }
-            [weakSelf reloadData];
+            [self reloadData];
         }];
     }
 }
@@ -146,129 +142,64 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _dataArray.count;
 }
-- (void)peps:(NSNotification*)notification {
-    
-    NSDictionary *dic = notification.userInfo;
-    CGFloat height = [dic[@"height"] floatValue] + 30;
-    long index = [[_pmidIndexDic objectForKey:[(NSNumber*)dic[@"pmid"] stringValue]] intValue];
-    
-    //MessageDetailTableViewCell *cell = (MessageDetailTableViewCell *)[self viewWithTag:pmid];
-    if (height != [[_heightArray objectAtIndex:index] floatValue] && height > 81) {
-        [_heightArray replaceObjectAtIndex:index withObject:[NSNumber numberWithFloat:height]];
-        //[self beginUpdates];
-        //[self endUpdates];
-    }
-
-}
-- (void)configureCell:(MessageDetailTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     long x = indexPath.row;
-    switch (x) {
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        case 7:
-            break;
-        case 8:
-            break;
-        case 9:
-            break;
-        case 10:
-            break;
-        case 11:
-            break;
-        default:
-            break;
+    NSNumber *pmid = [_pmidArray objectAtIndex:indexPath.row];
+    NSNumber *height = [_pmidHeightDic objectForKey:pmid];
+    if (height == nil) {
+        return 81;
     }
-    PrivateMessageDetailModel *model = _dataArray[indexPath.row];
-
-    //MessageDetailTableViewCell *c = [_cellArray objectAtIndex:indexPath.row];
-    //if ([cell isEqual:c]) {
-     //   cell.contentLabel = c.contentLabel;
-    //} else {
-        [cell.contentLabel setContentHtml:model.message];
-    //}
-    if (_viewType == MessagePrivate) {
-        [cell loadPrivateData:_dataArray[indexPath.row]];
-    } else if (_viewType == MessagePublic) {
-        [cell loadPublicData:_dataArray[indexPath.row]];
-    }
-    cell.tag = cell.pmid;
-    cell.contentLabel.tag = cell.pmid;
-    UILongPressGestureRecognizer *msgLPGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(mMsgLongPress:)];
-    [msgLPGR setNumberOfTouchesRequired:1];
-    [msgLPGR setAllowableMovement:100];
-    [msgLPGR setMinimumPressDuration:0.5];
-    //[cell addGestureRecognizer:msgLPGR];
-
-    //if (![_cellArray containsObject:cell]) {
-    //[_cellArray replaceObjectAtIndex:indexPath.row withObject:cell];
-    //}
-    /*if (![_cellArray containsObject:cell]) {
-        [_cellArray insertObject:cell atIndex:indexPath.row];
-    }*/
-    //[_pmidIndexDic setObject:[NSNumber numberWithInt:cell.pmid] forKey:[NSNumber numberWithInteger:indexPath.row]];
-    CGFloat height = cell.contentLabel.displayHeight + 30;
-    if (height > 81) {
-        [_heightArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithFloat:height]];
-    }
-    [_cellFlagArray replaceObjectAtIndex:indexPath.row withObject:@1];
+    return [height floatValue];
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PrivateMessageDetailModel *data = _dataArray[indexPath.row];
+    int x = indexPath.row;
+
+    PrivateMessageDetailModel *data = _dataArray[_dataArray.count - indexPath.row - 1];
     MessageDetailTableViewCell *cell;
     if (_viewType == MessagePublic || data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
         cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_In forIndexPath:indexPath];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_Out forIndexPath:indexPath];
     }
-    NSLog([NSString stringWithFormat:@"A: %ld %d", (long)indexPath.row, cell.pmid]);
-    //if ([[_cellFlagArray objectAtIndex:indexPath.row] isEqualToValue:@0]) {
+    if (![[_pmidArray objectAtIndex:indexPath.row] isEqual:@(cell.pmid)]) {
         [self configureCell:cell atIndexPath:indexPath];
-        NSLog([NSString stringWithFormat:@"B: %ld %d", (long)indexPath.row, cell.pmid]);
-    //}
-    
-    //NSLog([NSString stringWithFormat:@"B: %ld %d", (long)indexPath.row, cell.pmid]);
+        if ([_pmidHeightDic objectForKey:@(cell.pmid)] == nil) {
+            CGFloat height = cell.height;
+            [_pmidHeightDic setObject:[NSNumber numberWithFloat:height] forKey:@(cell.pmid)];
+        }
+    }
 
     return cell;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    /*if ([(NSNumber*)_cellFlagArray[indexPath.row] isEqualToValue:@0]) {
-        return 81;
-    }*/
+- (void)configureCell:(MessageDetailTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     long x = indexPath.row;
-
-    //MessageDetailTableViewCell *cell = [_cellArray objectAtIndex:indexPath.row];
-    //return cell.height;
-    //return [[_cellFlagArray objectAtIndex:indexPath.row] floatValue];
-    /*CGFloat height = cell.contentLabel.displayHeight + 30;
-    if (height > 81) {
-        [_heightArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithFloat:height]];
-    }*/
-    return [_heightArray[indexPath.row] floatValue];
-    /*PrivateMessageDetailModel *data = _dataArray[indexPath.row];
-    if (_viewType == MessagePublic || data.toId == [[NSUserDefaults standardUserDefaults] stringForKey:@"userId"]) {
-        return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell_In cacheByIndexPath:indexPath configuration:^(id cell) {
-            [self configureCell:cell atIndexPath:indexPath];
-        }];
-    } else {
-        return [tableView fd_heightForCellWithIdentifier:KMessageDetailTableViewCell_Out cacheByIndexPath:indexPath configuration:^(id cell) {
-            [self configureCell:cell atIndexPath:indexPath];
-        }];
-    }*/
+    
+    if (_viewType == MessagePrivate) {
+        [cell loadPrivateData:_dataArray[_dataArray.count - indexPath.row - 1]];
+    } else if (_viewType == MessagePublic) {
+        [cell loadPublicData:_dataArray[_dataArray.count - indexPath.row - 1]];
+    }
+    cell.contentLabel.tag = cell.pmid;
+    UILongPressGestureRecognizer *msgLPGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(mMsgLongPress:)];
+    [msgLPGR setNumberOfTouchesRequired:1];
+    [msgLPGR setAllowableMovement:100];
+    [msgLPGR setMinimumPressDuration:0.5];
+    //[cell addGestureRecognizer:msgLPGR];
 }
+- (void)resizeCell:(NSNotification*)notification {
+    
+    NSDictionary *dic = notification.userInfo;
+    CGFloat height = [dic[@"height"] floatValue] + 30;
+    NSNumber *pmid = dic[@"pmid"];
+    if ([_pmidFlagDic objectForKey:pmid] == nil) {
+        [_pmidHeightDic setObject:[NSNumber numberWithFloat:height] forKey:pmid];
+        [_pmidFlagDic setObject:@1 forKey:pmid];
+        long index = [[_pmidIndexDic objectForKey:pmid] intValue];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
@@ -281,7 +212,6 @@
     CGPoint touchP = [recognizer locationInView:self];
     NSIndexPath *indexPath = [self indexPathForRowAtPoint:touchP];
     _longPressedCell = [self cellForRowAtIndexPath:indexPath];
-
     
     if (indexPath != nil) {
         [_longPressedCell cellBgColor:YES];

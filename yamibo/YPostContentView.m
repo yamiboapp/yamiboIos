@@ -146,7 +146,7 @@
     if (didUpdate) {
         [self relayoutText];
         NSDictionary *dic = @{@"height":[NSNumber numberWithFloat:self.displayHeight], @"pmid":[NSNumber numberWithLong:self.tag]};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"peps" object:nil userInfo:dic];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"resizeCell" object:nil userInfo:dic];
     }
 }
 
