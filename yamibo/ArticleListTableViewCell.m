@@ -14,7 +14,7 @@
 @property (strong, nonatomic) UIView *backView;
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *nameLabel;
-@property (strong, nonatomic) UILabel *lastPostLabel;
+@property (strong, nonatomic) UILabel *lastPostDateLabel;
 @property (strong, nonatomic) UILabel *commentLabel;
 @property (strong, nonatomic) UILabel *watchLabel;
 @property (strong, nonnull) UIImageView *digestImgView;
@@ -61,11 +61,11 @@
     _nameLabel.nightTextColor = [UIColor whiteColor];
     [_backView addSubview:_nameLabel];
     
-    _lastPostLabel = [[UILabel alloc] init];
-    _lastPostLabel.font = KFONT(11);
-    _lastPostLabel.normalTextColor = KCOLOR_GRAY;
-    _lastPostLabel.nightTextColor = [UIColor whiteColor];
-    [_backView addSubview:_lastPostLabel];
+    _lastPostDateLabel = [[UILabel alloc] init];
+    _lastPostDateLabel.font = KFONT(11);
+    _lastPostDateLabel.normalTextColor = KCOLOR_GRAY;
+    _lastPostDateLabel.nightTextColor = [UIColor whiteColor];
+    [_backView addSubview:_lastPostDateLabel];
     
     _commentLabel = [[UILabel alloc] init];
     [_backView addSubview:_commentLabel];
@@ -98,9 +98,9 @@
         make.bottom.equalTo(_backView).offset(-13);
     }];
 
-    [_lastPostLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_lastPostDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(_nameLabel);
-        make.left.equalTo(_backView.mas_left).offset(130);
+        make.centerX.equalTo(_backView);
     }];
     
     [_watchLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -175,7 +175,7 @@
     _nameLabel.text = data.authorName;
     NSString *localLastPost = [data.lastPost toLocalTime];
     NSString *formattedLastPost = [localLastPost formatLastPost];
-    _lastPostLabel.text = [NSString stringWithFormat:@"最新回复：%@", formattedLastPost];
+    _lastPostDateLabel.text = [NSString stringWithFormat:@"最新回复：%@", formattedLastPost];
     _commentLabel.text = data.replyNum;
     _watchLabel.text = data.viewNum;
     if ([data.digest intValue] != 0) {

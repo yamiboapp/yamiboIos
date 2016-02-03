@@ -81,19 +81,19 @@
     NSDate *currentDate = [dateFormatter dateFromString:currentDateStr];
 
     NSCalendar *c = [NSCalendar currentCalendar];
-    NSDateComponents *components = [c components:(NSCalendarUnitYear | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:sourceDate toDate:currentDate options:0];
-    
+    NSDateComponents *diffs = [c components:(NSCalendarUnitYear | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:sourceDate toDate:currentDate options:0];
+    NSDateComponents *components = [c components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay| NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:sourceDate];
+    NSDateComponents *currs = [c components:NSCalendarUnitYear fromDate:currentDate];
+
     NSString *lastPostStr;
     
-    NSInteger diffYear = components.year;
-
-    if (diffYear < 1) {
-        NSInteger diffDay = components.day;
+    if (components.year == currs.year) {
+        NSInteger diffDay = diffs.day;
         
         if (diffDay < 1) {
-            NSInteger diffHour = components.hour;
+            NSInteger diffHour = diffs.hour;
             if (diffHour < 1) {
-                NSInteger diffMinute = components.minute;
+                NSInteger diffMinute = diffs.minute;
                 if (diffMinute < 1) {
                     lastPostStr = [NSString stringWithFormat:@"刚刚"];
                 } else {
@@ -103,7 +103,6 @@
                 lastPostStr = [NSString stringWithFormat:@"%ld小时前", (long)diffHour];
             }
         } else {
-            components = [c components:(NSCalendarUnitMonth | NSCalendarUnitDay| NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:sourceDate];
             if (diffDay == 1) {
                 lastPostStr = [NSString stringWithFormat:@"昨天 %ld:%ld", (long)components.hour, (long)components.minute];
             } else {

@@ -18,8 +18,7 @@
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data;
 - (void)loadPublicData:(PublicMessageDetailModel *)data;
-- (void)cellBgColor:(BOOL)longPressed;
-- (void)aaa;
+
 @property (strong, nonatomic) YPostContentView *contentLabel;
 @property (assign, nonatomic, getter=getHeight) CGFloat height;
 @property (assign, nonatomic) int pmid;

@@ -31,17 +31,17 @@
     [self configNavigation];
     [self initView];
     //==============>
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToFeedDetail object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToForumDetail object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (_hotView.hidden) {
-        [_forumList refreshData];
-    } else {
+    if (!_hotView.hidden) {
         [_hotView viewWillAppear];
     }
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToFeedDetail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToDetailController:) name:KNotification_ToForumDetail object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void) configNavigation {
     [self showCustomNavigationMenuButton];
@@ -80,7 +80,6 @@
     } else {
         _hotView.hidden = true;
         _forumList.hidden = false;
-        [_forumList refreshData];
     }
 }
 - (void)onNavigationLeftButtonClicked

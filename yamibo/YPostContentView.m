@@ -41,7 +41,7 @@
 }
 
 - (CGFloat)displayHeight {
-    CGSize displaySize = [_attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190];
+    CGSize displaySize = [_attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:self.frame.size.width];
     return displaySize.height;
 }
 

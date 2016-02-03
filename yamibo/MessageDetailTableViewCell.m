@@ -15,12 +15,11 @@
 @property (strong, nonatomic) YFaceImageView *headImg;
 @property (strong, nonatomic) UILabel *timeLable;
 @end
+
 @implementation MessageDetailTableViewCell
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
-    
     // Fix the bug in iOS7 - initial constraints warning
     self.contentView.bounds = [UIScreen mainScreen].bounds;
 }
@@ -67,7 +66,6 @@
 }
 
 - (void)setupConstrainsIn {
-    
     [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.contentView);
         make.bottom.equalTo(self.contentView).offset(-1);
@@ -79,22 +77,21 @@
         make.width.height.mas_equalTo(50);
     }];
     
-    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_headImg.mas_right).offset(20);
-        make.top.equalTo(_headImg);
-        make.bottom.equalTo(_backView).offset(-15);
-        make.width.mas_equalTo(190);
-    }];
-    
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(50);
         make.top.equalTo(_backView.mas_top).offset(15);
         make.right.equalTo(_backView.mas_right).offset(-24);
     }];
+    
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_headImg.mas_right).offset(20);
+        make.right.equalTo(_timeLable.mas_left).offset(-20);
+        make.top.equalTo(_headImg);
+        make.bottom.equalTo(_backView).offset(-15);
+    }];
 }
 
 - (void)setupConstrainsOut {
-    
     [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.contentView);
         make.bottom.equalTo(self.contentView).offset(-1);
@@ -106,50 +103,42 @@
         make.width.height.mas_equalTo(50);
     }];
     
-    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_headImg.mas_left).offset(-20);
-        make.top.equalTo(_headImg);
-        make.bottom.equalTo(_backView).offset(-15);
-        make.width.mas_equalTo(190);
-    }];
-    
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(50);
         make.top.equalTo(_backView).offset(15);
         make.left.equalTo(_backView).offset(24);
     }];
+    
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_headImg.mas_left).offset(-20);
+        make.left.equalTo(_timeLable.mas_right).offset(20);
+        make.top.equalTo(_headImg);
+        make.bottom.equalTo(_backView).offset(-15);
+    }];
 }
 
 - (void)loadPrivateData:(PrivateMessageDetailModel *)data {
     [_headImg setUserId:data.fromId andType:FaceMiddle];
-    
     [_contentLabel setContentHtml:data.message];
-    _timeLable.text = data.date;
+    _timeLable.text = [data.date toLocalTime];
     _pmid = [data.pmId intValue];
     
 }
-
 - (void)loadPublicData:(PublicMessageDetailModel *)data {
     [_headImg setUserId:data.authorId andType:FaceMiddle];
- //   _contentLabel.text = data.message;
-    _timeLable.text = data.date;
+    [_contentLabel setContentHtml:data.message];
+    _timeLable.text = [data.date toLocalTime];
 }
 
 - (CGFloat)getHeight {
-    CGFloat x = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:190].height;
-    if (x > 51) {
-        _height = x + 30;
+    CGFloat contentLabelWidth = self.contentView.frame.size.width - 188;
+    CGFloat contentLabelHeight = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:contentLabelWidth].height;
+    if (contentLabelHeight > 50) {
+        _height = contentLabelHeight + 30;
     } else {
-        _height = 81;
+        _height = 80;
     }
     return _height;
 }
 
-- (void)cellBgColor:(BOOL)longPressed {
-    if (longPressed) {
-        _backView.backgroundColor = KCOLOR_GRAY_70;
-    } else {
-        _backView.backgroundColor = KCOLOR_YELLOW_FDF5D8;
-    }
-}
 @end

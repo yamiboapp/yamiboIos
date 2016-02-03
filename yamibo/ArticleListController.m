@@ -48,13 +48,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self configure];
+}
+- (void)configure {
     [self configNavigation];
     [self initView];
     [self initFooter];
     [self initMiddleMenu];
     _subforumNames = [NSMutableArray arrayWithObject:_forumName];
     _subforumIds = [NSMutableArray arrayWithObject:_forumId];
-
 }
 - (void)viewWillAppear:(BOOL)animated {
     _titleBtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
@@ -97,7 +99,7 @@
     _middleMenu.font = KFONT(12);
     _middleMenu.textColor = [UIColor whiteColor];
 }
-- (void)initArticleListView:(NSString *)fid andTypeId:(NSString *)tid andFilter:(NSString *)filter{
+- (void)initArticleListViewWithFid:(NSString *)fid andTypeId:(NSString *)tid andFilter:(NSString *)filter{
     _didLoadRightMenu = NO;
     if (_articleListView) {
         [_articleListView removeFromSuperview];
@@ -121,51 +123,55 @@
     }
     [_articleListView refreshData];
 }
+- (void)initSegment {
+    UIView *back = [[UIView alloc]init];
+    back.backgroundColor = KCOLOR_YELLOW_FDF5D8;
+    [self.view addSubview:back];
+    [back mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.view);
+        make.height.mas_equalTo(43);
+    }];
+    
+    HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:_subforumNames];
+    segment.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   KCOLOR_GRAY, NSForegroundColorAttributeName,
+                                   KFONT(15), NSFontAttributeName,
+                                   nil];
+    segment.selectedTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           KCOLOR_RED_6D2C1D, NSForegroundColorAttributeName,
+                                           KFONT(15), NSFontAttributeName,
+                                           nil];
+    segment.selectionIndicatorColor = KCOLOR_RED_6D2C1D;
+    segment.backgroundColor = [UIColor clearColor];
+    segment.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    segment.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    segment.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleDynamic;
+    segment.userDraggable = YES;
+    segment.segmentEdgeInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    segment.selectionIndicatorEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 20);
+    segment.selectedSegmentIndex = 0;
+    
+    [back addSubview:segment];
+    [segment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(back).insets(UIEdgeInsetsMake(0, 20, 0, 20));
+    }];
+    
+    [segment addTarget:self action:@selector(changeSeg:) forControlEvents:UIControlEventValueChanged];
+}
 - (void)initView {
     [CommunicationrManager getArticleList:_forumId andPage:1 andFilter:@"" andTypeId:@"" andPerPage:@"1"
     completion:^(ArticleListModel *model, NSString *message) {
         //switch
         if ([model.subforumList count] > 0) {
             _hasSwith = YES;
-            UIView *back = [[UIView alloc]init];
-            back.backgroundColor = KCOLOR_YELLOW_FDF5D8;
-            [self.view addSubview:back];
-            [back mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.top.equalTo(self.view);
-                make.height.mas_equalTo(43);
-            }];
+
             //subforum names
             for (int i = 0; i < [model.subforumList count]; ++i) {
                 ForumModel *subforum = model.subforumList[i];
                 [_subforumNames addObject:subforum.forumName];
                 [_subforumIds addObject:subforum.forumId];
             }
-            HMSegmentedControl *segment = [[HMSegmentedControl alloc] initWithSectionTitles:_subforumNames];
-            segment.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           KCOLOR_GRAY, NSForegroundColorAttributeName,
-                                           KFONT(15), NSFontAttributeName,
-                                           nil];
-            segment.selectedTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                   KCOLOR_RED_6D2C1D, NSForegroundColorAttributeName,
-                                                   KFONT(15), NSFontAttributeName,
-                                                   nil];
-            segment.selectionIndicatorColor = KCOLOR_RED_6D2C1D;
-            segment.backgroundColor = [UIColor clearColor];
-            segment.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
-            segment.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
-            segment.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleDynamic;
-            segment.userDraggable = YES;
-            segment.segmentEdgeInset = UIEdgeInsetsMake(0, 20, 0, 20);
-            segment.selectionIndicatorEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 20);
-            segment.selectedSegmentIndex = 0;
-            
-            [back addSubview:segment];
-            [segment mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo(back).insets(UIEdgeInsetsMake(0, 20, 0, 20));
-            }];
-            
-            [segment addTarget:self action:@selector(changeSeg:) forControlEvents:UIControlEventValueChanged];
-            
+            [self initSegment];
         } else {
             _hasSwith = false;
         }
@@ -173,7 +179,7 @@
         [self setPageNumber:1 andTotalPages:[model.articleNum intValue]/10];
 
         //article list
-        [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
+        [self initArticleListViewWithFid:_forumId andTypeId:@"" andFilter:@""];
     }];
 }
 - (void)initFooter {
@@ -254,7 +260,7 @@
 - (void)changeSeg:(HMSegmentedControl *)seg {
     long index = (long)seg.selectedSegmentIndex;
     _forumId = _subforumIds[index];
-    [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
+    [self initArticleListViewWithFid:_forumId andTypeId:@"" andFilter:@""];
     _pageLabel.text = @"";
     [self.rightMenu close];
     self.rightMenu = nil;
@@ -308,22 +314,25 @@
 - (void)dealMenu:(int)index withMenu:(NSString *)menu {
     if ([menu isEqualToString:@"right"]) {
         if (index == 0) { //全部
-            [self initArticleListView:_forumId andTypeId:@"" andFilter:@""];
+            [self initArticleListViewWithFid:_forumId andTypeId:@"" andFilter:@""];
         } else if (index == 1) { //精华
-            [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"digest"];
+            [self initArticleListViewWithFid:_forumId andTypeId:_rightMenuIds[index] andFilter:@"digest"];
         } else {
-            [self initArticleListView:_forumId andTypeId:_rightMenuIds[index] andFilter:@"typeid"];
+            [self initArticleListViewWithFid:_forumId andTypeId:_rightMenuIds[index] andFilter:@"typeid"];
         }
     } else {
-        ArticleListController *articleListController = [[ArticleListController alloc] init];
-        [self.navigationController pushViewController:articleListController animated:YES];
+        //ArticleListController *articleListController = [[ArticleListController alloc] init];
         NSDictionary *dic = @{
                               @"forumId":_middleMenuIds[index],
                               @"forumName":_middleMenuNames[index],
                               @"forumIdList":_forumIdList,
                               @"forumNameList":_forumNameList
                               };
-        [articleListController loadData:dic];
+        [self loadData:dic];
+        for (UIView *view in self.view.subviews) {
+            [view removeFromSuperview];
+        }
+        [self configure];
     }
 }
 
