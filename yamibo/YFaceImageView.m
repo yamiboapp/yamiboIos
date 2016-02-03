@@ -13,7 +13,7 @@
 @interface YFaceImageView()
 
 @property (copy, nonatomic) NSArray *typeNames;
-
+@property (strong, nonatomic) UITapGestureRecognizer *tapGR;
 @end
 
 @implementation YFaceImageView
@@ -22,8 +22,9 @@
     if (self = [super init]) {
         self.userInteractionEnabled = true;
         self.contentMode = UIViewContentModeScaleAspectFill;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openProfile)];
-        [self addGestureRecognizer:tap];
+        _clickable = YES;
+        _tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openProfile)];
+        [self addGestureRecognizer:_tapGR];
         _typeNames = @[@"small", @"middle", @"big"];
     }
     return self;
@@ -40,6 +41,14 @@
     }
     
     [self sd_setImageWithURL:[NSURL URLWithString:_picUrl]];
+}
+- (void)setClickable:(BOOL)clickable {
+    if (!_clickable && clickable) {
+        [self addGestureRecognizer:_tapGR];
+    } else {
+        [self removeGestureRecognizer:_tapGR];
+    }
+    _clickable = clickable;
 }
 
 - (void)openProfile {

@@ -23,5 +23,7 @@
 + (NSString *)relativePathOfPath:(NSString *)path;
 
 + (UInt64)fileSizeAtPath:(NSString *)filePath;
++ (float)folderSizeAtPath:(NSString*)folderPath;
++ (void)clearCacheAtPath:(NSString *)path;
 
 @end

@@ -49,8 +49,11 @@
     face.layer.cornerRadius = SCALE_NUM(66)/2;
     face.clipsToBounds = true;
     face.backgroundColor = [UIColor yellowColor];
+    face.clickable = NO;
     
     if ([[ProfileManager sharedInstance] checkLogin]) {
+        face.clickable = YES;
+
         UILabel *nameLabel = [[UILabel alloc] init];
         [self addSubview:nameLabel];
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {

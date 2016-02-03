@@ -47,7 +47,7 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                _dataArray = [NSMutableArray arrayWithArray:[[model.msgList reverseObjectEnumerator] allObjects]];
+                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
                 _msgCount = [model.count intValue];
                 _perPage = [model.perPage intValue];
                 if (model.msgList.count < _perPage || _msgCount == _perPage) {
@@ -64,7 +64,7 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                _dataArray = [NSMutableArray arrayWithArray:[[model.msgList reverseObjectEnumerator] allObjects]];
+                _dataArray = [NSMutableArray arrayWithArray:model.msgList];
                 _msgCount = [model.count intValue];
                 _perPage = [model.perPage intValue];
                 if (model.msgList.count < _perPage || _msgCount == _perPage) {
@@ -85,7 +85,7 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:[[model.msgList reverseObjectEnumerator] allObjects]];
+                [_dataArray addObjectsFromArray:model.msgList];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];
@@ -100,7 +100,7 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:[[model.msgList reverseObjectEnumerator] allObjects]];
+                [_dataArray addObjectsFromArray:model.msgList];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];
@@ -128,9 +128,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMessageTableViewCell];
     if (_viewType == MessagePrivate) {
-        [cell loadPrivateData:_dataArray[indexPath.row]];
+        [cell loadPrivateData:_dataArray[_dataArray.count - indexPath.row - 1]];
     } else if (_viewType == MessagePublic) {
-        [cell loadPublicData:_dataArray[indexPath.row]];
+        [cell loadPublicData:_dataArray[_dataArray.count - indexPath.row - 1]];
     }
     return cell;
 }
@@ -168,9 +168,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic;
     if (_viewType == MessagePrivate) {
-        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[indexPath.row] toId], @"detailName":[_dataArray[indexPath.row] toName]};
+        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[_dataArray.count - indexPath.row - 1] toId], @"detailName":[_dataArray[indexPath.row] toName]};
     } else if (_viewType == MessagePublic) {
-        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[indexPath.row] pmId], @"detailName":[_dataArray[indexPath.row] authorName]};
+        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[_dataArray.count - indexPath.row - 1] pmId], @"detailName":[_dataArray[indexPath.row] authorName]};
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToMessageDetail object:nil userInfo:dic];

@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, FaceType) {
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *picUrl;
 @property (assign, nonatomic) FaceType faceType;
+@property (assign, nonatomic) BOOL clickable;
 
 - (void)setUserId:(NSString *)uid andType:(FaceType)type;
 

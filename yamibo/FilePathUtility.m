@@ -81,7 +81,6 @@
 
     return path;
 }
-
 + (UInt64)fileSizeAtPath:(NSString *)filePath
 {
     struct stat st;
@@ -90,5 +89,29 @@
     }
     return 0;
 }
-
++ (float)folderSizeAtPath:(NSString*)folderPath {
+    NSFileManager* manager = [NSFileManager defaultManager];
+    UInt64 folderSize = 0;
+    if ([manager fileExistsAtPath:folderPath]) {
+        NSArray *childFiles = [manager subpathsAtPath:folderPath];
+        for (NSString *fileName in childFiles) {
+            NSLog(@"%@",fileName);
+            NSString *fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+            NSLog(@"%llu",[FilePathUtility fileSizeAtPath:fileAbsolutePath]);
+            folderSize += [FilePathUtility fileSizeAtPath:fileAbsolutePath];
+        }
+    };
+    NSLog(@"folderSize ==== %lld",folderSize);
+    return folderSize/(1024.0*1024.0);
+}
++ (void)clearCacheAtPath:(NSString *)path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:path]) {
+        NSArray *childrenFiles = [fileManager subpathsAtPath:path];
+        for (NSString *fileName in childrenFiles) {
+            NSString *absolutePath = [path stringByAppendingPathComponent:fileName];
+            [fileManager removeItemAtPath:absolutePath error:nil];
+        }
+    }
+}
 @end

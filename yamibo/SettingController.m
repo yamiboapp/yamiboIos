@@ -13,6 +13,8 @@
 @interface SettingController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *cells;
+@property (strong, nonatomic) NSString *cacheSize;
+
 @end
 
 @implementation SettingController
@@ -35,6 +37,8 @@
         UITableViewCell *cell = [[UITableViewCell alloc] init];
         [_cells[1] addObject:cell];
     }
+    
+    _cacheSize = [NSString stringWithFormat:@"%.2fM", [FilePathUtility folderSizeAtPath:[FilePathUtility cachesDirectory]]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -179,8 +183,9 @@
                 case 4:
                     cell.accessoryView = rightSwitch;
                     break;
-                case 5:
-                    rightLabel.text = @"3.14M"; //TODO: cache
+                case 5: //清除缓存
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    rightLabel.text = _cacheSize;
                     cell.accessoryView = rightLabel;
                     break;
                 default:
@@ -214,7 +219,12 @@
         make.height.mas_equalTo(1);
     }];
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 5) {
+        [self showActionSheete];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+}
 - (void)switchValueChanged:(UISwitch *)sender {
     switch (sender.tag) {
         case 0: //显示繁体
@@ -243,5 +253,19 @@
         default:
             break;
     }
+}
+
+- (void)showActionSheete {
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [FilePathUtility clearCacheAtPath:[FilePathUtility cachesDirectory]];
+    }];
+    [alert addAction:action];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:true completion:nil];
 }
 @end

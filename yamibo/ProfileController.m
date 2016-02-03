@@ -94,7 +94,11 @@
         case 0:
             return 1;
         case 1:
-            return 3;
+            if (_isMyProfile) {
+                return 3;
+            } else {
+                return 1;
+            }
         case 2:
             return 1;
         default:
@@ -230,7 +234,12 @@
         //title
         UILabel *titleLabel = [[UILabel alloc] init];
         [cell addSubview:titleLabel];
-        NSArray *titles = @[@"主题", @"回复",@"日志"];
+        NSArray *titles;
+        if (_isMyProfile) {
+            titles = @[@"主题", @"回复",@"日志"];
+        } else {
+            titles = @[@"日志"];
+        }
         titleLabel.text = titles[indexPath.row];
         titleLabel.font = KFONT(15);
         titleLabel.textColor = KCOLOR_RED_6D2C1D;
@@ -271,7 +280,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        if (indexPath.row == 2) { //日志
+        if (!_isMyProfile || indexPath.row == 2) { //日志
             BlogListController *blogController = [[BlogListController alloc] init];
             NSDictionary *dic = @{@"userId":_userId, @"userName":_userData.userName};
             [blogController loadDate:dic];

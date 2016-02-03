@@ -43,7 +43,8 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 
 @property   (strong, nonatomic) NSString *pmId;
 @property   (strong, nonatomic) NSString *authorId;
-@property   (strong, nonatomic) NSString *authorName;
+//TODO: API返回author name
+@property   (strong, nonatomic) NSString<Optional> *authorName;
 @property   (strong, nonatomic) NSString *date;
 @property   (strong, nonatomic) NSString *summary;
 
