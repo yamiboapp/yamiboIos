@@ -9,6 +9,25 @@
 #import <Foundation/Foundation.h>
 
 /**
+ * 获取location成功
+ */
+static const int KLOCATIONSUCCESS = 0;
+/**
+ * 用户未开定位服务
+ */
+
+static const int KLOCATIONFAILESERVICENOTOPEND = 1;
+/**
+ * 用户禁止程序定位
+ */
+static const int KLOCATIONFAILEUSERDENIED = 2;
+/**
+ * 无法获取位置信息
+ */
+
+static const int KLOCATIONFAILEUNKNOW = 3;
+
+/**
  *  @author 李思良, 15-04-24 11:04:24
  *
  *  @brief  定位服务.

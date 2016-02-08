@@ -21,6 +21,20 @@
 
 @implementation CommunicationrManager
 
++ (void)setNearByConfig:(int)flag completion:(void (^)(NSString *message))completion {
+    NSDictionary *dic = @{@"lbs":@"profile", @"sousa":@"set", @"flag":@(flag)};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
+            
+            completion(nil);
+        } else {
+            completion(@"加载失败");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(@"加载失败");
+    }];
+}
+
 + (void)getProfile:(void (^)(NSString *message))completion {
     NSDictionary *dic = @{@"module":@"profile"};
     [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {

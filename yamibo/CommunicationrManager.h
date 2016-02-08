@@ -19,6 +19,10 @@
 
 @interface CommunicationrManager : NSObject
 
++ (void)setNearByConfig:(int)flag completion:(void (^)(NSString *message))completion;
+
++ (void)getNearByPeople:(void (^)(NSString *message))completion;
+
 + (void)getProfile:(void (^)(NSString *message))completion;
 
 + (void)getProfileWithUid:(NSString*)uid completion:(void (^)(ProfileModel *model, NSString *message))completion;

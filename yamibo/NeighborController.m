@@ -9,6 +9,8 @@
 #import "NeighborController.h"
 #import "REMenu.h"
 #import "NeighborTableView.h"
+#import "LocationManager.h"
+//#import "Utility.h"
 
 #define KMENUITEMHEIGHT 40
 
@@ -16,6 +18,8 @@
 @property (strong, nonatomic) REMenu *menu;
 @property (strong, nonatomic) NSArray *menuNames;
 @property (strong, nonatomic) NSArray *menuImgNames;
+@property (assign, nonatomic) float latitude;
+@property (assign, nonatomic) float longitude;
 @end
 
 @implementation NeighborController
@@ -24,6 +28,19 @@
     [super viewDidLoad];
     [self configNavigation];
     [self initTableView];
+    [self initLocation];
+}
+- (void)initLocation {
+    _latitude = 0;
+    _longitude = 0;
+    [[LocationManager sharedInstance] getLocation:^(int status, float latitude, float longitude) {
+        if (status != KLOCATIONSUCCESS) {
+            [Utility showHUDWithTitle:@"无法正常定位"];
+        } else {
+            _latitude = latitude;
+            _longitude = longitude;
+        }
+    }];
 }
 - (void) configNavigation {
     [self showCustomNavigationMenuButton];
