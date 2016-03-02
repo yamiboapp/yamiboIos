@@ -13,16 +13,18 @@
 @interface MessageDetailTableView()<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
-@property (strong, atomic) NSMutableDictionary *pmidIndexDic;
-@property (strong, atomic) NSMutableDictionary *pmidHeightDic;
-@property (strong, atomic) NSMutableDictionary *pmidFlagDic; // Recored the pmid that has images
-@property (strong, atomic) NSMutableArray *pmidArray;
-@property (strong, atomic) NSMutableArray *cellFlagArray;
+@property (strong, nonatomic) NSMutableDictionary *pmidIndexDic;
+@property (strong, nonatomic) NSMutableDictionary *pmidHeightDic;
+@property (strong, nonatomic) NSMutableDictionary *pmidFlagDic; // Recored the pmid that has images
+@property (strong, nonatomic) NSMutableArray *pmidArray;
 
 @property (assign, nonatomic) MessageViewType viewType;
 @property (assign, nonatomic) NSInteger detailId;
 @property (assign, nonatomic) int msgCount;
 @property (assign, nonatomic) int perPage;
+@property (assign, nonatomic) int curPage;
+
+@property (strong, nonatomic) PrivateMessageDetailModel *dataToLoadAfterDeletion;
 
 @end
 
@@ -44,7 +46,7 @@
         _pmidHeightDic = [NSMutableDictionary dictionary];
         _pmidFlagDic = [NSMutableDictionary dictionary];
         _pmidArray = [NSMutableArray array];
-        _cellFlagArray = [NSMutableArray array];
+        _curPage = 1;
         
         [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_In];
         [self registerClass:[MessageDetailTableViewCell class] forCellReuseIdentifier:KMessageDetailTableViewCell_Out];
@@ -73,7 +75,6 @@
                 int i = 0;
                 for (PrivateMessageDetailModel *data in _dataArray) {
                     [_pmidIndexDic setObject:@((int)_dataArray.count-i-1) forKey:@([data.pmId intValue])];
-                    [_cellFlagArray addObject:@0];
                     [_pmidArray insertObject:@([data.pmId intValue]) atIndex:0];
                     ++i;
                 }
@@ -105,20 +106,23 @@
 }
 - (void)loadMoreData {
     if (_viewType == MessagePrivate) {
-        [CommunicationrManager getPrivateMessageDetailList:(int)_dataArray.count / _perPage + 1 toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+        [CommunicationrManager getPrivateMessageDetailList:++_curPage toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
             [self stopLoadMoreData];
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
+                if (_dataToLoadAfterDeletion != nil) {
+                    [_dataArray addObject:_dataToLoadAfterDeletion];
+                    [_pmidArray insertObject:@([_dataToLoadAfterDeletion.pmId intValue]) atIndex:0];
+                    _dataToLoadAfterDeletion = nil;
+                }
                 [_dataArray addObjectsFromArray:model.msgList];
                 for (PrivateMessageDetailModel *data in model.msgList) {
                    [_pmidArray insertObject:@([data.pmId intValue]) atIndex:0];
                 }
 
                 int i = 0;
-                _cellFlagArray = [NSMutableArray array];
                 for (PrivateMessageDetailModel *data in _dataArray) {
-                    [_cellFlagArray addObject:@0];
                     [_pmidIndexDic setObject:@((int)_dataArray.count-i-1) forKey:@([data.pmId intValue])];
                     ++i;
                 }
@@ -143,7 +147,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_viewType == MessagePrivate) {
+//        MessageDetailTableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
         NSNumber *pmid = [_pmidArray objectAtIndex:indexPath.row];
+//        pmid = @(cell.pmid);
         NSNumber *height = [_pmidHeightDic objectForKey:pmid];
         if (height == nil) {
             return 80;
@@ -166,6 +172,7 @@
         } else {
             cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_Out forIndexPath:indexPath];
         }
+        //cell.tag = cell.pmid;
         if (![[_pmidArray objectAtIndex:indexPath.row] isEqual:@(cell.pmid)]) {
             [self configureCell:cell atIndexPath:indexPath];
             if ([_pmidHeightDic objectForKey:@(cell.pmid)] == nil) {
@@ -200,7 +207,7 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         // make sure to reload the data on the main thread to avoid the "no index path for table cell being reused" error
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         });
     }
 }
@@ -209,25 +216,48 @@
     return YES;
 }
 //TODO: layout after deleting a message
-/*-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self deleteRow:indexPath];
     }
 }
 - (void)deleteRow:(NSIndexPath *)indexPath {
     [Utility showHUDWithTitle:@"正在删除"];
+    
     __unsafe_unretained MessageDetailTableView *weakSelf = self;
-    [CommunicationrManager delMessage:[_dataArray[indexPath.row] pmId] orConversation:@"0" ofType:_viewType completion:^(NSString *message) {
+    NSInteger delIndex = indexPath.row;
+    NSNumber *delPmid = @([[_dataArray[_dataArray.count - delIndex - 1] pmId] intValue]);
+    
+    [CommunicationrManager delMessage:[delPmid stringValue] orConversation:@"0" ofType:_viewType completion:^(NSString *message) {
         [Utility hiddenProgressHUD];
         if (message != nil) {
             [Utility showTitle:message];
         } else {
-            [_dataArray removeObjectAtIndex:indexPath.row];
+            [_dataArray removeObjectAtIndex:_dataArray.count - indexPath.row - 1];
+
+            for (NSNumber *pmid in [_pmidIndexDic allKeys]) {
+                int index = [[_pmidIndexDic objectForKey:pmid] intValue];
+                if (index > delIndex) {
+                    [_pmidIndexDic setObject:@(index - 1) forKey:pmid];
+                }
+            }
+            [_pmidIndexDic removeObjectForKey:delPmid];
+            [_pmidHeightDic removeObjectForKey:delPmid];
+            [_pmidFlagDic removeObjectForKey:delPmid];
+            [_pmidArray removeObjectAtIndex:delIndex];
+            
             [weakSelf deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            [CommunicationrManager getPrivateMessageDetailList:_curPage toId:_detailId completion:^(PrivateMessageDetailListModel *model, NSString *message) {
+                if (model.msgList.count == 1) {
+                    _curPage--;
+                }
+                _dataToLoadAfterDeletion = model.msgList[_perPage - 1];
+                [Utility hiddenProgressHUD];
+            }];
         }
     }];
-    [Utility hiddenProgressHUD];
-}*/
+}
 
 #pragma mark inheritance
 

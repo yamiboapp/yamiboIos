@@ -98,14 +98,10 @@
         make.bottom.equalTo(_backView).offset(-13);
     }];
 
+
     [_lastPostDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(_nameLabel);
         make.centerX.equalTo(_backView);
-    }];
-    
-    [_watchLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_titleLabel.mas_right);
-        make.top.right.bottom.equalTo(_nameLabel);
     }];
     
     UIImageView *watchImgView = [[UIImageView alloc] init];
@@ -142,6 +138,21 @@
         make.width.height.mas_equalTo(30);
     }];
 
+    UIImageView *clockImgView = [[UIImageView alloc] init];
+    UIImage *clockImg = [UIImage imageNamed:@"forum-clock"];
+    [clockImgView setImage:clockImg];
+    [_backView addSubview:clockImgView];
+    [clockImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(_nameLabel);
+        make.width.mas_equalTo(commentImg.size.width);
+        make.height.mas_equalTo(commentImg.size.width);
+        make.right.equalTo(_lastPostDateLabel.mas_left).offset(-2);
+    }];
+    
+    [_watchLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_titleLabel.mas_right);
+        make.top.right.bottom.equalTo(_nameLabel);
+    }];
 }
 - (void)loadData:(ArticleModel *)data andTypeName:(NSString *)typeName{
     NSString *titleStr;
@@ -171,11 +182,10 @@
 
     [_titleLabel setAttributedText:mutAttrTitleStr];
 
-
     _nameLabel.text = data.authorName;
     NSString *localLastPost = [data.lastPost toLocalTime];
     NSString *formattedLastPost = [localLastPost formatLastPost];
-    _lastPostDateLabel.text = [NSString stringWithFormat:@"最新回复：%@", formattedLastPost];
+    _lastPostDateLabel.text = formattedLastPost;
     _commentLabel.text = data.replyNum;
     _watchLabel.text = data.viewNum;
     if ([data.digest intValue] != 0) {

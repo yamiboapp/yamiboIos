@@ -13,7 +13,7 @@
 @interface SettingController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *cells;
-@property (strong, nonatomic) NSString *cacheSize;
+@property (strong, nonatomic) UILabel *cacheLabel;
 
 @end
 
@@ -38,7 +38,7 @@
         [_cells[1] addObject:cell];
     }
     
-    _cacheSize = [NSString stringWithFormat:@"%.2fM", [FilePathUtility folderSizeAtPath:[FilePathUtility cachesDirectory]]];
+    //_cacheSize = [NSString stringWithFormat:@"%.2fM", [FilePathUtility folderSizeAtPath:[FilePathUtility cachesDirectory]]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -185,8 +185,9 @@
                     break;
                 case 5: //清除缓存
                     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-                    rightLabel.text = _cacheSize;
-                    cell.accessoryView = rightLabel;
+                    _cacheLabel = rightLabel;
+                    _cacheLabel.text = [self getCacheSize];
+                    cell.accessoryView = _cacheLabel;
                     break;
                 default:
                     break;
@@ -256,11 +257,11 @@
 }
 
 - (void)showActionSheete {
-
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [FilePathUtility clearCacheAtPath:[FilePathUtility cachesDirectory]];
+        _cacheLabel.text = [self getCacheSize];
     }];
     [alert addAction:action];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -268,4 +269,9 @@
     
     [self presentViewController:alert animated:true completion:nil];
 }
+
+-(NSString *)getCacheSize {
+    return [NSString stringWithFormat:@"%.2fM", [FilePathUtility folderSizeAtPath:[FilePathUtility cachesDirectory]]];
+}
+
 @end

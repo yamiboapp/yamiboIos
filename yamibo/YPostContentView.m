@@ -87,6 +87,10 @@
             
             // url for deferred loading
             imageView.url = attachment.contentURL;
+            imageView.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showZoomImageView:)];
+            [imageView addGestureRecognizer:tap];
+
         }
         
         return imageView;

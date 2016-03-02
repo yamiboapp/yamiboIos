@@ -107,6 +107,8 @@
 		BA8B26AC1BB014F900173D5B /* MessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AB1BB014F900173D5B /* MessageTableView.m */; };
 		BA8B26AF1BB0155400173D5B /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */; };
 		BA8B26B61BB0184500173D5B /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26B51BB0184500173D5B /* MessageController.m */; };
+		BA992A2B1C64E719002D7FCB /* forum-clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA992A291C64E719002D7FCB /* forum-clock@2x.png */; };
+		BA992A2C1C64E719002D7FCB /* forum-clock@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA992A2A1C64E719002D7FCB /* forum-clock@3x.png */; };
 		BAB8BA581C09F22D00C92B75 /* PostController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB8BA571C09F22D00C92B75 /* PostController.m */; };
 		BAB8BA5B1C09F6B800C92B75 /* btn-trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB8BA591C09F6B800C92B75 /* btn-trash@2x.png */; };
 		BAB8BA5C1C09F6B800C92B75 /* btn-trash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB8BA5A1C09F6B800C92B75 /* btn-trash@3x.png */; };
@@ -345,6 +347,8 @@
 		BA8B26AE1BB0155400173D5B /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		BA8B26B41BB0184500173D5B /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
 		BA8B26B51BB0184500173D5B /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
+		BA992A291C64E719002D7FCB /* forum-clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-clock@2x.png"; sourceTree = "<group>"; };
+		BA992A2A1C64E719002D7FCB /* forum-clock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-clock@3x.png"; sourceTree = "<group>"; };
 		BAB8BA561C09F22D00C92B75 /* PostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostController.h; sourceTree = "<group>"; };
 		BAB8BA571C09F22D00C92B75 /* PostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostController.m; sourceTree = "<group>"; };
 		BAB8BA591C09F6B800C92B75 /* btn-trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-trash@2x.png"; sourceTree = "<group>"; };
@@ -1007,6 +1011,8 @@
 		BAFF9BCA1BD471FD004BAD2B /* Forum */ = {
 			isa = PBXGroup;
 			children = (
+				BA992A291C64E719002D7FCB /* forum-clock@2x.png */,
+				BA992A2A1C64E719002D7FCB /* forum-clock@3x.png */,
 				BA65E9011BED734A00D8E037 /* forum-digest@2x.png */,
 				BA65E9021BED734B00D8E037 /* forum-digest@3x.png */,
 				D844D86B1BD957A900404533 /* forum-attachment@2x.png */,
@@ -1171,6 +1177,7 @@
 				BA72C0CD1C0B0005004DE25D /* arrow-down-white@3x.png in Resources */,
 				BAFF9BC91BD46958004BAD2B /* ico-logo@3x.png in Resources */,
 				650DDD8C1BAB189C004ACFF2 /* menu@2x.png in Resources */,
+				BA992A2B1C64E719002D7FCB /* forum-clock@2x.png in Resources */,
 				BAFF9BE21BD486AE004BAD2B /* menu-neighbor-clear@2x.png in Resources */,
 				D85DA2AC1BE561C4006B6DFA /* btn-fav.png in Resources */,
 				65378E161BAED081001B27FD /* more@3x.png in Resources */,
@@ -1184,6 +1191,7 @@
 				BAFF9BCD1BD47246004BAD2B /* forum-topic@2x.png in Resources */,
 				BA72C0CC1C0B0005004DE25D /* arrow-down-white@2x.png in Resources */,
 				BAFF9BDF1BD481F5004BAD2B /* gender-male@3x.png in Resources */,
+				BA992A2C1C64E719002D7FCB /* forum-clock@3x.png in Resources */,
 				BAB8BA5B1C09F6B800C92B75 /* btn-trash@2x.png in Resources */,
 				BA65E9041BED734B00D8E037 /* forum-digest@3x.png in Resources */,
 				65BB63271ADE0B300042C359 /* LaunchScreen.xib in Resources */,

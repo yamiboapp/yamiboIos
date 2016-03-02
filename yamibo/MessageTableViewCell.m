@@ -99,7 +99,11 @@
 
 - (void)loadPublicData:(PublicMessageModel *)data {
     [_headImg setUserId:data.authorId andType:FaceMiddle];
-    _titleLabel.text = [NSString stringWithFormat:@"%@ 说：", data.authorName];
+    NSString *authorName;
+    if (data.authorName == nil) {
+        authorName = @"系统";
+    }
+    _titleLabel.text = [NSString stringWithFormat:@"%@ 说：", authorName];
 
     _contentLabel.text = [data.summary stringFromHTML];
     //_timeLable.text = @"2012-2-23 18:33";
