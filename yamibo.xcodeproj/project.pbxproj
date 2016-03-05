@@ -87,6 +87,7 @@
 		BA65E9041BED734B00D8E037 /* forum-digest@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65E9021BED734B00D8E037 /* forum-digest@3x.png */; };
 		BA65E90C1BEE0EAD00D8E037 /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA65E90B1BEE0EAD00D8E037 /* SettingController.m */; };
 		BA6F652C1C0D72A90024A341 /* BlogDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6F652B1C0D72A90024A341 /* BlogDetailController.m */; };
+		BA721F6D1C8AE5C500E2E0AD /* placement-holder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA721F6C1C8AE5C500E2E0AD /* placement-holder.jpg */; };
 		BA72C0CC1C0B0005004DE25D /* arrow-down-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72C0CA1C0B0005004DE25D /* arrow-down-white@2x.png */; };
 		BA72C0CD1C0B0005004DE25D /* arrow-down-white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72C0CB1C0B0005004DE25D /* arrow-down-white@3x.png */; };
 		BA72C0CF1C0B1163004DE25D /* arrow-down-gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72C0CE1C0B1163004DE25D /* arrow-down-gray@3x.png */; };
@@ -319,6 +320,7 @@
 		BA65E90B1BEE0EAD00D8E037 /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
 		BA6F652A1C0D72A90024A341 /* BlogDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogDetailController.h; sourceTree = "<group>"; };
 		BA6F652B1C0D72A90024A341 /* BlogDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogDetailController.m; sourceTree = "<group>"; };
+		BA721F6C1C8AE5C500E2E0AD /* placement-holder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placement-holder.jpg"; sourceTree = "<group>"; };
 		BA72C0CA1C0B0005004DE25D /* arrow-down-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-down-white@2x.png"; sourceTree = "<group>"; };
 		BA72C0CB1C0B0005004DE25D /* arrow-down-white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-down-white@3x.png"; sourceTree = "<group>"; };
 		BA72C0CE1C0B1163004DE25D /* arrow-down-gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-down-gray@3x.png"; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				BAB8BA5E1C09F6D800C92B75 /* btn-refresh@3x.png */,
 				BAB8BA611C09F9F100C92B75 /* btn-create@2x.png */,
 				BAB8BA621C09F9F100C92B75 /* btn-create@3x.png */,
+				BA721F6C1C8AE5C500E2E0AD /* placement-holder.jpg */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1086,7 +1089,6 @@
 				65BB63101ADE0B300042C359 /* Frameworks */,
 				65BB63111ADE0B300042C359 /* Resources */,
 				1B7E1BC37F16F3DFBBC0B84A /* Copy Pods Resources */,
-				F0DD65DC15ACE1948031F971 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1126,7 +1128,7 @@
 				TargetAttributes = {
 					65BB63121ADE0B300042C359 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = AVJ7F5B5B9;
+						DevelopmentTeam = P9Z3358A52;
 					};
 					65BB632B1ADE0B300042C359 = {
 						CreatedOnToolsVersion = 6.3;
@@ -1177,6 +1179,7 @@
 				BA72C0CD1C0B0005004DE25D /* arrow-down-white@3x.png in Resources */,
 				BAFF9BC91BD46958004BAD2B /* ico-logo@3x.png in Resources */,
 				650DDD8C1BAB189C004ACFF2 /* menu@2x.png in Resources */,
+				BA721F6D1C8AE5C500E2E0AD /* placement-holder.jpg in Resources */,
 				BA992A2B1C64E719002D7FCB /* forum-clock@2x.png in Resources */,
 				BAFF9BE21BD486AE004BAD2B /* menu-neighbor-clear@2x.png in Resources */,
 				D85DA2AC1BE561C4006B6DFA /* btn-fav.png in Resources */,
@@ -1266,21 +1269,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F0DD65DC15ACE1948031F971 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

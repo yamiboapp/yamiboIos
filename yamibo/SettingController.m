@@ -83,6 +83,7 @@
     [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)logout { //TODO: logout
+    //[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:]
     
 }
 - (void)onNavigationLeftButtonClicked {

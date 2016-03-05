@@ -85,7 +85,9 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:model.msgList];
+                NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                       NSMakeRange(0, model.msgList.count)];
+                [_dataArray insertObjects:model.msgList atIndexes:indexes];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];
@@ -100,7 +102,9 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:model.msgList];
+                NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                       NSMakeRange(0, model.msgList.count)];
+                [_dataArray insertObjects:model.msgList atIndexes:indexes];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];
