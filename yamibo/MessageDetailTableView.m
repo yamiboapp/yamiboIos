@@ -147,9 +147,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_viewType == MessagePrivate) {
-//        MessageDetailTableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
         NSNumber *pmid = [_pmidArray objectAtIndex:indexPath.row];
-//        pmid = @(cell.pmid);
         NSNumber *height = [_pmidHeightDic objectForKey:pmid];
         if (height == nil) {
             return 80;
@@ -172,7 +170,6 @@
         } else {
             cell = [tableView dequeueReusableCellWithIdentifier:KMessageDetailTableViewCell_Out forIndexPath:indexPath];
         }
-        //cell.tag = cell.pmid;
         if (![[_pmidArray objectAtIndex:indexPath.row] isEqual:@(cell.pmid)]) {
             [self configureCell:cell atIndexPath:indexPath];
             if ([_pmidHeightDic objectForKey:@(cell.pmid)] == nil) {

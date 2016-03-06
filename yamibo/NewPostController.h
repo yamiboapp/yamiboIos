@@ -12,7 +12,7 @@
  *
  *  @brief  发表主题、回复帖子
  */
-@interface PostController : BaseViewController
+@interface NewPostController : BaseViewController
 
 - (void)loadData:(NSDictionary*)data;
 

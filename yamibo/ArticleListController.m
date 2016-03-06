@@ -10,7 +10,7 @@
 #import "ArticleModel.h"
 #import "ArticleListTableView.h"
 #import "ArticleDetailController.h"
-#import "PostController.h"
+#import "NewPostController.h"
 #import "CommunicationrManager.h"
 #import "HMSegmentedControl.h"
 #import "REMenu.h"
@@ -271,14 +271,14 @@
 }
 - (void)newArticle {
     if (_didLoadRightMenu) {
-        PostController *postController = [[PostController alloc] init];
+        NewPostController *newPostController = [[NewPostController alloc] init];
         NSDictionary *dic = @{
                               @"forumId":_forumId,
                               @"typeNames":_rightMenuNames,
                               @"typeIds":_rightMenuIds
                               };
-        [postController loadData:dic];
-        [self.navigationController pushViewController:postController animated:YES];
+        [newPostController loadData:dic];
+        [self.navigationController pushViewController:newPostController animated:YES];
     }
 }
 - (void)previousPage {

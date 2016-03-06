@@ -6,13 +6,13 @@
 //  Copyright © 2015 lsl. All rights reserved.
 //
 
-#import "PostController.h"
+#import "NewPostController.h"
 #import "REMenu.h"
 #import "UITextView+Placeholder.h"
 
 #define KMENUITEMHEIGHT 40
 
-@interface PostController ()<UITextViewDelegate>
+@interface NewPostController ()<UITextViewDelegate>
 @property (strong, nonatomic) NSString *forumId;
 @property (strong, nonatomic) NSMutableArray *typeNames;
 @property (strong, nonatomic) NSMutableArray *typeIds;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation PostController
+@implementation NewPostController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

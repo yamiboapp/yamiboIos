@@ -9,6 +9,8 @@
 #import "SettingController.h"
 #import "AppManager.h"
 #import "NKColorSwitch.h"
+#import "ProfileManager.h"
+#import "MenuController.h"
 
 @interface SettingController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
@@ -24,8 +26,9 @@
     // Do any additional setup after loading the view.
     [self configNavigation];
     [self initTableView];
-    [self initLogout];
-    
+    if ([[ProfileManager sharedInstance] checkLogin]) {
+        [self initLogout];
+    }
     _cells = [NSMutableArray array];
     [_cells addObject:[NSMutableArray array]];
     [_cells addObject:[NSMutableArray array]];
@@ -82,9 +85,17 @@
     [btn setTitle:@"退出登陆" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
 }
-- (void)logout { //TODO: logout
-    //[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:]
+- (void)logout {
+    [Utility showTitle:@"已退出" hideAfter:0.5];
     
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [cookieJar cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    
+    NSDictionary *dic = @{kLeftDrawerSelectionIndexKey:@(CenterControllerHome)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:KChangeCenterViewNotification object:nil userInfo:dic];
 }
 - (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
