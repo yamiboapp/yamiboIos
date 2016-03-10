@@ -42,42 +42,36 @@
 }
 - (void)initView {
     _backView = [[UIView alloc] init];
-    _backView.normalBackgroundColor = KCOLOR_YELLOW_FDF5D8;
-    _backView.nightBackgroundColor = UIColorFromRGB(0x343434);
+    _backView.dk_backgroundColorPicker = DKColorWithColors(KCOLOR_YELLOW_FDF5D8, [UIColor colorWithRGBHex:0x343434]);
 
     [self.contentView addSubview:_backView];
     
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.font = KFONT(15);
-    _titleLabel.normalTextColor = KCOLOR_RED_6D2C1D;
-    _titleLabel.nightTextColor = [UIColor whiteColor];
+    _titleLabel.dk_textColorPicker =  DKColorWithColors(KCOLOR_RED_6D2C1D, [UIColor whiteColor]);
     _titleLabel.numberOfLines = 0;
     [_backView addSubview:_titleLabel];
 
     
     _nameLabel = [[UILabel alloc] init];
     _nameLabel.font = KFONT(11);
-    _nameLabel.normalTextColor = KCOLOR_GRAY;
-    _nameLabel.nightTextColor = [UIColor whiteColor];
+    _nameLabel.dk_textColorPicker =  DKColorWithColors(KCOLOR_GRAY, [UIColor whiteColor]);
     [_backView addSubview:_nameLabel];
     
     _lastPostDateLabel = [[UILabel alloc] init];
     _lastPostDateLabel.font = KFONT(11);
-    _lastPostDateLabel.normalTextColor = KCOLOR_GRAY;
-    _lastPostDateLabel.nightTextColor = [UIColor whiteColor];
+    _lastPostDateLabel.dk_textColorPicker =  DKColorWithColors(KCOLOR_GRAY, [UIColor whiteColor]);
     [_backView addSubview:_lastPostDateLabel];
     
     _commentLabel = [[UILabel alloc] init];
     [_backView addSubview:_commentLabel];
     _commentLabel.font = KFONT(9);
-    _commentLabel.normalTextColor = KCOLOR_GRAY;
-    _commentLabel.nightTextColor = [UIColor whiteColor];
+    _commentLabel.dk_textColorPicker =  DKColorWithColors(KCOLOR_GRAY, [UIColor whiteColor]);
     
     _watchLabel = [[UILabel alloc] init];
     [_backView addSubview:_watchLabel];
     _watchLabel.font = KFONT(11);
-    _watchLabel.normalTextColor = KCOLOR_GRAY;
-    _watchLabel.nightTextColor = [UIColor whiteColor];
+    _watchLabel.dk_textColorPicker =  DKColorWithColors(KCOLOR_GRAY, [UIColor whiteColor]);
 }
 - (void)setupConstrains {
     [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
