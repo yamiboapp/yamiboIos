@@ -24,6 +24,7 @@
 		65378E161BAED081001B27FD /* more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65378E141BAED081001B27FD /* more@3x.png */; };
 		65378E1A1BAEDA28001B27FD /* NeighborTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E191BAEDA28001B27FD /* NeighborTableView.m */; };
 		65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65378E1C1BAEDB5B001B27FD /* NeighborTableViewCell.m */; };
+		654186A01C68C38C002BF136 /* ArticleDetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541869F1C68C38C002BF136 /* ArticleDetailWebView.m */; };
 		6541DF9D1ADE1634008EFEE7 /* UIColor+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF961ADE1634008EFEE7 /* UIColor+Utility.m */; };
 		6541DF9E1ADE1634008EFEE7 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF981ADE1634008EFEE7 /* UIImage+Utility.m */; };
 		6541DF9F1ADE1634008EFEE7 /* UILabel+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */; };
@@ -191,6 +192,8 @@
 		65378E191BAEDA28001B27FD /* NeighborTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborTableView.m; sourceTree = "<group>"; };
 		65378E1B1BAEDB5B001B27FD /* NeighborTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeighborTableViewCell.h; sourceTree = "<group>"; };
 		65378E1C1BAEDB5B001B27FD /* NeighborTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeighborTableViewCell.m; sourceTree = "<group>"; };
+		6541869E1C68C38C002BF136 /* ArticleDetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleDetailWebView.h; sourceTree = "<group>"; };
+		6541869F1C68C38C002BF136 /* ArticleDetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailWebView.m; sourceTree = "<group>"; };
 		6541DF941ADE1634008EFEE7 /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
 		6541DF951ADE1634008EFEE7 /* UIColor+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utility.h"; sourceTree = "<group>"; };
 		6541DF961ADE1634008EFEE7 /* UIColor+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utility.m"; sourceTree = "<group>"; };
@@ -1055,6 +1058,8 @@
 				D85DA2A41BE55911006B6DFA /* ArticleDetailTableView.m */,
 				D85DA2A61BE5594D006B6DFA /* ArticleDetailTableViewCell.h */,
 				D85DA2A71BE5594D006B6DFA /* ArticleDetailTableViewCell.m */,
+				6541869E1C68C38C002BF136 /* ArticleDetailWebView.h */,
+				6541869F1C68C38C002BF136 /* ArticleDetailWebView.m */,
 			);
 			name = ArticleDetail;
 			sourceTree = "<group>";
@@ -1333,6 +1338,7 @@
 				BAB8BA581C09F22D00C92B75 /* PostController.m in Sources */,
 				BA28B7EA1BF0933D003B4633 /* NKColorSwitch.m in Sources */,
 				BA8B26B61BB0184500173D5B /* MessageController.m in Sources */,
+				654186A01C68C38C002BF136 /* ArticleDetailWebView.m in Sources */,
 				65378E1D1BAEDB5B001B27FD /* NeighborTableViewCell.m in Sources */,
 				BA6F652C1C0D72A90024A341 /* BlogDetailController.m in Sources */,
 				6597FCA11BAC37BF009025E3 /* NSData+SDDataCache.m in Sources */,

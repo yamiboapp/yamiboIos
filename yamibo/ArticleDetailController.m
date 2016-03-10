@@ -12,14 +12,14 @@
 
 #import "YPostContentView.h"
 
-#import <WebKit/WebKit.h>
+#import "ArticleDetailWebView.h"
 
-@interface ArticleDetailController ()<YPostContentViewDelegate, WKNavigationDelegate>
+
+@interface ArticleDetailController ()<YPostContentViewDelegate>
 {
     YPostContentView *_contentView;
     NSString *_message1;
 }
-@property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) ArticleDetailTableView *postList;
 @property (nonatomic, strong) NSDictionary *paraDict;
 
@@ -93,17 +93,11 @@
 }
 
 - (void)test {
-    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:[[WKWebViewConfiguration alloc] init]];
-    [self.view addSubview:_webView];
-    _webView.navigationDelegate = self;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://ceshi.yamibo.com/chobits/v5/view.php?tid=239964&page=2&authorid=17804"]];
-    [_webView loadRequest:request];
-//    [wb loadHTMLString:_message1 baseURL:[NSURL URLWithString:@"http://www.yamibo.com"]];
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    NSLog(@"finish");
-    NSLog(@"%f", _webView.scrollView.contentSize.height);
+    ArticleDetailWebView *wb = [[ArticleDetailWebView alloc] init];
+    [self.view addSubview:wb];
+    [wb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)loadThreadDetail {

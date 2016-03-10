@@ -23,21 +23,21 @@
 
 + (void)setNearByConfig:(int)flag completion:(void (^)(NSString *message))completion {
     NSDictionary *dic = @{@"lbs":@"profile", @"sousa":@"set", @"flag":@(flag)};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             
             completion(nil);
         } else {
             completion(@"加载失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(@"加载失败");
     }];
 }
 
 + (void)getProfile:(void (^)(NSString *message))completion {
     NSDictionary *dic = @{@"module":@"profile"};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             [ProfileManager sharedInstance].rank = [responseObject[@"Variables"][@"space"][@"group"][@"grouptitle"] stringFromHTML];
             [ProfileManager sharedInstance].credit = responseObject[@"Variables"][@"space"][@"credits"];
@@ -46,20 +46,20 @@
         } else {
             completion(@"加载失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(@"加载失败");
     }];
 }
 
 + (void)getProfileWithUid:(NSString*)uid completion:(void (^)(ProfileModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"profile", @"uid":uid};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[ProfileModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请求失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"请求失败");
     }];
 }
@@ -71,7 +71,7 @@
     } else {
         dic = @{@"module":@"login", @"username":userName, @"password":pwd, @"questionid":questionId, @"answer":answer};
     }
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             if ([responseObject[@"Message"][@"messageval"] isEqualToString:@"login_succeed"]) {
                 [ProfileManager sharedInstance].userId = responseObject[@"Variables"][@"member_uid"];
@@ -84,27 +84,27 @@
         } else {
             completion(@"登陆失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil);
     }];
 }
 #pragma mark home page
 + (void)getHot:(void (^)(HotModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"hot"};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[HotModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请求失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"请求失败");
     }];
 }
 
 + (void)getForumList:(void (^)(ForumListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"forumindex"};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             // login时储存的formhash为登录前的formhash,需在此更新
             if ([self checkLogin:responseObject]) {
@@ -114,7 +114,7 @@
         } else {
             completion(nil, @"请求失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"请求失败");
     }];
 }
@@ -128,89 +128,88 @@
         digest = @"1";
     }
     NSString *url = [NSString stringWithFormat:@"%@%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%@&%@=%d",KBaseUrl, @"module", @"forumdisplay", @"fid", fId, @"typeid", typeId, @"digest", digest, @"filter", filter, @"tpp", perPage, @"page", page];
-    [[self defaultManager] POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[ArticleListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请求失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"请求失败");
     }];
 }
 #pragma mark favorite
 + (void)getFavoriteList:(int)page completion:(void (^)(ThreadFavoriteListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"myfavthread", @"page":@(page)};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             completion([[ThreadFavoriteListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请重新登录");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"加载失败");
     }];
 }
 
 + (void)delFavorite:(NSString *)favId completion:(void (^)(NSString *message))completion {
     NSDictionary *dic = @{@"module":@"favthread", @"op":@"delete", @"favid":favId, @"formhash": [ProfileManager sharedInstance].authToken};
-    AFHTTPRequestOperationManager *manager = [self defaultManager];
-    [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             completion(nil);
         } else {
             completion(@"请先登录");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(@"请求失败");
     }];
 }
 #pragma mark message
 + (void)getPrivateMessageList:(int)page completion:(void (^)(PrivateMessageListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"mypm", @"page":@(page)};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             completion([[PrivateMessageListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请重新登录");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"加载消息失败");
     }];
 }
 + (void)getPublicMessageList:(int)page completion:(void (^)(PublicMessageListModel *, NSString *))completion {
     NSDictionary *dic = @{@"module":@"publicpm", @"page":@(page)};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             completion([[PublicMessageListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请重新登录");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"加载消息失败");
     }];
 }
 + (void)getPrivateMessageDetailList:(int)page toId:(NSInteger)toId completion:(void (^)(PrivateMessageDetailListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"mypm", @"subop":@("view"), @"touid":@(toId), @"page":@(page)};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[PrivateMessageDetailListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"加载对话失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"加载对话失败");
     }];
 }
 + (void)getPublicMessageDetailList:(NSInteger)pmId completion:(void (^)(PublicMessageDetailListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"publicpm", @"subop":@("viewg"), @"pmid":@(pmId)};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[PublicMessageDetailListModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"加载消息失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(nil, @"加载消息失败");
     }];
 }
@@ -225,14 +224,13 @@
     } else if (type == MessagePublic) {
         dic = @{@"module":@"sendpm", @"op":@"delete", @"gpmid":pmId, @"formhash": [ProfileManager sharedInstance].authToken};
     }
-    AFHTTPRequestOperationManager *manager = [self defaultManager];
-    [manager POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion(nil);
         } else {
             completion(@"请求失败");
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(@"请求失败");
     }];
 }
@@ -245,46 +243,46 @@
                            @"ppp": @(ppp),
                            @"authorid": @(uid),
                            @"mobile": @"no"};
-    [[self defaultManager] POST:KBaseUrl parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dict success:^(NSURLSessionDataTask *task, id  _Nonnull responseObject) {
         if ([self jsonOKForResponseObject:responseObject] && [self checkLogin:responseObject]) {
             completion([[ArticleDetailModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请重新登录");
         }
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask *task, NSError * _Nonnull error) {
         completion(nil, @"内容加载失败");
     }];
 }
 #pragma mark blog
 + (void)getBlogListWithUid:(NSString *)uid andPage:(int)page completion:(void (^)(BlogListModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"blog", @"uid":uid, @"page":@(page)};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
             completion([[BlogListModel alloc] initWithDictionary:responseObject error:nil], nil);            
         } else {
             completion(nil, @"请求失败");
         }
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask *task, NSError * _Nonnull error) {
         completion(nil, @"请求失败");
     }];
 
 }
 + (void)getBlogDetailWithBlogId:(NSString *)bid completion:(void (^)(BlogDetailModel *model, NSString *message))completion {
     NSDictionary *dic = @{@"module":@"blog", @"op":@"view", @"blogid":bid};
-    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([self jsonOKForResponseObject:responseObject]) {
                 completion([[BlogDetailModel alloc] initWithDictionary:responseObject error:nil], nil);
         } else {
             completion(nil, @"请求失败");
         }
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask *task, NSError * _Nonnull error) {
         completion(nil, @"请求失败");
     }];
     
 }
 #pragma mark -
-+ (AFHTTPRequestOperationManager *)defaultManager {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
++ (AFHTTPSessionManager *)defaultManager {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.requestSerializer.HTTPShouldHandleCookies = true;
 
