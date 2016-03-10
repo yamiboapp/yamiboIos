@@ -95,13 +95,13 @@
     if ([manager fileExistsAtPath:folderPath]) {
         NSArray *childFiles = [manager subpathsAtPath:folderPath];
         for (NSString *fileName in childFiles) {
-            NSLog(@"%@",fileName);
+            //NSLog(@"%@",fileName);
             NSString *fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
-            NSLog(@"%llu",[FilePathUtility fileSizeAtPath:fileAbsolutePath]);
+            //NSLog(@"%llu",[FilePathUtility fileSizeAtPath:fileAbsolutePath]);
             folderSize += [FilePathUtility fileSizeAtPath:fileAbsolutePath];
         }
     };
-    NSLog(@"folderSize ==== %lld",folderSize);
+    //NSLog(@"folderSize ==== %lld",folderSize);
     return folderSize/(1024.0*1024.0);
 }
 + (void)clearCacheAtPath:(NSString *)path {

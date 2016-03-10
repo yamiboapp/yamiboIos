@@ -8,6 +8,8 @@
 
 #import "MessageDetailController.h"
 #import "MessageDetailTableView.h"
+#import "YReplyView.h"
+
 @interface MessageDetailController()
 @property (assign, nonatomic) MessageViewType viewType;
 @property (assign, nonatomic) NSInteger detailId;
@@ -33,9 +35,19 @@
 - (void)initView {
     MessageDetailTableView *tableView = [[MessageDetailTableView alloc] initWithViewType:_viewType andDetailId:_detailId];
     [self.view addSubview:tableView];
+
+    YReplyView *replyView = [[YReplyView alloc] init];
+    [self.view addSubview:replyView];
+    
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(replyView.mas_top).offset(-2);
     }];
+    [replyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(48);
+        make.bottom.left.right.equalTo(self.view);
+    }];
+    
     [tableView refreshData];
 }
 - (void)loadData:(NSDictionary *)data {

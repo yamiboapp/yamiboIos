@@ -92,16 +92,30 @@
     } else {
         _titleLabel.text = [NSString stringWithFormat:@"您 对 %@ 说：", data.toName];
     }
-    _contentLabel.text = [data.summary stringFromHTML];
+    if (data.summary == nil) {
+        _contentLabel.text = @"[图片]";
+    } else {
+        _contentLabel.text = [data.summary stringFromHTML];
+    }
     //_timeLable.text = @"2012-2-23 18:33";
     _timeLable.text = data.date;
 }
 
 - (void)loadPublicData:(PublicMessageModel *)data {
     [_headImg setUserId:data.authorId andType:FaceMiddle];
-    _titleLabel.text = [NSString stringWithFormat:@"%@ 说：", data.authorName];
+    NSString *authorName;
+    if (data.authorName == nil) {
+        authorName = @"系统";
+    } else {
+        authorName = data.authorName;
+    }
+    _titleLabel.text = [NSString stringWithFormat:@"%@ 说：", authorName];
 
-    _contentLabel.text = [data.summary stringFromHTML];
+    if (data.summary == nil) {
+        _contentLabel.text = @"[图片]";
+    } else {
+        _contentLabel.text = [data.summary stringFromHTML];
+    }
     //_timeLable.text = @"2012-2-23 18:33";
     _timeLable.text = data.date;
 }

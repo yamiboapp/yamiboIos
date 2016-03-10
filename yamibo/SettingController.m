@@ -9,11 +9,13 @@
 #import "SettingController.h"
 #import "AppManager.h"
 #import "NKColorSwitch.h"
+#import "ProfileManager.h"
+#import "MenuController.h"
 
 @interface SettingController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *cells;
-@property (strong, nonatomic) NSString *cacheSize;
+@property (strong, nonatomic) UILabel *cacheLabel;
 
 @end
 
@@ -24,8 +26,9 @@
     // Do any additional setup after loading the view.
     [self configNavigation];
     [self initTableView];
-    [self initLogout];
-    
+    if ([[ProfileManager sharedInstance] checkLogin]) {
+        [self initLogout];
+    }
     _cells = [NSMutableArray array];
     [_cells addObject:[NSMutableArray array]];
     [_cells addObject:[NSMutableArray array]];
@@ -38,7 +41,7 @@
         [_cells[1] addObject:cell];
     }
     
-    _cacheSize = [NSString stringWithFormat:@"%.2fM", [FilePathUtility folderSizeAtPath:[FilePathUtility cachesDirectory]]];
+    //_cacheSize = [NSString stringWithFormat:@"%.2fM", [FilePathUtility folderSizeAtPath:[FilePathUtility cachesDirectory]]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,8 +85,17 @@
     [btn setTitle:@"退出登陆" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
 }
-- (void)logout { //TODO: logout
+- (void)logout {
+    [Utility showTitle:@"已退出" hideAfter:0.5];
     
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [cookieJar cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    
+    NSDictionary *dic = @{kLeftDrawerSelectionIndexKey:@(CenterControllerHome)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:KChangeCenterViewNotification object:nil userInfo:dic];
 }
 - (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
@@ -185,8 +197,9 @@
                     break;
                 case 5: //清除缓存
                     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-                    rightLabel.text = _cacheSize;
-                    cell.accessoryView = rightLabel;
+                    _cacheLabel = rightLabel;
+                    _cacheLabel.text = [self getCacheSize];
+                    cell.accessoryView = _cacheLabel;
                     break;
                 default:
                     break;
@@ -256,11 +269,11 @@
 }
 
 - (void)showActionSheete {
-
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [FilePathUtility clearCacheAtPath:[FilePathUtility cachesDirectory]];
+        _cacheLabel.text = [self getCacheSize];
     }];
     [alert addAction:action];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -268,4 +281,9 @@
     
     [self presentViewController:alert animated:true completion:nil];
 }
+
+-(NSString *)getCacheSize {
+    return [NSString stringWithFormat:@"%.2fM", [FilePathUtility folderSizeAtPath:[FilePathUtility cachesDirectory]]];
+}
+
 @end

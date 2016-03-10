@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @property   (strong, nonatomic) NSString *toName;
 @property   (strong, nonatomic) NSString *lastId;
 @property   (strong, nonatomic) NSString *date;
-@property   (strong, nonatomic) NSString *summary;
+@property   (strong, nonatomic) NSString<Optional> *summary; //最后消息为图片时会返回空
 
 @end
 
@@ -43,7 +43,6 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 
 @property   (strong, nonatomic) NSString *pmId;
 @property   (strong, nonatomic) NSString *authorId;
-//TODO: API返回author name
 @property   (strong, nonatomic) NSString<Optional> *authorName;
 @property   (strong, nonatomic) NSString *date;
 @property   (strong, nonatomic) NSString *summary;
@@ -89,7 +88,7 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 
 @property   (strong, nonatomic) NSString *pmId;
 @property   (strong, nonatomic) NSString *authorId;
-@property   (strong, nonatomic) NSString *authorName;
+@property   (strong, nonatomic) NSString<Optional> *authorName;
 @property   (strong, nonatomic) NSString *date;
 @property   (strong, nonatomic) NSString *message;
 

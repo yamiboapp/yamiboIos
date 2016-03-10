@@ -78,15 +78,41 @@
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame {
     if ([attachment isKindOfClass:[DTImageTextAttachment class]]) {
         
-        DTLazyImageView *imageView = [[DTLazyImageView alloc] initWithFrame:frame];
+        UIImageView *imageView = [[DTLazyImageView alloc] initWithFrame:frame];
         
         if ([[AppManager sharedInstance] isNoImgMode]) {
             
         } else {
-            imageView.delegate = self;
-            
-            // url for deferred loading
-            imageView.url = attachment.contentURL;
+            imageView.userInteractionEnabled = YES;
+            //FIXME: placeholderImage not showing
+            [imageView sd_setImageWithURL:attachment.contentURL placeholderImage:[UIImage imageNamed:@"placement-holder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                CGSize imageSize;
+                if (image.size.width > self.frame.size.width) {
+                    imageSize = CGSizeMake(self.frame.size.width, self.frame.size.width*image.size.height/image.size.width);
+                } else {
+                    imageSize = image.size;
+                }
+                
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"contentURL == %@", imageURL];
+                
+                BOOL didUpdate = NO;
+                
+                for (DTTextAttachment *oneAttachment in [_attributedTextContentView.layoutFrame textAttachmentsWithPredicate:pred]) {
+                    if (CGSizeEqualToSize(oneAttachment.originalSize, CGSizeZero)) {
+                        oneAttachment.originalSize = imageSize;
+                        didUpdate = YES;
+                    }
+                }
+                
+                if (didUpdate) {
+                    [self relayoutText];
+                    NSDictionary *dic = @{@"height":[NSNumber numberWithFloat:self.displayHeight], @"pmid":[NSNumber numberWithLong:self.tag]};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"resizeCell" object:nil userInfo:dic];
+                }
+            }];
+             //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showZoomImageView:)];
+            //[imageView addGestureRecognizer:tap];
+
         }
         
         return imageView;
@@ -121,7 +147,7 @@
     return linkButton;
 }
 
-#pragma mark - DTLazyImageViewDelegate
+/*#pragma mark - DTLazyImageViewDelegate
 
 - (void)lazyImageView:(DTLazyImageView *)lazyImageView didChangeImageSize:(CGSize)size {
     
@@ -148,7 +174,7 @@
         NSDictionary *dic = @{@"height":[NSNumber numberWithFloat:self.displayHeight], @"pmid":[NSNumber numberWithLong:self.tag]};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"resizeCell" object:nil userInfo:dic];
     }
-}
+}*/
 
 
 #pragma mark - Actions

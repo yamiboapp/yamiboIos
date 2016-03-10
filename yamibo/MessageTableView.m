@@ -85,7 +85,9 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:model.msgList];
+                NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                       NSMakeRange(0, model.msgList.count)];
+                [_dataArray insertObjects:model.msgList atIndexes:indexes];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];
@@ -100,7 +102,9 @@
             if (message != nil) {
                 [Utility showTitle:message];
             } else {
-                [_dataArray addObjectsFromArray:model.msgList];
+                NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                       NSMakeRange(0, model.msgList.count)];
+                [_dataArray insertObjects:model.msgList atIndexes:indexes];
             }
             if (model.msgList.count < _perPage) {
                 [self hiddenFooter:YES];
@@ -168,9 +172,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic;
     if (_viewType == MessagePrivate) {
-        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[_dataArray.count - indexPath.row - 1] toId], @"detailName":[_dataArray[indexPath.row] toName]};
+        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[_dataArray.count - indexPath.row - 1] toId], @"detailName":[_dataArray[_dataArray.count - indexPath.row - 1] toName]};
     } else if (_viewType == MessagePublic) {
-        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[_dataArray.count - indexPath.row - 1] pmId], @"detailName":[_dataArray[indexPath.row] authorName]};
+        NSString *detailName;
+        if ([_dataArray[_dataArray.count - indexPath.row - 1] authorName] == nil) {
+            detailName = @"系统";
+        } else {
+            detailName = [_dataArray[_dataArray.count - indexPath.row - 1] authorName];
+        }
+        dic = @{@"messageViewType":[NSNumber numberWithInt:_viewType], @"detailId":[_dataArray[_dataArray.count - indexPath.row - 1] pmId], @"detailName":detailName};
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KNotification_ToMessageDetail object:nil userInfo:dic];
