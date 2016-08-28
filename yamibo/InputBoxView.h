@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YReplyView : UIView
+typedef void (^SendBlock)(void);
+
+@interface InputBoxView : UIView
 
 @end
+

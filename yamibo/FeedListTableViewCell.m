@@ -63,11 +63,11 @@
     
     _nameLabel = [[UILabel alloc] init];
     [_backView addSubview:_nameLabel];
-    _nameLabel.font = KFONT(10);
+    _nameLabel.font = KFONT(11);
     
     _timeLabel = [[UILabel alloc] init];
     [_backView addSubview:_timeLabel];
-    _timeLabel.font = KFONT(9);
+    _timeLabel.font = KFONT(11);
     _timeLabel.textColor = KCOLOR_GRAY;
     
     if (_isNoPicMode) {
@@ -122,7 +122,7 @@
     [_backView addSubview:info];
     [info mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(_backView).offset(-20);
-        make.height.mas_equalTo(9);
+        make.height.mas_equalTo(11);
         make.centerY.equalTo(_nameLabel);
     }];
     
@@ -131,7 +131,7 @@
     [_watchLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.bottom.equalTo(info);
     }];
-    _watchLabel.font = KFONT(9);
+    _watchLabel.font = KFONT(11);
     _watchLabel.textColor = KCOLOR_GRAY;
     
 
@@ -153,7 +153,7 @@
         make.right.equalTo(watchImgView.mas_left).offset(-5);
         make.top.bottom.equalTo(info);
     }];
-    _commentLabel.font = KFONT(9);
+    _commentLabel.font = KFONT(11);
     _commentLabel.textColor = KCOLOR_GRAY;
     
     UIImageView *commentImgView = [[UIImageView alloc] init];

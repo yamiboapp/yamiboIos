@@ -134,7 +134,6 @@
     NSString *localDate = [dateFormatter stringFromDate:sourceDate];
     return localDate;
 }
-
 @end
 
 @implementation NSString (stringFromHTML)
@@ -153,5 +152,19 @@
         return plainText;
     }
 }
+@end
 
+@implementation NSString (trimWhitespace)
+- (NSString *)trimWhitespace
+{
+    NSMutableString *str = [self mutableCopy];
+    CFStringTrimWhitespace((__bridge CFMutableStringRef)str);
+    return str;
+}
+@end
+
+@implementation NSString (isEmpty)
+- (BOOL)isEmpty {
+    return [[self trimWhitespace] isEqualToString:@""];
+}
 @end

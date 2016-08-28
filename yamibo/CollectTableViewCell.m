@@ -48,7 +48,7 @@
         make.top.mas_equalTo(20);
         make.centerX.equalTo(_backView);
     }];
-    _titleLabel.font = KFONT(14);
+    _titleLabel.font = KFONT(15);
     _titleLabel.textColor = KCOLOR_RED_6D2C1D;
     
     _nameLabel = [[UILabel alloc] init];
@@ -57,7 +57,7 @@
         make.left.equalTo(_titleLabel);
         make.top.equalTo(_titleLabel.mas_bottom).offset(15);
     }];
-    _nameLabel.font = KFONT(8);
+    _nameLabel.font = KFONT(11);
     _nameLabel.textColor = KCOLOR_GRAY;
     
     _timeLabel = [[UILabel alloc] init];
@@ -66,7 +66,7 @@
         make.top.bottom.equalTo(_nameLabel);
         make.centerX.equalTo(_backView);
     }];
-    _timeLabel.font = KFONT(8);
+    _timeLabel.font = KFONT(11);
     _timeLabel.textColor = KCOLOR_GRAY;
     
     _commentLabel = [[UILabel alloc] init];
@@ -75,7 +75,7 @@
         make.top.bottom.equalTo(_nameLabel);
         make.right.equalTo(_backView).offset(-23);
     }];
-    _commentLabel.font = KFONT(8);
+    _commentLabel.font = KFONT(11);
     _commentLabel.textColor = KCOLOR_GRAY;
     
     UIImageView *commentImgView = [[UIImageView alloc] init];

@@ -81,7 +81,7 @@
     }];
     btn.layer.cornerRadius = 4;
     btn.clipsToBounds = true;
-    [btn setBackgroundImage:[UIImage imageWithColor:KCOLOR_RED_6D2C1D] forState:UIControlStateNormal];
+    btn.backgroundColor = KCOLOR_RED_6D2C1D;
     [btn setTitle:@"退出登陆" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
 }

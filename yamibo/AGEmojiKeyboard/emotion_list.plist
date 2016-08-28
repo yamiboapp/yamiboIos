@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>chs</key>
+		<string>[aa]</string>
+		<key>type</key>
+		<integer>0</integer>
+		<key>png</key>
+		<string>coding_emoji_01</string>
+	</dict>
+</array>
+</plist>
