@@ -79,6 +79,28 @@
 - (NSString*)stringFromHTML;
 @end
 
+@interface NSString (trimWhitespace)
+/**
+ *  @author Shuang Yang, 15-11-10
+ *
+ *  @brief  Decode simple HTML tags (no images/links)
+ *
+ *  @return Plain text
+ */
+- (NSString*)trimWhitespace;
+@end
+
+@interface NSString (isEmpty)
+/**
+ *  @author Shuang Yang, 15-11-10
+ *
+ *  @brief  Decode simple HTML tags (no images/links)
+ *
+ *  @return Plain text
+ */
+- (BOOL)isEmpty;
+@end
+
 @interface NSData (MD5)
 
 /**

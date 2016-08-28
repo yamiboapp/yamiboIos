@@ -116,16 +116,17 @@
         UILabel *loginLabel = [[UILabel alloc] init];
         [self addSubview:loginLabel];
         [loginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(face);
+            make.left.equalTo(face).offset(-10);
+            make.right.equalTo(face).offset(10);
             make.top.equalTo(face.mas_bottom).offset(SCALE_NUM(34));
-            make.height.mas_equalTo(SCALE_NUM(30));
+            make.height.mas_equalTo(SCALE_NUM(35));
         }];
-        loginLabel.layer.cornerRadius = 5;
+        loginLabel.layer.cornerRadius = 4;
         loginLabel.clipsToBounds = true;
         loginLabel.textColor = KCOLOR_YELLOW_FDF5D8;
         loginLabel.textAlignment = NSTextAlignmentCenter;
         loginLabel.text = @"点击登陆";
-        loginLabel.font = KFONT(10);
+        loginLabel.font = KFONT(14);
         loginLabel.backgroundColor = KCOLOR_RED_A1422C;
     }
 }

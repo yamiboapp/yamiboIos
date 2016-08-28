@@ -48,7 +48,11 @@
 - (void)setContentHtml:(NSString *)html {
     NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSURL URLWithString:testUrl], NSBaseURLDocumentOption, nil];
+    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    [NSURL URLWithString:testUrl], NSBaseURLDocumentOption,
+                                    KCOLOR_RED_6D2C1D, NSForegroundColorAttributeName,
+                                    KFONT(15), NSFontAttributeName, nil];
+
     _attrString = [[NSAttributedString alloc] initWithHTMLData:data options:options documentAttributes:nil];
     
     self.attributedString = _attrString;

@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *pmidArray;
 
 @property (assign, nonatomic) MessageViewType viewType;
-@property (assign, nonatomic) NSInteger detailId;
+@property (assign, nonatomic) NSInteger detailId; //toUid
 @property (assign, nonatomic) int msgCount;
 @property (assign, nonatomic) int perPage;
 @property (assign, nonatomic) int curPage;
@@ -150,7 +150,7 @@
         NSNumber *pmid = [_pmidArray objectAtIndex:indexPath.row];
         NSNumber *height = [_pmidHeightDic objectForKey:pmid];
         if (height == nil) {
-            return 80;
+            return 95;
         }
         return [height floatValue];
     } else {
@@ -192,9 +192,9 @@
 }
 - (void)resizeCell:(NSNotification*)notification {
     NSDictionary *dic = notification.userInfo;
-    CGFloat height = [dic[@"height"] floatValue] + 30;
-    if (height < 80) {
-        height = 80;
+    CGFloat height = [dic[@"height"] floatValue] + 55;
+    if (height < 95) {
+        height = 95;
     }
     NSNumber *pmid = dic[@"pmid"];
     if ([_pmidFlagDic objectForKey:pmid] == nil) {

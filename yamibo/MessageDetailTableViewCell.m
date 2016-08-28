@@ -58,7 +58,7 @@
     [_backView addSubview:_headImg];
     
     _timeLable = [[UILabel alloc] init];
-    _timeLable.font = KFONT(10);
+    _timeLable.font = KFONT(11);
     _timeLable.textColor = KCOLOR_GRAY;
     _timeLable.textAlignment = NSTextAlignmentCenter;
     _timeLable.numberOfLines = 2;
@@ -77,16 +77,15 @@
         make.width.height.mas_equalTo(50);
     }];
     
-    [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(50);
-        make.top.equalTo(_backView.mas_top).offset(15);
-        make.right.equalTo(_backView.mas_right).offset(-24);
-    }];
-    
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_headImg.mas_right).offset(20);
-        make.right.equalTo(_timeLable.mas_left).offset(-20);
+        make.right.equalTo(_backView).offset(-94);
         make.top.equalTo(_headImg);
+    }];
+    
+    [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_contentLabel);;
+        make.top.equalTo(_contentLabel.mas_bottom).offset(10);
         make.bottom.equalTo(_backView).offset(-15);
     }];
 }
@@ -103,16 +102,15 @@
         make.width.height.mas_equalTo(50);
     }];
     
-    [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(50);
-        make.top.equalTo(_backView).offset(15);
-        make.left.equalTo(_backView).offset(24);
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_backView).offset(94);
+        make.right.equalTo(_headImg.mas_left).offset(-20);
+        make.top.equalTo(_headImg);
     }];
     
-    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_headImg.mas_left).offset(-20);
-        make.left.equalTo(_timeLable.mas_right).offset(20);
-        make.top.equalTo(_headImg);
+    [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_contentLabel);;
+        make.top.equalTo(_contentLabel.mas_bottom).offset(10);
         make.bottom.equalTo(_backView).offset(-15);
     }];
 }
@@ -133,10 +131,10 @@
 - (CGFloat)getHeight {
     CGFloat contentLabelWidth = self.contentView.frame.size.width - 188;
     CGFloat contentLabelHeight = [_contentLabel.attributedTextContentView suggestedFrameSizeToFitEntireStringConstraintedToWidth:contentLabelWidth].height;
-    if (contentLabelHeight > 50) {
-        _height = contentLabelHeight + 30;
+    if (contentLabelHeight > 95) {
+        _height = contentLabelHeight + 55;
     } else {
-        _height = 80;
+        _height = 95;
     }
     return _height;
 }

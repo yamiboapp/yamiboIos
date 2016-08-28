@@ -9,8 +9,8 @@
 #import "JSONModel.h"
 
 typedef NS_ENUM(NSInteger, MessageViewType) {
-    MessagePrivate = 0,
-    MessagePublic = 1,
+    MessagePrivate = 0, // 私人消息
+    MessagePublic = 1, // 公共消息
 };
 
 #pragma mark private message
@@ -99,4 +99,3 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @property (strong, nonatomic) NSArray<PublicMessageDetailModel> *msgList;
 
 @end
-

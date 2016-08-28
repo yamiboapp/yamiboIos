@@ -13,7 +13,7 @@
 @interface LoginController ()<UITextFieldDelegate, UIActionSheetDelegate>
 @property   (strong, nonatomic) UIImageView *logo;
 
-@property   (strong, nonatomic) UIView *containerView;
+@property   (strong, nonatomic) UIView *containerView; // user scrollView so navigationBar doesn't scroll with keyboard
 
 @property   (strong, nonatomic) UIView *backView;
 @property   (strong, nonatomic) UITextField *nameField;
@@ -22,6 +22,8 @@
 @property   (strong, nonatomic) UITextField *answerField;
 
 @property   (assign, nonatomic) int selectedQuestion;
+
+@property   (assign, nonatomic) BOOL wasKeyboardManagerEnabled;
 @end
 
 @implementation LoginController
@@ -31,17 +33,19 @@
     // Do any additional setup after loading the view.
     [self configNavigation];
     [self initView];
-    //增加监听，当键盘出现或改变时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
     
-    //增加监听，当键退出时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+    //增加监听，当键盘出现或改变时收出消息
+     [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(keyboardWillShow:)
+     name:UIKeyboardWillShowNotification
+     object:nil];
+     
+     //增加监听，当键退出时收出消息
+     [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(keyboardWillHide:)
+     name:UIKeyboardWillHideNotification
+     object:nil];
+    
     _selectedQuestion = 0;
 }
 
@@ -114,7 +118,7 @@
     }];
     btn.layer.cornerRadius = 4;
     btn.clipsToBounds = true;
-    [btn setBackgroundImage:[UIImage imageWithColor:KCOLOR_RED_6D2C1D] forState:UIControlStateNormal];
+    btn.backgroundColor = KCOLOR_RED_6D2C1D;
     [btn setTitle:@"登陆" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(submit) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -207,14 +211,13 @@
     return true;
 }
 
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return true;
 }
+
 //当键盘出现或改变时调用
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
+- (void)keyboardWillShow:(NSNotification *)aNotification {
     //获取键盘的高度
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -224,14 +227,15 @@
     if (offset >= 0) {
         _containerView.top = -offset;
     }
-    
 }
 
 //当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     _containerView.top = 0;
 }
+
 - (void)onNavigationLeftButtonClicked {
     [[NSNotificationCenter defaultCenter] postNotificationName:KDrawerChangeNotification object:nil];
 }
+
 @end

@@ -57,7 +57,7 @@
         make.left.equalTo(_headImg.mas_right).offset(6);
         make.top.equalTo(_headImg).offset(8);
     }];
-    _nameLabel.font = KFONT(12);
+    _nameLabel.font = KFONT(14);
     _nameLabel.textColor = KCOLOR_RED_6D2C1D;
     
     _distanceLabel = [[UILabel alloc] init];
@@ -66,7 +66,7 @@
         make.left.equalTo(_nameLabel);
         make.bottom.equalTo(_headImg).offset(-6);
     }];
-    _distanceLabel.font = KFONT(10);
+    _distanceLabel.font = KFONT(11);
     _distanceLabel.textColor = KCOLOR_GRAY;
     
     _genderTint = [[UIImageView alloc] init];
@@ -86,7 +86,7 @@
         make.centerY.equalTo(self);
         make.top.equalTo(_headImg);
     }];
-    _contentLabel.font = KFONT(8);
+    _contentLabel.font = KFONT(11);
     _contentLabel.textColor = KCOLOR_GRAY;
     _contentLabel.textAlignment = NSTextAlignmentCenter;
     _contentLabel.numberOfLines = 5;

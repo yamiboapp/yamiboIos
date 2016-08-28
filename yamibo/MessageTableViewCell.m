@@ -58,7 +58,7 @@
         make.left.equalTo(_headImg.mas_right).offset(20);
         make.top.equalTo(_headImg).offset(1);
     }];
-    _titleLabel.font = KFONT(13);
+    _titleLabel.font = KFONT(15);
     _titleLabel.textColor = KCOLOR_RED_6D2C1D;
     
     _contentLabel = [[UILabel alloc] init];
@@ -68,7 +68,7 @@
         make.top.equalTo(_headImg).offset(22);
         make.width.mas_equalTo(170);
     }];
-    _contentLabel.font = KFONT(11);
+    _contentLabel.font = KFONT(13);
     _contentLabel.textColor = KCOLOR_GRAY;
     _contentLabel.numberOfLines = 2;
     
@@ -79,7 +79,7 @@
         make.width.mas_equalTo(55);
         make.top.equalTo(_headImg).offset(3);
     }];
-    _timeLable.font = KFONT(10);
+    _timeLable.font = KFONT(11);
     _timeLable.textColor = KCOLOR_GRAY;
     _timeLable.textAlignment = NSTextAlignmentCenter;
     _timeLable.numberOfLines = 2;
