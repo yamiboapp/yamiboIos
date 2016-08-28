@@ -16,6 +16,7 @@
 #import "ArticleDetailModel.h"
 #import "ProfileModel.h"
 #import "BlogModel.h"
+#import "ActionResponseModel.h"
 
 #define KBaseUrl    @"http://ceshi.yamibo.com/chobits/index.php?"
 
@@ -234,7 +235,18 @@
         completion(@"请求失败");
     }];
 }
-
++ (void)sendMessage:(NSString *)message toUid:(NSInteger)uid completion:(void (^)(ActionResponseModel *model, NSString *message))completion {
+    NSDictionary *dic = @{@"module":@"sendpm", @"message":message, @"uid":@(uid), @"formhash": [ProfileManager sharedInstance].authToken};
+    [[self defaultManager] POST:KBaseUrl parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([self jsonOKForResponseObject:responseObject]) {
+            completion([[ActionResponseModel alloc] initWithDictionary:responseObject error:nil], nil);
+        } else {
+            completion(nil, @"请求失败");
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError * _Nonnull error) {
+        completion(nil, @"请求失败");
+    }];
+}
 #pragma mark article detail
 + (void)getArticleDetailList:(int)page threadID:(NSInteger)tid postPerPage:(int)ppp authorID:(NSInteger)uid completion:(void (^)(ArticleDetailModel *, NSString *))completion {
     NSDictionary *dict = @{@"module": @"viewthread",
@@ -289,11 +301,11 @@
     return manager;
 }
 
-+ (BOOL)jsonOKForResponseObject:(id)responseObject
-{
++ (BOOL)jsonOKForResponseObject:(id)responseObject {
     return responseObject && ([responseObject isKindOfClass:[NSDictionary class]] ||
                               [responseObject isKindOfClass:[NSArray class]]);
 }
+
 + (BOOL)checkLogin:(id)responseObject {
     if (responseObject[@"Variables"][@"auth"] == [NSNull null]) {
         [[ProfileManager sharedInstance] logOut];

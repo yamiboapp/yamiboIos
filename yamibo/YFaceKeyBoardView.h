@@ -12,8 +12,7 @@
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 #define ToolBarHeight 40
 
-typedef void (^FaceKeyBoardBlock)(NSString * faceName,NSInteger faceTag);
-typedef void (^FaceKeyBoardSendBlock)(void);
+typedef void (^FaceKeyBoardBlock)(NSString *faceName, NSInteger faceTag);
 typedef void (^FaceKeyBoardDeleteBlock)(void);
 
 /**
@@ -24,7 +23,6 @@ typedef void (^FaceKeyBoardDeleteBlock)(void);
 @interface YFaceKeyBoardView : UIView
 
 - (void)setFaceKeyBoardBlock:(FaceKeyBoardBlock)block;
-- (void)setFaceKeyBoardSendBlock:(FaceKeyBoardSendBlock)block;
 - (void)setFaceKeyBoardDeleteBlock:(FaceKeyBoardDeleteBlock)block;
 
 @end

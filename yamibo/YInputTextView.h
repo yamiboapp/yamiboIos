@@ -9,12 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "YFaceKeyBoardView.h"
 
-typedef void (^SendBlock)(void);
-
 @interface YInputTextView : UITextView
 
 @property (nonatomic, strong)YFaceKeyBoardView * viewFaceKB;
-@property (nonatomic, strong)SendBlock sendBlock;
 
 - (void)setFaceKeyBoard;
 - (void)changeKeyBoard;

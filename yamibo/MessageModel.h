@@ -99,4 +99,3 @@ typedef NS_ENUM(NSInteger, MessageViewType) {
 @property (strong, nonatomic) NSArray<PublicMessageDetailModel> *msgList;
 
 @end
-

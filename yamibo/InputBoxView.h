@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^SendBlock)(void);
+typedef void (^InputBoxSendMessageBlock)(NSString *message);
 
 @interface InputBoxView : UIView
 
+@property(nonatomic, strong) InputBoxSendMessageBlock sendMessageBlock;
 @end
 

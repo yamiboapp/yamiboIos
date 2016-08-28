@@ -83,7 +83,6 @@
 		BA61E3BB1BD1B70800F6E474 /* YTableViewReverse.m in Sources */ = {isa = PBXBuildFile; fileRef = BA61E3BA1BD1B70800F6E474 /* YTableViewReverse.m */; };
 		BA61E3BE1BD462C400F6E474 /* arrow-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA61E3BC1BD462C400F6E474 /* arrow-right@2x.png */; };
 		BA61E3BF1BD462C400F6E474 /* arrow-right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA61E3BD1BD462C400F6E474 /* arrow-right@3x.png */; };
-		BA6231271D30F8C4009106AE /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6231261D30F8C4009106AE /* NSString+Common.m */; };
 		BA62315C1D30FFD7009106AE /* coding_emoji_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6231291D30FFD7009106AE /* coding_emoji_01@2x.png */; };
 		BA62315D1D30FFD7009106AE /* coding_emoji_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA62312A1D30FFD7009106AE /* coding_emoji_02@2x.png */; };
 		BA65E9031BED734B00D8E037 /* forum-digest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65E9011BED734A00D8E037 /* forum-digest@2x.png */; };
@@ -120,6 +119,7 @@
 		BA8B26B61BB0184500173D5B /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA8B26B51BB0184500173D5B /* MessageController.m */; };
 		BA992A2B1C64E719002D7FCB /* forum-clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA992A291C64E719002D7FCB /* forum-clock@2x.png */; };
 		BA992A2C1C64E719002D7FCB /* forum-clock@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA992A2A1C64E719002D7FCB /* forum-clock@3x.png */; };
+		BAA1E1661D72CE1F00439A13 /* ActionResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA1E1651D72CE1F00439A13 /* ActionResponseModel.m */; };
 		BAB8BA581C09F22D00C92B75 /* NewPostController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB8BA571C09F22D00C92B75 /* NewPostController.m */; };
 		BAB8BA5B1C09F6B800C92B75 /* btn-trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB8BA591C09F6B800C92B75 /* btn-trash@2x.png */; };
 		BAB8BA5C1C09F6B800C92B75 /* btn-trash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAB8BA5A1C09F6B800C92B75 /* btn-trash@3x.png */; };
@@ -328,8 +328,6 @@
 		BA61E3BA1BD1B70800F6E474 /* YTableViewReverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTableViewReverse.m; sourceTree = "<group>"; };
 		BA61E3BC1BD462C400F6E474 /* arrow-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-right@2x.png"; sourceTree = "<group>"; };
 		BA61E3BD1BD462C400F6E474 /* arrow-right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-right@3x.png"; sourceTree = "<group>"; };
-		BA6231251D30F8C4009106AE /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
-		BA6231261D30F8C4009106AE /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
 		BA6231291D30FFD7009106AE /* coding_emoji_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coding_emoji_01@2x.png"; sourceTree = "<group>"; };
 		BA62312A1D30FFD7009106AE /* coding_emoji_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coding_emoji_02@2x.png"; sourceTree = "<group>"; };
 		BA65E9011BED734A00D8E037 /* forum-digest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-digest@2x.png"; sourceTree = "<group>"; };
@@ -377,6 +375,8 @@
 		BA8B26B51BB0184500173D5B /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
 		BA992A291C64E719002D7FCB /* forum-clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-clock@2x.png"; sourceTree = "<group>"; };
 		BA992A2A1C64E719002D7FCB /* forum-clock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forum-clock@3x.png"; sourceTree = "<group>"; };
+		BAA1E1641D72CE1F00439A13 /* ActionResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionResponseModel.h; sourceTree = "<group>"; };
+		BAA1E1651D72CE1F00439A13 /* ActionResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionResponseModel.m; sourceTree = "<group>"; };
 		BAB8BA561C09F22D00C92B75 /* NewPostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostController.h; sourceTree = "<group>"; };
 		BAB8BA571C09F22D00C92B75 /* NewPostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostController.m; sourceTree = "<group>"; };
 		BAB8BA591C09F6B800C92B75 /* btn-trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-trash@2x.png"; sourceTree = "<group>"; };
@@ -592,8 +592,6 @@
 				6541DF9A1ADE1634008EFEE7 /* UILabel+Utility.m */,
 				6541DF9B1ADE1634008EFEE7 /* UIView+Utility.h */,
 				6541DF9C1ADE1634008EFEE7 /* UIView+Utility.m */,
-				BA6231251D30F8C4009106AE /* NSString+Common.h */,
-				BA6231261D30F8C4009106AE /* NSString+Common.m */,
 			);
 			name = UIView;
 			sourceTree = "<group>";
@@ -806,6 +804,8 @@
 				BAF401601C06B3E300EC161D /* ProfileModel.m */,
 				BA72C0D21C0C1E25004DE25D /* BlogModel.h */,
 				BA72C0D31C0C1E25004DE25D /* BlogModel.m */,
+				BAA1E1641D72CE1F00439A13 /* ActionResponseModel.h */,
+				BAA1E1651D72CE1F00439A13 /* ActionResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1398,6 +1398,7 @@
 				BA61E3BB1BD1B70800F6E474 /* YTableViewReverse.m in Sources */,
 				BA5334801BE35E98000979F4 /* ArticleListController.m in Sources */,
 				65BB63191ADE0B300042C359 /* main.m in Sources */,
+				BAA1E1661D72CE1F00439A13 /* ActionResponseModel.m in Sources */,
 				65378E0E1BAE960D001B27FD /* CollectTableViewCell.m in Sources */,
 				65378E1A1BAEDA28001B27FD /* NeighborTableView.m in Sources */,
 				650454C01B4D3EBD00651434 /* HomeController.m in Sources */,
@@ -1444,7 +1445,6 @@
 				65F50C211BB656F4007DC23C /* HotModel.m in Sources */,
 				BA5334831BE35F46000979F4 /* ArticleModel.m in Sources */,
 				BAD573081D717F5C005D2EEE /* YInputTextView.m in Sources */,
-				BA6231271D30F8C4009106AE /* NSString+Common.m in Sources */,
 				65E8F2981ADF7FB2005BD0F0 /* NSObject+ValidObject.m in Sources */,
 				65E350761BAD9D020040A60D /* MenuTableViewCell.m in Sources */,
 				6597FCA41BAC37BF009025E3 /* TADotView.m in Sources */,

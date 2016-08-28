@@ -31,16 +31,10 @@
     
     __weak __block YInputTextView *copy_self = self;
     
-    [self.viewFaceKB
-     setFaceKeyBoardBlock:^(NSString *faceName, NSInteger faceTag) {
+    [self.viewFaceKB setFaceKeyBoardBlock:^(NSString *faceName, NSInteger faceTag) {
          copy_self.text = [copy_self.text stringByAppendingString:faceName];
      }];
     
-    [self.viewFaceKB setFaceKeyBoardSendBlock:^{
-        copy_self.sendBlock();
-        //清空textview
-        copy_self.text = nil;
-    }];
     [self.viewFaceKB setFaceKeyBoardDeleteBlock:^{
         NSMutableString *string =
         [[NSMutableString alloc] initWithString:copy_self.text];

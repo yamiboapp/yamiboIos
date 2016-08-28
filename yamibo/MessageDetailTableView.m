@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *pmidArray;
 
 @property (assign, nonatomic) MessageViewType viewType;
-@property (assign, nonatomic) NSInteger detailId;
+@property (assign, nonatomic) NSInteger detailId; //toUid
 @property (assign, nonatomic) int msgCount;
 @property (assign, nonatomic) int perPage;
 @property (assign, nonatomic) int curPage;

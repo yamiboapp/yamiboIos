@@ -16,7 +16,6 @@
 @property(nonatomic, strong) NSArray* arrFace;
 @property(nonatomic, strong) UIScrollView* scFace;
 @property(nonatomic, strong) FaceKeyBoardBlock block;
-@property(nonatomic, strong) FaceKeyBoardSendBlock sendBlock;
 @property(nonatomic, strong) FaceKeyBoardDeleteBlock deleteBlock;
 @property(nonatomic, strong) UIToolbar* toolBar;
 @property(nonatomic, strong) UIPageControl* pageC;
@@ -257,10 +256,9 @@
                                     target:self
                                     action:@selector(tapBigFaceBtn)];
     
-    [self.toolBar
-     setItems:[NSArray arrayWithObjects:recentlyFaceItem, spaceItem,
-               normalFaceItem, spaceItem, bigFaceItem,
-               spaceItem, nil]];
+    [self.toolBar setItems:[NSArray arrayWithObjects:recentlyFaceItem, spaceItem,
+                            normalFaceItem, spaceItem, bigFaceItem,
+                            spaceItem, nil]];
 }
 
 //点击ToolBar上的按钮回调
@@ -279,10 +277,10 @@
 - (void)setFaceKeyBoardBlock:(FaceKeyBoardBlock)block {
     self.block = block;
 }
-//发送接口
+/*//发送接口
 - (void)setFaceKeyBoardSendBlock:(FaceKeyBoardSendBlock)block {
     self.sendBlock = block;
-}
+}*/
 //删除接口
 - (void)setFaceKeyBoardDeleteBlock:(FaceKeyBoardDeleteBlock)block {
     self.deleteBlock = block;

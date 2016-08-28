@@ -9,11 +9,13 @@
 #import "MessageDetailController.h"
 #import "MessageDetailTableView.h"
 #import "InputBoxView.h"
+#import "CommunicationrManager.h"
+#import "ActionResponseModel.h"
 
 @interface MessageDetailController ()<UITextViewDelegate>
 
 @property (assign, nonatomic) MessageViewType viewType;
-@property (assign, nonatomic) NSInteger detailId;
+@property (assign, nonatomic) NSInteger detailId; //toUid
 @property (assign, nonatomic) NSString *detailName;
 
 @property (strong, nonatomic) MessageDetailTableView *tableView; // message list
@@ -30,6 +32,12 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
     [self.view addGestureRecognizer:tap];
+    
+    // send message
+    __weak __block MessageDetailController *copy_self = self;
+    [self.inputBox setSendMessageBlock:^(NSString *content) {
+        [copy_self sendMessage:content];
+    }];
 }
 - (void)viewWillAppear:(BOOL)animated {
     //增加监听，当键盘出现或改变时收出消息
@@ -74,6 +82,18 @@
     
     [_tableView refreshData];
 }
+
+- (void)sendMessage:(NSString *)content {
+    __weak __block MessageDetailController *copy_self = self;
+    [CommunicationrManager sendMessage:content toUid:copy_self.detailId completion:^(ActionResponseModel *model, NSString *message) {
+        if (message != nil) {
+            [Utility showTitle:message];
+        } else {
+            [Utility showTitle:model.response];
+        }
+    }];
+}
+
 - (void)loadData:(NSDictionary *)data {
     _viewType = [data[@"viewType"] intValue];
     _detailId = [data[@"detailId"] intValue];
